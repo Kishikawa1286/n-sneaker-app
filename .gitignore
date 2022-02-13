@@ -1,4 +1,9 @@
 .fvm/flutter_sdk
+android/unityLibrary/libs/*.aar
+android/unityLibrary/libs/*.jar
+android/unityLibrary/src
+android/unityLibrary/build.gradle
+ios/UnityLibrary
 
 # Miscellaneous
 *.class
