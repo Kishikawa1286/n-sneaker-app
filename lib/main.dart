@@ -30,7 +30,6 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
               color: Colors.yellow,
               child: UnityWidget(
                 onUnityCreated: onUnityCreated,
-                fullscreen: true,
               ),
             ),
           ),
