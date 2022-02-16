@@ -13,10 +13,12 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   late UnityWidgetController _unityWidgetController;
 
   double _intensity = 1;
+  double _shadowStrength = 0.8;
   double _theta = 0;
   double _phi = 45;
 
   double get intensity => _intensity;
+  double get shadowStrength => _shadowStrength;
   double get theta => _theta;
   double get phi => _phi;
 
@@ -43,6 +45,16 @@ class ARPageViewModel extends ViewModelChangeNotifier {
       'Directional Light',
       'SetIntensity',
       _intensity.toStringAsFixed(3),
+    );
+    notifyListeners();
+  }
+
+  void setShadowStrength(double sliderValue) {
+    _shadowStrength = sliderValue;
+    _unityWidgetController.postMessage(
+      'Directional Light',
+      'SetShadowStrength',
+      _shadowStrength.toStringAsFixed(3),
     );
     notifyListeners();
   }

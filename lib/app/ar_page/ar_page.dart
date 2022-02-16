@@ -36,6 +36,12 @@ class ARPage extends HookConsumerWidget {
                     label: '明るさ',
                   ),
                   Slider(
+                    onChanged: arPageViewModel.setShadowStrength,
+                    value: arPageViewModel.shadowStrength,
+                    divisions: 20,
+                    label: '影の濃さ',
+                  ),
+                  Slider(
                     onChanged: arPageViewModel.setTheta,
                     value: arPageViewModel.theta,
                     min: -180,
