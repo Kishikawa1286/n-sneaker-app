@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:native_screenshot/native_screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 import '../common/view_model_change_notifier.dart';
 
 final AutoDisposeChangeNotifierProvider<ARPageViewModel>
@@ -16,11 +18,13 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double _shadowStrength = 0.8;
   double _theta = 0;
   double _phi = 45;
+  bool _capturing = false;
 
   double get intensity => _intensity;
   double get shadowStrength => _shadowStrength;
   double get theta => _theta;
   double get phi => _phi;
+  bool get capturing => _capturing;
 
   void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
@@ -36,6 +40,19 @@ class ARPageViewModel extends ViewModelChangeNotifier {
       _setPhi();
     });
     notifyListeners();
+  }
+
+  Future<void> captureAndShareScreenshot() async {
+    _capturing = true;
+    notifyListeners();
+    Timer(const Duration(milliseconds: 200), () async {
+      final path = await NativeScreenshot.takeScreenshot();
+      _capturing = false;
+      notifyListeners();
+      if (path != null) {
+        await Share.shareFiles([path], text: '');
+      }
+    });
   }
 
   void onChangedIntensitySlider(double sliderValue) {

@@ -11,64 +11,78 @@ class ARPage extends HookConsumerWidget {
     final arPageViewModel = ref.watch(arPageViewModelProvider);
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        actions: [
-          GestureDetector(
-            onTap: arPageViewModel.reloadUnityScene,
-            behavior: HitTestBehavior.opaque,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(Icons.replay_outlined),
+      appBar: arPageViewModel.capturing
+          ? null
+          : AppBar(
+              actions: [
+                GestureDetector(
+                  onTap: arPageViewModel.reloadUnityScene,
+                  behavior: HitTestBehavior.opaque,
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(Icons.replay_outlined),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: arPageViewModel.captureAndShareScreenshot,
+                  behavior: HitTestBehavior.opaque,
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(Icons.camera_alt_outlined),
+                  ),
+                ),
+              ],
+              title: const Text('AR Page'),
             ),
-          )
-        ],
-        title: const Text('AR Page'),
-      ),
       body: Stack(
         children: [
           UnityWidget(
             onUnityCreated: arPageViewModel.onUnityCreated,
+            fullscreen: true,
           ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            right: 20,
-            child: Card(
-              elevation: 10,
-              child: Column(
-                children: <Widget>[
-                  Slider(
-                    onChanged: arPageViewModel.onChangedIntensitySlider,
-                    value: arPageViewModel.intensity,
-                    max: 10,
-                    divisions: 50,
-                    label: '明るさ',
+          arPageViewModel.capturing
+              ? const SizedBox()
+              : Positioned(
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  child: Card(
+                    elevation: 10,
+                    child: Column(
+                      children: <Widget>[
+                        Slider(
+                          onChanged: arPageViewModel.onChangedIntensitySlider,
+                          value: arPageViewModel.intensity,
+                          max: 10,
+                          divisions: 50,
+                          label: '明るさ',
+                        ),
+                        Slider(
+                          onChanged:
+                              arPageViewModel.onChangedShadowStrengthSlider,
+                          value: arPageViewModel.shadowStrength,
+                          divisions: 20,
+                          label: '影の濃さ',
+                        ),
+                        Slider(
+                          onChanged: arPageViewModel.onChangedThetaSlider,
+                          value: arPageViewModel.theta,
+                          min: -180,
+                          max: 180,
+                          divisions: 30,
+                          label: '水平方向',
+                        ),
+                        Slider(
+                          onChanged: arPageViewModel.onChangedPhiSlider,
+                          value: arPageViewModel.phi,
+                          max: 60,
+                          divisions: 30,
+                          label: '高さ',
+                        ),
+                      ],
+                    ),
                   ),
-                  Slider(
-                    onChanged: arPageViewModel.onChangedShadowStrengthSlider,
-                    value: arPageViewModel.shadowStrength,
-                    divisions: 20,
-                    label: '影の濃さ',
-                  ),
-                  Slider(
-                    onChanged: arPageViewModel.onChangedThetaSlider,
-                    value: arPageViewModel.theta,
-                    min: -180,
-                    max: 180,
-                    divisions: 30,
-                    label: '水平方向',
-                  ),
-                  Slider(
-                    onChanged: arPageViewModel.onChangedPhiSlider,
-                    value: arPageViewModel.phi,
-                    max: 60,
-                    divisions: 30,
-                    label: '高さ',
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
         ],
       ),
     );

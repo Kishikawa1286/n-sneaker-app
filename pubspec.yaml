@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   flutter_unity_widget: 2020.3.25
   hooks_riverpod: ^1.0.3
+  native_screenshot: ^1.0.0
+  share_plus: ^3.0.5
 
 dev_dependencies:
 
