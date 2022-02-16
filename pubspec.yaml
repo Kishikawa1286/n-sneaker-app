@@ -9,12 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_unity_widget: ^4.2.5+1
+  flutter_unity_widget: 2020.3.25
   hooks_riverpod: ^1.0.3
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
 flutter:
   uses-material-design: true

@@ -10,15 +10,24 @@ class ARPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final arPageViewModel = ref.watch(arPageViewModelProvider);
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: arPageViewModel.reloadUnityScene,
+            behavior: HitTestBehavior.opaque,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Icon(Icons.replay_outlined),
+            ),
+          )
+        ],
         title: const Text('AR Page'),
       ),
       body: Stack(
         children: [
           UnityWidget(
             onUnityCreated: arPageViewModel.onUnityCreated,
-            onUnitySceneLoaded: arPageViewModel.onUnitySceneLoaded,
-            fullscreen: true,
           ),
           Positioned(
             bottom: 20,
@@ -29,20 +38,20 @@ class ARPage extends HookConsumerWidget {
               child: Column(
                 children: <Widget>[
                   Slider(
-                    onChanged: arPageViewModel.setIntensity,
+                    onChanged: arPageViewModel.onChangedIntensitySlider,
                     value: arPageViewModel.intensity,
                     max: 10,
                     divisions: 50,
                     label: '明るさ',
                   ),
                   Slider(
-                    onChanged: arPageViewModel.setShadowStrength,
+                    onChanged: arPageViewModel.onChangedShadowStrengthSlider,
                     value: arPageViewModel.shadowStrength,
                     divisions: 20,
                     label: '影の濃さ',
                   ),
                   Slider(
-                    onChanged: arPageViewModel.setTheta,
+                    onChanged: arPageViewModel.onChangedThetaSlider,
                     value: arPageViewModel.theta,
                     min: -180,
                     max: 180,
@@ -50,9 +59,9 @@ class ARPage extends HookConsumerWidget {
                     label: '水平方向',
                   ),
                   Slider(
-                    onChanged: arPageViewModel.setPhi,
+                    onChanged: arPageViewModel.onChangedPhiSlider,
                     value: arPageViewModel.phi,
-                    max: 90,
+                    max: 60,
                     divisions: 30,
                     label: '高さ',
                   ),

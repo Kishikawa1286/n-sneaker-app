@@ -289,7 +289,7 @@ linter:
     # https://github.com/dart-lang/linter/issues/1589
     #
     # https://dart-lang.github.io/linter/lints/cascade_invocations.html
-    - cascade_invocations
+    # - cascade_invocations
 
     # Don't cast T? to T. Use ! instead
     # Dart SDK: >= 2.11.0-182.0.dev • (Linter v0.1.120)

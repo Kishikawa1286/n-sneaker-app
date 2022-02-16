@@ -44,7 +44,7 @@ public class LightSetting : MonoBehaviour, IEventSystemHandler
             Mathf.Cos(Phi),
             Mathf.Sin(Phi) * Mathf.Cos(Theta));
         gameObject.transform.position = 100 * direction;
-        gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, -direction);
+        gameObject.transform.LookAt(new Vector3(0, 0, 0));
         dlight.intensity = Intensity;
         dlight.shadowStrength = ShadowStrength;
     }

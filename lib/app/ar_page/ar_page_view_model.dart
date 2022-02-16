@@ -22,60 +22,75 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double get theta => _theta;
   double get phi => _phi;
 
-  @override
-  void dispose() {
-    _unityWidgetController.dispose();
-    super.dispose();
-  }
-
   void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
   }
 
-  void onUnitySceneLoaded(SceneLoaded? scene) {
-    if (scene?.isLoaded ?? false) {
-      Timer(const Duration(milliseconds: 500), notifyListeners);
-    }
+  void reloadUnityScene() {
+    _unityWidgetController.postMessage('AR Session', 'Reload', '');
+    // wait for loading unity session
+    Timer(const Duration(milliseconds: 500), () {
+      _setIntensity();
+      _setShadowStrength();
+      _setTheta();
+      _setPhi();
+    });
     notifyListeners();
   }
 
-  void setIntensity(double sliderValue) {
+  void onChangedIntensitySlider(double sliderValue) {
     _intensity = sliderValue;
+    _setIntensity();
+    notifyListeners();
+  }
+
+  void onChangedShadowStrengthSlider(double sliderValue) {
+    _shadowStrength = sliderValue;
+    _setShadowStrength();
+    notifyListeners();
+  }
+
+  void onChangedThetaSlider(double sliderValue) {
+    _theta = sliderValue;
+    _setTheta();
+    notifyListeners();
+  }
+
+  void onChangedPhiSlider(double sliderValue) {
+    _phi = sliderValue;
+    _setPhi();
+    notifyListeners();
+  }
+
+  void _setIntensity() {
     _unityWidgetController.postMessage(
       'Directional Light',
       'SetIntensity',
       _intensity.toStringAsFixed(3),
     );
-    notifyListeners();
   }
 
-  void setShadowStrength(double sliderValue) {
-    _shadowStrength = sliderValue;
+  void _setShadowStrength() {
     _unityWidgetController.postMessage(
       'Directional Light',
       'SetShadowStrength',
       _shadowStrength.toStringAsFixed(3),
     );
-    notifyListeners();
   }
 
-  void setTheta(double sliderValue) {
-    _theta = sliderValue;
+  void _setTheta() {
     _unityWidgetController.postMessage(
       'Directional Light',
       'SetTheta',
       _theta.toStringAsFixed(3),
     );
-    notifyListeners();
   }
 
-  void setPhi(double sliderValue) {
-    _phi = sliderValue;
+  void _setPhi() {
     _unityWidgetController.postMessage(
       'Directional Light',
       'SetPhi',
       _phi.toStringAsFixed(3),
     );
-    notifyListeners();
   }
 }
