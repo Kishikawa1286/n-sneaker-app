@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
   m_Name: Localization-String-Tables-Korean (ko)_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: 83efe835546fc421eb82bb68a7205560, type: 2}
+  m_Group: {fileID: 11400000, guid: e4a5cbb0e74744c3da968a200758d9b9, type: 2}
   m_StaticContent: 0

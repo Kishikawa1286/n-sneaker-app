@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Korean (ko)
   m_Data:
     m_SerializedData: []
-  m_GUID: b36df20d7c5c14406b99c392ec80bdae
+  m_GUID: d078be579f1a04476846d48adacc346d
   m_SerializeEntries:
   - m_GUID: b28fc5e6207d848e7a76edc85677ec3d
     m_Address: ReasonsUX_ko
@@ -26,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 78bdf713d65ad406e94552981323526a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: b8487e622601d4b0a9a51ff59108b55f, type: 2}
-    - {fileID: 11400000, guid: 886265e413c5a40f3a2a49877f2472a8, type: 2}
+    - {fileID: 11400000, guid: 04e6c2d3540f2473e99daa742f0e6f11, type: 2}
+    - {fileID: 11400000, guid: bdbfaf01a904c479abfdf618f47d1353, type: 2}

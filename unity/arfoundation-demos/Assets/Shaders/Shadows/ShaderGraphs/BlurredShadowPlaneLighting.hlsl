@@ -2,7 +2,7 @@
 
 void MainLightBlurShadow_half(half rand, half fadeTightness, SamplerState pointClamp, half blurRadius, half3 worldPos, out half shadowAtten)
 {
-#if SHADERGRAPH_PREVIEW
+#ifdef SHADERGRAPH_PREVIEW
 	shadowAtten = 1;
 #else
 	const int NUM_STEPS = 10;

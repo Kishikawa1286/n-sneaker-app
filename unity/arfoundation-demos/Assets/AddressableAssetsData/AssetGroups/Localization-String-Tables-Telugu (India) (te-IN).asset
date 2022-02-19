@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Telugu (India) (te-IN)
   m_Data:
     m_SerializedData: []
-  m_GUID: e946528152fa949509ebd8630e9f2b30
+  m_GUID: d6f90e2e9b7ca419ea5e2728596f4a1d
   m_SerializeEntries:
   - m_GUID: 6cc88f2ac69a04704b3ea6ecb6d004cb
     m_Address: ReasonsUX_te-IN
@@ -26,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 78bdf713d65ad406e94552981323526a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: cbbb90d9e0b0a413a98d86d89dd1bbfa, type: 2}
-    - {fileID: 11400000, guid: 0d5cc2e2523d14116bbd45747357d221, type: 2}
+    - {fileID: 11400000, guid: d11b93156f63f462ea53ee0509369b83, type: 2}
+    - {fileID: 11400000, guid: 182dd6bbfd7324a2bb8135a45a7d3790, type: 2}

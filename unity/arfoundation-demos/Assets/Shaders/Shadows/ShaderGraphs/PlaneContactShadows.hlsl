@@ -2,7 +2,7 @@
 
 void PlaneContactShadow_float(float rand, float3 position, float dist, float depth, out float shadowAmount)
 {
-#if SHADERGRAPH_PREVIEW
+#ifdef SHADERGRAPH_PREVIEW
 	shadowAmount = 0;
 #else
 	const float STAR_ANGLE = 1.7;

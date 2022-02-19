@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Hindi (hi)
   m_Data:
     m_SerializedData: []
-  m_GUID: a021919915a6e431a9dace9cf9da0a11
+  m_GUID: e0633a6ee7eaf4e4a994b2bb577b1696
   m_SerializeEntries:
   - m_GUID: b6430e3bcbbc04be88bb66ad359e2f80
     m_Address: ReasonsUX_hi
@@ -26,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 78bdf713d65ad406e94552981323526a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: dfc2b8c1988b34db091c70e09c6044c1, type: 2}
-    - {fileID: 11400000, guid: 3379a03caef9541e882ce7115f721f31, type: 2}
+    - {fileID: 11400000, guid: 2b6e5c1dd76524e018942699108a8373, type: 2}
+    - {fileID: 11400000, guid: a3dac0ddcf8b7402593732951714b365, type: 2}

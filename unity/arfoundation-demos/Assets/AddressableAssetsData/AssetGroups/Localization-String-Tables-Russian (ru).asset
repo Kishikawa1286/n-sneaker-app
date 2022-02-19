@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Russian (ru)
   m_Data:
     m_SerializedData: []
-  m_GUID: ffdda38eb4fdc46e89b603a3cfd4b525
+  m_GUID: eefc91e0bc5d345a5bd62ad501ed2a9d
   m_SerializeEntries:
   - m_GUID: 729adb78fc064423f934f328344a86ea
     m_Address: ReasonsUX_ru
@@ -26,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 78bdf713d65ad406e94552981323526a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 3d23db3b37b774b44a047fcbd0bca105, type: 2}
-    - {fileID: 11400000, guid: 8ed4bb50f0a6c4c85b38a7eb85ff27be, type: 2}
+    - {fileID: 11400000, guid: c9dee80c60d044f3f8ba42af2d38af8b, type: 2}
+    - {fileID: 11400000, guid: 727a2015983ef4b5596880e522841b4b, type: 2}

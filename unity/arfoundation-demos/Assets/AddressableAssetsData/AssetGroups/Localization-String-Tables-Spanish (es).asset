@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Spanish (es)
   m_Data:
     m_SerializedData: []
-  m_GUID: 6bbdd0cc08e3046ebae2645de3e8784f
+  m_GUID: 238cebef28ecb40df8bb5b4ed006c18f
   m_SerializeEntries:
   - m_GUID: d81eeb14491dd48e7944140e5d99597f
     m_Address: ReasonsUX_es
@@ -26,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 78bdf713d65ad406e94552981323526a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 01aba6202031f4f16b778634c3c49630, type: 2}
-    - {fileID: 11400000, guid: c76086815c02b43d295a98ad16b1dd3a, type: 2}
+    - {fileID: 11400000, guid: 6360c619cabbb478997b572bbe26e2a2, type: 2}
+    - {fileID: 11400000, guid: 12e032e0620564411bb281969472135b, type: 2}

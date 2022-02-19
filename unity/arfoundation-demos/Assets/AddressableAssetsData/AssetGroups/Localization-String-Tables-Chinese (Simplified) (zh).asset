@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Chinese (Simplified) (zh)
   m_Data:
     m_SerializedData: []
-  m_GUID: 648816ac03dfb4d31b3134573bfc221a
+  m_GUID: d308f91c3d24744439c820c509cfc87d
   m_SerializeEntries:
   - m_GUID: 487af4c7c5c514fdebe84f8fe3c2fcee
     m_Address: ReasonsUX_zh
@@ -26,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 78bdf713d65ad406e94552981323526a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: bfb34c27acfc9473390dc5c8c6e5a5a0, type: 2}
-    - {fileID: 11400000, guid: 110446b768653453cbd3b93f0b520ba7, type: 2}
+    - {fileID: 11400000, guid: 611992527366345068629d9e4db45725, type: 2}
+    - {fileID: 11400000, guid: b822adbb59d6f411abb37dc685a5a16c, type: 2}
