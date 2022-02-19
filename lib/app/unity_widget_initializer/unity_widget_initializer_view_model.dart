@@ -18,7 +18,7 @@ class UnityWidgetInitializerViewModel extends ViewModelChangeNotifier {
   bool get initialized => _initialized;
 
   void _initializeUnity() {
-    Timer(const Duration(milliseconds: 1200), () {
+    Timer(const Duration(milliseconds: 2000), () {
       _initialized = true;
       notifyListeners();
     });
