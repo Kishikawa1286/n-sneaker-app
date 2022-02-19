@@ -75,7 +75,8 @@ class ARPage extends HookConsumerWidget {
                         Slider(
                           onChanged: arPageViewModel.onChangedPhiSlider,
                           value: arPageViewModel.phi,
-                          max: 60,
+                          max: 0,
+                          min: -60,
                           divisions: 30,
                           label: '高さ',
                         ),

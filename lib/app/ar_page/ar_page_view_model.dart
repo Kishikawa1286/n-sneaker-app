@@ -17,7 +17,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double _intensity = 1;
   double _shadowStrength = 0.8;
   double _theta = 0;
-  double _phi = 45;
+  double _phi = -45;
   bool _capturing = false;
 
   double get intensity => _intensity;

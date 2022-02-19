@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BlurredShadowMat
-  m_Shader: {fileID: -6465566751694194690, guid: a16d371ba76d2bd4aa4d5d298d580569,
+  m_Shader: {fileID: -6465566751694194690, guid: 713bbd48932df364da163e145b086ae9,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -65,6 +65,7 @@ Material:
     - FadeTightness: 80
     - MultiplyStrength: 0.5
     - ShadowStrength: 0.5
+    - Vector1_50A95A7B: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -90,7 +91,9 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PlaneColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TexTintColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3665358235902547080
 MonoBehaviour:
