@@ -34,7 +34,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
 
   void onUnityMessage(dynamic message) {
     if (message.toString() == setUrlTriggerMessage) {
-      Timer(const Duration(microseconds: 250), _setUrl);
+      Timer(const Duration(microseconds: 200), setUrl);
     }
   }
 
@@ -42,6 +42,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     _unityWidgetController.postMessage('AR Session', 'Reload', '');
     // wait for loading unity session
     Timer(const Duration(milliseconds: 500), () {
+      setUrl();
       _setIntensity();
       _setShadowStrength();
       _setTheta();
@@ -119,9 +120,9 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     );
   }
 
-  void _setUrl({String? url}) {
-    if (url != null) {
-      _url = url;
+  void setUrl({String? newUrl}) {
+    if (newUrl != null) {
+      _url = newUrl;
     }
     _unityWidgetController.postMessage(
       'Target Sneaker',

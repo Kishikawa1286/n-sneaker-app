@@ -7,13 +7,19 @@ using UnityEngine.EventSystems;
 
 public class URLLoader : MonoBehaviour
 {
+    [SerializeField]
+    String url = "";
+
     // Flutterから呼び出す
-    void SetDownloadURL(String url)
+    void SetDownloadURL(String message)
     {
-        if (url == "")
+        // 3D モデルが切り替わるときだけ処理が走る
+        // それ以外は早期return
+        if (url == message || message == "")
         {
             return;
         }
+        url = message;
         // AssetLoaderOptionsインスタンスを作成します。
         // AssetLoaderOptionsは、ロードプロセスの多くの側面を構成するために使用されるクラスです。
         // 今回はデフォルト設定を変更しないので、インスタンスをそのまま使用できます。
@@ -25,7 +31,7 @@ public class URLLoader : MonoBehaviour
         var webRequest = AssetDownloader.CreateWebRequest(url);
 
         // モデルのダウンロードを開始します。
-        AssetDownloader.LoadModelFromUri(webRequest, OnLoad, OnMaterialsLoad, OnProgress, OnError, null, assetLoaderOptions, null, null, true);
+        AssetDownloader.LoadModelFromUri(webRequest, OnLoad, OnMaterialsLoad, OnProgress, OnError, gameObject, assetLoaderOptions, null, null, true);
     }
 
     // このイベントは、モデルの読み込みの進行状況が変更されたときに呼び出されます。
