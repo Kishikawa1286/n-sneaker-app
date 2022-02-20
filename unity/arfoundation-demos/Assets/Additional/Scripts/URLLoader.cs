@@ -7,15 +7,18 @@ using UnityEngine.EventSystems;
 
 public class URLLoader : MonoBehaviour
 {
-    [SerializeField]
-    String url = "";
+    private String url = "";
+
+    // 同時に2つ読み込みに行かない
+    // semaphore
+    private bool downloading = false;
 
     // Flutterから呼び出す
     void SetDownloadURL(String message)
     {
         // 3D モデルが切り替わるときだけ処理が走る
         // それ以外は早期return
-        if (url == message || message == "")
+        if (url == message || message == "" || downloading)
         {
             return;
         }
@@ -29,6 +32,8 @@ public class URLLoader : MonoBehaviour
         //  web-requestには、モデルのダウンロード方法に関する情報が含まれています。
         // TriLibWebサイトから003_visemes.zipモデルをダウンロード
         var webRequest = AssetDownloader.CreateWebRequest(url);
+
+        downloading = true;
 
         // モデルのダウンロードを開始します。
         AssetDownloader.LoadModelFromUri(webRequest, OnLoad, OnMaterialsLoad, OnProgress, OnError, gameObject, assetLoaderOptions, null, null, true);
@@ -68,5 +73,6 @@ public class URLLoader : MonoBehaviour
         // 必要に応じて、このステップでGameObjectを再び表示できます。
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
         myLoadedGameObject.SetActive(true);
+        downloading = false;
     }
 }

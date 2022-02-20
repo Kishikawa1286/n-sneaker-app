@@ -38,6 +38,10 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     }
   }
 
+  void onSelected3DModel(String newUrl) {
+    _url = newUrl;
+  }
+
   void reloadUnityScene() {
     _unityWidgetController.postMessage('AR Session', 'Reload', '');
     // wait for loading unity session
@@ -120,10 +124,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     );
   }
 
-  void setUrl({String? newUrl}) {
-    if (newUrl != null) {
-      _url = newUrl;
-    }
+  void setUrl() {
     _unityWidgetController.postMessage(
       'Target Sneaker',
       'SetDownloadURL',
