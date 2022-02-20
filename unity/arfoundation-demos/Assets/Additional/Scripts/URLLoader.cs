@@ -25,7 +25,7 @@ public class URLLoader : MonoBehaviour
         var webRequest = AssetDownloader.CreateWebRequest(url);
 
         // モデルのダウンロードを開始します。
-        AssetDownloader.LoadModelFromUri(webRequest, OnLoad, OnMaterialsLoad, OnProgress, OnError, null, assetLoaderOptions);
+        AssetDownloader.LoadModelFromUri(webRequest, OnLoad, OnMaterialsLoad, OnProgress, OnError, null, assetLoaderOptions, null, null, true);
     }
 
     // このイベントは、モデルの読み込みの進行状況が変更されたときに呼び出されます。

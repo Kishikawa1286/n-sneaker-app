@@ -34,7 +34,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
 
   void onUnityMessage(dynamic message) {
     if (message.toString() == setUrlTriggerMessage) {
-      _setUrl();
+      Timer(const Duration(microseconds: 250), _setUrl);
     }
   }
 
