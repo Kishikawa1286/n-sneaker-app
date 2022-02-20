@@ -11,7 +11,6 @@ class UnityWidgetInitializer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(unityWidgetInitializerViewModelProvider);
-    print(viewModel.initialized);
     if (viewModel.initialized) {
       return afterInitialized;
     }

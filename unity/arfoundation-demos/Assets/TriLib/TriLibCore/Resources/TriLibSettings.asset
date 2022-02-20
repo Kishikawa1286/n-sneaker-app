@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: TriLibSettings
   m_EditorClassIdentifier: 
   _dictionaryBoolKeys:
+  - UniversalRPMaterialMapper
+  - HDRPMaterialMapper
+  - StandardMaterialMapper
   - 
   - 
   - 
@@ -74,8 +77,5 @@ MonoBehaviour:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  _dictionaryBoolValues: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  _settingsCount: 0
+  _dictionaryBoolValues: 01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  _settingsCount: 3

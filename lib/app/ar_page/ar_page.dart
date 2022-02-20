@@ -38,6 +38,7 @@ class ARPage extends HookConsumerWidget {
         children: [
           UnityWidget(
             onUnityCreated: arPageViewModel.onUnityCreated,
+            onUnityMessage: arPageViewModel.onUnityMessage,
             fullscreen: true,
           ),
           arPageViewModel.capturing

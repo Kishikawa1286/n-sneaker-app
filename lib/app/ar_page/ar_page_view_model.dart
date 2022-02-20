@@ -6,10 +6,8 @@ import 'package:native_screenshot/native_screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import '../common/view_model_change_notifier.dart';
 
-final AutoDisposeChangeNotifierProvider<ARPageViewModel>
-    arPageViewModelProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => ARPageViewModel(),
-);
+final ChangeNotifierProvider<ARPageViewModel> arPageViewModelProvider =
+    ChangeNotifierProvider((ref) => ARPageViewModel());
 
 class ARPageViewModel extends ViewModelChangeNotifier {
   late UnityWidgetController _unityWidgetController;
@@ -18,6 +16,8 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double _shadowStrength = 0.8;
   double _theta = 0;
   double _phi = -45;
+  String _url =
+      'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FMyName.zip?alt=media&token=bf31730b-bcf8-4d07-af30-aebdc246cd2f';
   bool _capturing = false;
 
   double get intensity => _intensity;
@@ -26,8 +26,16 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double get phi => _phi;
   bool get capturing => _capturing;
 
+  static const String setUrlTriggerMessage = '[[SET_URL]]';
+
   void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
+  }
+
+  void onUnityMessage(dynamic message) {
+    if (message.toString() == setUrlTriggerMessage) {
+      _setUrl();
+    }
   }
 
   void reloadUnityScene() {
@@ -108,6 +116,17 @@ class ARPageViewModel extends ViewModelChangeNotifier {
       'Directional Light',
       'SetPhi',
       _phi.toStringAsFixed(3),
+    );
+  }
+
+  void _setUrl({String? url}) {
+    if (url != null) {
+      _url = url;
+    }
+    _unityWidgetController.postMessage(
+      'Target Sneaker',
+      'SetDownloadURL',
+      _url,
     );
   }
 }

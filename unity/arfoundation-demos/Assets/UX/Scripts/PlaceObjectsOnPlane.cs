@@ -11,6 +11,9 @@ public class PlaceObjectsOnPlane : MonoBehaviour
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject m_PlacedPrefab;
 
+    [SerializeField]
+    UnityMessageManager m_UnityMessageManager;
+
     /// <summary>
     /// The prefab to instantiate on touch.
     /// </summary>
@@ -33,7 +36,7 @@ public class PlaceObjectsOnPlane : MonoBehaviour
     ARRaycastManager m_RaycastManager;
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-    
+
     [SerializeField]
     int m_MaxNumberOfObjectsToPlace = 1;
 
@@ -51,6 +54,7 @@ public class PlaceObjectsOnPlane : MonoBehaviour
     void Awake()
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
+        m_UnityMessageManager = GetComponent<UnityMessageManager>();
     }
 
     void Update()
@@ -68,7 +72,7 @@ public class PlaceObjectsOnPlane : MonoBehaviour
                     if (m_NumberOfPlacedObjects < m_MaxNumberOfObjectsToPlace)
                     {
                         spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-                        
+
                         m_NumberOfPlacedObjects++;
                     }
                     else
@@ -78,10 +82,11 @@ public class PlaceObjectsOnPlane : MonoBehaviour
                             spawnedObject.transform.SetPositionAndRotation(hitPose.position, hitPose.rotation);
                         }
                     }
-                    
+
                     if (onPlacedObject != null)
                     {
                         onPlacedObject();
+                        m_UnityMessageManager.SendMessageToFlutter("[[SET_URL]]");
                     }
                 }
             }
