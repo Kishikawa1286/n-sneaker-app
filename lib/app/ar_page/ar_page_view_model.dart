@@ -19,12 +19,15 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   String _url =
       'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FMyName.zip?alt=media&token=bf31730b-bcf8-4d07-af30-aebdc246cd2f';
   bool _capturing = false;
+  double _downloadProgress = 0;
 
   double get intensity => _intensity;
   double get shadowStrength => _shadowStrength;
   double get theta => _theta;
   double get phi => _phi;
   bool get capturing => _capturing;
+  double get downloadProgress => _downloadProgress;
+  bool get downloading => 0 < _downloadProgress && _downloadProgress < 1;
 
   static const String setUrlTriggerMessage = '[[SET_URL]]';
 
@@ -33,8 +36,19 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   }
 
   void onUnityMessage(dynamic message) {
+    // オブジェクト配置時
     if (message.toString() == setUrlTriggerMessage) {
+      // wait for game object put in unity
       Timer(const Duration(microseconds: 200), setUrl);
+      return;
+    }
+    // TriLib2によるダウンロード時
+    try {
+      final prog = double.parse(message.toString());
+      _downloadProgress = prog;
+      notifyListeners();
+    } on Exception catch (e) {
+      print(e);
     }
   }
 
@@ -42,8 +56,11 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     _url = newUrl;
   }
 
-  void reloadUnityScene() {
+  void reloadUnityScene({bool justReload = false}) {
     _unityWidgetController.postMessage('AR Session', 'Reload', '');
+    if (justReload) {
+      return;
+    }
     // wait for loading unity session
     Timer(const Duration(milliseconds: 500), () {
       setUrl();
@@ -58,6 +75,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   Future<void> captureAndShareScreenshot() async {
     _capturing = true;
     notifyListeners();
+    // wait for rebuild
     Timer(const Duration(milliseconds: 200), () async {
       final path = await NativeScreenshot.takeScreenshot();
       _capturing = false;

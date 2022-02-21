@@ -24,6 +24,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app use camera for AR</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Take screenshots and save it to the PhotoLibrary.</string>
 	<key>Privacy - Camera Usage Description</key>
@@ -49,7 +51,5 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app use camera for AR</string>
 </dict>
 </plist>

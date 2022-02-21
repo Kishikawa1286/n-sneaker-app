@@ -14,6 +14,17 @@ class ARPage extends HookConsumerWidget {
       appBar: arPageViewModel.capturing
           ? null
           : AppBar(
+              leading: GestureDetector(
+                onTap: () {
+                  arPageViewModel.reloadUnityScene(justReload: true);
+                  Navigator.of(context).pop();
+                },
+                behavior: HitTestBehavior.opaque,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(Icons.chevron_left),
+                ),
+              ),
               actions: [
                 GestureDetector(
                   onTap: arPageViewModel.reloadUnityScene,
@@ -85,6 +96,34 @@ class ARPage extends HookConsumerWidget {
                     ),
                   ),
                 ),
+          arPageViewModel.downloading
+              ? Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    height: 100,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Loading',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          child: LinearProgressIndicator(
+                            value: arPageViewModel.downloadProgress,
+                            backgroundColor: Colors.grey,
+                            color: Colors.white,
+                            semanticsLabel: 'Loading',
+                            minHeight: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );

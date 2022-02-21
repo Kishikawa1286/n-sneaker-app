@@ -7,11 +7,19 @@ using UnityEngine.EventSystems;
 
 public class URLLoader : MonoBehaviour
 {
+    [SerializeField]
+    UnityMessageManager UnityMessageManager;
+
     private String url = "";
 
     // 同時に2つ読み込みに行かない
     // semaphore
     private bool downloading = false;
+
+    void Awake()
+    {
+        UnityMessageManager = GetComponent<UnityMessageManager>();
+    }
 
     // Flutterから呼び出す
     void SetDownloadURL(String message)
@@ -45,7 +53,7 @@ public class URLLoader : MonoBehaviour
     // UWPやWebGLなどのプラットフォームは、スレッドを使用しないため、現時点ではこのメソッドを呼び出しません。
     private void OnProgress(AssetLoaderContext assetLoaderContext, float progress)
     {
-
+        UnityMessageManager.SendMessageToFlutter(progress.ToString());
     }
 
     // このイベントは、モデルの読み込み中に重大なエラーが発生したときに呼び出されます。
@@ -74,5 +82,6 @@ public class URLLoader : MonoBehaviour
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
         myLoadedGameObject.SetActive(true);
         downloading = false;
+        UnityMessageManager.SendMessageToFlutter(1f.ToString());
     }
 }
