@@ -24,7 +24,9 @@ class RootPage extends HookConsumerWidget {
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
-                      'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FMyName.zip?alt=media&token=bf31730b-bcf8-4d07-af30-aebdc246cd2f',
+                      id: 'sneaker-1',
+                      url:
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FMyName.zip?alt=media&token=bf31730b-bcf8-4d07-af30-aebdc246cd2f',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
@@ -44,7 +46,9 @@ class RootPage extends HookConsumerWidget {
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
-                      'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FGuns.zip?alt=media&token=ac9c6363-eacf-4203-a047-6d3b612918f1',
+                      id: 'sneaker-2',
+                      url:
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FGuns.zip?alt=media&token=ac9c6363-eacf-4203-a047-6d3b612918f1',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },

@@ -16,10 +16,10 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double _shadowStrength = 0.8;
   double _theta = 0;
   double _phi = -45;
-  String _url =
-      'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FMyName.zip?alt=media&token=bf31730b-bcf8-4d07-af30-aebdc246cd2f';
   bool _capturing = false;
   double _downloadProgress = 0;
+  String _productId = '';
+  String _productUrl = '';
 
   double get intensity => _intensity;
   double get shadowStrength => _shadowStrength;
@@ -29,31 +29,40 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double get downloadProgress => _downloadProgress;
   bool get downloading => 0 < _downloadProgress && _downloadProgress < 1;
 
-  static const String setUrlTriggerMessage = '[[SET_URL]]';
-
   void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
   }
 
   void onUnityMessage(dynamic message) {
-    // オブジェクト配置時
-    if (message.toString() == setUrlTriggerMessage) {
-      // wait for game object put in unity
-      Timer(const Duration(microseconds: 200), setUrl);
+    if (message == '[[OBJECT_PLACED]]') {
+      _loadObject();
       return;
     }
-    // TriLib2によるダウンロード時
+    if (message.toString().contains('[[DOWNLOAD_ASSET_ERROR]]')) {
+      print(message);
+      return;
+    }
+    if (message.toString().contains('[[DOWNLOAD_ASSET_DONE]]')) {
+      print(message);
+      return;
+    }
+    if (message.toString().contains('{')) {
+      print(message);
+      return;
+    }
+    // ダウンロード時
     try {
-      final prog = double.parse(message.toString());
-      _downloadProgress = prog;
+      _downloadProgress = double.parse(message.toString());
       notifyListeners();
     } on Exception catch (e) {
+      print(message);
       print(e);
     }
   }
 
-  void onSelected3DModel(String newUrl) {
-    _url = newUrl;
+  void onSelected3DModel({required String id, required String url}) {
+    _productId = id;
+    _productUrl = url;
   }
 
   void reloadUnityScene({bool justReload = false}) {
@@ -63,7 +72,6 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     }
     // wait for loading unity session
     Timer(const Duration(milliseconds: 500), () {
-      setUrl();
       _setIntensity();
       _setShadowStrength();
       _setTheta();
@@ -142,11 +150,11 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     );
   }
 
-  void setUrl() {
+  void _loadObject() {
     _unityWidgetController.postMessage(
       'Target Sneaker',
-      'SetDownloadURL',
-      _url,
+      'LoadModel',
+      '{"id": "$_productId", "url": "$_productUrl"}',
     );
   }
 }

@@ -86,7 +86,7 @@ public class PlaceObjectsOnPlane : MonoBehaviour
                     if (onPlacedObject != null)
                     {
                         onPlacedObject();
-                        m_UnityMessageManager.SendMessageToFlutter("[[SET_URL]]");
+                        m_UnityMessageManager.SendMessageToFlutter("[[OBJECT_PLACED]]");
                     }
                 }
             }

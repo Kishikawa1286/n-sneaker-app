@@ -150,8 +150,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5700069552548356286}
-  - component: {fileID: 7420471762745164372}
   - component: {fileID: 6588813322489023960}
+  - component: {fileID: 4235495902625626461}
   m_Layer: 0
   m_Name: Target Sneaker
   m_TagString: Untagged
@@ -173,18 +173,6 @@ Transform:
   m_Father: {fileID: 1748037316647009009}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7420471762745164372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6708875548082963644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099938dc302b04a37a03bc6449863ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6588813322489023960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +185,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f0d555a552e429a9e36a2bec4c1faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4235495902625626461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708875548082963644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbebdee3865a4d648654da2617c30ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnityMessageManager: {fileID: 6588813322489023960}
 --- !u!1 &7679285653639408882
 GameObject:
   m_ObjectHideFlags: 0
