@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,6 +19,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   double _phi = -45;
   bool _capturing = false;
   double _downloadProgress = 0;
+  double _loadProgress = 0;
   String _productId = '';
   String _productUrl = '';
 
@@ -28,6 +30,8 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   bool get capturing => _capturing;
   double get downloadProgress => _downloadProgress;
   bool get downloading => 0 < _downloadProgress && _downloadProgress < 1;
+  double get loadProgress => _loadProgress;
+  bool get loading => 0 < _loadProgress && _loadProgress < 1;
 
   void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
@@ -42,18 +46,19 @@ class ARPageViewModel extends ViewModelChangeNotifier {
       print(message);
       return;
     }
-    if (message.toString().contains('[[DOWNLOAD_ASSET_DONE]]')) {
-      print(message);
-      return;
-    }
-    if (message.toString().contains('{')) {
-      print(message);
-      return;
-    }
     // ダウンロード時
     try {
-      _downloadProgress = double.parse(message.toString());
-      notifyListeners();
+      final json = jsonDecode(message.toString()) as Map<dynamic, dynamic>;
+      if (json['name'] == 'load') {
+        _loadProgress = double.parse(json['value'].toString());
+        notifyListeners();
+        return;
+      }
+      if (json['name'] == 'download') {
+        _downloadProgress = double.parse(json['value'].toString());
+        notifyListeners();
+        return;
+      }
     } on Exception catch (e) {
       print(message);
       print(e);
@@ -66,6 +71,8 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   }
 
   void reloadUnityScene({bool justReload = false}) {
+    _downloadProgress = 0;
+    _loadProgress = 0;
     _unityWidgetController.postMessage('AR Session', 'Reload', '');
     if (justReload) {
       return;

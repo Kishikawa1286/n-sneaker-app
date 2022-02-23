@@ -13,7 +13,7 @@ public class ModelLoader : MonoBehaviour
     [SerializeField]
     private UnityMessageManager UnityMessageManager;
 
-    private bool downloading = false;
+    private bool loading = false;
 
     void Awake()
     {
@@ -33,7 +33,7 @@ public class ModelLoader : MonoBehaviour
 
     private void LoadFile(String id)
     {
-        downloading = true;
+        loading = true;
         AssetLoaderZip.LoadModelFromZipFile(
             FileModelFilePath(id),
             OnLoad,
@@ -56,7 +56,7 @@ public class ModelLoader : MonoBehaviour
         String id = data.id;
         // id と ファイルが一対一対応している
         // id で指定されたファイルが存在すればそれを読み込む
-        if (downloading)
+        if (loading)
         {
             return;
         }
@@ -77,7 +77,7 @@ public class ModelLoader : MonoBehaviour
     // UWPやWebGLなどのプラットフォームは、スレッドを使用しないため、現時点ではこのメソッドを呼び出しません。
     private void OnProgress(AssetLoaderContext assetLoaderContext, float progress)
     {
-        // UnityMessageManager.SendMessageToFlutter(progress.ToString());
+        UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + progress.ToString() + "\"}");
     }
 
     // このイベントは、モデルの読み込み中に重大なエラーが発生したときに呼び出されます。
@@ -85,7 +85,7 @@ public class ModelLoader : MonoBehaviour
     private void OnError(IContextualizedError contextualizedError)
     {
         UnityMessageManager.SendMessageToFlutter(contextualizedError.ToString());
-        downloading = false;
+        loading = false;
     }
 
     // このイベントは、すべてのモデルのGameObjectとメッシュが読み込まれたときに呼び出されます。
@@ -106,8 +106,8 @@ public class ModelLoader : MonoBehaviour
         // 必要に応じて、このステップでGameObjectを再び表示できます。
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
         myLoadedGameObject.SetActive(true);
-        downloading = false;
-        UnityMessageManager.SendMessageToFlutter(1f.ToString());
+        loading = false;
+        UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + 1f.ToString() + "\"}");
     }
 
     // called from flutter
@@ -117,18 +117,18 @@ public class ModelLoader : MonoBehaviour
     // }
     private void DownloadAndLoad(String id, String url)
     {
-        if (downloading)
+        if (loading)
         {
             return;
         }
-        downloading = true;
+        loading = true;
         StartCoroutine(
             DownloadWithProgress(
                 url,
                 id,
                 (progress) =>
                 {
-                    UnityMessageManager.SendMessageToFlutter(progress.ToString());
+                    UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + progress.ToString() + "\"}");
                 }
             )
         );
@@ -145,7 +145,7 @@ public class ModelLoader : MonoBehaviour
                 {
                     //エラー
                     UnityMessageManager.SendMessageToFlutter("[[DOWNLOAD_ASSET_ERROR]]" + request.error.ToString());
-                    downloading = false;
+                    loading = false;
                     yield break;
                 }
 
@@ -155,14 +155,14 @@ public class ModelLoader : MonoBehaviour
                     {
                         //正常終了
                         File.WriteAllBytes(FileModelFilePath(id), request.downloadHandler.data);
-                        UnityMessageManager.SendMessageToFlutter("[[DOWNLOAD_ASSET_DONE]]");
+                        UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + 1f.ToString() + "\"}");
                         LoadFile(id);
                     }
                     catch (Exception e)
                     {
                         UnityMessageManager.SendMessageToFlutter("[[DOWNLOAD_ASSET_ERROR]]" + e.ToString());
                     }
-                    downloading = false;
+                    loading = false;
                     yield break;
                 }
 

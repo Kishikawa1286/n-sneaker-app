@@ -104,7 +104,7 @@ class ARPage extends HookConsumerWidget {
                     child: Column(
                       children: [
                         const Text(
-                          'Loading',
+                          'Downloading',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                         ),
@@ -113,6 +113,34 @@ class ARPage extends HookConsumerWidget {
                               const BorderRadius.all(Radius.circular(10)),
                           child: LinearProgressIndicator(
                             value: arPageViewModel.downloadProgress,
+                            backgroundColor: Colors.grey,
+                            color: Colors.white,
+                            semanticsLabel: 'Downloading',
+                            minHeight: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : const SizedBox(),
+          arPageViewModel.loading
+              ? Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    height: 100,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Loading',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          child: LinearProgressIndicator(
+                            value: arPageViewModel.loadProgress,
                             backgroundColor: Colors.grey,
                             color: Colors.white,
                             semanticsLabel: 'Loading',
