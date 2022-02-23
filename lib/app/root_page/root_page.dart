@@ -48,7 +48,7 @@ class RootPage extends HookConsumerWidget {
                     arPageViewModel.onSelected3DModel(
                       id: 'sneaker-2',
                       url:
-                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FGuns.zip?alt=media&token=ac9c6363-eacf-4203-a047-6d3b612918f1',
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FGuns.zip?alt=media&token=fc6031c9-4656-42f0-a2de-cd560c52c741',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
