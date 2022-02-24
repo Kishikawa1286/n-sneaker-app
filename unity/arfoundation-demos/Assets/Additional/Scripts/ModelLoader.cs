@@ -14,14 +14,15 @@ public class ModelLoader : MonoBehaviour
     private UnityMessageManager UnityMessageManager;
 
     private bool loading = false;
+    private bool loaded = false;
 
     void Awake()
     {
         // ref: https://kazupon.org/unity-ios-setnonackup-flag/
         // ref: https://qiita.com/Ubermensch/items/75072ef89249cb3b30e7#2applicationplatform%E3%82%92%E4%BD%BF%E3%81%86
-        #if UNITY_IOS
+#if UNITY_IOS
             UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
-        #endif
+#endif
         UnityMessageManager = GetComponent<UnityMessageManager>();
     }
 
@@ -50,6 +51,10 @@ public class ModelLoader : MonoBehaviour
     // Flutterから呼び出す
     void LoadModel(String json)
     {
+        if (loaded)
+        {
+            return;
+        }
         JsonData data = JsonUtility.FromJson<JsonData>(json);
         String url = data.url;
         String id = data.id;
@@ -106,6 +111,7 @@ public class ModelLoader : MonoBehaviour
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
         myLoadedGameObject.SetActive(true);
         loading = false;
+        loaded = true;
         UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + 1f.ToString() + "\"}");
     }
 
