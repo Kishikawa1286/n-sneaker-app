@@ -26,7 +26,10 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    // ref: https://stackoverflow.com/questions/66603488/ndk-is-not-installed
+    ndkVersion rootProject.ext.ndkVersion
+
+    compileSdkVersion 31
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -44,7 +47,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.n_sneaker_app"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 24
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -65,6 +68,12 @@ android {
         innerTest {
             matchingFallbacks = ['debug', 'release']
         }
+    }
+
+    // ref: https://qiita.com/stmon19/items/4e710cc83c099b98d4f5#lint-options%E3%82%92%E8%BF%BD%E8%A8%98
+    lintOptions {
+        disable 'InvalidPackage'
+        checkReleaseBuilds false
     }
 }
 

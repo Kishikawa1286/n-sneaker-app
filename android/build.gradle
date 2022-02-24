@@ -1,5 +1,12 @@
 buildscript {
     ext.kotlin_version = '1.6.10'
+
+    // ref: https://stackoverflow.com/questions/66603488/ndk-is-not-installed
+    // ref: https://github.com/juicycleff/flutter-unity-view-widget/issues/440
+    ext {
+        ndkVersion = "19.0.5232133"
+    }
+
     repositories {
         google()
         mavenCentral()

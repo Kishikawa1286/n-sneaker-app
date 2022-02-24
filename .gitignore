@@ -2,7 +2,8 @@
 android/unityLibrary/libs/*.aar
 android/unityLibrary/libs/*.jar
 android/unityLibrary/src
-android/unityLibrary/build.gradle
+android/unityLibrary/build
+android/unityLibrary/symbols
 ios/UnityLibrary
 
 # Miscellaneous

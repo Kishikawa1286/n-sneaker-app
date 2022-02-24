@@ -19,10 +19,9 @@ public class ModelLoader : MonoBehaviour
     {
         // ref: https://kazupon.org/unity-ios-setnonackup-flag/
         // ref: https://qiita.com/Ubermensch/items/75072ef89249cb3b30e7#2applicationplatform%E3%82%92%E4%BD%BF%E3%81%86
-        if (Application.platform == RuntimePlatform.IPhonePlayer)
-        {
+        #if UNITY_IOS
             UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
-        }
+        #endif
         UnityMessageManager = GetComponent<UnityMessageManager>();
     }
 

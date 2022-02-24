@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../common/view_model_change_notifier.dart';
@@ -15,10 +16,10 @@ class UnityWidgetInitializerViewModel extends ViewModelChangeNotifier {
 
   bool _initialized = false;
 
-  bool get initialized => _initialized;
+  bool get initialized => _initialized || Platform.isAndroid;
 
   void _initializeUnity() {
-    Timer(const Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 5000), () {
       _initialized = true;
       notifyListeners();
     });
