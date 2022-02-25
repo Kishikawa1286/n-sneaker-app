@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "193204818605",
+    "project_id": "n-sneaker-development",
+    "storage_bucket": "n-sneaker-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193204818605:android:fe3a4867e47383f06aac24",
+        "android_client_info": {
+          "package_name": "com.nevermind.nsneaker.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193204818605-2dlpe99ickuaeofck70ole0c0j4n9v8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAJ5O1WUf2C9ecKEXGV9uvKNvwdmQD3_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193204818605-2dlpe99ickuaeofck70ole0c0j4n9v8q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "193204818605-ca0vf3eqrsn4ljcgmdel31gevejadob2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nevermind.nsneaker.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
