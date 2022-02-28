@@ -37,6 +37,9 @@ namespace TriLibCore.Samples
         public void LoadModel()
         {
             var assetLoaderOptions = AssetLoader.CreateDefaultLoaderOptions();
+            assetLoaderOptions.AddSecondAlphaMaterial = false;
+            assetLoaderOptions.UseAlphaMaterials = true;
+            assetLoaderOptions.AlphaMaterialMode = AlphaMaterialMode.Transparent;
             var assetLoaderFilePicker = AssetLoaderFilePicker.Create();
             assetLoaderFilePicker.LoadModelFromFilePickerAsync("Select a Model file", OnLoad, OnMaterialsLoad, OnProgress, OnBeginLoad, OnError, null, assetLoaderOptions);
         }

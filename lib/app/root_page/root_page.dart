@@ -24,9 +24,9 @@ class RootPage extends HookConsumerWidget {
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
-                      id: 'sneaker-1',
+                      id: 'sneaker-Guns-1',
                       url:
-                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FMyName.zip?alt=media&token=bf31730b-bcf8-4d07-af30-aebdc246cd2f',
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-temp.appspot.com/o/test%2FGuns.zip?alt=media&token=0655f270-ebe8-48d9-89d7-8b2e883f2d06',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
@@ -35,7 +35,7 @@ class RootPage extends HookConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
-                        'My Name',
+                        'Guns',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
@@ -46,9 +46,9 @@ class RootPage extends HookConsumerWidget {
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
-                      id: 'sneaker-2',
+                      id: 'sneaker-Sckelton-4',
                       url:
-                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-dev.appspot.com/o/test%2FGuns.zip?alt=media&token=fc6031c9-4656-42f0-a2de-cd560c52c741',
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-temp.appspot.com/o/test%2Fsckelton%202.zip?alt=media&token=dbee3386-3673-4f90-8173-9c3570e7cdc2',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
@@ -57,7 +57,7 @@ class RootPage extends HookConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
-                        'Guns',
+                        'Sckelton',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),

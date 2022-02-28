@@ -34,6 +34,10 @@ public class ModelLoader : MonoBehaviour
     private void LoadFile(String id)
     {
         loading = true;
+        var options = AssetLoader.CreateDefaultLoaderOptions();
+        options.AddSecondAlphaMaterial = false;
+        options.UseAlphaMaterials = true;
+        options.AlphaMaterialMode = AlphaMaterialMode.Transparent;
         AssetLoaderZip.LoadModelFromZipFile(
             FileModelFilePath(id),
             OnLoad,
@@ -41,9 +45,9 @@ public class ModelLoader : MonoBehaviour
             OnProgress,
             OnError,
             gameObject, // Scriptを適用するGameObject自身
+            options,
             null,
-            null,
-            null,
+            "zip",
             false
         );
     }

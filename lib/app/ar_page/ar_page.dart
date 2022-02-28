@@ -50,7 +50,7 @@ class ARPage extends HookConsumerWidget {
           UnityWidget(
             onUnityCreated: arPageViewModel.onUnityCreated,
             onUnityMessage: arPageViewModel.onUnityMessage,
-            fullscreen: true,
+            useAndroidViewSurface: true,
           ),
           arPageViewModel.capturing
               ? const SizedBox()
