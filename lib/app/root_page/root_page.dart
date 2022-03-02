@@ -63,6 +63,27 @@ class RootPage extends HookConsumerWidget {
                     ),
                   ),
                 ),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    arPageViewModel.onSelected3DModel(
+                      id: 'mr-mind',
+                      url:
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-temp.appspot.com/o/test%2Fmr_mind.glb.zip?alt=media&token=e5d13589-de5d-442a-8fe9-6bb7d0e8a835',
+                    );
+                    Navigator.of(context).pushNamed('/arpage');
+                  },
+                  child: const Card(
+                    margin: EdgeInsets.all(10),
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        'Sckelton',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );

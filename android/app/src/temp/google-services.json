@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:54490296560:android:ca8c41061ed94fe12e5235",
+        "mobilesdk_app_id": "1:54490296560:android:cd412d07bb233b392e5235",
         "android_client_info": {
-          "package_name": "com.nevermind.nsneaker.temo"
+          "package_name": "com.nevermind.nsneaker.temp"
         }
       },
       "oauth_client": [

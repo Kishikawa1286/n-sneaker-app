@@ -39,7 +39,7 @@ namespace TriLibCore.Samples
             var assetLoaderOptions = AssetLoader.CreateDefaultLoaderOptions();
             assetLoaderOptions.AddSecondAlphaMaterial = false;
             assetLoaderOptions.UseAlphaMaterials = true;
-            assetLoaderOptions.AlphaMaterialMode = AlphaMaterialMode.Transparent;
+            assetLoaderOptions.LoadTexturesAsSRGB = false;
             var assetLoaderFilePicker = AssetLoaderFilePicker.Create();
             assetLoaderFilePicker.LoadModelFromFilePickerAsync("Select a Model file", OnLoad, OnMaterialsLoad, OnProgress, OnBeginLoad, OnError, null, assetLoaderOptions);
         }
