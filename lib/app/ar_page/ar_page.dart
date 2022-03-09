@@ -52,6 +52,7 @@ class ARPage extends HookConsumerWidget {
             onUnityMessage: arPageViewModel.onUnityMessage,
             useAndroidViewSurface: true,
           ),
+          /*
           arPageViewModel.capturing
               ? const SizedBox()
               : Positioned(
@@ -152,6 +153,7 @@ class ARPage extends HookConsumerWidget {
                   ),
                 )
               : const SizedBox(),
+              */
         ],
       ),
     );

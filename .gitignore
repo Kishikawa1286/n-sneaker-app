@@ -5,12 +5,12 @@ android/unityLibrary/libs/*.jar
 android/unityLibrary/src
 android/unityLibrary/build
 android/unityLibrary/symbols
-android/app/google-services.json
 
 ios/UnityLibrary
 
 # https://zenn.dev/riscait/articles/separating-environments-in-flutter related
 android/app/src/main/res/mipmap*/
+android/app/google-services.json
 ios/Flutter/DartDefines.xcconfig
 ios/GoogleService-Info.plist
 

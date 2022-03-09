@@ -16,5 +16,9 @@ MonoBehaviour:
     m_Code: ru
   m_Metadata:
     m_Items: []
+  m_LocaleName: Russian (ru)
+  m_CustomFormatCultureCode: 
+  m_UseCustomFormatter: 0
+  m_SortOrder: 10000
   references:
     version: 1
