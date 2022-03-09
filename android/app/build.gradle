@@ -1,5 +1,5 @@
 // ref: https://zenn.dev/riscait/articles/separating-environments-in-flutter
-def dartEnvironmentVariables = ['FLAVOR':'prod'];
+def dartEnvironmentVariables = [:];
 if (project.hasProperty('dart-defines')) {
     // カンマ区切りかつBase64でエンコードされている dart-defines をデコードして変数に格納します。
     dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
@@ -35,6 +35,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -117,8 +118,6 @@ task selectGoogleServicesJson(type: Copy) {
 }
 
 tasks.whenTaskAdded { task ->
-   task.dependsOn copySources
-    if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
-        task.dependsOn selectGoogleServicesJson
-    }
+    task.dependsOn copySources
+    task.dependsOn selectGoogleServicesJson
 }

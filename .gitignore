@@ -5,6 +5,8 @@ android/unityLibrary/libs/*.jar
 android/unityLibrary/src
 android/unityLibrary/build
 android/unityLibrary/symbols
+android/app/google-services.json
+
 ios/UnityLibrary
 
 # https://zenn.dev/riscait/articles/separating-environments-in-flutter related
