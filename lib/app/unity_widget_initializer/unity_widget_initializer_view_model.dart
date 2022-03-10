@@ -16,7 +16,7 @@ class UnityWidgetInitializerViewModel extends ViewModelChangeNotifier {
 
   bool _initialized = false;
 
-  bool get initialized => _initialized;
+  bool get initialized => _initialized || Platform.isAndroid;
 
   void _initializeUnity() {
     Timer(const Duration(milliseconds: 5000), () {
