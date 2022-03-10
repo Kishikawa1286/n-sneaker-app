@@ -512,6 +512,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1015722065}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 81d75ea34a22d40eda7f98a382c01742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -519,6 +520,11 @@ MonoBehaviour:
   ShadowStrength: 0.8
   Theta: 0
   Phi: -45
+=======
+  m_Script: {fileID: 11500000, guid: d8f0d555a552e429a9e36a2bec4c1faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> Stashed changes
 --- !u!114 &1015722070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,9 +534,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1015722065}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: d8f0d555a552e429a9e36a2bec4c1faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+  m_Script: {fileID: 11500000, guid: 81d75ea34a22d40eda7f98a382c01742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Intensity: 0
+  ShadowStrength: 0
+  Theta: 0
+  Phi: 0
+>>>>>>> Stashed changes
 --- !u!1 &1335839533
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,10 +561,13 @@ GameObject:
   - component: {fileID: 1335839536}
   - component: {fileID: 1335839538}
   - component: {fileID: 1335839542}
-  - component: {fileID: 1335839539}
   - component: {fileID: 1335839540}
   - component: {fileID: 1335839541}
   - component: {fileID: 1335839543}
+<<<<<<< Updated upstream
+=======
+  - component: {fileID: 1335839539}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -638,9 +657,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446fc7fee4cf2ad4daa02222a84869c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_PlacedPrefab: {fileID: 919132149155446097, guid: ed82ea891bb034d3cb47868ed86a6306,
     type: 3}
   m_UnityMessageManager: {fileID: 1335839543}
+=======
+  m_PlacedPrefab: {fileID: 7679285653639408882, guid: a941be56242ca45d4a3113e2a44d739f,
+    type: 3}
+  m_UnityMessageManager: {fileID: 0}
+>>>>>>> Stashed changes
   m_MaxNumberOfObjectsToPlace: 1
   m_CanReposition: 1
 --- !u!114 &1335839540
@@ -774,6 +799,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
     - target: {fileID: 249903488, guid: 29251f2f7c5044cce8e7eb862b4d93ef, type: 3}
       propertyPath: m_text
       value: "\u5468\u8FBA\u306E\u7279\u5FB4\u70B9\u3092\u63A2\u3057\u3066\u304F\u3060\u3055\u3044"
@@ -820,6 +846,67 @@ PrefabInstance:
         type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+=======
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedBody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedFace
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedInit
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedNone
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedLight
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedMotion
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedFeatures
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedMoveDevice
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedTapToPlace
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: localizedUnsupported
+      value: 
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 5977163237366113879, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
         type: 3}
@@ -835,6 +922,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: m_FindBodyClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: m_FindFaceClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: m_FindImageClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: m_FindAPlaneClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: m_FindObjectClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: m_TapToPlaceClip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5977163238016480456, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
         type: 3}

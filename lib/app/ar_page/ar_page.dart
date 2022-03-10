@@ -50,7 +50,6 @@ class ARPage extends HookConsumerWidget {
           UnityWidget(
             onUnityCreated: arPageViewModel.onUnityCreated,
             onUnityMessage: arPageViewModel.onUnityMessage,
-            useAndroidViewSurface: true,
           ),
           /*
           arPageViewModel.capturing
