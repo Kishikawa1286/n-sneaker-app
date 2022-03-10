@@ -1,5 +1,11 @@
 # 環境構築
 
+## Android Studio の導入
+
+[Android Studio](https://developer.android.com/studio) をインストールする。
+
+android/ で指定している SDK などを適宜インストールする。
+
 ## Unity 導入
 
 [Unity Hub](https://unity3d.com/get-unity/download)を導入する。
@@ -29,6 +35,8 @@ fvm install
 
 必要に応じて、 VSCodeなどのテキストエディタに fvm で導入した Flutter SDK のパスを与える。
 
+`fvm flutter doctor` を実行して、警告に対応する。
+
 ## Unity プロジェクトのビルド
 
 ### Android
@@ -43,6 +51,11 @@ android/local.properties の `ndk.dir` を Unity で使用している NDK の�
 ```
 fvm flutter run --dart-define=temp
 ```
+
+- 動かないときの確認事項
+    - Android 端末の USB デバッグが有効になっているか確認する
+    - local.properties の `ndk.dir` が設定されているかを確認する
+        - local.properties のパスの指定でバックスラッシュが2個になっているか？（Windows ではパスそのまま貼り付けは不可）
 
 ### iOS
 
