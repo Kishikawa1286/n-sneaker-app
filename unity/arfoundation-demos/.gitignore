@@ -16,6 +16,9 @@ Assets/UX/Scenes/Test.meta
 /Assets/UX/Scripts/Test/
 Assets/UX/Scripts/Test.meta
 
+# UserSettings data
+UserSettings/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 #!/[Aa]ssets/**/*.meta
 
