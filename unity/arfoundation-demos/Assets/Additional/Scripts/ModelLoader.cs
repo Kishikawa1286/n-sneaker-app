@@ -26,29 +26,26 @@ public class ModelLoader : MonoBehaviour
         UnityMessageManager = GetComponent<UnityMessageManager>();
     }
 
-    private String FileModelFilePath(String id)
+    private String FileModelFilePath(String name)
     {
-        return Application.persistentDataPath + "/" + id + "_fbx.zip";
+        return Application.persistentDataPath + "/" + name + ".glb";
     }
 
-    private void LoadFile(String id)
+    private void LoadFile(String name)
     {
         loading = true;
         var options = AssetLoader.CreateDefaultLoaderOptions();
         options.AddSecondAlphaMaterial = false;
         options.UseAlphaMaterials = true;
         options.LoadTexturesAsSRGB = false;
-        AssetLoaderZip.LoadModelFromZipFile(
-            FileModelFilePath(id),
+        AssetLoader.LoadModelFromFile(
+            FileModelFilePath(name),
             OnLoad,
             OnMaterialsLoad,
             OnProgress,
             OnError,
             gameObject, // Scriptを適用するGameObject自身
-            options,
-            null,
-            "zip",
-            false
+            options
         );
     }
 
@@ -85,7 +82,7 @@ public class ModelLoader : MonoBehaviour
     // UWPやWebGLなどのプラットフォームは、スレッドを使用しないため、現時点ではこのメソッドを呼び出しません。
     private void OnProgress(AssetLoaderContext assetLoaderContext, float progress)
     {
-        UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + progress.ToString() + "\"}");
+        UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + progress.ToString() + "\"}"); // json
     }
 
     // このイベントは、モデルの読み込み中に重大なエラーが発生したときに呼び出されます。
@@ -154,7 +151,7 @@ public class ModelLoader : MonoBehaviour
                 id,
                 (progress) =>
                 {
-                    UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + progress.ToString() + "\"}");
+                    UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + progress.ToString() + "\"}"); // json
                 }
             )
         );
@@ -181,7 +178,7 @@ public class ModelLoader : MonoBehaviour
                     {
                         //正常終了
                         File.WriteAllBytes(FileModelFilePath(id), request.downloadHandler.data);
-                        UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + 1f.ToString() + "\"}");
+                        UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + 1f.ToString() + "\"}"); // json
                         LoadFile(id);
                     }
                     catch (Exception e)

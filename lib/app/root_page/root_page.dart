@@ -24,9 +24,9 @@ class RootPage extends HookConsumerWidget {
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
-                      id: 'sneaker-Guns-1',
+                      id: 'my-name-one-1',
                       url:
-                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-temp.appspot.com/o/test%2FGuns.zip?alt=media&token=0655f270-ebe8-48d9-89d7-8b2e883f2d06',
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-development.appspot.com/o/test%2Fmy_name.glb?alt=media&token=f606d49d-2010-4217-b282-d7dfb0076b48',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
@@ -35,20 +35,19 @@ class RootPage extends HookConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
-                        'Guns',
+                        'My Name (one)',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                   ),
-                ),
-                // Guns
+                ), // My Name
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
-                      id: 'sneaker-Sckelton-4',
+                      id: 'my-name-both-1',
                       url:
-                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-temp.appspot.com/o/test%2Fsckelton%202.zip?alt=media&token=dbee3386-3673-4f90-8173-9c3570e7cdc2',
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-development.appspot.com/o/test%2Fmy_name_both.glb?alt=media&token=240c89a6-efe5-4a2e-9990-5342703c8ccc',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
@@ -57,19 +56,20 @@ class RootPage extends HookConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
-                        'Sckelton',
+                        'My Name (both)',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                   ),
                 ),
+                // Mr.Mind
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     arPageViewModel.onSelected3DModel(
                       id: 'mr-mind',
                       url:
-                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-temp.appspot.com/o/test%2Fmr_mind.glb.zip?alt=media&token=e5d13589-de5d-442a-8fe9-6bb7d0e8a835',
+                          'https://firebasestorage.googleapis.com/v0/b/n-sneaker-development.appspot.com/o/test%2Fmr_mind.glb?alt=media&token=d8b33c03-d042-4796-8864-6c63ea830eb3',
                     );
                     Navigator.of(context).pushNamed('/arpage');
                   },
@@ -78,7 +78,7 @@ class RootPage extends HookConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
-                        'Sckelton',
+                        'Mr Mind',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
