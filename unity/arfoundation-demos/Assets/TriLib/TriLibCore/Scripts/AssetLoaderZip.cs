@@ -122,7 +122,7 @@ namespace TriLibCore
         /// <param name="wrapperGameObject">The Game Object that will be the parent of the loaded Game Object. Can be null.</param>
         /// <param name="assetLoaderOptions">The options to use when loading the Model.</param>
         /// <param name="customContextData">The Custom Data that will be passed along the Context.</param>
-        /// <param name="fileExtension">The Model inside the Zip file extension.. If <c>null</c> TriLib will try to find a suitable model format inside the Zip file.</param>
+        /// <param name="fileExtension">The Model inside the Zip file extension. If <c>null</c> TriLib will try to find a suitable model format inside the Zip file.</param>
         /// <returns>The asset loader context, containing model loading information and the output game object.</returns>
         public static AssetLoaderContext LoadModelFromZipStreamNoThread(Stream stream, Action<IContextualizedError> onError, GameObject wrapperGameObject = null, AssetLoaderOptions assetLoaderOptions = null, object customContextData = null, string fileExtension = null)
         {
@@ -142,7 +142,7 @@ namespace TriLibCore
         /// <param name="stream">The Stream containing the Zip data.</param>
         /// <param name="path">The Zip file path.</param>
         /// <param name="assetLoaderOptions">The options to use when loading the Model.</param>
-        /// <param name="fileExtension">The Model inside the Zip file extension..</param>
+        /// <param name="fileExtension">The Model inside the Zip file extension.</param>
         /// <param name="zipFile">The Zip file instance.</param>
         /// <returns>The model file data stream.</returns>
         private static Stream SetupZipModelLoading(Action<IContextualizedError> onError, ref Stream stream, string path, ref AssetLoaderOptions assetLoaderOptions, ref string fileExtension, out ZipFile zipFile)

@@ -1,15 +1,8 @@
-﻿2.1.4b
+﻿2.1.5
 Changelog:
--Fixed FBX Animation ranges bug.
--Fixed GetTriLibPreferences Resources loading bug.
--Fixed long names replacement bug.
--Fixed mobile input system.
--Fixed stb_image issues.
--Updated stb_image.
--Fixed StandaloneFileBrowser on iOS.
--Refactored FBX ASCII reader.
--Removed DAE Importer options in TriLib Settings (reserved for a future release).
--Added MergeAnimations sample. This sample uses a custom AnimationClipMapper to merge AnimationClip tuples into one.
--Added MaxTexturesResolution Asset Loader Option. Use this field to change the maximum Texture resolutions.
--Added back the AssetLoaderOptions.OptimizeMeshes functionality.
--Added MergeSingleChild Asset Loader Option. Turn on this field to merge single child models into a single GameObject.
+-Increased FBX blend-shapes limit.
+-Fixed FBX ASCII reader issue.
+-Fixed FBX pivot issue.
+-Fixed AssetLoaderOptionsEditor typo.
+-Fixed gLTF2 Metallic/Smoothness Texture creation.
+-Added onPreLoad parameter to AssetLoader.LoadModelFromStream and AssetLoader.LoadModelFromFile. Use this parameter when you want to call a completion method on the loading Thread (onComplete is different from onPreLoad as it is always called on the main thread).

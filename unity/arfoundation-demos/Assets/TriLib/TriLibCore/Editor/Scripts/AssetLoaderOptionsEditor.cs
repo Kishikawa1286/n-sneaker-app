@@ -85,7 +85,7 @@ namespace TriLibCore.Editor
                         {
                             EditorGUILayout.PropertyField(serializedObject.FindProperty("ConvexColliders"), new GUIContent("Convex Colliders", "Turn on this field to generate convex Colliders when the GenerateColliders field is enabled."));
                         }
-                        EditorGUILayout.PropertyField(serializedObject.FindProperty("OptimizeMesh"), new GUIContent("Optimize Mesh", "Turn on this field to optimize imported Meshes for GPU access"));
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("OptimizeMeshes"), new GUIContent("Optimize Meshes", "Turn on this field to optimize imported Meshes for GPU access"));
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("KeepQuads"), new GUIContent("Keep Quads", "Turn on this field to mantain Mesh quads. (Useful for DX11 tesselation)"));
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("MergeVertices"), new GUIContent("Merge Vertices", "Turn on this field to merge model duplicated vertices where possible."));
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("ImportNormals"), new GUIContent("Import Normals", "Turn on this field to import Mesh normals. If not enabled, normals will be calculated instead."));

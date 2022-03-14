@@ -35,8 +35,7 @@ public class ModelLoader : MonoBehaviour
     {
         loading = true;
         var options = AssetLoader.CreateDefaultLoaderOptions();
-        options.AddSecondAlphaMaterial = false;
-        options.UseAlphaMaterials = true;
+        options.AlphaMaterialMode = AlphaMaterialMode.Transparent;
         options.LoadTexturesAsSRGB = false;
         AssetLoader.LoadModelFromFile(
             FileModelFilePath(name),
