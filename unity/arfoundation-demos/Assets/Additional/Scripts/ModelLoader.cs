@@ -110,6 +110,23 @@ public class ModelLoader : MonoBehaviour
     // このイベントは、重大な読み込みエラーの後にも呼び出されるため、必要なリソースをクリーンアップできます。
     private void OnMaterialsLoad(AssetLoaderContext assetLoaderContext)
     {
+        foreach (var kvp in assetLoaderContext.LoadedMaterials)
+        {
+            Material mat = kvp.Value;
+
+            mat.EnableKeyword("_EMISSION");
+
+            float r = mat.color[0];
+            float g = mat.color[1];
+            float b = mat.color[2];
+            float a = mat.color[3];
+
+            r = Mathf.Pow(r, 1/2.2f);
+            g = Mathf.Pow(g, 1/2.2f);
+            b = Mathf.Pow(b, 1/2.2f);
+
+            mat.color = new Color(r, g, b, a);
+        }
         // ルートにロードされたGameObjectは、"assetLoaderContext.RootGameObject"フィールドに割り当てられます。
         // 必要に応じて、このステップでGameObjectを再び表示できます。
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
