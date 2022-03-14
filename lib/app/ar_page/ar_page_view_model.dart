@@ -7,10 +7,49 @@ import 'package:native_screenshot/native_screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import '../common/view_model_change_notifier.dart';
 
-final ChangeNotifierProvider<ARPageViewModel> arPageViewModelProvider =
-    ChangeNotifierProvider((ref) => ARPageViewModel());
+class _ARPageViewModelConstructorParams {
+  const _ARPageViewModelConstructorParams({
+    required this.productId,
+    required this.productGlbFileId,
+    required this.productUrl,
+  });
 
-class ARPageViewModel extends ViewModelChangeNotifier {
+  factory _ARPageViewModelConstructorParams.fromJson(String jsonStr) {
+    final params = jsonDecode(jsonStr) as Map<String, dynamic>;
+    return _ARPageViewModelConstructorParams(
+      productId: params['product_id'] as String? ?? '',
+      productGlbFileId: params['product_glb_file_id'] as String? ?? '',
+      productUrl: params['url'] as String? ?? '',
+    );
+  }
+
+  final String productId;
+  final String productGlbFileId;
+  final String productUrl;
+}
+
+final arPageViewModelProvider =
+    AutoDisposeChangeNotifierProviderFamily<_ARPageViewModel, String>(
+        (ref, paramsAsJson) {
+  final params = _ARPageViewModelConstructorParams.fromJson(paramsAsJson);
+  return _ARPageViewModel(
+    params.productId,
+    params.productGlbFileId,
+    params.productUrl,
+  );
+});
+
+class _ARPageViewModel extends ViewModelChangeNotifier {
+  _ARPageViewModel(
+    this._productId,
+    this._productGlbFileId,
+    this._productUrl,
+  );
+
+  final String _productId;
+  final String _productGlbFileId;
+  final String _productUrl;
+
   late UnityWidgetController _unityWidgetController;
 
   double _intensity = 1;
@@ -20,8 +59,6 @@ class ARPageViewModel extends ViewModelChangeNotifier {
   bool _capturing = false;
   double _downloadProgress = 0;
   double _loadProgress = 0;
-  String _productId = '';
-  String _productUrl = '';
 
   double get intensity => _intensity;
   double get shadowStrength => _shadowStrength;
@@ -63,11 +100,6 @@ class ARPageViewModel extends ViewModelChangeNotifier {
       print(message);
       print(e);
     }
-  }
-
-  void onSelected3DModel({required String id, required String url}) {
-    _productId = id;
-    _productUrl = url;
   }
 
   void reloadUnityScene({bool justReload = false}) {
@@ -161,7 +193,7 @@ class ARPageViewModel extends ViewModelChangeNotifier {
     _unityWidgetController.postMessage(
       'Target Sneaker',
       'LoadModel',
-      '{"id": "$_productId", "url": "$_productUrl"}',
+      '{"id": "${_productId}_$_productGlbFileId", "url": "$_productUrl"}',
     );
   }
 }

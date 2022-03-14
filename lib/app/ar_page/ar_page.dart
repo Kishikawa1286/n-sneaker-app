@@ -3,12 +3,42 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'ar_page_view_model.dart';
 
+// url の生成を実装していないのでurlを渡さなければならない
+// pushnameはできないので、直push
+void pushARPage(
+  BuildContext context, {
+  required String productId,
+  required String productGlbFileId,
+  required String url,
+}) =>
+    Navigator.of(context).push(
+      MaterialPageRoute<Widget>(
+        builder: (context) => ARPage(
+          productId: productId,
+          productGlbFileId: productGlbFileId,
+          url: url,
+        ),
+      ),
+    );
+
 class ARPage extends HookConsumerWidget {
-  const ARPage();
+  const ARPage({
+    required this.productId,
+    required this.productGlbFileId,
+    required this.url,
+  });
+
+  final String productId;
+  final String productGlbFileId;
+  final String url;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final arPageViewModel = ref.watch(arPageViewModelProvider);
+    final arPageViewModel = ref.watch(
+      arPageViewModelProvider(
+        '{"product_id": "$productId", "product_glb_file_id": "$productGlbFileId", "url": "$url"}',
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: arPageViewModel.capturing
