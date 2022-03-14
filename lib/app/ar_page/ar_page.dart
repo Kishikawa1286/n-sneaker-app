@@ -45,8 +45,8 @@ class ARPage extends HookConsumerWidget {
           ? null
           : AppBar(
               leading: GestureDetector(
-                onTap: () {
-                  arPageViewModel.reloadUnityScene(justReload: true);
+                onTap: () async {
+                  await arPageViewModel.onPop();
                   Navigator.of(context).pop();
                 },
                 behavior: HitTestBehavior.opaque,

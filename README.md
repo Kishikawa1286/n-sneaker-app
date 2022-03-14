@@ -53,9 +53,10 @@ fvm flutter run --dart-define=temp
 ```
 
 - 動かないときの確認事項
-    - Android 端末の USB デバッグが有効になっているか確認する
-    - local.properties の `ndk.dir` が設定されているかを確認する
-        - local.properties のパスの指定でバックスラッシュが2個になっているか？（Windows ではパスそのまま貼り付けは不可）
+    - Android 端末の USB デバッグが有効になっているか？
+    - local.properties の `ndk.dir` が設定されているか？
+        - local.properties のパスの指定でバックスラッシュが2個になっているか？（Windows ではパスそのまま貼り付けは不可）  
+        例: `C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.29f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK`
 
 ### iOS
 

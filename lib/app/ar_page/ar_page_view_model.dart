@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -69,6 +70,14 @@ class _ARPageViewModel extends ViewModelChangeNotifier {
   bool get downloading => 0 < _downloadProgress && _downloadProgress < 1;
   double get loadProgress => _loadProgress;
   bool get loading => 0 < _loadProgress && _loadProgress < 1;
+
+  Future<void> onPop() async {
+    if (Platform.isIOS) {
+      reloadUnityScene(justReload: true);
+    } else {
+      await _unityWidgetController.unload();
+    }
+  }
 
   void onUnityCreated(UnityWidgetController controller) {
     _unityWidgetController = controller;
