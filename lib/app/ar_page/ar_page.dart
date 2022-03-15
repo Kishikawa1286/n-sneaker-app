@@ -56,6 +56,7 @@ class ARPage extends HookConsumerWidget {
                 ),
               ),
               actions: [
+                /*
                 GestureDetector(
                   onTap: arPageViewModel.reloadUnityScene,
                   behavior: HitTestBehavior.opaque,
@@ -64,6 +65,7 @@ class ARPage extends HookConsumerWidget {
                     child: Icon(Icons.replay_outlined),
                   ),
                 ),
+                */
                 GestureDetector(
                   onTap: arPageViewModel.captureAndShareScreenshot,
                   behavior: HitTestBehavior.opaque,
