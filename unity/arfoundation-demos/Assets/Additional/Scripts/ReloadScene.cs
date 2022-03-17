@@ -13,9 +13,12 @@ public class ReloadScene : MonoBehaviour, IEventSystemHandler
     // This method is called from Flutter
     public void Reload(String message)
     {
-        GameObject target = GameObject.Find("Target Sneaker");
-        Destroy(target);
+        #if UNITY_IOS
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        #endif
+        // GameObject target = GameObject.Find("Target Sneaker");
+        // Destroy(target);
 
-        session.Reset();
+        // session.Reset();
     }
 }
