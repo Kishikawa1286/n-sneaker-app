@@ -54,6 +54,12 @@ class RootPage extends HookConsumerWidget {
                     'https://firebasestorage.googleapis.com/v0/b/n-sneaker-development.appspot.com/o/test%2Fmr_mind_guns.glb?alt=media&token=940a5045-33a7-4cfa-8233-e2a0fcd1f2c1',
               ),
               _Tile(
+                productId: 'Guns',
+                productGlbFileId: 'MRMIND2',
+                url:
+                    'https://firebasestorage.googleapis.com/v0/b/n-sneaker-development.appspot.com/o/test%2Fmr_mind_guns_edit.glb?alt=media&token=c53e9dd3-bbfa-48c2-ba0c-ad48d29784f5',
+              ),
+              _Tile(
                 productId: 'Mark',
                 productGlbFileId: 'MRMIND',
                 url:

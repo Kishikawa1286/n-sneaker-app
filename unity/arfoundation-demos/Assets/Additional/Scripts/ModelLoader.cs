@@ -37,6 +37,7 @@ public class ModelLoader : MonoBehaviour
         var options = AssetLoader.CreateDefaultLoaderOptions();
         options.AlphaMaterialMode = AlphaMaterialMode.Transparent;
         options.LoadTexturesAsSRGB = false;
+        options.TextureCompressionQuality = TextureCompressionQuality.Best;
         AssetLoader.LoadModelFromFile(
             FileModelFilePath(name),
             OnLoad,

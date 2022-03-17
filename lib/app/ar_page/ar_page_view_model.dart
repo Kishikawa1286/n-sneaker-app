@@ -132,6 +132,7 @@ class _ARPageViewModel extends ViewModelChangeNotifier {
     _capturing = true;
     notifyListeners();
     // wait for rebuild
+    /*
     Timer(const Duration(milliseconds: 200), () async {
       final path = await NativeScreenshot.takeScreenshot();
       _capturing = false;
@@ -140,6 +141,7 @@ class _ARPageViewModel extends ViewModelChangeNotifier {
         await Share.shareFiles([path], text: '');
       }
     });
+    */
   }
 
   void onChangedIntensitySlider(double sliderValue) {
