@@ -31,7 +31,7 @@ public class LightSetting : MonoBehaviour, IEventSystemHandler
         Intensity = 1f;
         ShadowStrength = 0.8f;
         Theta = 0f * Mathf.Deg2Rad;
-        Phi = 45f * Mathf.Deg2Rad;
+        Phi = -45f * Mathf.Deg2Rad;
     }
 
     // Update is called once per frame

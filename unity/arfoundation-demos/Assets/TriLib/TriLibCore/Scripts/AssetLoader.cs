@@ -41,8 +41,9 @@ namespace TriLibCore
         /// <param name="assetLoaderOptions">The options to use when loading the Model.</param>
         /// <param name="customContextData">The Custom Data that will be passed along the Context.</param>
         /// <param name="haltTask">Turn on this field to avoid loading the model immediately and chain the Tasks.</param>
+        /// <param name="onPreLoad">The method to call on the parallel Thread before the Unity objects are created.</param>
         /// <returns>The Asset Loader Context, containing Model loading information and the output Game Object.</returns>
-        public static AssetLoaderContext LoadModelFromFile(string path, Action<AssetLoaderContext> onLoad = null, Action<AssetLoaderContext> onMaterialsLoad = null, Action<AssetLoaderContext, float> onProgress = null, Action<IContextualizedError> onError = null, GameObject wrapperGameObject = null, AssetLoaderOptions assetLoaderOptions = null, object customContextData = null, bool haltTask = false)
+        public static AssetLoaderContext LoadModelFromFile(string path, Action<AssetLoaderContext> onLoad = null, Action<AssetLoaderContext> onMaterialsLoad = null, Action<AssetLoaderContext, float> onProgress = null, Action<IContextualizedError> onError = null, GameObject wrapperGameObject = null, AssetLoaderOptions assetLoaderOptions = null, object customContextData = null, bool haltTask = false, Action<AssetLoaderContext> onPreLoad = null)
         {
             var assetLoaderContext = new AssetLoaderContext
             {
@@ -55,6 +56,7 @@ namespace TriLibCore
                 OnProgress = onProgress,
                 HandleError = HandleError,
                 OnError = onError,
+                OnPreLoad = onPreLoad,
                 CustomData = customContextData,
 #if UNITY_WEBGL || (UNITY_UWP && !TRILIB_ENABLE_UWP_THREADS) || TRILIB_FORCE_SYNC
                 Async = false
@@ -78,8 +80,9 @@ namespace TriLibCore
         /// <param name="assetLoaderOptions">The options to use when loading the Model.</param>
         /// <param name="customContextData">The Custom Data that will be passed along the Context.</param>
         /// <param name="haltTask">Turn on this field to avoid loading the model immediately and chain the Tasks.</param>
+        /// <param name="onPreLoad">The method to call on the parallel Thread before the Unity objects are created.</param>
         /// <returns>The Asset Loader Context, containing Model loading information and the output Game Object.</returns>
-        public static AssetLoaderContext LoadModelFromStream(Stream stream, string filename = null, string fileExtension = null, Action<AssetLoaderContext> onLoad = null, Action<AssetLoaderContext> onMaterialsLoad = null, Action<AssetLoaderContext, float> onProgress = null, Action<IContextualizedError> onError = null, GameObject wrapperGameObject = null, AssetLoaderOptions assetLoaderOptions = null, object customContextData = null, bool haltTask = false)
+        public static AssetLoaderContext LoadModelFromStream(Stream stream, string filename = null, string fileExtension = null, Action<AssetLoaderContext> onLoad = null, Action<AssetLoaderContext> onMaterialsLoad = null, Action<AssetLoaderContext, float> onProgress = null, Action<IContextualizedError> onError = null, GameObject wrapperGameObject = null, AssetLoaderOptions assetLoaderOptions = null, object customContextData = null, bool haltTask = false, Action<AssetLoaderContext> onPreLoad = null)
         {
             var assetLoaderContext = new AssetLoaderContext
             {
@@ -94,6 +97,7 @@ namespace TriLibCore
                 OnProgress = onProgress,
                 HandleError = HandleError,
                 OnError = onError,
+                OnPreLoad = onPreLoad,
                 CustomData = customContextData,
 #if UNITY_WEBGL || (UNITY_UWP && !TRILIB_ENABLE_UWP_THREADS) || TRILIB_FORCE_SYNC
                 Async = false
@@ -175,7 +179,7 @@ namespace TriLibCore
 #else
             string threadName = null;
 #endif
-            ThreadUtils.RequestNewThreadFor(assetLoaderContext, ref assetLoaderContext.CancellationToken, LoadModel, ProcessRootModel, HandleError, assetLoaderContext.Options.Timeout, threadName, !haltTask);
+            ThreadUtils.RequestNewThreadFor(assetLoaderContext, ref assetLoaderContext.CancellationToken, LoadModel, ProcessRootModel, HandleError, assetLoaderContext.Options.Timeout, threadName, !haltTask, assetLoaderContext.OnPreLoad);
         }
 
         /// <summary>

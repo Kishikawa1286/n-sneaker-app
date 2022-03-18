@@ -3,6 +3,7 @@ using TriLibCore.General;
 using UnityEngine;
 using TriLibCore.Extensions;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 namespace TriLibCore.Samples
 {
@@ -80,16 +81,64 @@ namespace TriLibCore.Samples
         /// <param name="assetLoaderContext">The context used to load the Model.</param>
         private void OnMaterialsLoad(AssetLoaderContext assetLoaderContext)
         {
-            if (assetLoaderContext.RootGameObject != null)
+            // ref: https://forum.unity.com/threads/trilib-model-loading-package.478480/page-31
+            foreach (var kvp in assetLoaderContext.LoadedMaterials)
             {
-                Debug.Log("Model fully loaded.");
+                Material mat = kvp.Value;
+
+                mat.EnableKeyword("_EMISSION");
+
+                float matR = mat.color[0];
+                float matG = mat.color[1];
+                float matB = mat.color[2];
+                float matA = mat.color[3];
+
+                matR = Mathf.Pow(matR, 1/2.2f);
+                matG = Mathf.Pow(matG, 1/2.2f);
+                matB = Mathf.Pow(matB, 1/2.2f);
+
+                mat.color = new Color(matR, matG, matB, matA);
+                
+                Texture2D tex2d;
+                Texture tex = mat.GetTexture("_BaseMap");
+                if (tex != null) {
+                    if (tex.dimension == TextureDimension.Tex2D) {
+                        tex2d = ToTexture2D(tex);
+                        
+                        for (int y = 0; y < tex2d.height; y++) {
+                            for (int x = 0; x < tex2d.width; x++) {
+                                Color pixel = tex2d.GetPixel(x, y);
+
+                                float texR = pixel[0];
+                                float texG = pixel[1];
+                                float texB = pixel[2];
+                                float texA = pixel[3];
+
+                                texR = Mathf.Pow(texR, 1/2.2f);
+                                texG = Mathf.Pow(texG, 1/2.2f);
+                                texB = Mathf.Pow(texB, 1/2.2f);
+
+                                tex2d.SetPixel(x, y, new Color(texR, texG, texB, texA));
+                                
+                            }
+                        }
+
+                        mat.SetTexture("_BaseMap", tex2d);
+                        tex2d.Apply();
+                    }
+                }
+
+                if (assetLoaderContext.RootGameObject != null)
+                {
+                    Debug.Log("Model fully loaded.");
+                }
+                else
+                {
+                    Debug.Log("Model could not be loaded.");
+                }
+                _loadModelButton.interactable = true;
+                _progressText.enabled = false;
             }
-            else
-            {
-                Debug.Log("Model could not be loaded.");
-            }
-            _loadModelButton.interactable = true;
-            _progressText.enabled = false;
         }
 
         /// <summary>
@@ -108,6 +157,23 @@ namespace TriLibCore.Samples
             {
                 Camera.main.FitToBounds(assetLoaderContext.RootGameObject, 2f);
             }
+        }
+
+        private Texture2D ToTexture2D(Texture tex)
+        {
+            var sw = tex.width;
+            var sh = tex.height;
+            var format = UnityEngine.TextureFormat.RGBA32;
+            var result = new Texture2D(sw, sh, format, false);
+            var currentRT = RenderTexture.active;
+            var rt = new RenderTexture(sw, sh, 32);
+            Graphics.Blit(tex, rt);
+            RenderTexture.active = rt;
+            var source = new Rect(0, 0, rt.width, rt.height);
+            result.ReadPixels(source, 0, 0);
+            result.Apply();
+            RenderTexture.active = currentRT;
+            return result;
         }
     }
 }

@@ -49,6 +49,11 @@
 			int _HasDefaultRoughness;
 			int _HasDefaultMetallic;
 			int _UsingRoughness;
+			int _MixTextureChannelsWithColors;
+
+			float GetGlossiness() {
+				return 1 - (_HasDefaultRoughness > 0 ? _DefaultRoughness : 1);
+			}
 
 			// Reference:
 			// https://docs.microsoft.com/en-us/azure/remote-rendering/reference/material-mapping
@@ -62,6 +67,9 @@
 				float metalness;
 				if (_HasMetallicTexture > 0) {
 					metalness = tex2D(_MetallicTexture, i.uv).x;
+					if (_HasDefaultMetallic && _MixTextureChannelsWithColors > 0) {
+						metalness *= _DefaultMetallic;
+					}
 				}
 				else if (_HasSpecularTexture > 0)
 				{
@@ -76,6 +84,9 @@
 					float squareRoot = sqrt(max(0, B * B - 4 * A * C));
 					float value = (-B + squareRoot) / (2 * A);
 					metalness = clamp(value, 0, 1);
+					if (_HasDefaultMetallic && _MixTextureChannelsWithColors > 0) {
+						metalness *= _DefaultMetallic;
+					}
 				}
 				else 
 				{
@@ -86,14 +97,20 @@
 				float glossiness;
 				if (_HasGlossinessTexture > 0) {
 					glossiness = _UsingRoughness > 0 ? 1 - tex2D(_GlossinessTexture, i.uv).x : tex2D(_GlossinessTexture, i.uv).x;
+					if (_HasDefaultRoughness && _MixTextureChannelsWithColors > 0) {
+						glossiness *= GetGlossiness();
+					}
 				}
 				else if (_HasSpecularTexture > 0)
 				{
 					float specularIntensity = specularBase.r * 0.2125 + specularBase.g * 0.7154 + specularBase.b * 0.0721;
 					glossiness = 1 - sqrt(2 / (_ShininessExponent * specularIntensity + 2));
+					if (_HasDefaultRoughness && _MixTextureChannelsWithColors > 0) {
+						glossiness *= GetGlossiness();
+					}
 				}
 				else {
-					glossiness = 1 - (_HasDefaultRoughness > 0 ?  _DefaultRoughness : 1);
+					glossiness = GetGlossiness();
 				}
 
 				return float4(metalness, metalness, metalness, glossiness);

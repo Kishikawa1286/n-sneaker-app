@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../ar_page/ar_page_view_model.dart';
 import 'unity_widget_initializer_view_model.dart';
 
 class UnityWidgetInitializer extends HookConsumerWidget {
@@ -13,7 +12,6 @@ class UnityWidgetInitializer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final unityWidgetInitializerViewModel =
         ref.watch(unityWidgetInitializerViewModelProvider);
-    final arPageViewModel = ref.watch(arPageViewModelProvider);
     if (unityWidgetInitializerViewModel.initialized) {
       return afterInitialized(context);
     }
@@ -28,13 +26,9 @@ class UnityWidgetInitializer extends HookConsumerWidget {
               ),
             ),
           ),
-          SizedBox(
-            width: 0,
-            height: 0,
-            child: UnityWidget(
-              onUnityCreated: arPageViewModel.onUnityCreated,
-              fullscreen: true,
-            ),
+          UnityWidget(
+            onUnityCreated: unityWidgetInitializerViewModel.onUnityCreated,
+            fullscreen: true,
           ),
         ],
       ),

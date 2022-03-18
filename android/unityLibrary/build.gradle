@@ -5,17 +5,17 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation(name: 'unity-classes', ext:'jar')
-    implementation(name: 'ARPresto', ext:'aar')
-    implementation(name: 'UnityARCore', ext:'aar')
     implementation(name: 'arcore_client', ext:'aar')
+    implementation(name: 'ARPresto', ext:'aar')
     implementation(name: 'unityandroidpermissions', ext:'aar')
+    implementation(name: 'UnityARCore', ext:'aar')
     implementation(name: 'libarpresto_api', ext:'so')
     implementation(name: 'libUnityARCore', ext:'so')
 }
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '32.0.0'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -55,7 +55,7 @@ def getSdkDir() {
 
 def BuildIl2Cpp(String workingDir, String targetDirectory, String architecture, String abi, String configuration) {
     exec {
-        commandLine(workingDir + "/src/main/Il2CppOutputProject/IL2CPP/build/deploy/netcoreapp3.1/il2cpp",
+        commandLine(workingDir + "/src/main/Il2CppOutputProject/IL2CPP/build/deploy/netcoreapp3.1/il2cpp.exe",
             "--compile-cpp",
             "--libil2cpp-static",
             "--platform=Android",

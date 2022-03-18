@@ -26,29 +26,26 @@ public class ModelLoader : MonoBehaviour
         UnityMessageManager = GetComponent<UnityMessageManager>();
     }
 
-    private String FileModelFilePath(String id)
+    private String FileModelFilePath(String name)
     {
-        return Application.persistentDataPath + "/" + id + "_fbx.zip";
+        return Application.persistentDataPath + "/" + name + ".glb";
     }
 
-    private void LoadFile(String id)
+    private void LoadFile(String name)
     {
         loading = true;
         var options = AssetLoader.CreateDefaultLoaderOptions();
-        options.AddSecondAlphaMaterial = false;
-        options.UseAlphaMaterials = true;
+        options.AlphaMaterialMode = AlphaMaterialMode.Transparent;
         options.LoadTexturesAsSRGB = false;
-        AssetLoaderZip.LoadModelFromZipFile(
-            FileModelFilePath(id),
+        options.TextureCompressionQuality = TextureCompressionQuality.Best;
+        AssetLoader.LoadModelFromFile(
+            FileModelFilePath(name),
             OnLoad,
             OnMaterialsLoad,
             OnProgress,
             OnError,
             gameObject, // Scriptを適用するGameObject自身
-            options,
-            null,
-            "zip",
-            false
+            options
         );
     }
 
@@ -85,7 +82,7 @@ public class ModelLoader : MonoBehaviour
     // UWPやWebGLなどのプラットフォームは、スレッドを使用しないため、現時点ではこのメソッドを呼び出しません。
     private void OnProgress(AssetLoaderContext assetLoaderContext, float progress)
     {
-        UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + progress.ToString() + "\"}");
+        UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + progress.ToString() + "\"}"); // json
     }
 
     // このイベントは、モデルの読み込み中に重大なエラーが発生したときに呼び出されます。
@@ -110,6 +107,23 @@ public class ModelLoader : MonoBehaviour
     // このイベントは、重大な読み込みエラーの後にも呼び出されるため、必要なリソースをクリーンアップできます。
     private void OnMaterialsLoad(AssetLoaderContext assetLoaderContext)
     {
+        foreach (var kvp in assetLoaderContext.LoadedMaterials)
+        {
+            Material mat = kvp.Value;
+
+            mat.EnableKeyword("_EMISSION");
+
+            float r = mat.color[0];
+            float g = mat.color[1];
+            float b = mat.color[2];
+            float a = mat.color[3];
+
+            r = Mathf.Pow(r, 1/2.2f);
+            g = Mathf.Pow(g, 1/2.2f);
+            b = Mathf.Pow(b, 1/2.2f);
+
+            mat.color = new Color(r, g, b, a);
+        }
         // ルートにロードされたGameObjectは、"assetLoaderContext.RootGameObject"フィールドに割り当てられます。
         // 必要に応じて、このステップでGameObjectを再び表示できます。
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
@@ -137,7 +151,7 @@ public class ModelLoader : MonoBehaviour
                 id,
                 (progress) =>
                 {
-                    UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + progress.ToString() + "\"}");
+                    UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + progress.ToString() + "\"}"); // json
                 }
             )
         );
@@ -164,7 +178,7 @@ public class ModelLoader : MonoBehaviour
                     {
                         //正常終了
                         File.WriteAllBytes(FileModelFilePath(id), request.downloadHandler.data);
-                        UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + 1f.ToString() + "\"}");
+                        UnityMessageManager.SendMessageToFlutter("{\"name\": \"download\", \"value\": \"" + 1f.ToString() + "\"}"); // json
                         LoadFile(id);
                     }
                     catch (Exception e)

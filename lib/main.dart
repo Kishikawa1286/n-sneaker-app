@@ -16,7 +16,7 @@ Future<void> main() async {
           child: MaterialApp(
             title: 'n-sneaker',
             onGenerateRoute: onGenerateRoute,
-            initialRoute: '/',
+            initialRoute: 'root',
           ),
         ),
       );
