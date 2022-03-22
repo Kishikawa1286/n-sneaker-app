@@ -15,9 +15,9 @@ public class ReloadScene : MonoBehaviour, IEventSystemHandler
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        #if UNITY_ANDROID
-            session.Reset();
-        #endif
+        // #if UNITY_ANDROID
+        //     session.Reset();
+        // #endif
 
         // GameObject target = GameObject.Find("Target Sneaker");
         // Destroy(target);
