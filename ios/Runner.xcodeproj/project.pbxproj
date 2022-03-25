@@ -17,6 +17,7 @@
 		E4073F0F27C8C13900252C48 /* dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E4073F0E27C8C13900252C48 /* dev.xcconfig */; };
 		E4073F1427C8C15900252C48 /* temp.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E4073F1327C8C15900252C48 /* temp.xcconfig */; };
 		E4073F1627C8C16D00252C48 /* prod.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E4073F1527C8C16D00252C48 /* prod.xcconfig */; };
+		E470811327EC461100C7279C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E470811227EC461100C7279C /* StoreKit.framework */; };
 		E4B4A18F27C8CC8B00DE4EF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4B4A18E27C8CC8B00DE4EF1 /* GoogleService-Info.plist */; };
 		E4E6E20A27B90B28002724A3 /* UnityFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E6E20327B908BA002724A3 /* UnityFramework.framework */; };
 		E4E6E20B27B90B28002724A3 /* UnityFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E4E6E20327B908BA002724A3 /* UnityFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -81,6 +82,7 @@
 		E4073F0E27C8C13900252C48 /* dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = dev.xcconfig; path = Flutter/dev.xcconfig; sourceTree = "<group>"; };
 		E4073F1327C8C15900252C48 /* temp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = temp.xcconfig; path = Flutter/temp.xcconfig; sourceTree = "<group>"; };
 		E4073F1527C8C16D00252C48 /* prod.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = prod.xcconfig; path = Flutter/prod.xcconfig; sourceTree = "<group>"; };
+		E470811227EC461100C7279C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E4B4A18E27C8CC8B00DE4EF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4D6CB9327BD5E3300C6219B /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		E4E6E1F827B908BA002724A3 /* Unity-iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Unity-iPhone.xcodeproj"; path = "UnityLibrary/Unity-iPhone.xcodeproj"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E470811327EC461100C7279C /* StoreKit.framework in Frameworks */,
 				25CB003FE06A04C0F6B4026F /* Pods_Runner.framework in Frameworks */,
 				E4E6E20A27B90B28002724A3 /* UnityFramework.framework in Frameworks */,
 			);
@@ -102,6 +105,7 @@
 		178607A5D551C944511C51BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E470811227EC461100C7279C /* StoreKit.framework */,
 				0CDBFE2469968EE47EB391EB /* Pods_Runner.framework */,
 			);
 			name = Frameworks;

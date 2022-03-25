@@ -22,14 +22,26 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app use camera for AR</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Take screenshots and save it to the PhotoLibrary.</string>
 	<key>Privacy - Camera Usage Description</key>
 	<string>$(PRODUCT_NAME) uses Cameras</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
