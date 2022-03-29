@@ -28,5 +28,6 @@ public class ScreenshotModel : MonoBehaviour
         string fileName = "cap_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".png";
 
         File.WriteAllBytes(Application.persistentDataPath + "/" + fileName, bytes);
+        //File.WriteAllBytes("/tmp/" + fileName, bytes);
     }
 }
