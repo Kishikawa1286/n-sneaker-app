@@ -4,6 +4,7 @@ using System;//IObservableがUniRXとSystemで競合するため，Systemを記�
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class SwitchEffectWindowView : MonoBehaviour
 {
