@@ -87,12 +87,16 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     try {
       final result = await _adaptyService.makePurchase(_productId);
       if (result == null) {
+        _purchaseInProgress = false;
+        notifyListeners();
         throw Exception('purchase failed.');
       }
       _purchased = true;
     } on Exception catch (e) {
       print(e);
-      return '購入に失敗しました。決済を行った場合は決済状態の復元を試みてください。';
+      _purchaseInProgress = false;
+      notifyListeners();
+      return '購入がキャンセルされました。';
     }
     _purchaseInProgress = false;
     notifyListeners();
@@ -112,6 +116,8 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
       }
     } on Exception catch (e) {
       print(e);
+      _purchaseInProgress = false;
+      notifyListeners();
       return '購入の情報がないため、決済を復元できませんでした。';
     }
     try {
@@ -121,6 +127,8 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
       _purchased = true;
     } on Exception catch (e) {
       print(e);
+      _purchaseInProgress = false;
+      notifyListeners();
       return '購入の情報を確認できましたが、決済の復元中にエラーが発生しました。';
     }
     _purchaseInProgress = false;

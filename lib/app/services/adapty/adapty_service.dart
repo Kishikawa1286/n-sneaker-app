@@ -38,8 +38,8 @@ class AdaptyService {
         await _init();
       }
       final purchaserInfo = await _adaptyRepository.fetchPurchaserInfo();
-      if (purchaserInfo.accessLevels[productId] == null) {
-        throw Exception('no adapty access level exists.');
+      if (purchaserInfo.accessLevels[productId] != null) {
+        throw Exception('access level is already granted.');
       }
       final adaptyProducts = _paywalls?[productId]?.products;
       if (adaptyProducts == null) {
