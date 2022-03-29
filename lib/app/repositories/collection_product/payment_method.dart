@@ -1,5 +1,7 @@
+// ignore_for_file: constant_identifier_names
+
 enum PaymentMethod {
-  googlePlayInAppPurchase,
-  appStoreInAppPurchase,
+  play_store_in_app_purchase,
+  app_store_in_app_purchase,
   unknown,
 }

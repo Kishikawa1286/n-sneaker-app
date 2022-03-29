@@ -3,6 +3,7 @@ import 'package:adapty_flutter/models/adapty_product.dart';
 import 'package:adapty_flutter/models/adapty_purchaser_info.dart';
 import 'package:adapty_flutter/results/get_paywalls_result.dart';
 import 'package:adapty_flutter/results/make_purchase_result.dart';
+import 'package:adapty_flutter/results/restore_purchases_result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final adaptyInterfaceProvider =
@@ -25,4 +26,7 @@ class AdaptyInterface {
     String? offerId,
   }) =>
       Adapty.makePurchase(product, offerId: offerId);
+
+  Future<RestorePurchasesResult> restorePurchases() =>
+      Adapty.restorePurchases();
 }

@@ -49,10 +49,10 @@ class CollectionProductRepository {
 
   PaymentMethod _inAppPurchase() {
     if (Platform.isAndroid) {
-      return PaymentMethod.googlePlayInAppPurchase;
+      return PaymentMethod.play_store_in_app_purchase;
     }
     if (Platform.isIOS) {
-      return PaymentMethod.appStoreInAppPurchase;
+      return PaymentMethod.app_store_in_app_purchase;
     }
     return PaymentMethod.unknown;
   }
@@ -78,11 +78,13 @@ class CollectionProductRepository {
 
   Future<void> addCollectionProduct({
     required String productId,
+    required String receipt,
   }) async {
     final params = AddCollectionProductParameters(
       productId: productId,
       // in app purchase のみ可能
       paymentMethod: enumToString(_inAppPurchase()),
+      receipt: receipt,
     );
     final result = await _cloudFunctionsInterface.addCollectionProduct(params);
     print(result.data);

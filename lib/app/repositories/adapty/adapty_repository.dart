@@ -30,4 +30,12 @@ class AdaptyRepository {
     String? offerId,
   }) =>
       _adaptyInterface.makePurchase(product, offerId: offerId);
+
+  Future<String?> restorePurchase(String productId) async {
+    final result = await _adaptyInterface.restorePurchases();
+    if (result.purchaserInfo?.accessLevels[productId] != null) {
+      return null;
+    }
+    return result.receipt;
+  }
 }

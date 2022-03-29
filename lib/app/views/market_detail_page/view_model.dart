@@ -87,11 +87,24 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     try {
       final result = await _adaptyService.makePurchase(_productId);
       if (result == null) {
-        _purchaseInProgress = false;
-        notifyListeners();
         throw Exception('purchase failed.');
       }
-      _purchased = true;
+      try {
+        final receipt = result.receipt;
+        if (receipt == null) {
+          throw Exception('processing after purchase failed.');
+        }
+        await _collectionProductRepository.addCollectionProduct(
+          productId: _productId,
+          receipt: receipt,
+        );
+        _purchased = true;
+      } on Exception catch (e) {
+        print(e);
+        _purchaseInProgress = false;
+        notifyListeners();
+        return '購入を完了しましたが、エラーが発生しました。購入の復元を行ってください。';
+      }
     } on Exception catch (e) {
       print(e);
       _purchaseInProgress = false;
@@ -103,33 +116,34 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     return '${_product?.titleJp} を購入しました。';
   }
 
-  Future<String> revertPurchase() async {
-    if (_purchaseInProgress) {
+  Future<String> restorePurchase() async {
+    if (_purchaseInProgress || _purchased!) {
       return '';
     }
     _purchaseInProgress = true;
     notifyListeners();
     try {
-      final purchaserInfo = await _adaptyRepository.fetchPurchaserInfo();
-      if (purchaserInfo.accessLevels[_productId] == null) {
+      final receipt = await _adaptyRepository.restorePurchase(_productId);
+      if (receipt == null) {
         throw Exception('no adapty access level exists.');
+      }
+      try {
+        await _collectionProductRepository.addCollectionProduct(
+          productId: _productId,
+          receipt: receipt,
+        );
+        _purchased = true;
+      } on Exception catch (e) {
+        print(e);
+        _purchaseInProgress = false;
+        notifyListeners();
+        return '購入の情報を確認できましたが、決済の復元中にエラーが発生しました。';
       }
     } on Exception catch (e) {
       print(e);
       _purchaseInProgress = false;
       notifyListeners();
       return '購入の情報がないため、決済を復元できませんでした。';
-    }
-    try {
-      await _collectionProductRepository.addCollectionProduct(
-        productId: _productId,
-      );
-      _purchased = true;
-    } on Exception catch (e) {
-      print(e);
-      _purchaseInProgress = false;
-      notifyListeners();
-      return '購入の情報を確認できましたが、決済の復元中にエラーが発生しました。';
     }
     _purchaseInProgress = false;
     notifyListeners();
