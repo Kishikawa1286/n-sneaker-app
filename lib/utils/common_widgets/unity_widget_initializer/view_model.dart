@@ -3,7 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../common/view_model_change_notifier.dart';
+
+import '../../view_model_change_notifier.dart';
 
 final ChangeNotifierProvider<UnityWidgetInitializerViewModel>
     unityWidgetInitializerViewModelProvider = ChangeNotifierProvider(

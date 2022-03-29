@@ -7,8 +7,8 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:native_screenshot/native_screenshot.dart';
 import 'package:share_plus/share_plus.dart';
-import '../common/view_model_change_notifier.dart';
-import '../unity_widget_key_service.dart';
+import '../../utils/view_model_change_notifier.dart';
+import '../services/unity_widget_key/unity_widget_key_service.dart';
 
 class _ARPageViewModelConstructorParams {
   const _ARPageViewModelConstructorParams({
