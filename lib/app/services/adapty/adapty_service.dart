@@ -38,9 +38,11 @@ class AdaptyService {
         await _init();
       }
       final purchaserInfo = await _adaptyRepository.fetchPurchaserInfo();
+      // access level は productId を ID として登録されている
       if (purchaserInfo.accessLevels[productId] != null) {
         throw Exception('access level is already granted.');
       }
+      // paywall は productId を ID として登録されている
       final adaptyProducts = _paywalls?[productId]?.products;
       if (adaptyProducts == null) {
         throw Exception('no adapty products exists.');
@@ -48,6 +50,7 @@ class AdaptyService {
       if (adaptyProducts.isEmpty) {
         throw Exception('no adapty products exists.');
       }
+      // 1 paywall 1 product の設定
       final adaptyProduct = adaptyProducts.first;
       final result = await _adaptyRepository.makePurchase(adaptyProduct);
       return result;
