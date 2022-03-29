@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'unity_widget_initializer_view_model.dart';
+import 'view_model.dart';
 
 class UnityWidgetInitializer extends HookConsumerWidget {
   const UnityWidgetInitializer({required this.afterInitialized});
 
-  final Scaffold Function(BuildContext) afterInitialized;
+  final Widget Function(BuildContext) afterInitialized;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,11 +18,19 @@ class UnityWidgetInitializer extends HookConsumerWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const ColoredBox(
+          ColoredBox(
             color: Colors.white,
             child: Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+              child: SizedBox(
+                width: 80,
+                height: 80,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: const Image(
+                    image: AssetImage('assets/launcher_icon/icon.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           ),
