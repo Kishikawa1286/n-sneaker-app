@@ -23,7 +23,7 @@ class ArPage extends HookConsumerWidget {
           Container(
             color: CommonStyle.black,
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 150,
+            height: MediaQuery.of(context).size.height - 180,
             child: viewModel.initialized
                 ? UnityWidget(
                     key: viewModel.unityWidgetKey,
@@ -35,7 +35,7 @@ class ArPage extends HookConsumerWidget {
           ),
           Card(
             elevation: 5,
-            margin: const EdgeInsets.only(top: 15),
+            margin: const EdgeInsets.only(top: 10),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 50,
               child: !viewModel.initialized || productGlbFile == null
