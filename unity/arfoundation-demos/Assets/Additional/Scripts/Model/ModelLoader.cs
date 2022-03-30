@@ -7,23 +7,41 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
+using UniRx;
 
+class JsonData
+{
+    public String url;
+    public String id;
+}
 public class ModelLoader : MonoBehaviour
 {
-    [SerializeField]
-    private UnityMessageManager UnityMessageManager;
+    private BoolReactiveProperty IsFileDownloaded = new BoolReactiveProperty(false);
+    private BoolReactiveProperty IsFileLoaded = new BoolReactiveProperty(false);
 
-    private bool loading = false;
+    [SerializeField]private UnityMessageManager UnityMessageManager;
+
+    [SerializeField]private DataManager datamanager;
+  private bool loading = false;
     private bool loaded = false;
-
+    public void isDataLoaded()
+    {
+        //loading -> first:false, middle:true, end:false,
+        //loaded -> first:false, middle:false, end:true,
+        
+    }
     void Awake()
     {
         // ref: https://kazupon.org/unity-ios-setnonackup-flag/
         // ref: https://qiita.com/Ubermensch/items/75072ef89249cb3b30e7#2applicationplatform%E3%82%92%E4%BD%BF%E3%81%86
-#if UNITY_IOS
-            UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
-#endif
+        #if UNITY_IOS
+        UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
+        #endif
         UnityMessageManager = GetComponent<UnityMessageManager>();
+
+        //./Resourceフォルダ下にスクリプタブルオブジェクトがある．それを参照してる．
+        datamanager = Resources.Load<DataManager>("datamanager");
+
     }
 
     private String FileModelFilePath(String name)
@@ -44,7 +62,7 @@ public class ModelLoader : MonoBehaviour
             OnMaterialsLoad,
             OnProgress,
             OnError,
-            gameObject, // Scriptを適用するGameObject自身
+            gameObject, // Scriptを適用するGameObject自身 <- 自分自身にスクリプトを適用する
             options
         );
     }
@@ -52,7 +70,7 @@ public class ModelLoader : MonoBehaviour
     // Flutterから呼び出す
     void LoadModel(String json)
     {
-        if (loaded)
+        if (loaded == true)
         {
             return;
         }
@@ -61,7 +79,7 @@ public class ModelLoader : MonoBehaviour
         String id = data.id;
         // id と ファイルが一対一対応している
         // id で指定されたファイルが存在すればそれを読み込む
-        if (loading)
+        if (loading == true)
         {
             return;
         }
@@ -126,10 +144,19 @@ public class ModelLoader : MonoBehaviour
         }
         // ルートにロードされたGameObjectは、"assetLoaderContext.RootGameObject"フィールドに割り当てられます。
         // 必要に応じて、このステップでGameObjectを再び表示できます。
-        var myLoadedGameObject = assetLoaderContext.RootGameObject;
-        myLoadedGameObject.SetActive(true);
+
+
+        //ここで，オブジェクトをマネージャーに飛ばす．
+        // var myLoadedGameObject = assetLoaderContext.RootGameObject;
+        // myLoadedGameObject.SetActive(true);
+        datamanager.ModelData = assetLoaderContext.RootGameObject;
+        datamanager.ModelData.SetActive(true);
+
+        // ここの時点で，データがDLされ終わってはいるので，flagを切り替える．
         loading = false;
         loaded = true;
+
+        // flutterにデータを飛ばす
         UnityMessageManager.SendMessageToFlutter("{\"name\": \"load\", \"value\": \"" + 1f.ToString() + "\"}");
     }
 
@@ -197,8 +224,4 @@ public class ModelLoader : MonoBehaviour
     }
 }
 
-class JsonData
-{
-    public String url;
-    public String id;
-}
+
