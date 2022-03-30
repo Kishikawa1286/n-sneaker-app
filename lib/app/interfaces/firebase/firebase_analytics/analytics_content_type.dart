@@ -1,0 +1,1 @@
+enum AnalyticsContentType { product }

@@ -1,0 +1,1 @@
+enum AnalyticsLoginMethod { emailPassword }
