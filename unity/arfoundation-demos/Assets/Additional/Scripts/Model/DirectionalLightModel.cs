@@ -5,13 +5,20 @@ using UniRx;
 
 public class DirectionalLightModel : MonoBehaviour
 {
-    [SerializeField] Light directionalLight;
+    [SerializeField] GameObject directionalLight;
 
-    void Update()
+    private Light _light;
+
+    void Start()
+    {
+        _light = directionalLight.GetComponent<Light>();
+    }
+
+    private void setLightDirection()
     {
         float theta = _theta.Value * Mathf.Deg2Rad;
         float phi = _phi.Value * Mathf.Deg2Rad;
-        // ref: https://yowabi.blogspot.com/2018/06/unity.html
+        // see: https://yowabi.blogspot.com/2018/06/unity.html
         // direction vector
         Vector3 direction = new Vector3(
             Mathf.Sin(phi) * Mathf.Sin(theta),
@@ -19,12 +26,8 @@ public class DirectionalLightModel : MonoBehaviour
             Mathf.Sin(phi) * Mathf.Cos(theta));
         directionalLight.transform.position = 100 * direction;
         directionalLight.transform.LookAt(new Vector3(0, 0, 0));
-        directionalLight.intensity = _intensity.Value;
-        directionalLight.shadowStrength = _shadowStrength.Value;
     }
 
-    // 光の強度
-    private readonly FloatReactiveProperty _intensity = new FloatReactiveProperty(DefaultIntensity);
     // 定数
     public readonly float MaxIntensity = 2f;
     public readonly float MinIntensity = 0.01f;
@@ -32,11 +35,11 @@ public class DirectionalLightModel : MonoBehaviour
     // Presenter で呼び出される更新処理
     public void SetIntensity(float _Value)
     {
-        _intensity.Value = Mathf.Clamp(_Value, MinIntensity, MaxIntensity);
+        // see: https://yowabi.blogspot.com/2018/06/unity.html
+        _light.intensity = Mathf.Clamp(_Value, MinIntensity, MaxIntensity);
     }
 
     // 影の濃さ
-    private readonly FloatReactiveProperty _shadowStrength = new FloatReactiveProperty(DefaultShadowStrength);
     // 定数
     public readonly float MaxShadowStrength = 1f;
     public readonly float MinShadowStrength = 0f;
@@ -44,9 +47,10 @@ public class DirectionalLightModel : MonoBehaviour
     // Presenter で呼び出される更新処理
     public void SetShadowStrength(float _Value)
     {
-        _shadowStrength.Value = Mathf.Clamp(_Value, MaxShadowStrength, MinShadowStrength);
-    }
+        // see: https://yowabi.blogspot.com/2018/06/unity.html
+        _light.shadowStrength = Mathf.Clamp(_Value, MinShadowStrength, MaxShadowStrength);
 
+    }
 
     // θ
     private readonly FloatReactiveProperty _theta = new FloatReactiveProperty(DefaultTheta);
@@ -57,7 +61,8 @@ public class DirectionalLightModel : MonoBehaviour
     // Presenter で呼び出される更新処理
     public void SetTheta(float _Value)
     {
-        _theta.Value = Mathf.Clamp(_Value, MaxTheta, MinTheta);
+        _theta.Value = Mathf.Clamp(_Value, MinTheta, MaxTheta);
+        setLightDirection();
     }
 
     // φ
@@ -69,6 +74,7 @@ public class DirectionalLightModel : MonoBehaviour
     // Presenter で呼び出される更新処理
     public void SetPhi(float _Value)
     {
-        _phi.Value = Mathf.Clamp(_Value, MaxPhi, MinPhi);
+        _phi.Value = Mathf.Clamp(_Value, MinPhi, MaxPhi);
+        setLightDirection();
     }
 }
