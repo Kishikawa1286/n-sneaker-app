@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -47,16 +45,6 @@ class CollectionProductRepository {
               .whereType<CollectionProductModel>()
               .toList();
 
-  PaymentMethod _inAppPurchase() {
-    if (Platform.isAndroid) {
-      return PaymentMethod.play_store_in_app_purchase;
-    }
-    if (Platform.isIOS) {
-      return PaymentMethod.app_store_in_app_purchase;
-    }
-    return PaymentMethod.unknown;
-  }
-
   Future<bool> checkIfPurchased({
     required String accountId,
     required String productId,
@@ -76,15 +64,25 @@ class CollectionProductRepository {
     return true;
   }
 
-  Future<void> addCollectionProduct({
+  Future<void> addCollectionProductOnMakingPurchase({
     required String productId,
-    required String receipt,
   }) async {
     final params = AddCollectionProductParameters(
       productId: productId,
-      // in app purchase のみ可能
-      paymentMethod: enumToString(_inAppPurchase()),
-      receipt: receipt,
+      paymentMethod: enumToString(generatePaymentMethodFromDevice()),
+    );
+    final result = await _cloudFunctionsInterface.addCollectionProduct(params);
+    print(result.data);
+  }
+
+  Future<void> addCollectionProductOnRestoringPurchase({
+    required String productId,
+    required String? store,
+  }) async {
+    final params = AddCollectionProductParameters(
+      productId: productId,
+      paymentMethod:
+          enumToString(generatePaymentMethodFromAdaptyStoreInfo(store)),
     );
     final result = await _cloudFunctionsInterface.addCollectionProduct(params);
     print(result.data);

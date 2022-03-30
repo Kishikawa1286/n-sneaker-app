@@ -1,3 +1,4 @@
+import 'package:adapty_flutter/models/adapty_error.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -89,14 +90,13 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
       if (result == null) {
         throw Exception('purchase failed.');
       }
+      if (!(result.purchaserInfo?.accessLevels[_productId]?.isActive ??
+          false)) {
+        throw Exception('purchase failed.');
+      }
       try {
-        final receipt = result.receipt;
-        if (receipt == null) {
-          throw Exception('processing after purchase failed.');
-        }
-        await _collectionProductRepository.addCollectionProduct(
+        await _collectionProductRepository.addCollectionProductOnMakingPurchase(
           productId: _productId,
-          receipt: receipt,
         );
         _purchased = true;
       } on Exception catch (e) {
@@ -105,6 +105,11 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
         notifyListeners();
         return '購入を完了しましたが、エラーが発生しました。購入の復元を行ってください。';
       }
+    } on AdaptyError catch (e) {
+      print(e);
+      _purchaseInProgress = false;
+      notifyListeners();
+      return '購入に失敗しました。';
     } on Exception catch (e) {
       print(e);
       _purchaseInProgress = false;
@@ -123,14 +128,17 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     _purchaseInProgress = true;
     notifyListeners();
     try {
-      final receipt = await _adaptyRepository.restorePurchase(_productId);
-      if (receipt == null) {
+      final result = await _adaptyRepository.restorePurchase(_productId);
+      if (result == null) {
         throw Exception('no adapty access level exists.');
       }
       try {
-        await _collectionProductRepository.addCollectionProduct(
+        // _adaptyRepository.restorePurchase で存在が保証されている
+        final store = result.purchaserInfo?.accessLevels[_productId]?.store;
+        await _collectionProductRepository
+            .addCollectionProductOnRestoringPurchase(
           productId: _productId,
-          receipt: receipt,
+          store: store,
         );
         _purchased = true;
       } on Exception catch (e) {

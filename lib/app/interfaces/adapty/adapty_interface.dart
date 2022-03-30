@@ -21,11 +21,8 @@ class AdaptyInterface {
 
   Future<AdaptyPurchaserInfo> fetchPurchaserInfo() => Adapty.getPurchaserInfo();
 
-  Future<MakePurchaseResult> makePurchase(
-    AdaptyProduct product, {
-    String? offerId,
-  }) =>
-      Adapty.makePurchase(product, offerId: offerId);
+  Future<MakePurchaseResult> makePurchase(AdaptyProduct product) =>
+      Adapty.makePurchase(product);
 
   Future<RestorePurchasesResult> restorePurchases() =>
       Adapty.restorePurchases();
