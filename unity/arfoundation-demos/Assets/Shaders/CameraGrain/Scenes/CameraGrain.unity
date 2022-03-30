@@ -1378,12 +1378,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ScreenShotButton: {fileID: 2429604031525569452}
-  _ChangeEffectToggle: {fileID: 2429604029595145589}
   _ReloadButton: {fileID: 2429604030177922649}
   _ScreenShotModel: {fileID: 1781149323}
   _SceneReloadModel: {fileID: 1781149322}
   _SwitchEffectWindowModel: {fileID: 1781149325}
-  _SwitchEffectWindowView: {fileID: 2429604029595145592}
+  _SwitchEffectWindowView: {fileID: 2429604031087044086}
 --- !u!4 &1219171740
 Transform:
   m_ObjectHideFlags: 0
@@ -2400,27 +2399,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2429604029595145588}
   - component: {fileID: 2429604029595145589}
-  - component: {fileID: 2429604029595145592}
   m_Layer: 5
-  m_Name: EffectSwitchButton
+  m_Name: SwitchEffectWindowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2429604029595145592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2429604029595145591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fdd364f1ae0cd6489a26ffcc61589a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _switchEffectWindowToggle: {fileID: 2429604029595145589}
 --- !u!1 &2429604029662212125
 GameObject:
   m_ObjectHideFlags: 0
@@ -4874,6 +4859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2429604031087044090}
+  - component: {fileID: 2429604031087044086}
   m_Layer: 5
   m_Name: ScreenShotScreen
   m_TagString: Untagged
@@ -4881,6 +4867,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2429604031087044086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429604031087044085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdd364f1ae0cd6489a26ffcc61589a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ScreenShotComponent: {fileID: 2429604031050199405}
+  _EffectComponent: {fileID: 2429604030003104634}
+  _SwitchEffectWindowToggle: {fileID: 2429604029595145589}
 --- !u!224 &2429604031087044090
 RectTransform:
   m_ObjectHideFlags: 0
