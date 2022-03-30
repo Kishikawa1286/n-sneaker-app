@@ -12,18 +12,18 @@ public class EffectSliderPresenter : MonoBehaviour
     [SerializeField] Slider _ObjectThetaAngleControllSlider;
 
 
-    [SerializeField] ChangeShadowModel _ChangeShadowModel;
+    [SerializeField] ChangeShadowStrengthModel _ChangeShadowStrengthModel;
     [SerializeField] ChangeBrightnessModel _ChangeBrightnessModel;
     [SerializeField] ChangePhiAngleModel _ChangePhiAngleModel;
     [SerializeField] ChangeThetaAngleModel _ChangeThetaAngleModel;
 
     private void Start() {
-        // _ShadowSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeShadowModel.SetShadow(value));
+        // _ShadowSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeShadowStrengthModel.SetShadow(value));
         // _BlightnessSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeThetaAngleModel.SetThetaAngle(value));
         // _ObjectPhiAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeBrightnessModel.SetBlightness(value));
-        // _ObjectThetaAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeShadowModel.SetShadow(value));
+        // _ObjectThetaAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeShadowStrengthModel.SetShadow(value));
 
-        _ShadowSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeShadowModel.SetShadow(value));
+        _ShadowSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeShadowStrengthModel.SetShadow(value));
         _BlightnessSlider.OnValueChangedAsObservable().Subscribe(value => _ChangeBrightnessModel.SetBlightness(value));
         _ObjectPhiAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangePhiAngleModel.SetPhiAngle(value));
         _ObjectThetaAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _ChangeThetaAngleModel.SetThetaAngle(value));

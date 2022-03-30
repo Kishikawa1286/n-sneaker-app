@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class ChangeShadowModel : MonoBehaviour
+public class ChangeShadowStrengthModel : MonoBehaviour
 {
     // Start is called before the first frame update
 

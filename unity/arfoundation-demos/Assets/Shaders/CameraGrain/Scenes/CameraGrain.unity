@@ -649,8 +649,8 @@ GameObject:
   - component: {fileID: 486622848}
   - component: {fileID: 486622847}
   - component: {fileID: 486622846}
-  - component: {fileID: 486622845}
   - component: {fileID: 486622844}
+  - component: {fileID: 486622845}
   m_Layer: 0
   m_Name: EffectSliderModel
   m_TagString: Untagged
@@ -679,7 +679,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 486622843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6affaf25d0f86ec41824b4b7cf61dd81, type: 3}
+  m_Script: {fileID: 11500000, guid: a9a42fba1a14c184da3c2a01b9a38e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &486622846
@@ -1980,7 +1980,7 @@ MonoBehaviour:
   _BlightnessSlider: {fileID: 2429604030719008381}
   _ObjectPhiAngleControllSlider: {fileID: 2429604030432449119}
   _ObjectThetaAngleControllSlider: {fileID: 2429604030108301129}
-  _ChangeShadowModel: {fileID: 486622845}
+  _ChangeShadowStrengthModel: {fileID: 0}
   _ChangeBrightnessModel: {fileID: 486622847}
   _ChangePhiAngleModel: {fileID: 486622846}
   _ChangeThetaAngleModel: {fileID: 486622844}
