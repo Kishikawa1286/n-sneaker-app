@@ -638,6 +638,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f0d555a552e429a9e36a2bec4c1faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &486622843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486622848}
+  - component: {fileID: 486622847}
+  - component: {fileID: 486622846}
+  - component: {fileID: 486622845}
+  - component: {fileID: 486622844}
+  m_Layer: 0
+  m_Name: EffectSliderModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &486622844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486622843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2648a7dd498d3f40b4d5a559b5a3d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &486622845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486622843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6affaf25d0f86ec41824b4b7cf61dd81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &486622846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486622843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8da261536a1854283f769798a3d524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &486622847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486622843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e853593a59acd14fab6ccf9c482304d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &486622848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486622843}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 153.40195, y: 259.1755, z: -755.00183}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495234455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,6 +1465,14 @@ MonoBehaviour:
   _SwitchEffectWindowView: {fileID: 2429604031087044086}
   _SceneReloadButtonView: {fileID: 2429604030177922652}
   _ScreenShotButtonView: {fileID: 2429604031525569456}
+  _ShadowSlider: {fileID: 0}
+  _BlightnessSlider: {fileID: 0}
+  _ObjectPhiAngleControllSlider: {fileID: 0}
+  _ObjectThetaAngleControllSlider: {fileID: 0}
+  _ChangePhiAngleModel: {fileID: 0}
+  _ChangeThetaAngleModel: {fileID: 0}
+  _ChangeBrightnessModel: {fileID: 0}
+  _ChangeShadowModel: {fileID: 0}
 --- !u!4 &1219171740
 Transform:
   m_ObjectHideFlags: 0
@@ -1897,7 +1987,7 @@ GameObject:
   - component: {fileID: 1781149322}
   - component: {fileID: 1781149325}
   m_Layer: 0
-  m_Name: model
+  m_Name: SwitchDisplayComponentModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3319,6 +3409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2429604030003104635}
+  - component: {fileID: 2429604030003104636}
   m_Layer: 0
   m_Name: EffectComponent
   m_TagString: Untagged
@@ -3346,6 +3437,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2429604030003104636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429604030003104634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca2a85678fffad47b232d643b6abd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ShadowSlider: {fileID: 2429604029959189622}
+  _BlightnessSlider: {fileID: 2429604030719008381}
+  _ObjectPhiAngleControllSlider: {fileID: 2429604030432449119}
+  _ObjectThetaAngleControllSlider: {fileID: 2429604030108301129}
+  _ChangePhiAngleModel: {fileID: 486622846}
+  _ChangeThetaAngleModel: {fileID: 486622844}
+  _ChangeBrightnessModel: {fileID: 486622847}
+  _ChangeShadowModel: {fileID: 486622845}
 --- !u!114 &2429604030061695632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3779,7 +3890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac9fdbf0527ff641bd065b89fcd22cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ScneReloadButton: {fileID: 2429604030177922649}
 --- !u!114 &2429604030177922654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5753,7 +5863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5e58c2682e72345a2da600988c92e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ScreenShotButton: {fileID: 0}
 --- !u!222 &2429604031525569458
 CanvasRenderer:
   m_ObjectHideFlags: 0
