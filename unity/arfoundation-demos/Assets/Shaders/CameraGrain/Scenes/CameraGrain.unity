@@ -713,12 +713,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486622843}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 153.40195, y: 259.1755, z: -755.00183}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.678543, y: -2.9621277, z: -216.61652}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 688086389}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495234455
 GameObject:
@@ -1100,9 +1100,11 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 157.08049, y: 262.13763, z: -538.3853}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 486622848}
+  - {fileID: 1781149324}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &700830359
 GameObject:
@@ -1441,7 +1443,7 @@ GameObject:
   - component: {fileID: 1219171740}
   - component: {fileID: 1219171739}
   m_Layer: 0
-  m_Name: Presenter
+  m_Name: SwitchDisplayComponentPresenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1465,14 +1467,6 @@ MonoBehaviour:
   _SwitchEffectWindowView: {fileID: 2429604031087044086}
   _SceneReloadButtonView: {fileID: 2429604030177922652}
   _ScreenShotButtonView: {fileID: 2429604031525569456}
-  _ShadowSlider: {fileID: 0}
-  _BlightnessSlider: {fileID: 0}
-  _ObjectPhiAngleControllSlider: {fileID: 0}
-  _ObjectThetaAngleControllSlider: {fileID: 0}
-  _ChangePhiAngleModel: {fileID: 0}
-  _ChangeThetaAngleModel: {fileID: 0}
-  _ChangeBrightnessModel: {fileID: 0}
-  _ChangeShadowModel: {fileID: 0}
 --- !u!4 &1219171740
 Transform:
   m_ObjectHideFlags: 0
@@ -1480,12 +1474,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219171738}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 157.08049, y: 262.13763, z: -538.3853}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1451900242}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1335839533
 GameObject:
@@ -1683,7 +1677,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 157.08049, y: 262.13763, z: -538.3853}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1219171740}
+  - {fileID: 1652812896}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1937,6 +1933,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601058942}
   m_CullTransparentMesh: 1
+--- !u!1 &1652812895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652812896}
+  - component: {fileID: 1652812897}
+  m_Layer: 0
+  m_Name: EffectSliderPresenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1652812896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652812895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1451900242}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1652812897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652812895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca2a85678fffad47b232d643b6abd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ShadowSlider: {fileID: 2429604029959189622}
+  _BlightnessSlider: {fileID: 2429604030719008381}
+  _ObjectPhiAngleControllSlider: {fileID: 2429604030432449119}
+  _ObjectThetaAngleControllSlider: {fileID: 2429604030108301129}
+  _ChangeShadowModel: {fileID: 486622845}
+  _ChangeBrightnessModel: {fileID: 486622847}
+  _ChangePhiAngleModel: {fileID: 486622846}
+  _ChangeThetaAngleModel: {fileID: 486622844}
 --- !u!1 &1780395610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,12 +2072,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781149321}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 157.08049, y: 262.13763, z: -538.3853}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 688086389}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1781149325
 MonoBehaviour:
@@ -3409,7 +3456,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2429604030003104635}
-  - component: {fileID: 2429604030003104636}
   m_Layer: 0
   m_Name: EffectComponent
   m_TagString: Untagged
@@ -3437,26 +3483,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2429604030003104636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2429604030003104634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ca2a85678fffad47b232d643b6abd3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ShadowSlider: {fileID: 2429604029959189622}
-  _BlightnessSlider: {fileID: 2429604030719008381}
-  _ObjectPhiAngleControllSlider: {fileID: 2429604030432449119}
-  _ObjectThetaAngleControllSlider: {fileID: 2429604030108301129}
-  _ChangePhiAngleModel: {fileID: 486622846}
-  _ChangeThetaAngleModel: {fileID: 486622844}
-  _ChangeBrightnessModel: {fileID: 486622847}
-  _ChangeShadowModel: {fileID: 486622845}
 --- !u!114 &2429604030061695632
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,16 +19,7 @@ public class ObjectDisplayPresenter : MonoBehaviour
     [SerializeField] ScreenShotButtonView _ScreenShotButtonView;
 
     //sliderはpresenter->model間のやりとりで簡潔
-    [SerializeField] Slider _ShadowSlider;
-    [SerializeField] Slider _BlightnessSlider;
-    [SerializeField] Slider _ObjectPhiAngleControllSlider;
-    [SerializeField] Slider _ObjectThetaAngleControllSlider;
 
-
-  [SerializeField] ChangePhiAngleModel _ChangePhiAngleModel;
-  [SerializeField] ChangeThetaAngleModel _ChangeThetaAngleModel;
-  [SerializeField] ChangeBrightnessModel _ChangeBrightnessModel;
-  [SerializeField] ChangeShadowModel _ChangeShadowModel;
 
 
 
