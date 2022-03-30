@@ -18,7 +18,21 @@ public class ObjectDisplayPresenter : MonoBehaviour
     [SerializeField] SceneReloadButtonView _SceneReloadButtonView;
     [SerializeField] ScreenShotButtonView _ScreenShotButtonView;
 
-    void Start()
+    //sliderはpresenter->model間のやりとりで簡潔
+    [SerializeField] Slider _ShadowSlider;
+    [SerializeField] Slider _BlightnessSlider;
+    [SerializeField] Slider _ObjectPhiAngleControllSlider;
+    [SerializeField] Slider _ObjectThetaAngleControllSlider;
+
+
+  [SerializeField] ChangePhiAngleModel _ChangePhiAngleModel;
+  [SerializeField] ChangeThetaAngleModel _ChangeThetaAngleModel;
+  [SerializeField] ChangeBrightnessModel _ChangeBrightnessModel;
+  [SerializeField] ChangeShadowModel _ChangeShadowModel;
+
+
+
+  void Start()
     {
     //from View to Model
     //subscribeは，Subjectに実行してほしい関数を登録する処理
