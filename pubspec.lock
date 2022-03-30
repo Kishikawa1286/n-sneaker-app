@@ -326,13 +326,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  infinite_scroll_tab_view:
-    dependency: "direct main"
-    description:
-      name: infinite_scroll_tab_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   intl:
     dependency: transitive
     description:

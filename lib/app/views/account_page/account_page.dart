@@ -166,7 +166,9 @@ class AccountPage extends HookConsumerWidget {
             AccountPageListTile(
               iconData: Icons.account_circle,
               title: 'ログアウト',
-              onTap: viewModel.signOut,
+              onTap: () async {
+                await viewModel.signOut();
+              },
             ),
           ],
         ),

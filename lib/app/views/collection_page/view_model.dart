@@ -29,9 +29,11 @@ class CollectionPageProductGridViewModel extends ViewModelChangeNotifier {
 
   final PagingController<int, CollectionProductModel> _pagingController =
       PagingController<int, CollectionProductModel>(firstPageKey: 0);
+  bool _noCollectionProductExists = false;
 
   PagingController<int, CollectionProductModel> get pagingController =>
       _pagingController;
+  bool get noCollectionProductExists => _noCollectionProductExists;
 
   Future<void> _fetchProducts(int pageKey) async {
     try {
@@ -45,6 +47,11 @@ class CollectionPageProductGridViewModel extends ViewModelChangeNotifier {
         accountId,
         startAfter: startAfter,
       );
+      if (pageKey == 0 && fetchedCollectionProducts.isEmpty) {
+        _noCollectionProductExists = true;
+        notifyListeners();
+        return;
+      }
       if (fetchedCollectionProducts.length != _limit) {
         _pagingController.appendLastPage(fetchedCollectionProducts);
       } else {

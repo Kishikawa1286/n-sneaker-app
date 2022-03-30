@@ -5,11 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../repositories/account/account_model.dart';
 import '../../repositories/account/account_repository.dart';
 import '../../repositories/adapty/adapty_repository.dart';
+import '../../repositories/product_glb_file/product_glb_file_repository.dart';
 
 final accountServiceProvider = Provider<AccountService>(
   (ref) => AccountService(
     ref.read(accountRepositoryProvider),
     ref.read(adaptyRepositoryProvider),
+    ref.read(productGlbFileRepositoryProvider),
   ),
 );
 
@@ -17,6 +19,7 @@ class AccountService {
   AccountService(
     this._accountRepository,
     this._adaptyRepository,
+    this._productGlbFileRepository,
   ) {
     _authStateController.add(AuthState.notChecked);
     _signInWithSavedEmailAndPassword();
@@ -24,6 +27,7 @@ class AccountService {
 
   final AccountRepository _accountRepository;
   final AdaptyRepository _adaptyRepository;
+  final ProductGlbFileRepository _productGlbFileRepository;
 
   final StreamController<AuthState?> _authStateController =
       StreamController<AuthState?>();
@@ -99,6 +103,7 @@ class AccountService {
       await _accountRepository.signOut();
       _account = null;
       await _adaptyRepository.logout();
+      await _productGlbFileRepository.removeLastUsedGlbFileId();
       _authStateController.add(AuthState.signOut);
     } on Exception catch (e) {
       print(e);

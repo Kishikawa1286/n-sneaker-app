@@ -237,4 +237,7 @@ class ProductGlbFileRepository {
       value: ids,
     );
   }
+
+  Future<void> removeLastUsedGlbFileId() => _sharedPreferencesInterface
+      .removeString(SharedPreferencesKey.lastUsedGlbFileId);
 }

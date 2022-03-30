@@ -16,18 +16,6 @@ import 'view_model.dart';
 class Root extends HookConsumerWidget {
   const Root();
 
-  BottomNavigationBarItem _tabBarItem(IconData iconData) =>
-      BottomNavigationBarItem(
-        icon: Icon(
-          iconData,
-          color: CommonStyle.disabledColor,
-        ),
-        activeIcon: Icon(
-          iconData,
-          color: CommonStyle.enabledColor,
-        ),
-      );
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(rootViewModelProvider);
@@ -42,30 +30,48 @@ class Root extends HookConsumerWidget {
           if (authState == AuthState.signOut) {
             return const SignInPage();
           }
-          return CupertinoTabScaffold(
+          return Scaffold(
             backgroundColor: CommonStyle.scaffoldBackgroundColor,
-            tabBar: CupertinoTabBar(
-              items: <BottomNavigationBarItem>[
-                _tabBarItem(Icons.shopping_bag),
-                _tabBarItem(Icons.grid_view_rounded),
-                _tabBarItem(Icons.center_focus_strong),
-                _tabBarItem(Icons.person),
+            bottomNavigationBar: BottomNavigationBar(
+              unselectedItemColor: CommonStyle.disabledColor,
+              selectedItemColor: CommonStyle.enabledColor,
+              currentIndex: viewModel.currentIndex,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_bag),
+                  label: 'マーケット',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.grid_view_rounded),
+                  label: 'コレクション',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.center_focus_strong),
+                  label: 'AR',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: '設定',
+                ),
               ],
+              onTap: viewModel.setIndex,
             ),
-            tabBuilder: (context, index) {
-              switch (index) {
-                case 0:
-                  return const MarketPage();
-                case 1:
-                  return const CollectionPage();
-                case 2:
-                  return const ArPage();
-                case 3:
-                  return const AccountPage();
-                default:
-                  return const LoadingPage();
-              }
-            },
+            body: Builder(
+              builder: (context) {
+                switch (viewModel.currentIndex) {
+                  case 0:
+                    return const MarketPage();
+                  case 1:
+                    return const CollectionPage();
+                  case 2:
+                    return const ArPage();
+                  case 3:
+                    return const AccountPage();
+                  default:
+                    return const LoadingPage();
+                }
+              },
+            ),
           );
         },
       ),

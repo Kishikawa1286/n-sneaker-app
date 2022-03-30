@@ -17,81 +17,88 @@ class ArPage extends HookConsumerWidget {
     final viewModel = ref.watch(arPageViewModelProvider);
     final productGlbFile = viewModel.productGlbFile;
 
-    return Material(
-      child: Column(
-        children: [
-          Container(
-            color: CommonStyle.black,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 180,
-            child: viewModel.initialized
-                ? UnityWidget(
-                    key: viewModel.unityWidgetKey,
-                    onUnityCreated: viewModel.onUnityCreated,
-                    onUnityMessage: viewModel.onUnityMessage,
-                    useAndroidViewSurface: true,
-                  )
-                : const SizedBox(),
-          ),
-          Card(
-            elevation: 5,
-            margin: const EdgeInsets.only(top: 10),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 50,
-              child: !viewModel.initialized || productGlbFile == null
-                  ? const SizedBox()
-                  : ListTile(
-                      leading: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CachedNetworkImage(
-                          imageUrl: productGlbFile.imageUrls.first,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(7)),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: imageProvider,
+    return Column(
+      children: [
+        Container(
+          color: CommonStyle.black,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height - 180,
+          child: viewModel.initialized
+              ? UnityWidget(
+                  key: viewModel.unityWidgetKey,
+                  onUnityCreated: viewModel.onUnityCreated,
+                  onUnityMessage: viewModel.onUnityMessage,
+                  useAndroidViewSurface: true,
+                )
+              : const SizedBox(),
+        ),
+        Card(
+          elevation: 5,
+          margin: const EdgeInsets.only(top: 10),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width - 50,
+            child: !viewModel.initialized
+                ? const SizedBox()
+                : productGlbFile == null
+                    ? ListTile(
+                        title: Text(
+                          'コレクションがありません👟',
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      )
+                    : ListTile(
+                        leading: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CachedNetworkImage(
+                            imageUrl: productGlbFile.imageUrls.first,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: imageProvider,
+                                ),
+                              ),
+                            ),
+                            placeholder: (_, __) => Container(
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(7)),
+                                color: CommonStyle.grey,
                               ),
                             ),
                           ),
-                          placeholder: (_, __) => Container(
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              color: CommonStyle.grey,
-                            ),
-                          ),
                         ),
-                      ),
-                      title: Text(
-                        productGlbFile.titleJp,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      onTap: () {
-                        showCollectionProductSelectorModalBottomSheet(
-                          context,
-                          onTapTile: (collectionProduct) =>
-                              showGlbFileSelectorModalBottomSheet(
+                        title: Text(
+                          productGlbFile.titleJp,
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        onTap: () {
+                          showCollectionProductSelectorModalBottomSheet(
                             context,
-                            productId: collectionProduct.productId,
-                            onTapTile: (selected) {
-                              viewModel.selectGlbFile(selected);
-                              Navigator.popUntil(
-                                context,
-                                (route) => route.isFirst,
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
-            ),
+                            onTapTile: (collectionProduct) =>
+                                showGlbFileSelectorModalBottomSheet(
+                              context,
+                              productId: collectionProduct.productId,
+                              onTapTile: (selected) {
+                                viewModel.selectGlbFile(selected);
+                                Navigator.popUntil(
+                                  context,
+                                  (route) => route.isFirst,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
