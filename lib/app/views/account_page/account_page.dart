@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../utils/common_style.dart';
 import '../../../utils/environment_variables.dart';
 import 'components/expansion_tile.dart';
 import 'components/list_tile.dart';
@@ -17,6 +18,7 @@ class AccountPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(accountPageViewModelProvider);
     return Material(
+      color: CommonStyle.scaffoldBackgroundColor,
       child: SingleChildScrollView(
         child: Column(
           children: [
