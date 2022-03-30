@@ -29,7 +29,7 @@ public class ObjectDisplayPresenter : MonoBehaviour
     //subscribeは，Subjectに実行してほしい関数を登録する処理
     _SceneReloadButtonView.OnClickAsObservable().Subscribe(_ => _SceneReloadModel.SceneReload());
     //_ReloadButton.onClick.AsObservable().Subscribe(_ => _SceneReloadModel.SceneReload());
-    _ScreenShotButtonView.OnClickAsObservable().Subscribe(_ => _ScreenShotModel.Screenshot());
+    _ScreenShotButtonView.OnClickAsObservable().Subscribe(_ => _ScreenShotModel.ShareScreenshot());
     // _ScreenShotButton.onClick.AsObservable().Subscribe(_ => _ScreenShotModel.Screenshot());
 
     //UniRXの仕様がよくわかってないので，一度保留．
