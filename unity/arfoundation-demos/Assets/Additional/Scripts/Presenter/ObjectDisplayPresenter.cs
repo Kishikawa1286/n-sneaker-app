@@ -7,8 +7,7 @@ using UniRx;
 public class ObjectDisplayPresenter : MonoBehaviour
 {
   // Start is called before the first frame update
-    [SerializeField] Button _ScreenShotButton;
-    [SerializeField] Button _ReloadButton;
+
     [SerializeField] ScreenshotModel _ScreenShotModel;
     [SerializeField] SceneReloadModel _SceneReloadModel;
 
@@ -16,13 +15,17 @@ public class ObjectDisplayPresenter : MonoBehaviour
 
     [SerializeField] SwitchEffectWindowView _SwitchEffectWindowView;
 
+    [SerializeField] SceneReloadButtonView _SceneReloadButtonView;
+    [SerializeField] ScreenShotButtonView _ScreenShotButtonView;
 
     void Start()
     {
-        //from View to Model
-        //subscribeは，Subjectに実行してほしい関数を登録する処理
-        _ReloadButton.onClick.AsObservable().Subscribe(_ => _SceneReloadModel.SceneReload());
-        _ScreenShotButton.onClick.AsObservable().Subscribe(_ => _ScreenShotModel.Screenshot());
+    //from View to Model
+    //subscribeは，Subjectに実行してほしい関数を登録する処理
+    _SceneReloadButtonView.OnClickAsObservable().Subscribe(_ => _SceneReloadModel.SceneReload());
+    //_ReloadButton.onClick.AsObservable().Subscribe(_ => _SceneReloadModel.SceneReload());
+    _ScreenShotButtonView.OnClickAsObservable().Subscribe(_ => _ScreenShotModel.Screenshot());
+    // _ScreenShotButton.onClick.AsObservable().Subscribe(_ => _ScreenShotModel.Screenshot());
 
     //UniRXの仕様がよくわかってないので，一度保留．
     //ViewのToggleの値が変更された場合，Modelへ通知する．さらに，bool値の状態を変更する．

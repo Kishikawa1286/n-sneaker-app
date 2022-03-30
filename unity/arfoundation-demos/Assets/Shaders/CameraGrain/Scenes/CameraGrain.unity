@@ -1377,12 +1377,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85fbe78ea07c50141a6c482b80b6f397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ScreenShotButton: {fileID: 2429604031525569452}
-  _ReloadButton: {fileID: 2429604030177922649}
   _ScreenShotModel: {fileID: 1781149323}
   _SceneReloadModel: {fileID: 1781149322}
   _SwitchEffectWindowModel: {fileID: 1781149325}
   _SwitchEffectWindowView: {fileID: 2429604031087044086}
+  _SceneReloadButtonView: {fileID: 2429604030177922652}
+  _ScreenShotButtonView: {fileID: 2429604031525569456}
 --- !u!4 &1219171740
 Transform:
   m_ObjectHideFlags: 0
@@ -3759,6 +3759,7 @@ GameObject:
   - component: {fileID: 2429604030177922655}
   - component: {fileID: 2429604030177922654}
   - component: {fileID: 2429604030177922649}
+  - component: {fileID: 2429604030177922652}
   m_Layer: 5
   m_Name: ReloadButton
   m_TagString: Untagged
@@ -3766,6 +3767,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2429604030177922652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429604030177922651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac9fdbf0527ff641bd065b89fcd22cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ScneReloadButton: {fileID: 2429604030177922649}
 --- !u!114 &2429604030177922654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5700,6 +5714,7 @@ GameObject:
   - component: {fileID: 2429604031525569458}
   - component: {fileID: 2429604031525569453}
   - component: {fileID: 2429604031525569452}
+  - component: {fileID: 2429604031525569456}
   m_Layer: 5
   m_Name: CameraButton
   m_TagString: Untagged
@@ -5726,6 +5741,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2429604031525569456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429604031525569454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5e58c2682e72345a2da600988c92e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ScreenShotButton: {fileID: 0}
 --- !u!222 &2429604031525569458
 CanvasRenderer:
   m_ObjectHideFlags: 0
