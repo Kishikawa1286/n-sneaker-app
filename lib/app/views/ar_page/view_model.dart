@@ -39,9 +39,11 @@ class ArPageViewModel extends ViewModelChangeNotifier {
   ProductGlbFileModel? _productGlbFile;
   String _url = '';
   bool _initialized = false;
+  bool _noCollectionProductExists = false;
 
   ProductGlbFileModel? get productGlbFile => _productGlbFile;
   bool get initialized => _initialized;
+  bool get noCollectionProductExists => _noCollectionProductExists;
 
   Future<void> _init() async {
     try {
@@ -55,7 +57,10 @@ class ArPageViewModel extends ViewModelChangeNotifier {
         final fetchedCollectionProducts = await _collectionProductRepository
             .fetchCollectionProductsFromFirestore(accountId);
         if (fetchedCollectionProducts.isEmpty) {
-          throw Exception('no collection product was fetched.');
+          _noCollectionProductExists = true;
+          _initialized = true;
+          notifyListeners();
+          return;
         }
         final collectionProduct = fetchedCollectionProducts.first;
         final fetchedProductGlbFiles = await _productGlbFileRepository

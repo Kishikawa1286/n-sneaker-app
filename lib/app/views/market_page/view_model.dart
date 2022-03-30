@@ -18,6 +18,5 @@ class MarketPageViewModel extends ViewModelChangeNotifier {
     }
     _currentIndex = index;
     notifyListeners();
-    print(index);
   }
 }

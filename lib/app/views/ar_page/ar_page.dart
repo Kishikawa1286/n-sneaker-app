@@ -17,6 +17,28 @@ class ArPage extends HookConsumerWidget {
     final viewModel = ref.watch(arPageViewModelProvider);
     final productGlbFile = viewModel.productGlbFile;
 
+    if (viewModel.noCollectionProductExists) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 150),
+        child: Center(
+          child: Column(
+            children: [
+              Text(
+                '👟',
+                maxLines: 1,
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              Text(
+                'コレクションがありません',
+                maxLines: 1,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Column(
       children: [
         Container(
