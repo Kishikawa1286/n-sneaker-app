@@ -7,6 +7,7 @@ dependencies {
     implementation(name: 'unity-classes', ext:'jar')
     implementation(name: 'arcore_client', ext:'aar')
     implementation(name: 'ARPresto', ext:'aar')
+    implementation(name: 'NatShare', ext:'aar')
     implementation(name: 'unityandroidpermissions', ext:'aar')
     implementation(name: 'UnityARCore', ext:'aar')
     implementation(name: 'libarpresto_api', ext:'so')
