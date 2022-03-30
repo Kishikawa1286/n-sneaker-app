@@ -17,29 +17,50 @@ class CollectionPage extends HookConsumerWidget {
       child: Stack(
         children: [
           const PageHeader(title: 'コレクション'),
-          Padding(
-            padding: const EdgeInsets.only(top: 80),
-            child: PagedGridView<int, CollectionProductModel>(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 8,
-              ),
-              pagingController: viewModel.pagingController,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.65,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              builderDelegate:
-                  PagedChildBuilderDelegate<CollectionProductModel>(
-                itemBuilder: (context, collectionProduct, index) =>
-                    CollectionPageProductGridTile(
-                  collectionProduct: collectionProduct,
+          viewModel.noCollectionProductExists
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 150),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          '👟',
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        Text(
+                          'コレクションがありません',
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: PagedGridView<int, CollectionProductModel>(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 8,
+                    ),
+                    pagingController: viewModel.pagingController,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.65,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
+                    builderDelegate:
+                        PagedChildBuilderDelegate<CollectionProductModel>(
+                      itemBuilder: (context, collectionProduct, index) =>
+                          CollectionPageProductGridTile(
+                        collectionProduct: collectionProduct,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
         ],
       ),
     );

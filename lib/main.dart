@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:adapty_flutter/adapty_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
         await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       }
       await Firebase.initializeApp();
+      Adapty.activate();
       runApp(
         ProviderScope(
           child: MaterialApp(

@@ -1,5 +1,9 @@
 PODS:
-  - cloud_firestore (3.1.9):
+  - Adapty (1.16.8)
+  - adapty_flutter (1.0.0):
+    - Adapty (= 1.16.8)
+    - Flutter
+  - cloud_firestore (3.1.10):
     - Firebase/Firestore (= 8.11.0)
     - firebase_core
     - Flutter
@@ -25,11 +29,11 @@ PODS:
     - Firebase/AnalyticsWithoutAdIdSupport (= 8.11.0)
     - firebase_core
     - Flutter
-  - firebase_auth (3.3.9):
+  - firebase_auth (3.3.11):
     - Firebase/Auth (= 8.11.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.13.0):
+  - firebase_core (1.13.1):
     - Firebase/CoreOnly (= 8.11.0)
     - Flutter
   - FirebaseAnalytics/WithoutAdIdSupport (8.11.0):
@@ -119,14 +123,6 @@ PODS:
   - path_provider_ios (0.0.1):
     - Flutter
   - PromisesObjC (2.0.0)
-  - Purchases (3.13.2):
-    - PurchasesCoreSwift (= 3.13.2)
-  - purchases_flutter (3.9.5):
-    - Flutter
-    - PurchasesHybridCommon (= 1.11.2)
-  - PurchasesCoreSwift (3.13.2)
-  - PurchasesHybridCommon (1.11.2):
-    - Purchases (= 3.13.2)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_ios (0.0.1):
@@ -140,6 +136,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - adapty_flutter (from `.symlinks/plugins/adapty_flutter/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -151,7 +148,6 @@ DEPENDENCIES:
   - native_screenshot (from `.symlinks/plugins/native_screenshot/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
-  - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -160,6 +156,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Adapty
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -174,11 +171,10 @@ SPEC REPOS:
     - GTMSessionFetcher
     - nanopb
     - PromisesObjC
-    - Purchases
-    - PurchasesCoreSwift
-    - PurchasesHybridCommon
 
 EXTERNAL SOURCES:
+  adapty_flutter:
+    :path: ".symlinks/plugins/adapty_flutter/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   cloud_functions:
@@ -202,8 +198,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
-  purchases_flutter:
-    :path: ".symlinks/plugins/purchases_flutter/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_ios:
@@ -221,12 +215,14 @@ CHECKOUT OPTIONS:
     :tag: 8.11.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: c4fe921497494112ca9de681464ddd44d51b17bb
+  Adapty: 7bd19095b4e77ebbda17af2faf7268a0fdbc295b
+  adapty_flutter: 71c72df337899de1719e350b1d1ced8f877684a0
+  cloud_firestore: c6c42fe62809b7417aa3c45a6ef0c2812f7fb0d6
   cloud_functions: 8415560122ac43e9edc2efd070ae14e664aa2fd3
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   firebase_analytics: 816a4f02c5a0dbd67c5ee281944aa321b4445816
-  firebase_auth: 99c9cdc8cc2e59f6fd4960b6e183f5430d237838
-  firebase_core: 80a05c91b091a4eca8a6fb98c2c8b1391974c99c
+  firebase_auth: bdfbd5b10da1db6d5eb6ae7dbda5d81365b9cc9d
+  firebase_core: 08f6a85f62060111de5e98d6a214810d11365de9
   FirebaseAnalytics: 4e4b13031034e6561ed3bd1d47b6fdabbd6487c6
   FirebaseAuth: d96d73aba85d192d7a7aa0b86dd6d7f8ec170b4b
   FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
@@ -246,10 +242,6 @@ SPEC CHECKSUMS:
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  Purchases: 03200de9288724e77de435000d1828601e6b8e00
-  purchases_flutter: cf2b742f12b7ffef6f618c7f1ba1961e652825b1
-  PurchasesCoreSwift: 2ea4b33e5cece5c8a0751594ef7c6cbfcbd747a9
-  PurchasesHybridCommon: 56ef42d85c3e930d49aff4ac5fa027373d2e1bb8
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904

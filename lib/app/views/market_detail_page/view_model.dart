@@ -1,13 +1,15 @@
+import 'package:adapty_flutter/models/adapty_error.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/view_model_change_notifier.dart';
+import '../../repositories/adapty/adapty_repository.dart';
 import '../../repositories/collection_product/collection_product_repository.dart';
 import '../../repositories/product/product_model.dart';
 import '../../repositories/product/product_repository.dart';
-import '../../repositories/purchases/purchases_repository.dart';
 import '../../services/account/account_service.dart';
+import '../../services/adapty/adapty_service.dart';
 
 final marketDetailPageViewModelProvider =
     AutoDisposeChangeNotifierProviderFamily<MarketDetailPageViewModel, String>(
@@ -16,7 +18,8 @@ final marketDetailPageViewModelProvider =
     ref.watch(accountServiceProvider),
     ref.read(productRepositoryProvider),
     ref.read(collectionProductRepositoryProvider),
-    ref.read(purchasesRepositoryProvider),
+    ref.read(adaptyServiceProvider),
+    ref.read(adaptyRepositoryProvider),
   ),
 );
 
@@ -26,7 +29,8 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     this._accountService,
     this._productRepository,
     this._collectionProductRepository,
-    this._purchasesRepository,
+    this._adaptyService,
+    this._adaptyRepository,
   ) {
     _fetchProduct();
   }
@@ -35,7 +39,8 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
   final AccountService _accountService;
   final ProductRepository _productRepository;
   final CollectionProductRepository _collectionProductRepository;
-  final PurchasesRepository _purchasesRepository;
+  final AdaptyService _adaptyService;
+  final AdaptyRepository _adaptyRepository;
 
   final CarouselController _carouselController = CarouselController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -81,39 +86,71 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     _purchaseInProgress = true;
     notifyListeners();
     try {
-      final info = await _purchasesRepository.purchaseProduct(_productId);
-      // 決済できているかを一度クライアント側で確認
-      if (info.entitlements.active.keys.contains(_productId)) {
-        await _collectionProductRepository.addCollectionProduct(
+      final result = await _adaptyService.makePurchase(_productId);
+      if (result == null) {
+        throw Exception('purchase failed.');
+      }
+      if (!(result.purchaserInfo?.accessLevels[_productId]?.isActive ??
+          false)) {
+        throw Exception('purchase failed.');
+      }
+      try {
+        await _collectionProductRepository.addCollectionProductOnMakingPurchase(
           productId: _productId,
         );
         _purchased = true;
+      } on Exception catch (e) {
+        print(e);
+        _purchaseInProgress = false;
+        notifyListeners();
+        return '購入を完了しましたが、エラーが発生しました。購入の復元を行ってください。';
       }
+    } on AdaptyError catch (e) {
+      print(e);
+      _purchaseInProgress = false;
+      notifyListeners();
+      return '購入に失敗しました。';
     } on Exception catch (e) {
       print(e);
-      return '購入に失敗しました。決済を行った場合は決済状態の復元を試みてください。';
+      _purchaseInProgress = false;
+      notifyListeners();
+      return '購入がキャンセルされました。';
     }
     _purchaseInProgress = false;
     notifyListeners();
     return '${_product?.titleJp} を購入しました。';
   }
 
-  Future<String> revertPurchase() async {
-    if (_purchaseInProgress) {
+  Future<String> restorePurchase() async {
+    if (_purchaseInProgress || _purchased!) {
       return '';
     }
     _purchaseInProgress = true;
     notifyListeners();
     try {
-      final info = await _purchasesRepository.fetchPurchaseInfo();
-      if (info.entitlements.active.keys.contains(_productId)) {
-        await _collectionProductRepository.addCollectionProduct(
+      final result = await _adaptyRepository.restorePurchase(_productId);
+      if (result == null) {
+        throw Exception('no adapty access level exists.');
+      }
+      try {
+        // _adaptyRepository.restorePurchase で存在が保証されている
+        final store = result.purchaserInfo?.accessLevels[_productId]?.store;
+        await _collectionProductRepository
+            .addCollectionProductOnRestoringPurchase(
           productId: _productId,
+          store: store,
         );
         _purchased = true;
+      } on Exception catch (e) {
+        print(e);
+        _purchaseInProgress = false;
+        notifyListeners();
+        return '購入の情報を確認できましたが、決済の復元中にエラーが発生しました。';
       }
     } on Exception catch (e) {
       print(e);
+      _purchaseInProgress = false;
+      notifyListeners();
       return '購入の情報がないため、決済を復元できませんでした。';
     }
     _purchaseInProgress = false;

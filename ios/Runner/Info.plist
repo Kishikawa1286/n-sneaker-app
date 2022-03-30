@@ -71,5 +71,7 @@
 	</dict>
 	<key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
 	<false/>
+	<key>AdaptyPublicSdkKey</key>
+    <string>$(ADAPTY_PUBLIC_SDK_KEY)</string>
 </dict>
 </plist>

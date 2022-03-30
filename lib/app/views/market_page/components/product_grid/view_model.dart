@@ -32,6 +32,12 @@ class MarketPageProductGridViewModel extends ViewModelChangeNotifier {
 
   PagingController<int, ProductModel> get pagingController => _pagingController;
 
+  @override
+  void dispose() {
+    super.dispose();
+    _pagingController.dispose();
+  }
+
   Future<void> _fetchProducts(int pageKey) async {
     try {
       final startAfter = pagingController.itemList?.last;
