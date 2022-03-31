@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5700069552548356286}
   - component: {fileID: 6588813322489023960}
-  - component: {fileID: 4235495902625626461}
+  - component: {fileID: 814950927666150012}
   m_Layer: 0
   m_Name: Target Sneaker
   m_TagString: Untagged
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f0d555a552e429a9e36a2bec4c1faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4235495902625626461
+--- !u!114 &814950927666150012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,10 +194,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6708875548082963644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efbebdee3865a4d648654da2617c30ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 859d74a7d95a4b34fba54e977b9befa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnityMessageManager: {fileID: 6588813322489023960}
+  _dataManager: {fileID: 11400000, guid: f56a1b740d7024d4bb7c69e5b256909c, type: 2}
 --- !u!1 &7679285653639408882
 GameObject:
   m_ObjectHideFlags: 0

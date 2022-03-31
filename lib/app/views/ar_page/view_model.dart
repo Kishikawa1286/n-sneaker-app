@@ -138,9 +138,9 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       return;
     }
     _unityWidgetController.postMessage(
-      'Target Sneaker',
-      'LoadModel',
-      '{"id": "${f.productId}_${f.id}", "url": "$_url"}',
+      'FileLoadModel',
+      'Load',
+      '{"fileName": "${f.productId}_${f.id}.glb", "url": "$_url"}',
     );
   }
 }
