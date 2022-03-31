@@ -33,6 +33,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app use camera for AR</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Take screenshots and save it to the PhotoLibrary.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Take screenshots and save it to the PhotoLibrary.</string>
 	<key>Privacy - Camera Usage Description</key>

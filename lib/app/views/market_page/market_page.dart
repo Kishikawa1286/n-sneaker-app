@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/common_style.dart';
 import 'components/product_grid/product_grid.dart';
-import 'series_list.dart';
 import 'view_model.dart';
 
 class MarketPage extends HookConsumerWidget {
@@ -13,8 +12,14 @@ class MarketPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(marketPageViewModelProvider);
+    final tabTitles = viewModel.tabTitles;
+
+    if (tabTitles.isEmpty) {
+      return const SizedBox();
+    }
+
     return DefaultTabController(
-      length: seriesList.length,
+      length: tabTitles.length,
       child: Builder(
         builder: (context) {
           DefaultTabController.of(context)?.addListener(() {
@@ -41,7 +46,7 @@ class MarketPage extends HookConsumerWidget {
                     child: TabBar(
                       isScrollable: true,
                       indicatorWeight: 1,
-                      tabs: seriesList
+                      tabs: tabTitles
                           .asMap()
                           .map(
                             (index, series) => MapEntry(
@@ -64,7 +69,7 @@ class MarketPage extends HookConsumerWidget {
                   ),
                   Expanded(
                     child: TabBarView(
-                      children: seriesList
+                      children: tabTitles
                           .asMap()
                           .map(
                             (index, series) => MapEntry(

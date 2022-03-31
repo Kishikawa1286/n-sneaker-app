@@ -12,6 +12,8 @@ const String firestoreProductGlbFilesVersion = 'v1';
 /// Firestoreの'collection_products'コレクションのバージョン
 const String firestoreCollectionProductsVersion = 'v1';
 
+const String firestoreMarketPageTabsVersion = 'v1';
+
 /// AlgoliaのApplication ID
 const String algoliaApplicationId = 'EHWBNFTR66';
 

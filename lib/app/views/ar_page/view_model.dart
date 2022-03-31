@@ -111,25 +111,6 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       print(message);
       return;
     }
-    // ダウンロード時
-    /*
-    try {
-      final json = jsonDecode(message.toString()) as Map<dynamic, dynamic>;
-      if (json['name'] == 'load') {
-        _loadProgress = double.parse(json['value'].toString());
-        notifyListeners();
-        return;
-      }
-      if (json['name'] == 'download') {
-        _downloadProgress = double.parse(json['value'].toString());
-        notifyListeners();
-        return;
-      }
-    } on Exception catch (e) {
-      print(message);
-      print(e);
-    }
-    */
   }
 
   void _loadObject() {
@@ -138,9 +119,9 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       return;
     }
     _unityWidgetController.postMessage(
-      'Target Sneaker',
-      'LoadModel',
-      '{"id": "${f.productId}_${f.id}", "url": "$_url"}',
+      'FileLoadModel',
+      'Load',
+      '{"fileName": "${f.productId}_${f.id}.glb", "url": "$_url"}',
     );
   }
 }

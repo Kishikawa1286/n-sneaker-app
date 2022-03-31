@@ -10,6 +10,8 @@ const String _productGlbFilesCollectionVersion =
 const String _collectionProductsCollectionVersion =
     firestoreCollectionProductsVersion;
 
+const String _marketPageTabsCollectionVersion = firestoreMarketPageTabsVersion;
+
 const String _accountDomain = 'accounts';
 
 const String _accountsCollectionPath =
@@ -42,3 +44,8 @@ String collectionProductsCollectionPath =
 
 String collectionProductDocumentPath(String productCollectionId) =>
     '$collectionProductsCollectionPath/$productCollectionId';
+
+const String marketPageTabsDomain = 'market_page_tabs';
+
+const String marketPageTabsCollectionPath =
+    '${marketPageTabsDomain}_$_marketPageTabsCollectionVersion';

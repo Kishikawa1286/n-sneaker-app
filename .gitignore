@@ -6,6 +6,8 @@ android/app/signingConfigs.gradle
 android/unityLibrary/libs/arcore_client.aar
 android/unityLibrary/libs/ARPresto.aar
 android/unityLibrary/libs/UnityARCore.aar
+android/unityLibrary/libs/NatShare.aar
+android/unityLibrary/libs/core-1.0.0-rc02.aar
 android/unityLibrary/libs/*.jar
 android/unityLibrary/src
 android/unityLibrary/build
