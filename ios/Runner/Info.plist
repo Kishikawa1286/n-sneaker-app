@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AdaptyPublicSdkKey</key>
+	<string>$(ADAPTY_PUBLIC_SDK_KEY)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -33,9 +35,9 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app use camera for AR</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Take screenshots and save it to the PhotoLibrary.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Take screenshots and save it to the PhotoLibrary.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Take screenshots and save it to the PhotoLibrary.</string>
 	<key>Privacy - Camera Usage Description</key>
 	<string>$(PRODUCT_NAME) uses Cameras</string>
@@ -48,11 +50,11 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -65,15 +67,5 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
-	<!-- https://github.com/sadahry/ff-maillink-login-example/blob/main/ios/Runner/Info.plist -->
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
-	<key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
-	<false/>
-	<key>AdaptyPublicSdkKey</key>
-    <string>$(ADAPTY_PUBLIC_SDK_KEY)</string>
 </dict>
 </plist>
