@@ -214,6 +214,13 @@ public class FileLoadModel : MonoBehaviour
 
     private void _loadLocalFile(String fileName)
     {
+        // タップ時に配置されるPrefabの中にSneakerというGameObjectが入っている
+        GameObject target = GameObject.Find("Sneaker");
+        if (target == null)
+        {
+            return;
+        }
+
         _onStartLocalFileLoading();
         var options = AssetLoader.CreateDefaultLoaderOptions();
         options.AlphaMaterialMode = AlphaMaterialMode.Transparent;
@@ -225,7 +232,7 @@ public class FileLoadModel : MonoBehaviour
             _onLocalFileMaterialLoad,
             _onProgressLocalFileLoading,
             _onErrorLocalFileLoading,
-            gameObject, // Scriptを適用するGameObject自身 <- 自分自身にスクリプトを適用する
+            target,
             options
         );
     }
@@ -250,12 +257,10 @@ public class FileLoadModel : MonoBehaviour
 
         // ルートにロードされたGameObjectは、"assetLoaderContext.RootGameObject"フィールドに割り当てられます。
         // 必要に応じて、このステップでGameObjectを再び表示できます。
-        // var myLoadedGameObject = assetLoaderContext.RootGameObject;
-        // myLoadedGameObject.SetActive(true);
+        var myLoadedGameObject = assetLoaderContext.RootGameObject;
+        myLoadedGameObject.SetActive(true);
 
         //ここで，オブジェクトをマネージャーに飛ばす．
-        _dataManager.ModelData = assetLoaderContext.RootGameObject;
-
         _onFinishLocalFileLoading();
     }
 
