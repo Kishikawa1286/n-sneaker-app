@@ -18,7 +18,7 @@ class JsonData
 // LoadをFlutterから呼び出すのでComponentにUnityMessageManager
 public class FileLoadModel : MonoBehaviour
 {
-    [SerializeField] private DataManager _dataManager;
+    private String _GlbFileName = "";
 
     void Awake()
     {
@@ -28,8 +28,6 @@ public class FileLoadModel : MonoBehaviour
         #if UNITY_IOS
             UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
         #endif
-
-        _dataManager = Resources.Load<DataManager>("datamanager");
     }
 
     // called by Flutter
@@ -37,9 +35,9 @@ public class FileLoadModel : MonoBehaviour
     {
         JsonData jsonData = _parseJson(json);
         // 値が現在のものから変わっている場合には状態変数を初期化
-        if (jsonData.fileName != _dataManager.GlbFileName) {
+        if (jsonData.fileName != _GlbFileName) {
             _initializeLoadingStates();
-            _setDataManagerValues(jsonData.fileName, jsonData.url);
+            _GlbFileName = jsonData.fileName;
         }
         if (_loaded.Value) {
             return;
@@ -300,11 +298,5 @@ public class FileLoadModel : MonoBehaviour
         mat.color = new Color(r, g, b, a);
         
         // mat.EnableKeyword("_EMISSION");
-    }
-
-    private void _setDataManagerValues(String fileName, String url)
-    {
-        _dataManager.GlbFileName = fileName;
-        _dataManager.GlbFileDownloadUrl = url;
     }
 }

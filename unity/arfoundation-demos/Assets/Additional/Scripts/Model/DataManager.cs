@@ -9,9 +9,7 @@ using UniRx;
 [CreateAssetMenu]
 public class DataManager: ScriptableObject
 {
-  // GLBファイルの読込中や読込前はnull
-  public string GlbFileName = "";
-
-  // GLBファイルの読込中や読込前はnull
-  public string GlbFileDownloadUrl = "";
+  // Light / Placement / Screenshot
+  //  UIの状態を動的に生成されるgameObjectに伝えるための変数
+  public string UiMode = "Placement";
 }

@@ -11,7 +11,6 @@ public class EffectSliderPresenter : MonoBehaviour
     [SerializeField] Slider _ObjectPhiAngleControllSlider;
     [SerializeField] Slider _ObjectThetaAngleControllSlider;
 
-
     [SerializeField] DirectionalLightModel _DirectionalLightModel;
 
     private void Start() {
