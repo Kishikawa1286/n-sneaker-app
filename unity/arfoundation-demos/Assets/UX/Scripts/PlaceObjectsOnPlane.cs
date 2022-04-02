@@ -62,34 +62,34 @@ public class PlaceObjectsOnPlane : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
+        // Placementモードでのみ物体を配置する
+        if (_dataManager.UiMode == "Placement")
         {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
+            if (Input.touchCount > 0)
             {
-                if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
                 {
-                    Pose hitPose = s_Hits[0].pose;
-
-                    if (m_NumberOfPlacedObjects < m_MaxNumberOfObjectsToPlace)
+                    if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
                     {
-                        spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                        Pose hitPose = s_Hits[0].pose;
 
-                        m_NumberOfPlacedObjects++;
-                    }
-                    else
-                    {
-                        if (m_CanReposition)
+                        if (m_NumberOfPlacedObjects < m_MaxNumberOfObjectsToPlace)
                         {
-                            spawnedObject.transform.SetPositionAndRotation(hitPose.position, hitPose.rotation);
-                        }
-                    }
+                            spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
 
-                    if (onPlacedObject != null)
-                    {
-                        // Placementモードでのみ物体を配置する
-                        if (_dataManager.UiMode == "Placement")
+                            m_NumberOfPlacedObjects++;
+                        }
+                        else
+                        {
+                            if (m_CanReposition)
+                            {
+                                spawnedObject.transform.SetPositionAndRotation(hitPose.position, hitPose.rotation);
+                            }
+                        }
+
+                        if (onPlacedObject != null)
                         {
                             onPlacedObject();
                             m_UnityMessageManager.SendMessageToFlutter("[[OBJECT_PLACED]]");

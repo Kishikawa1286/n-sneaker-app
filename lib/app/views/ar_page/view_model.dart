@@ -96,6 +96,8 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       productId: selected.productId,
       productGlbFileId: selected.id,
     );
+    _reloadScene();
+    notifyListeners();
   }
 
   void onUnityCreated(UnityWidgetController controller) {
@@ -123,5 +125,9 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       'Load',
       '{"fileName": "${f.productId}_${f.id}.glb", "url": "$_url"}',
     );
+  }
+
+  void _reloadScene() {
+    _unityWidgetController.postMessage('SceneReloadModel', 'SceneReload', '');
   }
 }
