@@ -14,6 +14,8 @@ public class PlaceObjectsOnPlane : MonoBehaviour
     [SerializeField]
     UnityMessageManager m_UnityMessageManager;
 
+    private DataManager _dataManager;
+
     /// <summary>
     /// The prefab to instantiate on touch.
     /// </summary>
@@ -55,6 +57,7 @@ public class PlaceObjectsOnPlane : MonoBehaviour
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_UnityMessageManager = GetComponent<UnityMessageManager>();
+        _dataManager = Resources.Load<DataManager>("datamanager");
     }
 
     void Update()
@@ -85,8 +88,12 @@ public class PlaceObjectsOnPlane : MonoBehaviour
 
                     if (onPlacedObject != null)
                     {
-                        onPlacedObject();
-                        m_UnityMessageManager.SendMessageToFlutter("[[OBJECT_PLACED]]");
+                        // Placementモードでのみ物体を配置する
+                        if (_dataManager.UiMode == "Placement")
+                        {
+                            onPlacedObject();
+                            m_UnityMessageManager.SendMessageToFlutter("[[OBJECT_PLACED]]");
+                        }
                     }
                 }
             }
