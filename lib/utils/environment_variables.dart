@@ -12,7 +12,11 @@ const String firestoreProductGlbFilesVersion = 'v1';
 /// Firestoreの'collection_products'コレクションのバージョン
 const String firestoreCollectionProductsVersion = 'v1';
 
+/// Firestoreの'market_page_tabs'コレクションのバージョン
 const String firestoreMarketPageTabsVersion = 'v1';
+
+/// Firestoreの'launch_configs'コレクションのバージョン
+const String firestoreLaunchConfigsVersion = 'v1';
 
 /// AlgoliaのApplication ID
 const String algoliaApplicationId = 'EHWBNFTR66';
@@ -23,6 +27,7 @@ const String algoliaApikey = '1b42b72bcb9325502450036567af273d';
 /// String.fromEnvironment('env') の値
 const String flavor = String.fromEnvironment('FLAVOR');
 
+/// Firebase Analyticsを停止
 const isEnabledAnalytics = !(String.fromEnvironment('ANALYTICS') == 'false' ||
     String.fromEnvironment('ANALYTICS') == 'no' ||
     String.fromEnvironment('ANALYTICS') == 'disable');
@@ -41,3 +46,9 @@ const contactUrl = '';
 
 /// コンタクト
 const accountDeletionRequestUrl = '';
+
+/// App Store
+const appStoreUrl = '';
+
+/// Play Store
+const playStoreUrl = '';

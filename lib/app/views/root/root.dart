@@ -11,6 +11,8 @@ import '../ar_page/ar_page.dart';
 import '../collection_page/collection_page.dart';
 import '../market_page/market_page.dart';
 import '../sign_in_page/sign_in_page.dart';
+import 'invalid_build_number_page.dart';
+import 'maintainance_page.dart';
 import 'view_model.dart';
 
 class Root extends HookConsumerWidget {
@@ -19,6 +21,15 @@ class Root extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(rootViewModelProvider);
+
+    if (viewModel.underMaintainance) {
+      return MaintainancePage(message: viewModel.maintainanceMessage);
+    }
+
+    if (!viewModel.isLaunchableBuildNumber) {
+      return InvalidBuildNumberPage(url: viewModel.storeUrl);
+    }
+
     return UnityWidgetInitializer(
       afterInitialized: (context) => StreamBuilder<AuthState?>(
         stream: viewModel.authStateStream,

@@ -12,6 +12,8 @@ const String _collectionProductsCollectionVersion =
 
 const String _marketPageTabsCollectionVersion = firestoreMarketPageTabsVersion;
 
+const String _launchConfigsCollectionVersion = firestoreLaunchConfigsVersion;
+
 const String _accountDomain = 'accounts';
 
 const String _accountsCollectionPath =
@@ -45,7 +47,12 @@ String collectionProductsCollectionPath =
 String collectionProductDocumentPath(String productCollectionId) =>
     '$collectionProductsCollectionPath/$productCollectionId';
 
-const String marketPageTabsDomain = 'market_page_tabs';
+const String _marketPageTabsDomain = 'market_page_tabs';
 
 const String marketPageTabsCollectionPath =
-    '${marketPageTabsDomain}_$_marketPageTabsCollectionVersion';
+    '${_marketPageTabsDomain}_$_marketPageTabsCollectionVersion';
+
+const String _launchConfigsDomain = 'launch_configs';
+
+const String launchConfigsCollection =
+    '${_launchConfigsDomain}_$_launchConfigsCollectionVersion';
