@@ -221,8 +221,8 @@ public class FileLoadModel : MonoBehaviour
 
         _onStartLocalFileLoading();
         var options = AssetLoader.CreateDefaultLoaderOptions();
-        options.AlphaMaterialMode = AlphaMaterialMode.Transparent;
-        options.LoadTexturesAsSRGB = false;
+        options.AlphaMaterialMode = AlphaMaterialMode.CutoutAndTransparent;
+        // options.LoadTexturesAsSRGB = false;
         options.TextureCompressionQuality = TextureCompressionQuality.Best;
         AssetLoader.LoadModelFromFile(
             _filePath(fileName),
