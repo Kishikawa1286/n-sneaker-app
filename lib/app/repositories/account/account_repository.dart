@@ -112,7 +112,10 @@ class AccountRepository {
         documentPath: accountDocumentPath(userId),
       );
       _saveEmailAndPassword(email: email, password: password);
-      return AccountModel.fromDocumentSnapshot(documentSnapshot);
+      return AccountModel.fromDocumentSnapshot(
+        snapshot: documentSnapshot,
+        email: email,
+      );
     } on Exception catch (e) {
       print(e);
       rethrow;

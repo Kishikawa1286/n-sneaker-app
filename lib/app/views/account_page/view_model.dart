@@ -24,6 +24,7 @@ class AccountPageViewModel extends ViewModelChangeNotifier {
   final PackageInfoRepository _packageInfoRepository;
 
   String get accountId => _accountService.account?.id ?? '';
+  String get accountEmail => _accountService.account?.email ?? '';
 
   String _version = '';
   String _buildNumber = '';

@@ -6,11 +6,13 @@ class AccountModel {
     required this.numberOfCollectionProducts,
     required this.createdAt,
     required this.lastEditedAt,
+    this.email,
   });
 
-  factory AccountModel.fromDocumentSnapshot(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-  ) {
+  factory AccountModel.fromDocumentSnapshot({
+    required DocumentSnapshot<Map<String, dynamic>> snapshot,
+    required String email,
+  }) {
     final data = snapshot.data();
     if (data == null) {
       throw Exception('DocumentSnapshot has no data.');
@@ -21,6 +23,7 @@ class AccountModel {
           int.tryParse(data['number_of_collection_products'].toString()) ?? 0,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
+      email: email,
     );
   }
 
@@ -28,4 +31,6 @@ class AccountModel {
   final int numberOfCollectionProducts;
   final Timestamp createdAt;
   final Timestamp lastEditedAt;
+
+  final String? email;
 }
