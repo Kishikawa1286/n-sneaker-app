@@ -1,3 +1,4 @@
+import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -29,64 +30,39 @@ class CollectionPageProductGridTile extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          elevation: 3,
+          color: CommonStyle.transparent,
+          elevation: 0,
           child: Stack(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: collectionProduct.tileImageUrls.first,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: imageProvider,
-                              ),
-                            ),
-                          ),
-                          placeholder: (_, __) => Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(7),
-                                topRight: Radius.circular(7),
-                              ),
-                              color: CommonStyle.grey,
-                            ),
-                          ),
-                        ),
-                      ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: 100,
+                  height: 20,
+                  decoration: const BoxDecoration(
+                    color: CommonStyle.transparentBlack,
+                    borderRadius: BorderRadius.all(Radius.elliptical(50, 10)),
+                  ),
+                ),
+              ),
+              CachedNetworkImage(
+                imageUrl:
+                    collectionProduct.transparentBackgroundImageUrls.first,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    image: DecorationImage(
+                      fit: BoxFit.contain,
+                      image: imageProvider,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 7,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${collectionProduct.vendorJp}  ${collectionProduct.seriesJp}',
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                        Text(
-                          collectionProduct.titleJp,
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    ),
+                ),
+                placeholder: (_, __) => Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: CommonStyle.transparent,
                   ),
-                ],
+                ),
               ),
             ],
           ),

@@ -1,1 +1,6 @@
-enum SharedPreferencesKey { signInEmail, signInPassword, lastUsedGlbFileId }
+enum SharedPreferencesKey {
+  signInEmail,
+  signInPassword,
+  lastUsedGlbFileId,
+  lastSetCollectionPageBackgroundImageIndex,
+}

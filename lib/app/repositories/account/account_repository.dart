@@ -143,9 +143,8 @@ class AccountRepository {
 
   Future<void> signOut() async {
     await _firebaseAuthInterface.signOut();
+    await _sharedPreferencesInterface.remove(SharedPreferencesKey.signInEmail);
     await _sharedPreferencesInterface
-        .removeString(SharedPreferencesKey.signInEmail);
-    await _sharedPreferencesInterface
-        .removeString(SharedPreferencesKey.signInPassword);
+        .remove(SharedPreferencesKey.signInPassword);
   }
 }

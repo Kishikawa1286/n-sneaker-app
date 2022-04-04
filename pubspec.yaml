@@ -50,7 +50,8 @@ flutter:
         - asset: fonts/MPLUS1-Thin.ttf
 
   assets:
-    - assets/launcher_icon/icon.jpg
+    - assets/collection_background/
+    - assets/launcher_icon/
 
 flutter_icons:
   android: true

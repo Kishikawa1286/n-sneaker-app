@@ -7,11 +7,15 @@ class PageHeader extends StatelessWidget {
     required this.title,
     this.showBackButton = false,
     this.height = 80,
+    this.color = CommonStyle.transparent,
+    this.actions = const <Widget>[],
   });
 
   final String title;
   final bool showBackButton;
   final double height;
+  final Color color;
+  final List<Widget> actions;
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -20,8 +24,9 @@ class PageHeader extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: height,
             alignment: Alignment.bottomCenter,
-            decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: CommonStyle.grey)),
+            decoration: BoxDecoration(
+              color: color,
+              border: const Border(bottom: BorderSide(color: CommonStyle.grey)),
             ),
             child: Padding(
               padding: const EdgeInsets.only(bottom: 5),
@@ -47,6 +52,13 @@ class PageHeader extends StatelessWidget {
                   ),
                 )
               : const SizedBox(),
+          Positioned(
+            top: 32,
+            right: 0,
+            child: Row(
+              children: actions,
+            ),
+          ),
         ],
       );
 }

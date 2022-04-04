@@ -6,7 +6,7 @@ abstract class CommonStyle {
   static const black = Colors.black;
   static const white = Colors.white;
   static const transparent = Colors.transparent;
-  static const transparentBlack = Color.fromARGB(64, 0, 0, 0);
+  static const transparentBlack = Color.fromARGB(80, 0, 0, 0);
   static const grey = Color.fromARGB(255, 140, 140, 140);
 
   static const errorColor = Colors.red;
