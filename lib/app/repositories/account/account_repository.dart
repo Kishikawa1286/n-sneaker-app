@@ -80,6 +80,7 @@ class AccountRepository {
       return AccountModel(
         id: userId,
         numberOfCollectionProducts: 0,
+        email: email,
         createdAt: Timestamp.now(),
         lastEditedAt: Timestamp.now(),
       );
