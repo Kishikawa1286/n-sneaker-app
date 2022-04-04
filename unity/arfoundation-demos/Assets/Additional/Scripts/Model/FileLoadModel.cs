@@ -229,7 +229,7 @@ public class FileLoadModel : MonoBehaviour
             _onLocalFileLoad,
             _onLocalFileMaterialLoad,
             _onProgressLocalFileLoading,
-            _onErrorLocalFileLoading,
+            _onError,
             target,
             options
         );
@@ -262,7 +262,7 @@ public class FileLoadModel : MonoBehaviour
         _onFinishLocalFileLoading();
     }
 
-    private void _onErrorLocalFileLoading(IContextualizedError contextualizedError)
+    private void _onError(IContextualizedError contextualizedError)
     {
         _onErrorLocalFileLoading();
     }
