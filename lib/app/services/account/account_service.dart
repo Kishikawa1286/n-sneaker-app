@@ -73,7 +73,7 @@ class AccountService {
       );
       _account = ac;
       await _adaptyRepository.identify(ac.id);
-      _authStateController.add(AuthState.signIn);
+      _authStateController.add(AuthState.signInWithNewAccount);
     } on Exception catch (e) {
       print(e);
       rethrow;
@@ -111,4 +111,4 @@ class AccountService {
   }
 }
 
-enum AuthState { notChecked, signIn, signOut }
+enum AuthState { notChecked, signIn, signInWithNewAccount, signOut }

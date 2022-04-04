@@ -35,11 +35,13 @@ class RootViewModel extends ViewModelChangeNotifier {
   LaunchConfigsModel? _configs;
   int _localBuildNumber = 0;
   int _currentIndex = 0;
+  bool _modalShowed = false;
 
   bool get isLaunchableBuildNumber =>
       _localBuildNumber >= (_configs?.launchableBuildNumber ?? 1000);
   bool get underMaintainance => _configs?.underMaintenance ?? true;
   String get maintainanceMessage => _configs?.maintainanceMessage ?? '';
+  bool get modalShowed => _modalShowed;
   String get storeUrl {
     if (Platform.isIOS) {
       return appStoreUrl;
@@ -66,5 +68,9 @@ class RootViewModel extends ViewModelChangeNotifier {
   void setIndex(int index) {
     _currentIndex = index;
     notifyListeners();
+  }
+
+  void onModalShowed() {
+    _modalShowed = true;
   }
 }

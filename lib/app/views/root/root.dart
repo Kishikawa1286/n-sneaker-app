@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +15,7 @@ import '../market_page/market_page.dart';
 import '../sign_in_page/sign_in_page.dart';
 import 'invalid_build_number_page.dart';
 import 'maintainance_page.dart';
+import 'show_sign_up_reward_dialog.dart';
 import 'view_model.dart';
 
 class Root extends HookConsumerWidget {
@@ -71,6 +74,20 @@ class Root extends HookConsumerWidget {
               builder: (context) {
                 switch (viewModel.currentIndex) {
                   case 0:
+                    if (authState == AuthState.signInWithNewAccount &&
+                        !viewModel.modalShowed) {
+                      // wait MarketPage built
+                      Timer(const Duration(milliseconds: 100), () {
+                        showSignUpRewardDialog(
+                          context: context,
+                          onTapButton: () {
+                            viewModel.setIndex(1);
+                            Navigator.of(context).pop();
+                          },
+                        );
+                        viewModel.onModalShowed();
+                      });
+                    }
                     return const MarketPage();
                   case 1:
                     return const CollectionPage();

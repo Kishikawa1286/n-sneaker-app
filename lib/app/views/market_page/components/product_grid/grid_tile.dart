@@ -26,33 +26,29 @@ class MarketPageProductGridTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Stack(
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: product.tileImageUrls.first,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: imageProvider,
-                          ),
-                        ),
+                child: CachedNetworkImage(
+                  imageUrl: product.tileImageUrls.first,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
                       ),
-                      placeholder: (_, __) => Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(7),
-                            topRight: Radius.circular(7),
-                          ),
-                          color: CommonStyle.grey,
-                        ),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: imageProvider,
                       ),
                     ),
-                  ],
+                  ),
+                  placeholder: (_, __) => Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(7),
+                        topRight: Radius.circular(7),
+                      ),
+                      color: CommonStyle.grey,
+                    ),
+                  ),
                 ),
               ),
               Padding(
