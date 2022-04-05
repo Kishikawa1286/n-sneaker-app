@@ -13,8 +13,6 @@ class ProductGlbFileModel {
     required this.createdAt,
     required this.lastEditedAt,
     required this.productId,
-    required this.productAppStoreId,
-    required this.productPlayStoreId,
     required this.productTitle,
     required this.productVendor,
     required this.productSeries,
@@ -47,8 +45,6 @@ class ProductGlbFileModel {
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       productId: data['product_id'] as String,
-      productAppStoreId: data['product_app_store_id'] as String,
-      productPlayStoreId: data['product_play_store_id'] as String,
       productTitle: data['product_title'] as String,
       productVendor: data['product_vendor'] as String,
       productSeries: data['product_series'] as String,
@@ -80,9 +76,6 @@ class ProductGlbFileModel {
 
   // product data
   final String productId;
-
-  final String productAppStoreId;
-  final String productPlayStoreId;
 
   final String productTitle;
   final String productVendor;

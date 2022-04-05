@@ -8,8 +8,6 @@ class CollectionProductModel {
     required this.createdAt,
     required this.lastEditedAt,
     required this.productId,
-    required this.appStoreId,
-    required this.playStoreId,
     required this.title,
     required this.vendor,
     required this.series,
@@ -46,8 +44,6 @@ class CollectionProductModel {
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       productId: data['product_id'] as String,
-      appStoreId: data['app_store_id'] as String,
-      playStoreId: data['play_store_id'] as String,
       title: data['title'] as String,
       vendor: data['vendor'] as String,
       series: data['series'] as String,
@@ -86,9 +82,6 @@ class CollectionProductModel {
 
   // product data
   final String productId;
-
-  final String appStoreId;
-  final String playStoreId;
 
   final String title;
   final String vendor;
