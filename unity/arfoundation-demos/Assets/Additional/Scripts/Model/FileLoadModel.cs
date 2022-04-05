@@ -97,7 +97,6 @@ public class FileLoadModel : MonoBehaviour
     private void _onStartDownloading()
     {
         _downloading.Value = true;
-        _localFileLoading.Value = false;
         _loaded.Value = false;
         _downloadProgress.Value = 0f;
     }
@@ -106,7 +105,6 @@ public class FileLoadModel : MonoBehaviour
     private void _onFinishDownloading()
     {
         _downloading.Value = false;
-        _localFileLoading.Value = false;
         _loaded.Value = false;
         _downloadProgress.Value = 1f;
     }
@@ -115,7 +113,6 @@ public class FileLoadModel : MonoBehaviour
     private void _onErrorDownloading()
     {
         _downloading.Value = false;
-        _localFileLoading.Value = false;
         _loaded.Value = false;
         _downloadProgress.Value = 0f;
     }
@@ -123,7 +120,6 @@ public class FileLoadModel : MonoBehaviour
     // ローカルファイルのロード開始
     private void _onStartLocalFileLoading()
     {
-        _downloading.Value = false;
         _localFileLoading.Value = true;
         _loaded.Value = false;
         _localFileLoadingProgress.Value = 0f;
@@ -132,7 +128,6 @@ public class FileLoadModel : MonoBehaviour
     // ローカルファイルのロード完了
     private void _onFinishLocalFileLoading()
     {
-        _downloading.Value = false;
         _localFileLoading.Value = false;
         _loaded.Value = true;
         _localFileLoadingProgress.Value = 1f;
@@ -141,7 +136,6 @@ public class FileLoadModel : MonoBehaviour
     // ローカルファイルのロード失敗
     private void _onErrorLocalFileLoading()
     {
-        _downloading.Value = false;
         _localFileLoading.Value = false;
         _loaded.Value = false;
         _localFileLoadingProgress.Value = 0f;
