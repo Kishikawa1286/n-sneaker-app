@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app/views/glb_file_viewer_page/glb_file_viewer_page.dart';
 import '../app/views/market_detail_page/market_detail_page.dart';
+import '../app/views/onboarding_page/onboarding_page.dart';
 import '../app/views/root/root.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) =>
@@ -11,6 +12,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) =>
         final name = settings.name;
         if (name == null || name == 'root') {
           return const Root();
+        }
+
+        if (name == 'onboarding') {
+          return const OnboardingPage();
         }
 
         if (name.startsWith('product_detail')) {

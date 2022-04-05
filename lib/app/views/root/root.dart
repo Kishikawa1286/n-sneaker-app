@@ -12,6 +12,7 @@ import '../account_page/account_page.dart';
 import '../ar_page/ar_page.dart';
 import '../collection_page/collection_page.dart';
 import '../market_page/market_page.dart';
+import '../onboarding_page/onboarding_page.dart';
 import '../sign_in_page/sign_in_page.dart';
 import 'invalid_build_number_page.dart';
 import 'maintainance_page.dart';
@@ -24,6 +25,10 @@ class Root extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(rootViewModelProvider);
+    final onboardingDone = viewModel.onboardingDone;
+    if (onboardingDone == null) {
+      return const LoadingPage();
+    }
 
     if (viewModel.underMaintainance) {
       return MaintainancePage(message: viewModel.maintainanceMessage);
@@ -42,6 +47,14 @@ class Root extends HookConsumerWidget {
             return const LoadingPage();
           }
           if (authState == AuthState.signOut) {
+            // まだpushしていない && オンボーディングを表示したことがない
+            if (!viewModel.onboardingPagePushed && !onboardingDone) {
+              // wait SignInPage built
+              Timer(const Duration(milliseconds: 100), () {
+                pushOnboardingPage(context);
+                viewModel.onOnboardingPagePushed();
+              });
+            }
             return const SignInPage();
           }
           return Scaffold(
@@ -89,12 +102,16 @@ class Root extends HookConsumerWidget {
                       });
                     }
                     return const MarketPage();
+
                   case 1:
                     return const CollectionPage();
+
                   case 2:
                     return const ArPage();
+
                   case 3:
                     return const AccountPage();
+
                   default:
                     return const LoadingPage();
                 }

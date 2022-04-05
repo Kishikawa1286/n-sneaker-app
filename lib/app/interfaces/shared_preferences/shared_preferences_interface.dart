@@ -40,4 +40,17 @@ class SharedPreferencesInterface {
     final sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getInt(enumToString(key));
   }
+
+  Future<void> setBool({
+    required SharedPreferencesKey key,
+    required bool value,
+  }) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setBool(enumToString(key), value);
+  }
+
+  Future<bool?> getBool(SharedPreferencesKey key) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool(enumToString(key));
+  }
 }

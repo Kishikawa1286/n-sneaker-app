@@ -6,6 +6,7 @@ import '../../../utils/environment_variables.dart';
 import '../../../utils/view_model_change_notifier.dart';
 import '../../repositories/launch_configs/launch_configs.dart';
 import '../../repositories/launch_configs/launch_configs_repository.dart';
+import '../../repositories/onboarding_state/onboarding_state_repository.dart';
 import '../../repositories/package_info/package_info_repository.dart';
 import '../../services/account/account_service.dart';
 
@@ -13,6 +14,7 @@ final rootViewModelProvider = ChangeNotifierProvider(
   (ref) => RootViewModel(
     ref.read(launchConfigsRepositoryProvider),
     ref.read(packageInfoRepositoryProvider),
+    ref.read(onboardingStateRepositoryProvider),
     ref.watch(accountServiceProvider),
   ),
 );
@@ -21,6 +23,7 @@ class RootViewModel extends ViewModelChangeNotifier {
   RootViewModel(
     this._launchConfigsRepository,
     this._packageInfoRepository,
+    this._onboardingStateRepository,
     this._accountService,
   ) {
     _init();
@@ -28,6 +31,7 @@ class RootViewModel extends ViewModelChangeNotifier {
 
   final LaunchConfigsRepository _launchConfigsRepository;
   final PackageInfoRepository _packageInfoRepository;
+  final OnboardingStateRepository _onboardingStateRepository;
   final AccountService _accountService;
 
   Stream<AuthState?> get authStateStream => _accountService.authStateStream;
@@ -35,13 +39,17 @@ class RootViewModel extends ViewModelChangeNotifier {
   LaunchConfigsModel? _configs;
   int _localBuildNumber = 0;
   int _currentIndex = 0;
+  bool? _onboardingDone;
   bool _modalShowed = false;
+  bool _onboardingPagePushed = false;
 
   bool get isLaunchableBuildNumber =>
       _localBuildNumber >= (_configs?.launchableBuildNumber ?? 1000);
   bool get underMaintainance => _configs?.underMaintenance ?? true;
   String get maintainanceMessage => _configs?.maintainanceMessage ?? '';
+  bool? get onboardingDone => _onboardingDone;
   bool get modalShowed => _modalShowed;
+  bool get onboardingPagePushed => _onboardingPagePushed;
   String get storeUrl {
     if (Platform.isIOS) {
       return appStoreUrl;
@@ -56,6 +64,8 @@ class RootViewModel extends ViewModelChangeNotifier {
 
   Future<void> _init() async {
     try {
+      _onboardingDone =
+          await _onboardingStateRepository.getWhetherOnboardingDone();
       _configs = await _launchConfigsRepository.fetch();
       _localBuildNumber =
           int.tryParse(await _packageInfoRepository.getBuildNumber()) ?? 0;
@@ -72,5 +82,9 @@ class RootViewModel extends ViewModelChangeNotifier {
 
   void onModalShowed() {
     _modalShowed = true;
+  }
+
+  void onOnboardingPagePushed() {
+    _onboardingPagePushed = true;
   }
 }

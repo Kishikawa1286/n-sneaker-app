@@ -7,7 +7,7 @@ import '../view_model.dart';
 class SignInPageCarouselSelector extends StatelessWidget {
   const SignInPageCarouselSelector();
 
-  static const _texts = ['ログイン', '新規登録', 'パスワード\nリセット'];
+  static const _texts = ['新規登録', 'ログイン', 'パスワード\nリセット'];
 
   @override
   Widget build(BuildContext context) => Padding(

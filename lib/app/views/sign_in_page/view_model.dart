@@ -19,7 +19,9 @@ final signInPageViewModelProvider =
 );
 
 class SignInPageViewModel extends ViewModelChangeNotifier {
-  SignInPageViewModel(this._accountService, this._accountRepository);
+  SignInPageViewModel(this._accountService, this._accountRepository) {
+    Timer(const Duration(milliseconds: 200), _stopWaiting);
+  }
 
   final AccountService _accountService;
   final AccountRepository _accountRepository;
@@ -35,12 +37,19 @@ class SignInPageViewModel extends ViewModelChangeNotifier {
   String _signInErrorMessage = '';
   String _signUpErrorMessage = '';
   String _passwordResetErrorMessage = '';
-  int _carouselIndex = 1;
+  int _carouselIndex = 0;
+  bool _waiting = true; // オンボーディングがpushされるのを待つ
 
   String get signInErrorMessage => _signInErrorMessage;
   String get signUpErrorMessage => _signUpErrorMessage;
   String get passwordResetErrorMessage => _passwordResetErrorMessage;
   int get carouselIndex => _carouselIndex;
+  bool get waiting => _waiting;
+
+  void _stopWaiting() {
+    _waiting = false;
+    notifyListeners();
+  }
 
   void setCarouselIndex(int index) {
     _carouselIndex = index;

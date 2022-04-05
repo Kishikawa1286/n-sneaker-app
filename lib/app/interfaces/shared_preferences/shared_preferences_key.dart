@@ -3,4 +3,5 @@ enum SharedPreferencesKey {
   signInPassword,
   lastUsedGlbFileId,
   lastSetCollectionPageBackgroundImageIndex,
+  onboardingDone,
 }
