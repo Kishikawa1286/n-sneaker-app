@@ -1,0 +1,8 @@
+signingConfigs {
+    release {
+        storeFile file('./releasekey.keystore')
+        storePassword 'izTNZbmFMSUWKzAW'
+        keyAlias 'release'
+        keyPassword 'izTNZbmFMSUWKzAW'
+    }
+}
