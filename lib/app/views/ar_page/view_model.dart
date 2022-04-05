@@ -47,37 +47,23 @@ class ArPageViewModel extends ViewModelChangeNotifier {
 
   Future<void> _init() async {
     try {
-      final accountId = _accountService.account?.id;
-      if (accountId == null) {
-        throw Exception('accountId is null.');
-      }
       final ids = await _productGlbFileRepository.getLastUsedGlbFileId();
       // Shared Preferences に記録がない場合
       if (ids.isEmpty) {
-        final fetchedCollectionProducts = await _collectionProductRepository
-            .fetchCollectionProductsFromFirestore(accountId);
-        if (fetchedCollectionProducts.isEmpty) {
-          _noCollectionProductExists = true;
-          _initialized = true;
-          notifyListeners();
-          return;
-        }
-        final collectionProduct = fetchedCollectionProducts.first;
-        final fetchedProductGlbFiles = await _productGlbFileRepository
-            .fetchProductsGlbFilesForAr(collectionProduct.productId);
-        if (fetchedProductGlbFiles.isEmpty) {
-          throw Exception('no glb file data were fetched.');
-        }
-        await selectGlbFile(fetchedProductGlbFiles.first);
-        _initialized = true;
-        notifyListeners();
+        await _onFirstUse();
         return;
       }
-      _productGlbFile =
+      final fetchedCollectionProduct =
           await _productGlbFileRepository.fetchProductsGlbFileById(
         productId: ids[0],
         productGlbFileId: ids[1],
       );
+      // 前回起動時から設定が変わってAR非対応になっていた場合
+      if (!fetchedCollectionProduct.availableForAr) {
+        await _onFirstUse();
+        return;
+      }
+      await _setGlbFile(fetchedCollectionProduct);
       _initialized = true;
       notifyListeners();
     } on Exception catch (e) {
@@ -85,12 +71,42 @@ class ArPageViewModel extends ViewModelChangeNotifier {
     }
   }
 
-  Future<void> selectGlbFile(ProductGlbFileModel selected) async {
-    _productGlbFile = selected;
+  Future<void> _onFirstUse() async {
+    final accountId = _accountService.account?.id;
+    if (accountId == null) {
+      throw Exception('accountId is null.');
+    }
+    final fetchedCollectionProducts = await _collectionProductRepository
+        .fetchCollectionProductsFromFirestore(accountId);
+    // コレクションが空の場合
+    if (fetchedCollectionProducts.isEmpty) {
+      _noCollectionProductExists = true;
+      _initialized = true;
+      notifyListeners();
+      return;
+    }
+    final collectionProduct = fetchedCollectionProducts.first;
+    final fetchedProductGlbFiles = await _productGlbFileRepository
+        .fetchProductsGlbFilesForAr(collectionProduct.productId);
+    // GLB ファイルがない場合
+    if (fetchedProductGlbFiles.isEmpty) {
+      throw Exception('no glb file data were fetched.');
+    }
+    await _setGlbFile(fetchedProductGlbFiles.first);
+    _initialized = true;
+    notifyListeners();
+  }
+
+  Future<void> _setGlbFile(ProductGlbFileModel productGlbFileModel) async {
+    _productGlbFile = productGlbFileModel;
     _url = await _productGlbFileRepository.generateGlbFileDownloadUrl(
-      productId: selected.productId,
-      productGlbFileId: selected.id,
+      productId: productGlbFileModel.productId,
+      productGlbFileId: productGlbFileModel.id,
     );
+  }
+
+  Future<void> selectGlbFile(ProductGlbFileModel selected) async {
+    await _setGlbFile(selected);
     notifyListeners();
     await _productGlbFileRepository.setLastUsedGlbFileId(
       productId: selected.productId,
