@@ -35,7 +35,7 @@ class SignInPageViewModel extends ViewModelChangeNotifier {
   String _signInErrorMessage = '';
   String _signUpErrorMessage = '';
   String _passwordResetErrorMessage = '';
-  int _carouselIndex = 0;
+  int _carouselIndex = 1;
 
   String get signInErrorMessage => _signInErrorMessage;
   String get signUpErrorMessage => _signUpErrorMessage;
