@@ -57,7 +57,7 @@ void showSignUpRewardDialog({
                       ),
                     ),
                     child: const Text(
-                      'コレクションを見る',
+                      'さっそく見てみる',
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 14,
