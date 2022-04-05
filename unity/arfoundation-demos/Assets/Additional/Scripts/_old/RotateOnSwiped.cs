@@ -8,7 +8,7 @@ public class RotateOnSwiped : MonoBehaviour
     private float speedModifier = 0.4f;
 
     private float formerDist;
-    private float minRate = 0.7f;
+    private float minRate = 0.3f;
     private float maxRate = 3f;
 
     void Awake()
@@ -64,7 +64,7 @@ public class RotateOnSwiped : MonoBehaviour
         }
 
         float scale = transform.localScale.x;
-        scale += (dist - formerDist) / 200f;
+        scale += (dist - formerDist) / 230f;
         if (scale > maxRate)
         {
             scale = maxRate;
