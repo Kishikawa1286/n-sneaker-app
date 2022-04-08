@@ -8,7 +8,7 @@ public class RotateOnSwiped : MonoBehaviour
     private float speedModifier = 0.4f;
 
     private float formerDist;
-    private float minRate = 0.3f;
+    private float minRate = 0.2f;
     private float maxRate = 3f;
 
     void Awake()

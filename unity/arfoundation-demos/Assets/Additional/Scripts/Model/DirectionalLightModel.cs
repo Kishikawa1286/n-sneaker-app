@@ -69,8 +69,8 @@ public class DirectionalLightModel : MonoBehaviour
     private readonly FloatReactiveProperty _phi = new FloatReactiveProperty(DefaultPhi);
     // 定数
     public readonly float MaxPhi = 0f;
-    public readonly float MinPhi = -90f;
-    static public readonly float DefaultPhi = -45f;
+    public readonly float MinPhi = -70f;
+    static public readonly float DefaultPhi = -35f;
     // Presenter で呼び出される更新処理
     public void SetPhi(float _Value)
     {

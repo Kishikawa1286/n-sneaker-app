@@ -259,6 +259,10 @@ public class FileLoadModel : MonoBehaviour
     private void _onError(IContextualizedError contextualizedError)
     {
         _onErrorLocalFileLoading();
+        if (File.Exists(_filePath("_GlbFileName")))
+        {
+            File.Delete(_filePath("_GlbFileName"));
+        }
     }
 
     private void _onProgressLocalFileLoading(AssetLoaderContext assetLoaderContext, float progress)
