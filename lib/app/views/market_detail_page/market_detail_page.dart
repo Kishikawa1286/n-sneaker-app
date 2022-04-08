@@ -50,25 +50,23 @@ class MarketDetailPage extends HookConsumerWidget {
         visible: viewModel.purchaseInProgress,
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    MarketDetailPageCarouselSlider(productId: productId),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: MarketDetailPageCarouselIndicator(
-                        productId: productId,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 45),
-                      child: MarketDetailPageDescription(productId: productId),
-                    ),
-                  ],
+            ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: MarketDetailPageCarouselSlider(productId: productId),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: MarketDetailPageCarouselIndicator(
+                    productId: productId,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 45),
+                  child: MarketDetailPageDescription(productId: productId),
+                ),
+              ],
             ),
             const Positioned(
               top: 40,

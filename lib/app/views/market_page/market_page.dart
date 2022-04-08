@@ -57,8 +57,8 @@ class MarketPage extends HookConsumerWidget {
                                   color: index == viewModel.currentIndex
                                       ? CommonStyle.enabledColor
                                       : CommonStyle.disabledColor,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
                                 ),
                               ),
                             ),

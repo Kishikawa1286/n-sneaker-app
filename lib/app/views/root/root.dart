@@ -22,6 +22,11 @@ import 'view_model.dart';
 class Root extends HookConsumerWidget {
   const Root();
 
+  static const _labelTextStyle = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+  );
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(rootViewModelProvider);
@@ -63,6 +68,10 @@ class Root extends HookConsumerWidget {
               unselectedItemColor: CommonStyle.disabledColor,
               selectedItemColor: CommonStyle.enabledColor,
               currentIndex: viewModel.currentIndex,
+              type: BottomNavigationBarType.fixed,
+              showUnselectedLabels: true,
+              selectedLabelStyle: _labelTextStyle,
+              unselectedLabelStyle: _labelTextStyle,
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.shopping_bag),
