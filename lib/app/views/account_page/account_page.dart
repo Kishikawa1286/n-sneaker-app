@@ -143,7 +143,7 @@ class AccountPage extends HookConsumerWidget {
                   ),
                   AccountPageListTile(
                     iconData: Icons.description,
-                    title: '特定商取引法に基づく表示',
+                    title: '特定商取引法に基づく表記',
                     isLauncher: true,
                     onTap: () async {
                       if (await canLaunch(

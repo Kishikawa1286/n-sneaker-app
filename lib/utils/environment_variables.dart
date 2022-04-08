@@ -52,19 +52,22 @@ const isEnabledAnalytics = !(String.fromEnvironment('ANALYTICS') == 'false' ||
 /* 外部リンク */
 
 /// 特定商取引法
-const notionBasedOnSpecifiedCommercialTransactionsActUrl = '';
+const notionBasedOnSpecifiedCommercialTransactionsActUrl =
+    'https://successful-whistle-5b2.notion.site/5d789bc257d74ef8a8fe112c57011443';
 
 /// プライバシーポリシー
-const privacyPolicyUrl = '';
+const privacyPolicyUrl =
+    'https://successful-whistle-5b2.notion.site/6527df805f454002add1786d3ea78f4e';
 
 /// 利用規約
-const termsOfServiceUrl = '';
+const termsOfServiceUrl =
+    'https://successful-whistle-5b2.notion.site/N-Sneaker-45038a37fc6d4aca808623255260c6a1';
 
 /// コンタクト
-const contactUrl = '';
+const contactUrl = 'https://notionforms.io/forms/n-sneaker';
 
-/// コンタクト
-const accountDeletionRequestUrl = '';
+/// アカウント削除
+const accountDeletionRequestUrl = 'https://notionforms.io/forms/n-sneaker-1 ';
 
 /// App Store
 const appStoreUrl = '';
