@@ -38,17 +38,14 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: MPLUS1
+    - family: NotoSansJP
       fonts:
-        - asset: fonts/MPLUS1-Black.ttf
-        - asset: fonts/MPLUS1-Bold.ttf
-        - asset: fonts/MPLUS1-ExtraBold.ttf
-        - asset: fonts/MPLUS1-ExtraLight.ttf
-        - asset: fonts/MPLUS1-Light.ttf
-        - asset: fonts/MPLUS1-Medium.ttf
-        - asset: fonts/MPLUS1-Regular.ttf
-        - asset: fonts/MPLUS1-SemiBold.ttf
-        - asset: fonts/MPLUS1-Thin.ttf
+        - asset: fonts/NotoSansJP-Black.otf
+        - asset: fonts/NotoSansJP-Bold.otf
+        - asset: fonts/NotoSansJP-Light.otf
+        - asset: fonts/NotoSansJP-Medium.otf
+        - asset: fonts/NotoSansJP-Regular.otf
+        - asset: fonts/NotoSansJP-Thin.otf
 
   assets:
     - assets/collection_background/

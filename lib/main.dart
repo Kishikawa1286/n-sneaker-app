@@ -32,7 +32,7 @@ Future<void> main() async {
             initialRoute: 'root',
             theme: ThemeData(
               brightness: Brightness.light,
-              fontFamily: 'MPLUS1',
+              fontFamily: 'NotoSansJP',
             ),
           ),
         ),
