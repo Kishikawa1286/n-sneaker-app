@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/convert_paywall_id_to_vendor_product_id.dart';
-import '../../../utils/enum_to_string.dart';
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_interface.dart';
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_paths.dart';
 import '../../interfaces/firebase/cloud_functions/add_collection_product_on_making_purchase_parameters.dart';
@@ -11,7 +10,6 @@ import '../../interfaces/firebase/cloud_functions/add_collection_product_on_rest
 import '../../interfaces/firebase/cloud_functions/cloud_functions_interface.dart';
 import '../product/product_model.dart';
 import 'collection_product_model.dart';
-import 'payment_method.dart';
 
 final collectionProductRepositoryProvider =
     Provider<CollectionProductRepository>(
@@ -77,31 +75,29 @@ class CollectionProductRepository {
     if (vendorProductId.isEmpty) {
       throw Exception('generating vendor product id failed.');
     }
-    final nonSubscriptions =
-        makePurchaseResult.purchaserInfo?.nonSubscriptions[vendorProductId];
+    final nonSubscriptions = makePurchaseResult
+        .purchaserInfo?.nonSubscriptions[vendorProductId]
+        ?.where((ns) => ns.purchasedAt != null)
+        .toList();
     if (nonSubscriptions == null) {
       throw Exception('no nonSubscription for id $vendorProductId exists.');
     }
-    final purchasedAtList = nonSubscriptions
-        .map((nonSubscription) => nonSubscription.purchasedAt)
-        .whereType<DateTime>()
-        .toList();
-    // lastを呼び出すのでEmptyチェック
-    if (purchasedAtList.isEmpty) {
-      throw Exception('no nonSubscription for id $vendorProductId exists.');
+    // ns.purchasedAt == nullは既に弾いている
+    // // 時系列順にソートされる（最新のものが最後）
+    nonSubscriptions.sort((a, b) => a.purchasedAt!.compareTo(b.purchasedAt!));
+    final purchaseId = nonSubscriptions.last.purchaseId;
+    if (purchaseId == null) {
+      throw Exception('purchaseId is null');
     }
-    // 時系列順にソートされる（最新のものが最後）
-    purchasedAtList.sort((a, b) => a.compareTo(b));
-    final purchasedAt = purchasedAtList.last;
     final params = AddCollectionProductOnMakingPurchaseParameters(
       productId: product.id,
-      paymentMethod: enumToString(generatePaymentMethodFromDevice()),
-      purchasedAtAsIso8601: purchasedAt.toIso8601String(),
-      vendorProductId: vendorProductId,
+      purchaseId: purchaseId,
     );
     final result = await _cloudFunctionsInterface
         .addCollectionProductOnMakingPurchase(params);
-    print(result.data);
+    if (result.data.toString().contains('Error')) {
+      throw Exception('No purchase was found.');
+    }
   }
 
   Future<void> addCollectionProductOnRestoringPurchase(
@@ -111,7 +107,9 @@ class CollectionProductRepository {
         AddCollectionProductOnRestoringPurchaseParameters(productId: productId);
     final result = await _cloudFunctionsInterface
         .addCollectionProductOnRestoringPurchase(params);
-    print(result.data);
+    if (result.data.toString().contains('Error')) {
+      throw Exception('No purchase was found.');
+    }
   }
 
   Future<List<CollectionProductModel>> fetchCollectionProductsFromFirestore(

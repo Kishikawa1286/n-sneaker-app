@@ -134,7 +134,7 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
       print(e);
       _purchaseInProgress = false;
       notifyListeners();
-      return 'failed';
+      return '購入情報がありません。購入している場合はお問い合わせください。';
     }
     _purchased = true;
     _purchaseInProgress = false;

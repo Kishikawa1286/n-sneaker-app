@@ -54,7 +54,7 @@ class MarketDetailPagePurchaseButton extends HookConsumerWidget {
           if (message.isNotEmpty) {
             await Flushbar<void>(
               message: message,
-              duration: const Duration(seconds: 1),
+              duration: const Duration(seconds: 3),
             ).show(context);
           }
         },
