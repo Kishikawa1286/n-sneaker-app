@@ -32,18 +32,12 @@ class AdaptyService {
     }
   }
 
-  Future<MakePurchaseResult?> makePurchase(String productId) async {
+  Future<MakePurchaseResult?> makePurchase(String adaptyPaymentId) async {
     try {
       if (_paywalls == null) {
         await _init();
       }
-      final purchaserInfo = await _adaptyRepository.fetchPurchaserInfo();
-      // access level は productId を ID として登録されている
-      if (purchaserInfo.accessLevels[productId] != null) {
-        throw Exception('access level is already granted.');
-      }
-      // paywall は productId を ID として登録されている
-      final adaptyProducts = _paywalls?[productId]?.products;
+      final adaptyProducts = _paywalls?[adaptyPaymentId]?.products;
       if (adaptyProducts == null) {
         throw Exception('no adapty products exists.');
       }

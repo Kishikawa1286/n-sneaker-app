@@ -32,7 +32,7 @@ class MarketDetailPage extends HookConsumerWidget {
                 ? const SizedBox()
                 : ListTile(
                     onTap: () async {
-                      final message = await viewModel.restorePurchase();
+                      final message = await viewModel.restore();
                       if (message.isNotEmpty) {
                         await Flushbar<void>(
                           message: message,

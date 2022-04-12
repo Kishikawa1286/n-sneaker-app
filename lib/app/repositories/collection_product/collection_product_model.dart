@@ -5,6 +5,8 @@ class CollectionProductModel {
     required this.id,
     required this.accountId,
     required this.paymentMethod,
+    required this.vendorProductId,
+    required this.purchasedAtAsIso8601,
     required this.createdAt,
     required this.lastEditedAt,
     required this.productId,
@@ -41,6 +43,8 @@ class CollectionProductModel {
       id: data['id'] as String,
       accountId: data['account_id'] as String,
       paymentMethod: data['payment_method'] as String,
+      vendorProductId: data['vendor_product_id'] as String,
+      purchasedAtAsIso8601: data['purchased_at'] as String,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       productId: data['product_id'] as String,
@@ -76,6 +80,8 @@ class CollectionProductModel {
 
   final String accountId;
   final String paymentMethod;
+  final String vendorProductId;
+  final String purchasedAtAsIso8601;
 
   final Timestamp createdAt;
   final Timestamp lastEditedAt;

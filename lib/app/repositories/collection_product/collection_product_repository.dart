@@ -1,11 +1,15 @@
+import 'package:adapty_flutter/results/make_purchase_result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../utils/convert_paywall_id_to_vendor_product_id.dart';
 import '../../../utils/enum_to_string.dart';
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_interface.dart';
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_paths.dart';
-import '../../interfaces/firebase/cloud_functions/add_collection_product_parameters.dart';
+import '../../interfaces/firebase/cloud_functions/add_collection_product_on_making_purchase_parameters.dart';
+import '../../interfaces/firebase/cloud_functions/add_collection_product_on_restoring_purchase_parameters.dart';
 import '../../interfaces/firebase/cloud_functions/cloud_functions_interface.dart';
+import '../product/product_model.dart';
 import 'collection_product_model.dart';
 import 'payment_method.dart';
 
@@ -65,26 +69,48 @@ class CollectionProductRepository {
   }
 
   Future<void> addCollectionProductOnMakingPurchase({
-    required String productId,
+    required ProductModel product,
+    required MakePurchaseResult makePurchaseResult,
   }) async {
-    final params = AddCollectionProductParameters(
-      productId: productId,
+    final paywallId = product.adaptyPaywallId;
+    final vendorProductId = convertPaywallIdToVendorProductId(paywallId);
+    if (vendorProductId.isEmpty) {
+      throw Exception('generating vendor product id failed.');
+    }
+    final nonSubscriptions =
+        makePurchaseResult.purchaserInfo?.nonSubscriptions[vendorProductId];
+    if (nonSubscriptions == null) {
+      throw Exception('no nonSubscription for id $vendorProductId exists.');
+    }
+    final purchasedAtList = nonSubscriptions
+        .map((nonSubscription) => nonSubscription.purchasedAt)
+        .whereType<DateTime>()
+        .toList();
+    // lastを呼び出すのでEmptyチェック
+    if (purchasedAtList.isEmpty) {
+      throw Exception('no nonSubscription for id $vendorProductId exists.');
+    }
+    // 時系列順にソートされる（最新のものが最後）
+    purchasedAtList.sort((a, b) => a.compareTo(b));
+    final purchasedAt = purchasedAtList.last;
+    final params = AddCollectionProductOnMakingPurchaseParameters(
+      productId: product.id,
       paymentMethod: enumToString(generatePaymentMethodFromDevice()),
+      purchasedAtAsIso8601: purchasedAt.toIso8601String(),
+      vendorProductId: vendorProductId,
     );
-    final result = await _cloudFunctionsInterface.addCollectionProduct(params);
+    final result = await _cloudFunctionsInterface
+        .addCollectionProductOnMakingPurchase(params);
     print(result.data);
   }
 
-  Future<void> addCollectionProductOnRestoringPurchase({
-    required String productId,
-    required String? store,
-  }) async {
-    final params = AddCollectionProductParameters(
-      productId: productId,
-      paymentMethod:
-          enumToString(generatePaymentMethodFromAdaptyStoreInfo(store)),
-    );
-    final result = await _cloudFunctionsInterface.addCollectionProduct(params);
+  Future<void> addCollectionProductOnRestoringPurchase(
+    String productId,
+  ) async {
+    final params =
+        AddCollectionProductOnRestoringPurchaseParameters(productId: productId);
+    final result = await _cloudFunctionsInterface
+        .addCollectionProductOnRestoringPurchase(params);
     print(result.data);
   }
 

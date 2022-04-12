@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ProductModel {
   const ProductModel({
     required this.id,
+    required this.adaptyPaywallId,
     required this.title,
     required this.vendor,
     required this.series,
@@ -40,6 +41,7 @@ class ProductModel {
     }
     return ProductModel(
       id: data['id'] as String,
+      adaptyPaywallId: (data['adapty_paywall_id'] as String?) ?? '',
       title: data['title'] as String,
       vendor: data['vendor'] as String,
       series: data['series'] as String,
@@ -75,6 +77,7 @@ class ProductModel {
   }
 
   final String id;
+  final String adaptyPaywallId;
   // product data
   final String title;
   final String vendor;
