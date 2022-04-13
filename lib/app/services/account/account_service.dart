@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../repositories/account/account_model.dart';
@@ -22,7 +23,13 @@ class AccountService {
     this._productGlbFileRepository,
   ) {
     _authStateController.add(AuthState.notChecked);
-    _signInWithSavedEmailAndPassword();
+    _accountRepository.setOnStateChanged(
+      onSignedOut: () {
+        _authStateController.add(AuthState.signOut);
+        print('not logged in.');
+      },
+      onSignedIn: _onSignedIn,
+    );
   }
 
   final AccountRepository _accountRepository;
@@ -41,70 +48,57 @@ class AccountService {
     _authStateController.close();
   }
 
-  Future<void> _signInWithSavedEmailAndPassword() async {
-    final isSavedEmailAndPassword =
-        await _accountRepository.isSavedEmailAndPassword();
-    if (!isSavedEmailAndPassword) {
-      // ログイン情報がない
+  Future<void> _onSignedIn(User user) async {
+    final uid = user.uid;
+    if (_account != null) {
+      return;
+    }
+    final ac = await _accountRepository.fetch(uid);
+    if (ac == null) {
       _authStateController.add(AuthState.signOut);
       return;
     }
+    _account = ac;
+    _authStateController.add(AuthState.signIn);
+    await _adaptyRepository.identify(uid);
+  }
+
+  Future<void> _signIn(Future<String> Function() signInToFirebaseAuth) async {
     try {
-      final ac = await _accountRepository.signInWithSavedEmailAndPassword();
-      _account = ac;
-      await _adaptyRepository.identify(ac.id);
-      _authStateController.add(AuthState.signIn);
+      // 一度クリアする
+      _account = null;
+      await _adaptyRepository.logout();
+      await _productGlbFileRepository.removeLastUsedGlbFileId();
+      final uid = await signInToFirebaseAuth();
+      final ac = await _accountRepository.fetch(uid);
+      if (ac == null) {
+        // 新規登録
+        _account = await _accountRepository.createNew(uid);
+        _authStateController.add(AuthState.signInWithNewAccount);
+      } else {
+        // 既存アカウント
+        _account = ac;
+        _authStateController.add(AuthState.signIn);
+      }
+      await _adaptyRepository.identify(uid);
     } on Exception catch (e) {
       print(e);
-      // 保存されているものからメールアドレス・パスワードが変わった
-      // オフライン時など
       _authStateController.add(AuthState.signOut);
     }
   }
 
-  Future<void> signUpWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final ac = await _accountRepository.signUpWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      _account = ac;
-      await _adaptyRepository.identify(ac.id);
-      _authStateController.add(AuthState.signInWithNewAccount);
-    } on Exception catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
+  Future<void> signInWithApple() => _signIn(_accountRepository.signInWithApple);
 
-  Future<void> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final ac = await _accountRepository.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      _account = ac;
-      await _adaptyRepository.identify(ac.id);
-      _authStateController.add(AuthState.signIn);
-    } on Exception catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
+  Future<void> signInWithGoogle() =>
+      _signIn(_accountRepository.signInWithGoogle);
 
   Future<void> signOut() async {
     try {
       await _accountRepository.signOut();
       _account = null;
-      await _adaptyRepository.logout();
-      await _productGlbFileRepository.removeLastUsedGlbFileId();
       _authStateController.add(AuthState.signOut);
+      await _productGlbFileRepository.removeLastUsedGlbFileId();
+      await _adaptyRepository.logout();
     } on Exception catch (e) {
       print(e);
     }

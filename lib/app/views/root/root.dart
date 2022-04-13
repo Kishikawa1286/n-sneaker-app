@@ -13,7 +13,6 @@ import '../ar_page/ar_page.dart';
 import '../collection_page/collection_page.dart';
 import '../market_page/market_page.dart';
 import '../onboarding_page/onboarding_page.dart';
-import '../sign_in_page/sign_in_page.dart';
 import 'invalid_build_number_page.dart';
 import 'maintainance_page.dart';
 import 'show_sign_up_reward_dialog.dart';
@@ -52,15 +51,7 @@ class Root extends HookConsumerWidget {
             return const LoadingPage();
           }
           if (authState == AuthState.signOut) {
-            // まだpushしていない && オンボーディングを表示したことがない
-            if (!viewModel.onboardingPagePushed && !onboardingDone) {
-              // wait SignInPage built
-              Timer(const Duration(milliseconds: 100), () {
-                pushOnboardingPage(context);
-                viewModel.onOnboardingPagePushed();
-              });
-            }
-            return const SignInPage();
+            return const OnboardingPage();
           }
           return Scaffold(
             backgroundColor: CommonStyle.scaffoldBackgroundColor,

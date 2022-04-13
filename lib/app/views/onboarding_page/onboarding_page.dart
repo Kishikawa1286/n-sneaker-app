@@ -6,10 +6,6 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 import '../../../utils/common_style.dart';
 import 'view_model.dart';
 
-void pushOnboardingPage(BuildContext context) {
-  Navigator.of(context).pushNamed('onboarding');
-}
-
 class OnboardingPage extends HookConsumerWidget {
   const OnboardingPage();
 
@@ -83,18 +79,8 @@ class OnboardingPage extends HookConsumerWidget {
       ],
       skipOrBackFlex: 0,
       nextFlex: 0,
-      onDone: () {
-        viewModel.onDone();
-        Navigator.of(context).pop();
-      },
       next: const Icon(Icons.arrow_forward, color: CommonStyle.black),
       nextStyle: ButtonStyle(
-        overlayColor: MaterialStateProperty.all<Color>(CommonStyle.transparent),
-        foregroundColor:
-            MaterialStateProperty.all<Color>(CommonStyle.transparent),
-      ),
-      done: Text('進む', style: Theme.of(context).textTheme.button),
-      doneStyle: ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(CommonStyle.transparent),
         foregroundColor:
             MaterialStateProperty.all<Color>(CommonStyle.transparent),

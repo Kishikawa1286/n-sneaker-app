@@ -6,8 +6,6 @@ import '../../interfaces/firebase/cloud_firestore/cloud_firestore_interface.dart
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_paths.dart';
 import '../../interfaces/firebase/cloud_functions/cloud_functions_interface.dart';
 import '../../interfaces/firebase/firebase_auth/firebase_auth_interface.dart';
-import '../../interfaces/shared_preferences/shared_preferences_interface.dart';
-import '../../interfaces/shared_preferences/shared_preferences_key.dart';
 import 'account_model.dart';
 
 final accountRepositoryProvider = Provider<AccountRepository>(
@@ -15,7 +13,6 @@ final accountRepositoryProvider = Provider<AccountRepository>(
     ref.read(firebaseAuthInterfaceProvider),
     ref.read(cloudFirestoreInterfaceProvider),
     ref.read(cloudFunctionsInterfaceProvider),
-    ref.read(sharedPreferencesInterfaceProvider),
   ),
 );
 
@@ -24,128 +21,66 @@ class AccountRepository {
     this._firebaseAuthInterface,
     this._cloudFirestoreInterface,
     this._cloudFunctionsInterface,
-    this._sharedPreferencesInterface,
   );
 
   final FirebaseAuthInterface _firebaseAuthInterface;
   final CloudFirestoreInterface _cloudFirestoreInterface;
   final CloudFunctionsInterface _cloudFunctionsInterface;
-  final SharedPreferencesInterface _sharedPreferencesInterface;
 
   User? getCurrentUser() => _firebaseAuthInterface.getCurrentUser();
 
-  Future<bool> isSavedEmailAndPassword() async {
-    final email = await _sharedPreferencesInterface
-        .getString(SharedPreferencesKey.signInEmail);
-    final password = await _sharedPreferencesInterface
-        .getString(SharedPreferencesKey.signInPassword);
-    return email != null && password != null;
+  void setOnStateChanged({
+    required void Function() onSignedOut,
+    required void Function(User) onSignedIn,
+  }) =>
+      _firebaseAuthInterface.setOnStateChanged(
+        onSignedOut: onSignedOut,
+        onSignedIn: onSignedIn,
+      );
+
+  Future<String> signInWithApple() async {
+    final userCredential = await _firebaseAuthInterface.signInWithApple();
+    final uid = userCredential.user?.uid;
+    // nullになるのは例外のとき
+    // uidをString?からStringにするためのコード
+    if (uid == null) {
+      throw Exception('uid is null. something went wrong.');
+    }
+    return uid;
   }
 
-  void _saveEmailAndPassword({
-    required String email,
-    required String password,
-  }) {
-    _sharedPreferencesInterface.setString(
-      key: SharedPreferencesKey.signInEmail,
-      value: email,
+  Future<String> signInWithGoogle() async {
+    final userCredential = await _firebaseAuthInterface.signInWithGoogle();
+    final uid = userCredential.user?.uid;
+    // nullになるのは例外のとき
+    // uidをString?からStringにするためのコード
+    if (uid == null) {
+      throw Exception('uid is null. something went wrong.');
+    }
+    return uid;
+  }
+
+  Future<AccountModel?> fetch(String uid) async {
+    final documentSnapshot =
+        await _cloudFirestoreInterface.fetchDocumentSnapshot(
+      documentPath: accountDocumentPath(uid),
     );
-    _sharedPreferencesInterface.setString(
-      key: SharedPreferencesKey.signInPassword,
-      value: password,
+    if (documentSnapshot.exists) {
+      return AccountModel.fromDocumentSnapshot(snapshot: documentSnapshot);
+    }
+    return null; // 未登録
+  }
+
+  Future<AccountModel> createNew(String uid) async {
+    final dynamic result = await _cloudFunctionsInterface.createAccount();
+    print('createAccount result: $result');
+    return AccountModel(
+      id: uid,
+      numberOfCollectionProducts: 1,
+      createdAt: Timestamp.now(),
+      lastEditedAt: Timestamp.now(),
     );
   }
 
-  Future<AccountModel> signUpWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      // Firebase Authでログインを試みる
-      // 未登録ならば新規作成される
-      final userCredential =
-          await _firebaseAuthInterface.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final userId = userCredential.user?.uid;
-      // nullになるのは例外のとき
-      // userIdをString?からStringにするためのコード
-      if (userId == null) {
-        throw Exception('uid is null. something went wrong.');
-      }
-      final dynamic result = await _cloudFunctionsInterface.createAccount();
-      print('createAccount result: $result');
-      _saveEmailAndPassword(email: email, password: password);
-      return AccountModel(
-        id: userId,
-        numberOfCollectionProducts: 0,
-        email: email,
-        createdAt: Timestamp.now(),
-        lastEditedAt: Timestamp.now(),
-      );
-    } on Exception catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
-
-  Future<AccountModel> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      // Firebase Authでログインを試みる
-      // 未登録ならば新規作成される
-      final userCredential =
-          await _firebaseAuthInterface.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final userId = userCredential.user?.uid;
-      // nullになるのは例外のとき
-      // userIdをString?からStringにするためのコード
-      if (userId == null) {
-        throw Exception('uid is null. something went wrong.');
-      }
-      final documentSnapshot =
-          await _cloudFirestoreInterface.fetchDocumentSnapshot(
-        documentPath: accountDocumentPath(userId),
-      );
-      _saveEmailAndPassword(email: email, password: password);
-      return AccountModel.fromDocumentSnapshot(
-        snapshot: documentSnapshot,
-        email: email,
-      );
-    } on Exception catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
-
-  Future<AccountModel> signInWithSavedEmailAndPassword() async {
-    try {
-      final email = await _sharedPreferencesInterface
-          .getString(SharedPreferencesKey.signInEmail);
-      final password = await _sharedPreferencesInterface
-          .getString(SharedPreferencesKey.signInPassword);
-      if (email == null || password == null) {
-        throw Exception('email and password are not saved.');
-      }
-      return signInWithEmailAndPassword(email: email, password: password);
-    } on Exception catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
-
-  Future<void> sendPasswordResetEmail({required String email}) =>
-      _firebaseAuthInterface.sendPasswordResetEmail(email: email);
-
-  Future<void> signOut() async {
-    await _firebaseAuthInterface.signOut();
-    await _sharedPreferencesInterface.remove(SharedPreferencesKey.signInEmail);
-    await _sharedPreferencesInterface
-        .remove(SharedPreferencesKey.signInPassword);
-  }
+  Future<void> signOut() => _firebaseAuthInterface.signOut();
 }

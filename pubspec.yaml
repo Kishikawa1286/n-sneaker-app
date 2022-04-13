@@ -14,12 +14,14 @@ dependencies:
   carousel_slider: ^4.0.0
   cloud_firestore: ^3.1.9
   cloud_functions: ^3.2.9
+  crypto: ^3.0.1
   firebase_analytics: ^9.1.2
   firebase_auth: ^3.3.9
   firebase_core: ^1.13.0
   flutter:
     sdk: flutter
   flutter_unity_widget: 2020.3.25
+  google_sign_in: ^5.2.4
   hooks_riverpod: ^1.0.3
   http: ^0.13.4
   infinite_scroll_pagination: ^3.1.0
@@ -28,6 +30,7 @@ dependencies:
   package_info_plus: ^1.4.0
   path_provider: ^2.0.9
   shared_preferences: ^2.0.9
+  sign_in_with_apple: ^3.3.0
   social_login_buttons: ^1.0.6+2
   url_launcher: ^6.0.20
 

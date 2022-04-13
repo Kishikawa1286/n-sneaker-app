@@ -55,26 +55,6 @@ class AccountPage extends HookConsumerWidget {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  viewModel.accountEmail.isNotEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 2),
-                          child: Text(
-                            'メールアドレス',
-                            style: Theme.of(context).textTheme.titleSmall,
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      : const SizedBox(),
-                  viewModel.accountEmail.isNotEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 2, bottom: 5),
-                          child: Text(
-                            viewModel.accountEmail,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      : const SizedBox(),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Text(
