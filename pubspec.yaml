@@ -20,6 +20,7 @@ dependencies:
   firebase_core: ^1.13.0
   flutter:
     sdk: flutter
+  flutter_svg: ^1.0.3
   flutter_unity_widget: 2020.3.25
   google_sign_in: ^5.2.4
   hooks_riverpod: ^1.0.3
@@ -53,8 +54,9 @@ flutter:
   assets:
     - assets/collection_background/
     - assets/launcher_icon/
-    - assets/onboarding_glb_file/
+    - assets/onboarding_images/
     - assets/sign_up_reward/
+    - assets/wave_background/
 
 flutter_icons:
   android: true

@@ -14,28 +14,32 @@ class OverlayLoading extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: [
-          child,
-          visible
-              ? Positioned.fill(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Color.fromRGBO(0, 0, 0, 0.6),
-                    ),
-                    child: Center(
-                      child: Theme(
-                        data: ThemeData(
-                          cupertinoOverrideTheme: const CupertinoThemeData(
-                            brightness: Brightness.dark,
+  Widget build(BuildContext context) => SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            child,
+            visible
+                ? Positioned.fill(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color.fromRGBO(0, 0, 0, 0.6),
+                      ),
+                      child: Center(
+                        child: Theme(
+                          data: ThemeData(
+                            cupertinoOverrideTheme: const CupertinoThemeData(
+                              brightness: Brightness.dark,
+                            ),
                           ),
+                          child: const CupertinoActivityIndicator(),
                         ),
-                        child: const CupertinoActivityIndicator(),
                       ),
                     ),
-                  ),
-                )
-              : const SizedBox()
-        ],
+                  )
+                : const SizedBox()
+          ],
+        ),
       );
 }

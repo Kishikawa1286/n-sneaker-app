@@ -40,6 +40,10 @@ class ProductGlbFileRepository {
     required String productId,
     required String productGlbFileId,
   }) async {
+    if (Platform.isIOS) {
+      final directory = await _localStorageInterface.getLibraryDirectory();
+      return '${directory.path}/${productId}_$productGlbFileId.glb';
+    }
     final directory =
         await _localStorageInterface.getApplicationDocumentsDirectory();
     return '${directory.path}/${productId}_$productGlbFileId.glb';

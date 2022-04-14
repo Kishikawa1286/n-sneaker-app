@@ -63,7 +63,60 @@ class AccountService {
     await _adaptyRepository.identify(uid);
   }
 
-  Future<void> _signIn(Future<String> Function() signInToFirebaseAuth) async {
+  Future<void> createNewWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      // 一度クリアする
+      _account = null;
+      await _adaptyRepository.logout();
+      await _productGlbFileRepository.removeLastUsedGlbFileId();
+      final ac = await _accountRepository.createNewWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      _account = ac;
+      _authStateController.add(AuthState.signInWithNewAccount);
+      await _adaptyRepository.identify(ac.id);
+    } on Exception catch (e) {
+      print(e);
+      _authStateController.add(AuthState.signOut);
+      rethrow;
+    }
+  }
+
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      // 一度クリアする
+      _account = null;
+      await _adaptyRepository.logout();
+      await _productGlbFileRepository.removeLastUsedGlbFileId();
+      final uid = await _accountRepository.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final ac = await _accountRepository.fetch(uid);
+      if (ac == null) {
+        _authStateController.add(AuthState.signOut);
+        return;
+      }
+      _account = ac;
+      _authStateController.add(AuthState.signIn);
+      await _adaptyRepository.identify(uid);
+    } on Exception catch (e) {
+      print(e);
+      _authStateController.add(AuthState.signOut);
+      rethrow;
+    }
+  }
+
+  Future<void> _signInWithUidGetter(
+    Future<String> Function() signInToFirebaseAuth,
+  ) async {
     try {
       // 一度クリアする
       _account = null;
@@ -73,7 +126,7 @@ class AccountService {
       final ac = await _accountRepository.fetch(uid);
       if (ac == null) {
         // 新規登録
-        _account = await _accountRepository.createNew(uid);
+        _account = await _accountRepository.createNewWithUid(uid);
         _authStateController.add(AuthState.signInWithNewAccount);
       } else {
         // 既存アカウント
@@ -87,10 +140,11 @@ class AccountService {
     }
   }
 
-  Future<void> signInWithApple() => _signIn(_accountRepository.signInWithApple);
+  Future<void> signInWithApple() =>
+      _signInWithUidGetter(_accountRepository.signInWithApple);
 
   Future<void> signInWithGoogle() =>
-      _signIn(_accountRepository.signInWithGoogle);
+      _signInWithUidGetter(_accountRepository.signInWithGoogle);
 
   Future<void> signOut() async {
     try {

@@ -5,7 +5,7 @@ String generateFirebaseAuthErrorMessage(FirebaseAuthException e) {
     case 'invalid-email':
       return '無効なメールアドレスです。';
     case 'wrong-password':
-      return 'パスワードが違います。';
+      return 'パスワードが違う、またはパスワードとして無効な文字列です。';
     case 'user-disabled':
       return 'アカウントが無効化されています。';
     case 'user-not-found':

@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import '../common_style.dart';
 
 class FloatingBackButton extends StatelessWidget {
-  const FloatingBackButton();
+  const FloatingBackButton({
+    this.buttonColor = CommonStyle.black,
+    this.iconColor = CommonStyle.white,
+  });
+
+  final Color buttonColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
@@ -12,8 +18,9 @@ class FloatingBackButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 1,
           shadowColor: CommonStyle.transparent,
-          primary: CommonStyle.transparentBlack,
-          onPrimary: CommonStyle.transparentBlack,
+          primary: buttonColor,
+          onPrimary: buttonColor,
+          onSurface: CommonStyle.transparent,
           shape: const CircleBorder(
             side: BorderSide(
               width: 0,
@@ -21,12 +28,12 @@ class FloatingBackButton extends StatelessWidget {
             ),
           ),
         ),
-        child: const Padding(
-          padding: EdgeInsets.only(left: 9),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 9),
           child: Icon(
             Icons.arrow_back_ios,
             size: 26,
-            color: CommonStyle.white,
+            color: iconColor,
           ),
         ),
       );

@@ -28,6 +28,27 @@ class FirebaseAuthInterface {
     });
   }
 
+  Future<UserCredential> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) =>
+      _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+  Future<UserCredential> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) =>
+      _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+  Future<void> sendPasswordResetEmail({required String email}) =>
+      _firebaseAuth.sendPasswordResetEmail(email: email);
+
   Future<UserCredential> signInWithGoogle() async {
     final googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) {

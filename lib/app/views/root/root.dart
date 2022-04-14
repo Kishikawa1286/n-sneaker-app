@@ -13,6 +13,7 @@ import '../ar_page/ar_page.dart';
 import '../collection_page/collection_page.dart';
 import '../market_page/market_page.dart';
 import '../onboarding_page/onboarding_page.dart';
+import '../sign_up_page/sign_up_page.dart';
 import 'invalid_build_number_page.dart';
 import 'maintainance_page.dart';
 import 'show_sign_up_reward_dialog.dart';
@@ -47,11 +48,19 @@ class Root extends HookConsumerWidget {
         stream: viewModel.authStateStream,
         builder: (context, snapshot) {
           final authState = snapshot.data;
-          if (authState == null || authState == AuthState.notChecked) {
+          final onboardingDone = viewModel.onboardingDone;
+          if (authState == null ||
+              authState == AuthState.notChecked ||
+              onboardingDone == null) {
             return const LoadingPage();
           }
           if (authState == AuthState.signOut) {
-            return const OnboardingPage();
+            return const SignUpPage();
+          }
+          if (!onboardingDone) {
+            Timer(const Duration(milliseconds: 100), () {
+              pushOnboardingPage(context);
+            });
           }
           return Scaffold(
             backgroundColor: CommonStyle.scaffoldBackgroundColor,

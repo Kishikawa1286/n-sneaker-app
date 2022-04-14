@@ -41,7 +41,6 @@ class RootViewModel extends ViewModelChangeNotifier {
   int _currentIndex = 0;
   bool? _onboardingDone;
   bool _modalShowed = false;
-  bool _onboardingPagePushed = false;
 
   bool get isLaunchableBuildNumber =>
       _localBuildNumber >= (_configs?.launchableBuildNumber ?? 1000);
@@ -49,7 +48,7 @@ class RootViewModel extends ViewModelChangeNotifier {
   String get maintainanceMessage => _configs?.maintainanceMessage ?? '';
   bool? get onboardingDone => _onboardingDone;
   bool get modalShowed => _modalShowed;
-  bool get onboardingPagePushed => _onboardingPagePushed;
+
   String get storeUrl {
     if (Platform.isIOS) {
       return appStoreUrl;
@@ -82,9 +81,5 @@ class RootViewModel extends ViewModelChangeNotifier {
 
   void onModalShowed() {
     _modalShowed = true;
-  }
-
-  void onOnboardingPagePushed() {
-    _onboardingPagePushed = true;
   }
 }

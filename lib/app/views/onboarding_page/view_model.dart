@@ -9,7 +9,9 @@ final onboardingPageViewModelProvider =
 );
 
 class OnboardingPageViewModel extends ViewModelChangeNotifier {
-  OnboardingPageViewModel(this._onboardingStateRepository);
+  OnboardingPageViewModel(
+    this._onboardingStateRepository,
+  );
 
   final OnboardingStateRepository _onboardingStateRepository;
 

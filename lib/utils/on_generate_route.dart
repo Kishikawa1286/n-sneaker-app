@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../app/views/glb_file_viewer_page/glb_file_viewer_page.dart';
 import '../app/views/market_detail_page/market_detail_page.dart';
 import '../app/views/onboarding_page/onboarding_page.dart';
+import '../app/views/password_reset_page/password_reset_page.dart';
 import '../app/views/root/root.dart';
+import '../app/views/sign_in_page/sign_in_page.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) =>
     PageRouteBuilder<Widget>(
@@ -16,6 +18,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) =>
 
         if (name == 'onboarding') {
           return const OnboardingPage();
+        }
+
+        if (name == 'sign_in') {
+          return const SignInPage();
+        }
+
+        if (name == 'password_reset') {
+          return const PasswordResetPage();
         }
 
         if (name.startsWith('product_detail')) {

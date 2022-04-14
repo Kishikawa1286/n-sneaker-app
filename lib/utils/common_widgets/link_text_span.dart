@@ -1,12 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../common_style.dart';
 
-TextSpan linkTextSpan(
-  BuildContext context, {
-  required String url,
+TextSpan linkTextSpan({
+  required void Function() onTap,
   required String text,
 }) =>
     TextSpan(
@@ -16,9 +14,7 @@ TextSpan linkTextSpan(
         decoration: TextDecoration.underline,
       ),
       recognizer: TapGestureRecognizer()
-        ..onTap = () async {
-          if (await canLaunch(url)) {
-            await launch(url);
-          }
+        ..onTap = () {
+          onTap();
         },
     );

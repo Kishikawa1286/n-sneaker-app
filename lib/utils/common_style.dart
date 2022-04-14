@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class CommonStyle {
   static const themeColor = Color.fromARGB(255, 107, 154, 255);
+  static const accentColor = Color.fromARGB(255, 219, 255, 178);
 
   static const black = Colors.black;
   static const white = Colors.white;

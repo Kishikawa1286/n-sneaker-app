@@ -38,11 +38,45 @@ class AccountRepository {
         onSignedIn: onSignedIn,
       );
 
+  Future<String> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final userCredential = await _firebaseAuthInterface
+        .signInWithEmailAndPassword(email: email, password: password);
+    final uid = userCredential.user?.uid;
+    if (uid == null) {
+      throw Exception('uid is null. something went wrong.');
+    }
+    return uid;
+  }
+
+  Future<AccountModel> createNewWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final userCredential =
+        await _firebaseAuthInterface.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final uid = userCredential.user?.uid;
+    if (uid == null) {
+      throw Exception('uid is null. something went wrong.');
+    }
+    final dynamic result = await _cloudFunctionsInterface.createAccount();
+    print('createAccount result: $result');
+    return AccountModel(
+      id: uid,
+      numberOfCollectionProducts: 1,
+      createdAt: Timestamp.now(),
+      lastEditedAt: Timestamp.now(),
+    );
+  }
+
   Future<String> signInWithApple() async {
     final userCredential = await _firebaseAuthInterface.signInWithApple();
     final uid = userCredential.user?.uid;
-    // nullになるのは例外のとき
-    // uidをString?からStringにするためのコード
     if (uid == null) {
       throw Exception('uid is null. something went wrong.');
     }
@@ -52,8 +86,6 @@ class AccountRepository {
   Future<String> signInWithGoogle() async {
     final userCredential = await _firebaseAuthInterface.signInWithGoogle();
     final uid = userCredential.user?.uid;
-    // nullになるのは例外のとき
-    // uidをString?からStringにするためのコード
     if (uid == null) {
       throw Exception('uid is null. something went wrong.');
     }
@@ -71,7 +103,7 @@ class AccountRepository {
     return null; // 未登録
   }
 
-  Future<AccountModel> createNew(String uid) async {
+  Future<AccountModel> createNewWithUid(String uid) async {
     final dynamic result = await _cloudFunctionsInterface.createAccount();
     print('createAccount result: $result');
     return AccountModel(
@@ -83,4 +115,7 @@ class AccountRepository {
   }
 
   Future<void> signOut() => _firebaseAuthInterface.signOut();
+
+  Future<void> sendPasswordResetEmail(String email) =>
+      _firebaseAuthInterface.sendPasswordResetEmail(email: email);
 }

@@ -9,8 +9,11 @@ final localStorageInterfaceProvider =
 class LocalStorageInterface {
   const LocalStorageInterface();
 
-  Future<Directory> getApplicationDocumentsDirectory() async =>
+  Future<Directory> getApplicationDocumentsDirectory() =>
       path_provider.getApplicationDocumentsDirectory();
+
+  Future<Directory> getLibraryDirectory() =>
+      path_provider.getLibraryDirectory();
 
   Future<void> writeBytes({
     required String path,
