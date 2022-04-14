@@ -40,6 +40,7 @@ class RootViewModel extends ViewModelChangeNotifier {
   int _localBuildNumber = 0;
   int _currentIndex = 0;
   bool? _onboardingDone;
+  bool _onboardingPushed = false;
   bool _modalShowed = false;
 
   bool get isLaunchableBuildNumber =>
@@ -47,6 +48,7 @@ class RootViewModel extends ViewModelChangeNotifier {
   bool get underMaintainance => _configs?.underMaintenance ?? true;
   String get maintainanceMessage => _configs?.maintainanceMessage ?? '';
   bool? get onboardingDone => _onboardingDone;
+  bool get onboardingPushed => _onboardingPushed;
   bool get modalShowed => _modalShowed;
 
   String get storeUrl {
@@ -77,6 +79,10 @@ class RootViewModel extends ViewModelChangeNotifier {
   void setIndex(int index) {
     _currentIndex = index;
     notifyListeners();
+  }
+
+  void onOnboardingPushed() {
+    _onboardingPushed = true;
   }
 
   void onModalShowed() {

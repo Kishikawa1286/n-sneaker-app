@@ -59,8 +59,8 @@ class AccountService {
       return;
     }
     _account = ac;
-    _authStateController.add(AuthState.signIn);
     await _adaptyRepository.identify(uid);
+    _authStateController.add(AuthState.signIn);
   }
 
   Future<void> createNewWithEmailAndPassword({
@@ -105,8 +105,8 @@ class AccountService {
         return;
       }
       _account = ac;
-      _authStateController.add(AuthState.signIn);
       await _adaptyRepository.identify(uid);
+      _authStateController.add(AuthState.signIn);
     } on Exception catch (e) {
       print(e);
       _authStateController.add(AuthState.signOut);
@@ -127,13 +127,14 @@ class AccountService {
       if (ac == null) {
         // 新規登録
         _account = await _accountRepository.createNewWithUid(uid);
+        await _adaptyRepository.identify(uid);
         _authStateController.add(AuthState.signInWithNewAccount);
       } else {
         // 既存アカウント
         _account = ac;
+        await _adaptyRepository.identify(uid);
         _authStateController.add(AuthState.signIn);
       }
-      await _adaptyRepository.identify(uid);
     } on Exception catch (e) {
       print(e);
       _authStateController.add(AuthState.signOut);

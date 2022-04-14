@@ -57,11 +57,6 @@ class Root extends HookConsumerWidget {
           if (authState == AuthState.signOut) {
             return const SignUpPage();
           }
-          if (!onboardingDone) {
-            Timer(const Duration(milliseconds: 100), () {
-              pushOnboardingPage(context);
-            });
-          }
           return Scaffold(
             backgroundColor: CommonStyle.scaffoldBackgroundColor,
             bottomNavigationBar: BottomNavigationBar(
@@ -96,18 +91,23 @@ class Root extends HookConsumerWidget {
               builder: (context) {
                 switch (viewModel.currentIndex) {
                   case 0:
-                    if (authState == AuthState.signInWithNewAccount &&
-                        !viewModel.modalShowed) {
+                    if (authState == AuthState.signInWithNewAccount) {
                       // wait MarketPage built
-                      Timer(const Duration(milliseconds: 100), () {
-                        showSignUpRewardDialog(
-                          context: context,
-                          onTapButton: () {
-                            viewModel.setIndex(1);
-                            Navigator.of(context).pop();
-                          },
-                        );
-                        viewModel.onModalShowed();
+                      Timer(const Duration(milliseconds: 500), () {
+                        if (!viewModel.modalShowed) {
+                          showSignUpRewardDialog(
+                            context: context,
+                            onTapButton: () {
+                              viewModel.setIndex(1);
+                              Navigator.of(context).pop();
+                            },
+                          );
+                          viewModel.onModalShowed();
+                        }
+                        if (!onboardingDone && !viewModel.onboardingPushed) {
+                          pushOnboardingPage(context);
+                          viewModel.onOnboardingPushed();
+                        }
                       });
                     }
                     return const MarketPage();
