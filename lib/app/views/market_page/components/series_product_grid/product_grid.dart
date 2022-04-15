@@ -3,17 +3,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../repositories/product/product_model.dart';
-import 'grid_tile.dart';
+import '../grid_tile.dart';
 import 'view_model.dart';
 
-class MarketPageProductGrid extends HookConsumerWidget {
-  const MarketPageProductGrid({required this.series});
+class MarketPageSeriesProductGrid extends HookConsumerWidget {
+  const MarketPageSeriesProductGrid({required this.series});
 
   final String series;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(marketPageProductGridViewModelProvider(series));
+    final viewModel =
+        ref.watch(marketPageSeriesProductGridViewModelProvider(series));
     return PagedGridView<int, ProductModel>(
       padding: const EdgeInsets.symmetric(
         vertical: 10,

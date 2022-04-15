@@ -5,17 +5,17 @@ import '../../../../../utils/view_model_change_notifier.dart';
 import '../../../../repositories/product/product_model.dart';
 import '../../../../repositories/product/product_repository.dart';
 
-final marketPageProductGridViewModelProvider =
-    AutoDisposeChangeNotifierProviderFamily<MarketPageProductGridViewModel,
-        String>(
-  (ref, series) => MarketPageProductGridViewModel(
+final marketPageSeriesProductGridViewModelProvider =
+    AutoDisposeChangeNotifierProviderFamily<
+        MarketPageSeriesProductGridViewModel, String>(
+  (ref, series) => MarketPageSeriesProductGridViewModel(
     series,
     ref.read(productRepositoryProvider),
   ),
 );
 
-class MarketPageProductGridViewModel extends ViewModelChangeNotifier {
-  MarketPageProductGridViewModel(
+class MarketPageSeriesProductGridViewModel extends ViewModelChangeNotifier {
+  MarketPageSeriesProductGridViewModel(
     this._series,
     this._productRepository,
   ) {
@@ -34,8 +34,8 @@ class MarketPageProductGridViewModel extends ViewModelChangeNotifier {
 
   @override
   void dispose() {
-    super.dispose();
     _pagingController.dispose();
+    super.dispose();
   }
 
   Future<void> _fetchProducts(int pageKey) async {
@@ -43,6 +43,10 @@ class MarketPageProductGridViewModel extends ViewModelChangeNotifier {
       final startAfter = pagingController.itemList?.last;
       final fetchedProducts = await _productRepository
           .fetchProductsBySeries(_series, startAfter: startAfter);
+      // _pagingControllerのdispose後に操作をするのを回避
+      if (disposed) {
+        return;
+      }
       if (fetchedProducts.length != _limit) {
         _pagingController.appendLastPage(fetchedProducts);
       } else {

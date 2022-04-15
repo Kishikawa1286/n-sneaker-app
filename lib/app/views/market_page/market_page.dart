@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/common_style.dart';
-import 'components/product_grid/product_grid.dart';
+import 'components/all_product_grid/product_grid.dart';
+import 'components/series_product_grid/product_grid.dart';
 import 'view_model.dart';
 
 class MarketPage extends HookConsumerWidget {
@@ -12,7 +13,7 @@ class MarketPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(marketPageViewModelProvider);
-    final tabTitles = viewModel.tabTitles;
+    final tabTitles = ['All', ...viewModel.tabTitles];
 
     if (tabTitles.isEmpty) {
       return const SizedBox();
@@ -74,7 +75,9 @@ class MarketPage extends HookConsumerWidget {
                           .map(
                             (index, series) => MapEntry(
                               index,
-                              MarketPageProductGrid(series: series),
+                              index == 0
+                                  ? const MarketPageAllProductGrid()
+                                  : MarketPageSeriesProductGrid(series: series),
                             ),
                           )
                           .values

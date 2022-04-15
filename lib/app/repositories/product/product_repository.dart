@@ -37,6 +37,38 @@ class ProductRepository {
     return ProductModel.fromDocumentSnapshot(snapshot);
   }
 
+  Future<List<ProductModel>> fetchProducts({
+    int limit = 16,
+    ProductModel? startAfter,
+  }) async {
+    if (startAfter == null) {
+      // startAfterを指定しない
+      final snapshot =
+          await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
+        collectionPath: productsCollectionPath,
+        queryBuilder: (query) => query
+            .where('vivsible_in_market', isEqualTo: true)
+            .orderBy('created_at', descending: true)
+            .limit(limit),
+      );
+      return _convertDocumentSnapshotListToProductModelList(snapshot.docs);
+    }
+    final startAfterDocumentSnapshot = startAfter.documentSnapshot;
+    if (startAfterDocumentSnapshot == null) {
+      return [];
+    }
+    final snapshot =
+        await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
+      collectionPath: productsCollectionPath,
+      queryBuilder: (query) => query
+          .where('vivsible_in_market', isEqualTo: true)
+          .orderBy('created_at', descending: true)
+          .limit(limit)
+          .startAfterDocument(startAfterDocumentSnapshot),
+    );
+    return _convertDocumentSnapshotListToProductModelList(snapshot.docs);
+  }
+
   Future<List<ProductModel>> fetchProductsBySeries(
     String series, {
     int limit = 16,

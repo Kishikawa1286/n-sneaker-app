@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/common_style.dart';
-import '../../../../../utils/price_formatter.dart';
-import '../../../../repositories/product/product_model.dart';
-import '../../../market_detail_page/market_detail_page.dart';
+import '../../../../utils/common_style.dart';
+import '../../../../utils/price_formatter.dart';
+import '../../../repositories/product/product_model.dart';
+import '../../market_detail_page/market_detail_page.dart';
 
 class MarketPageProductGridTile extends StatelessWidget {
   const MarketPageProductGridTile({required this.product});
