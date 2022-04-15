@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../../../utils/common_style.dart';
 import '../../../../../utils/common_widgets/page_header.dart';
+import '../../../utils/common_widgets/glb_file_selector_grid_tile.dart';
 import '../../repositories/product_glb_file/product_glb_file.dart';
-import 'components/grid_tile.dart';
 import 'view_model.dart';
 
-void showGlbFileSelectorModalBottomSheet(
+void showArGlbFileSelectorModalBottomSheet(
   BuildContext context, {
   required String productId,
   required void Function(ProductGlbFileModel) onTapTile,
@@ -15,15 +16,15 @@ void showGlbFileSelectorModalBottomSheet(
   showModalBottomSheet<void>(
     context: context,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    builder: (context) => GlbFileSelectorModalBottomSheet(
+    builder: (context) => ArGlbFileSelectorModalBottomSheet(
       productId: productId,
       onTapTile: onTapTile,
     ),
   );
 }
 
-class GlbFileSelectorModalBottomSheet extends HookConsumerWidget {
-  GlbFileSelectorModalBottomSheet({
+class ArGlbFileSelectorModalBottomSheet extends HookConsumerWidget {
+  ArGlbFileSelectorModalBottomSheet({
     required this.productId,
     required this.onTapTile,
   });
@@ -35,8 +36,9 @@ class GlbFileSelectorModalBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel =
-        ref.watch(glbFileSelectorModalBottomSheetViewModelProvider(productId));
+    final viewModel = ref.watch(
+      arGlbFileSelectorModalBottomSheetViewModelProvider(productId),
+    );
     final glbFileModels = viewModel.glbFileModels;
 
     if (glbFileModels == null) {
@@ -69,7 +71,7 @@ class GlbFileSelectorModalBottomSheet extends HookConsumerWidget {
             ),
             children: glbFileModels
                 .map(
-                  (glbFileModel) => GlbFileSelectorModalBottomSheetGridTile(
+                  (glbFileModel) => GlbFileSelectorGridTile(
                     productGlbFileModel: glbFileModel,
                     onTap: onTapTile,
                   ),

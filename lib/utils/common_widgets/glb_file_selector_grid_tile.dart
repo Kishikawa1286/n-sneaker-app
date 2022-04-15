@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../utils/common_style.dart';
-import '../../../repositories/product_glb_file/product_glb_file.dart';
+import '../../../../utils/common_style.dart';
+import '../../app/repositories/product_glb_file/product_glb_file.dart';
 
-class GlbFileSelectorModalBottomSheetGridTile extends StatelessWidget {
-  const GlbFileSelectorModalBottomSheetGridTile({
+class GlbFileSelectorGridTile extends StatelessWidget {
+  const GlbFileSelectorGridTile({
     required this.productGlbFileModel,
     required this.onTap,
   });

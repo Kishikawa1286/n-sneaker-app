@@ -4,17 +4,18 @@ import '../../../../../utils/view_model_change_notifier.dart';
 import '../../repositories/product_glb_file/product_glb_file.dart';
 import '../../repositories/product_glb_file/product_glb_file_repository.dart';
 
-final glbFileSelectorModalBottomSheetViewModelProvider =
+final viewerGlbFileSelectorModalBottomSheetViewModelProvider =
     AutoDisposeChangeNotifierProviderFamily<
-        GlbFileSelectorModalBottomSheetViewModel, String>(
-  (ref, productId) => GlbFileSelectorModalBottomSheetViewModel(
+        ViewerGlbFileSelectorModalBottomSheetViewModel, String>(
+  (ref, productId) => ViewerGlbFileSelectorModalBottomSheetViewModel(
     productId,
     ref.read(productGlbFileRepositoryProvider),
   ),
 );
 
-class GlbFileSelectorModalBottomSheetViewModel extends ViewModelChangeNotifier {
-  GlbFileSelectorModalBottomSheetViewModel(
+class ViewerGlbFileSelectorModalBottomSheetViewModel
+    extends ViewModelChangeNotifier {
+  ViewerGlbFileSelectorModalBottomSheetViewModel(
     this._productId,
     this._productGlbFileRepository,
   ) {

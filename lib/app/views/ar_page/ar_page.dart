@@ -5,8 +5,8 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/common_style.dart';
+import '../ar_glb_file_selector_modal_bottom_sheet/viewer_glb_file_selector_modal_bottom_sheet.dart';
 import '../collection_product_selector_modal_bottom_sheet/collection_product_selector_modal_bottom_sheet.dart';
-import '../glb_file_selector_modal_bottom_sheet/glb_file_selector_modal_bottom_sheet.dart';
 import 'view_model.dart';
 
 class ArPage extends HookConsumerWidget {
@@ -104,7 +104,7 @@ class ArPage extends HookConsumerWidget {
                           showCollectionProductSelectorModalBottomSheet(
                             context,
                             onTapTile: (collectionProduct) =>
-                                showGlbFileSelectorModalBottomSheet(
+                                showArGlbFileSelectorModalBottomSheet(
                               context,
                               productId: collectionProduct.productId,
                               onTapTile: (selected) {

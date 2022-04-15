@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../utils/common_style.dart';
 import '../../../repositories/collection_product/collection_product_model.dart';
-import '../../glb_file_selector_modal_bottom_sheet/glb_file_selector_modal_bottom_sheet.dart';
 import '../../glb_file_viewer_page/glb_file_viewer_page.dart';
+import '../../viewer_glb_file_selector_modal_bottom_sheet/viewer_glb_file_selector_modal_bottom_sheet.dart';
 
 class CollectionPageProductGridTile extends StatelessWidget {
   const CollectionPageProductGridTile({required this.collectionProduct});
@@ -14,7 +14,7 @@ class CollectionPageProductGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: () {
-          showGlbFileSelectorModalBottomSheet(
+          showViewerGlbFileSelectorModalBottomSheet(
             context,
             productId: collectionProduct.productId,
             onTapTile: (productGlbFile) => pushGlbFileViewerPage(
