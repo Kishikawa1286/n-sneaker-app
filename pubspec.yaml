@@ -56,7 +56,6 @@ flutter:
     - assets/launcher_icon/
     - assets/onboarding_images/
     - assets/sign_up_reward/
-    - assets/wave_background/
 
 flutter_icons:
   android: true

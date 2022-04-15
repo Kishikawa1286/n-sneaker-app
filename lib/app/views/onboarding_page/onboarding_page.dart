@@ -12,11 +12,12 @@ void pushOnboardingPage(BuildContext context) {
 class OnboardingPage extends HookConsumerWidget {
   const OnboardingPage();
 
-  PageViewModel _page({
+  PageViewModel _page(
+    BuildContext context, {
     required String title,
     required String body,
     required String assetImagePath,
-    required PageDecoration pageDecoration,
+    required String backgroundImagePath,
   }) =>
       PageViewModel(
         image: Container(
@@ -34,98 +35,97 @@ class OnboardingPage extends HookConsumerWidget {
             ),
           ),
         ),
-        titleWidget: Builder(
-          builder: (context) => Container(
-            width: MediaQuery.of(context).size.width * 0.95,
-            margin: const EdgeInsets.only(top: 30),
-            decoration: BoxDecoration(
-              color: CommonStyle.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
+        titleWidget: Container(
+          width: MediaQuery.of(context).size.width * 0.95,
+          margin: const EdgeInsets.only(top: 30),
+          decoration: BoxDecoration(
+            color: CommonStyle.transparent,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
-        bodyWidget: Builder(
-          builder: (context) => Container(
-            width: MediaQuery.of(context).size.width * 0.95,
-            margin: const EdgeInsets.only(top: 30),
-            decoration: BoxDecoration(
-              color: CommonStyle.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Text(
-                body,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
+        bodyWidget: Container(
+          width: MediaQuery.of(context).size.width * 0.95,
+          margin: const EdgeInsets.only(top: 30),
+          decoration: BoxDecoration(
+            color: CommonStyle.transparent,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              body,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
-        decoration: pageDecoration,
+        decoration: PageDecoration(
+          boxDecoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(backgroundImagePath),
+              fit: BoxFit.contain,
+            ),
+          ),
+          titleTextStyle: Theme.of(context).textTheme.titleMedium ??
+              const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+          bodyTextStyle: Theme.of(context).textTheme.bodyMedium ??
+              const TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
+          imagePadding: EdgeInsets.zero,
+        ),
       );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(onboardingPageViewModelProvider);
-    final pageDecoration = PageDecoration(
-      boxDecoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/wave_background/Wave.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      titleTextStyle: Theme.of(context).textTheme.titleMedium ??
-          const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-      bodyTextStyle: Theme.of(context).textTheme.bodyMedium ??
-          const TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
-      imagePadding: EdgeInsets.zero,
-    );
-
     return IntroductionScreen(
       globalBackgroundColor: CommonStyle.white,
       pages: [
         _page(
+          context,
           title: 'N-Sneaker',
           body: 'N-Sneakerはデジタルスニーカーを\n「買って、集めて、遊べる」\n総合プラットフォームです',
           assetImagePath: 'assets/onboarding_images/onboarding1.jpg',
-          pageDecoration: pageDecoration,
+          backgroundImagePath: 'assets/onboarding_images/Blob1.png',
         ),
         _page(
+          context,
           title: 'マーケット',
           body: '気にいったスニーカーを選んで購入',
           assetImagePath: 'assets/onboarding_images/onboarding2.jpg',
-          pageDecoration: pageDecoration,
+          backgroundImagePath: 'assets/onboarding_images/Blob2.png',
         ),
         _page(
+          context,
           title: 'コレクション',
           body: '買ったスニーカーはコレクションして\n手のひらの中で好きなだけ\n転がすことができます',
           assetImagePath: 'assets/onboarding_images/onboarding3.jpg',
-          pageDecoration: pageDecoration,
+          backgroundImagePath: 'assets/onboarding_images/Blob3.png',
         ),
         _page(
+          context,
           title: 'AR',
           body: 'お気に入りのスニーカーを\nARで私たちの日常に持ってこよう',
           assetImagePath: 'assets/onboarding_images/onboarding4.jpg',
-          pageDecoration: pageDecoration,
+          backgroundImagePath: 'assets/onboarding_images/Blob4.png',
         ),
         _page(
+          context,
           title: '',
           body: 'さあ、新しいファッションライフを\n始めましょう！',
           assetImagePath: 'assets/onboarding_images/onboarding5.jpg',
-          pageDecoration: pageDecoration,
+          backgroundImagePath: 'assets/onboarding_images/Blob5.png',
         ),
       ],
       next: const Icon(Icons.arrow_forward_ios, color: CommonStyle.black),
