@@ -14,13 +14,14 @@ class OnboardingPage extends HookConsumerWidget {
 
   PageViewModel _page({
     required String title,
+    required String body,
     required String assetImagePath,
     required PageDecoration pageDecoration,
   }) =>
       PageViewModel(
         image: Container(
           height: 500,
-          margin: const EdgeInsets.only(top: 70),
+          margin: const EdgeInsets.only(top: 45),
           child: Material(
             elevation: 5,
             borderRadius: BorderRadius.circular(10),
@@ -35,30 +36,44 @@ class OnboardingPage extends HookConsumerWidget {
         ),
         titleWidget: Builder(
           builder: (context) => Container(
-            height: 100,
-            width: MediaQuery.of(context).size.width * 0.9,
+            width: MediaQuery.of(context).size.width * 0.95,
             margin: const EdgeInsets.only(top: 30),
-            child: Material(
-              elevation: 5,
+            decoration: BoxDecoration(
+              color: CommonStyle.white,
               borderRadius: BorderRadius.circular(10),
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  color: CommonStyle.white,
-                  borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
                 ),
-                child: Center(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
         ),
-        body: '',
+        bodyWidget: Builder(
+          builder: (context) => Container(
+            width: MediaQuery.of(context).size.width * 0.95,
+            margin: const EdgeInsets.only(top: 30),
+            decoration: BoxDecoration(
+              color: CommonStyle.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(
+                body,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
         decoration: pageDecoration,
       );
 
@@ -83,28 +98,33 @@ class OnboardingPage extends HookConsumerWidget {
       globalBackgroundColor: CommonStyle.white,
       pages: [
         _page(
-          title: 'N-Sneakerはデジタルスニーカーを\n「買って、集めて、遊べる」\n総合プラットフォームです',
+          title: 'N-Sneaker',
+          body: 'N-Sneakerはデジタルスニーカーを\n「買って、集めて、遊べる」\n総合プラットフォームです',
           assetImagePath: 'assets/onboarding_images/onboarding1.jpg',
           pageDecoration: pageDecoration,
         ),
         _page(
-          title: '気にいったスニーカーを選んで購入',
+          title: 'マーケット',
+          body: '気にいったスニーカーを選んで購入',
           assetImagePath: 'assets/onboarding_images/onboarding2.jpg',
           pageDecoration: pageDecoration,
         ),
         _page(
-          title: '買ったスニーカーはコレクションして\n手のひらの中で好きなだけ\n転がすことができます',
+          title: 'コレクション',
+          body: '買ったスニーカーはコレクションして\n手のひらの中で好きなだけ\n転がすことができます',
           assetImagePath: 'assets/onboarding_images/onboarding3.jpg',
           pageDecoration: pageDecoration,
         ),
         _page(
-          title: 'お気に入りのスニーカーを\nARで私たちの日常に持ってこよう',
+          title: 'AR',
+          body: 'お気に入りのスニーカーを\nARで私たちの日常に持ってこよう',
           assetImagePath: 'assets/onboarding_images/onboarding4.jpg',
           pageDecoration: pageDecoration,
         ),
         _page(
-          title: 'さあ、新しいファッションライフを\n始めましょう！',
-          assetImagePath: 'assets/onboarding_images/onboarding4.jpg',
+          title: '',
+          body: 'さあ、新しいファッションライフを\n始めましょう！',
+          assetImagePath: 'assets/onboarding_images/onboarding5.jpg',
           pageDecoration: pageDecoration,
         ),
       ],

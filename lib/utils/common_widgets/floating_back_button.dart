@@ -5,7 +5,7 @@ import '../common_style.dart';
 
 class FloatingBackButton extends StatelessWidget {
   const FloatingBackButton({
-    this.buttonColor = CommonStyle.black,
+    this.buttonColor = CommonStyle.transparentBlack,
     this.iconColor = CommonStyle.white,
   });
 

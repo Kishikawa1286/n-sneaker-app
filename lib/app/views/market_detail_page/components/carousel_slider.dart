@@ -17,19 +17,16 @@ class MarketDetailPageCarouselSlider extends HookConsumerWidget {
     final product = viewModel.product;
     final width = MediaQuery.of(context).size.width;
     if (product == null) {
-      return Material(
-        elevation: 5,
-        child: Container(
-          width: width,
-          height: width * 4 / 3,
-          decoration: const BoxDecoration(color: CommonStyle.white),
-        ),
+      return Container(
+        width: width,
+        height: width,
+        decoration: const BoxDecoration(color: CommonStyle.white),
       );
     }
     return CarouselSlider(
       carouselController: viewModel.carouselController,
       options: CarouselOptions(
-        height: width * 4 / 3,
+        height: width,
         viewportFraction: 1,
         onPageChanged: (index, reason) {
           viewModel.setCarouselIndex(index);
@@ -38,6 +35,7 @@ class MarketDetailPageCarouselSlider extends HookConsumerWidget {
       items: product.imageUrls
           .map(
             (url) => CachedNetworkImage(
+              fadeInDuration: const Duration(milliseconds: 2000),
               imageUrl: url,
               imageBuilder: (context, imageProvider) => Center(
                 child: Container(

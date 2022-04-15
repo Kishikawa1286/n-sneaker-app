@@ -30,7 +30,7 @@ class SignUpPage extends HookConsumerWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 55, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -57,15 +57,15 @@ class SignUpPage extends HookConsumerWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                    padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                     child: Text(
-                      '無料で登録して\nスニーカーを遊び尽くしましょう。',
+                      '無料で登録して\nスニーカーを遊び尽くそう。',
                       style: Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                    padding: const EdgeInsets.fromLTRB(30, 25, 30, 0),
                     child: RichText(
                       text: TextSpan(
                         style: const TextStyle(color: CommonStyle.black),
@@ -80,7 +80,7 @@ class SignUpPage extends HookConsumerWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Stack(
                       children: [
                         const Padding(
@@ -103,7 +103,7 @@ class SignUpPage extends HookConsumerWidget {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 15),
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Material(
                       elevation: 5,
@@ -146,7 +146,7 @@ class SignUpPage extends HookConsumerWidget {
                         )
                       : const SizedBox(),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 25),
                     child: Text(
                       'Eメールで登録',
                       style: Theme.of(context).textTheme.titleLarge,
@@ -154,7 +154,7 @@ class SignUpPage extends HookConsumerWidget {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 3),
                     child: CommonTextFormField(
                       controller: viewModel.emailController,
                       hintText: 'メールアドレス',
@@ -163,7 +163,7 @@ class SignUpPage extends HookConsumerWidget {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    padding: const EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 2),
                     child: CommonTextFormField(
                       controller: viewModel.passwordController,
                       hintText: 'パスワード',
@@ -174,7 +174,7 @@ class SignUpPage extends HookConsumerWidget {
                   Container(
                     height: 55,
                     width: MediaQuery.of(context).size.width * 0.8,
-                    margin: const EdgeInsets.only(top: 15),
+                    margin: const EdgeInsets.only(top: 8),
                     child: Material(
                       elevation: 5,
                       child: Stack(

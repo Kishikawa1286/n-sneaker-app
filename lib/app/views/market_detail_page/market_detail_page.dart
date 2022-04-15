@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../utils/common_style.dart';
 import '../../../utils/common_widgets/floating_back_button.dart';
 import '../../../utils/common_widgets/overlay_loading.dart';
 import 'components/carousel_indicator.dart';
@@ -52,10 +53,7 @@ class MarketDetailPage extends HookConsumerWidget {
           children: [
             ListView(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: MarketDetailPageCarouselSlider(productId: productId),
-                ),
+                MarketDetailPageCarouselSlider(productId: productId),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: MarketDetailPageCarouselIndicator(
@@ -88,11 +86,33 @@ class MarketDetailPage extends HookConsumerWidget {
                 : Positioned(
                     top: 40,
                     right: 5,
-                    child: IconButton(
+                    child: ElevatedButton(
                       onPressed:
                           viewModel.scaffoldKey.currentState?.openEndDrawer,
-                      icon: const Icon(Icons.menu, size: 30),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 1,
+                        shadowColor: CommonStyle.transparent,
+                        primary: CommonStyle.transparentBlack,
+                        onPrimary: CommonStyle.transparentBlack,
+                        onSurface: CommonStyle.transparent,
+                        shape: const CircleBorder(
+                          side: BorderSide(
+                            width: 0,
+                            color: CommonStyle.transparent,
+                          ),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.menu,
+                        size: 26,
+                        color: CommonStyle.white,
+                      ),
                     ),
+                    // child: IconButton(
+                    //   onPressed:
+                    //       viewModel.scaffoldKey.currentState?.openEndDrawer,
+                    //   icon: const Icon(Icons.menu, size: 30),
+                    // ),
                   ),
           ],
         ),
