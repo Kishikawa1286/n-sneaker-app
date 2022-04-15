@@ -24,13 +24,13 @@ class MarketDetailPage extends HookConsumerWidget {
     final viewModel = ref.watch(marketDetailPageViewModelProvider(productId));
     return Scaffold(
       key: viewModel.scaffoldKey,
-      endDrawer: Drawer(
-        child: ListView(
-          padding: const EdgeInsets.only(top: 50),
-          children: [
-            viewModel.purchased ?? true
-                ? const SizedBox()
-                : ListTile(
+      endDrawer: viewModel.purchased ?? true
+          ? null
+          : Drawer(
+              child: ListView(
+                padding: const EdgeInsets.only(top: 50),
+                children: [
+                  ListTile(
                     onTap: () async {
                       final message = await viewModel.restore();
                       if (message.isNotEmpty) {
@@ -43,9 +43,9 @@ class MarketDetailPage extends HookConsumerWidget {
                     leading: const Icon(Icons.replay),
                     title: const Text('決済状態を復元する'),
                   ),
-          ],
-        ),
-      ),
+                ],
+              ),
+            ),
       body: OverlayLoading(
         visible: viewModel.purchaseInProgress,
         child: Stack(
