@@ -102,32 +102,8 @@ class SignUpPage extends HookConsumerWidget {
                       ],
                     ),
                   ),
-                  ConsentmentCheckbox(
-                    padding: const EdgeInsets.fromLTRB(45, 20, 0, 0),
-                    text: 'すべての定款に同意する',
-                    value: viewModel.consentToAllTerms,
-                    onChanged: (_) => viewModel.toggleAll(),
-                  ),
-                  ConsentmentCheckbox(
-                    padding: const EdgeInsets.fromLTRB(45, 13, 0, 0),
-                    text: '利用規約',
-                    value: viewModel.consentToTermOfService,
-                    onChanged: (_) {
-                      viewModel.toggleConsentToTermOfService();
-                    },
-                    url: termsOfServiceUrl,
-                  ),
-                  ConsentmentCheckbox(
-                    padding: const EdgeInsets.fromLTRB(45, 4, 0, 0),
-                    text: 'プライバシーポリシー',
-                    value: viewModel.consentToPrivacyPolicy,
-                    onChanged: (_) {
-                      viewModel.toggleConsentToPrivacyPolicy();
-                    },
-                    url: privacyPolicyUrl,
-                  ),
                   Container(
-                    margin: const EdgeInsets.only(top: 30),
+                    margin: const EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Material(
                       elevation: 5,
@@ -234,6 +210,30 @@ class SignUpPage extends HookConsumerWidget {
                         ],
                       ),
                     ),
+                  ),
+                  ConsentmentCheckbox(
+                    padding: const EdgeInsets.fromLTRB(45, 30, 0, 0),
+                    text: 'すべての定款に同意する',
+                    value: viewModel.consentToAllTerms,
+                    onChanged: (_) => viewModel.toggleAll(),
+                  ),
+                  ConsentmentCheckbox(
+                    padding: const EdgeInsets.fromLTRB(45, 13, 0, 0),
+                    text: '利用規約',
+                    value: viewModel.consentToTermOfService,
+                    onChanged: (_) {
+                      viewModel.toggleConsentToTermOfService();
+                    },
+                    url: termsOfServiceUrl,
+                  ),
+                  ConsentmentCheckbox(
+                    padding: const EdgeInsets.fromLTRB(45, 4, 0, 0),
+                    text: 'プライバシーポリシー',
+                    value: viewModel.consentToPrivacyPolicy,
+                    onChanged: (_) {
+                      viewModel.toggleConsentToPrivacyPolicy();
+                    },
+                    url: privacyPolicyUrl,
                   ),
                 ],
               ),

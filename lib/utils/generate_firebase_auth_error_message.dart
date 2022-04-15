@@ -17,7 +17,7 @@ String generateFirebaseAuthErrorMessage(FirebaseAuthException e) {
     case 'email-already-exists':
       return 'そのメールアドレスはすでに登録されています。';
     case 'email-already-in-use':
-      return 'そのメールアドレスはすでに登録されています。';
+      return 'そのメールアドレスはすでに登録されています。ログインしてください。';
     default:
       return 'メールアドレス・パスワードを確認してください。';
   }
