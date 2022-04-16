@@ -6,11 +6,6 @@
 	<string>$(ADAPTY_PUBLIC_SDK_KEY)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ja</string>
-	<key>CFBundleLocalizations</key>
-    <array>
-        <string>en</string>
-        <string>ja</string>
-    </array>
 	<key>CFBundleDisplayName</key>
 	<string>N-Sneaker$(APP_ID_SUFFIX)</string>
 	<key>CFBundleExecutable</key>
@@ -19,6 +14,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ja</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>N-Sneaker$(APP_ID_SUFFIX)</string>
 	<key>CFBundlePackageType</key>
