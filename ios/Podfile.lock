@@ -1,7 +1,7 @@
 PODS:
-  - Adapty (1.16.8)
+  - Adapty (1.16.10)
   - adapty_flutter (1.0.0):
-    - Adapty (= 1.16.8)
+    - Adapty (= 1.16.10)
     - Flutter
   - AppAuth (1.5.0):
     - AppAuth/Core (= 1.5.0)
@@ -9,11 +9,11 @@ PODS:
   - AppAuth/Core (1.5.0)
   - AppAuth/ExternalUserAgent (1.5.0):
     - AppAuth/Core
-  - cloud_firestore (3.1.11):
+  - cloud_firestore (3.1.12):
     - Firebase/Firestore (= 8.14.0)
     - firebase_core
     - Flutter
-  - cloud_functions (3.2.11):
+  - cloud_functions (3.2.12):
     - Firebase/Functions (= 8.14.0)
     - firebase_core
     - Flutter
@@ -31,15 +31,15 @@ PODS:
   - Firebase/Functions (8.14.0):
     - Firebase/CoreOnly
     - FirebaseFunctions (~> 8.14.0)
-  - firebase_analytics (9.1.3):
+  - firebase_analytics (9.1.5):
     - Firebase/AnalyticsWithoutAdIdSupport (= 8.14.0)
     - firebase_core
     - Flutter
-  - firebase_auth (3.3.12):
+  - firebase_auth (3.3.14):
     - Firebase/Auth (= 8.14.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.14.0):
+  - firebase_core (1.14.1):
     - Firebase/CoreOnly (= 8.14.0)
     - Flutter
   - FirebaseAnalytics/WithoutAdIdSupport (8.14.0):
@@ -87,7 +87,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - google_sign_in (0.0.1):
+  - google_sign_in_ios (0.0.1):
     - Flutter
     - GoogleSignIn (~> 5.0)
   - GoogleAppMeasurement/WithoutAdIdSupport (8.14.0):
@@ -159,7 +159,7 @@ DEPENDENCIES:
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `8.14.0`)
   - Flutter (from `Flutter`)
   - flutter_unity_widget (from `.symlinks/plugins/flutter_unity_widget/ios`)
-  - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
@@ -209,8 +209,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_unity_widget:
     :path: ".symlinks/plugins/flutter_unity_widget/ios"
-  google_sign_in:
-    :path: ".symlinks/plugins/google_sign_in/ios"
+  google_sign_in_ios:
+    :path: ".symlinks/plugins/google_sign_in_ios/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_ios:
@@ -232,15 +232,15 @@ CHECKOUT OPTIONS:
     :tag: 8.14.0
 
 SPEC CHECKSUMS:
-  Adapty: 7bd19095b4e77ebbda17af2faf7268a0fdbc295b
-  adapty_flutter: 71c72df337899de1719e350b1d1ced8f877684a0
+  Adapty: 76319ab7bde8708c722702fff371ef15c84ec55e
+  adapty_flutter: 4857d8c3310aa2b062342e56db889e8cbc94783c
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
-  cloud_firestore: dd4c0ed7d60794e3890f0cf6566d749838fe9ee0
-  cloud_functions: 0003e860a2af12e1a2baf9a804a681b76f5d58b5
+  cloud_firestore: 6894050fe57f80e72d84d5d6c57392f3d1615c19
+  cloud_functions: d91235916581754322cf43a52a6775ab82e8576d
   Firebase: 7e8fe528c161b9271d365217a74c16aaf834578e
-  firebase_analytics: c6ad91993707a67c6e6626f2f4ae12f2954ad51d
-  firebase_auth: 363370737d33bad09a838cd109f7589bc48533cd
-  firebase_core: b0b382f1497ab407aceb25e41e3036c8798c1609
+  firebase_analytics: 41aebc4570dd750b3cf38d33c4b4cfcf5bd56065
+  firebase_auth: db3557d178b86a0d2ccdb7a878a1d1c2fe70de4e
+  firebase_core: cdef02fcf55872191eb0568d4c31a7a700e38582
   FirebaseAnalytics: 2fc3876e2eb347673ad2f35e249ae7b15d6c88f5
   FirebaseAuth: c5fde343630090253d3af7e2d35697b414b40202
   FirebaseCore: b84a44ee7ba999e0f9f76d198a9c7f60a797b848
@@ -251,7 +251,7 @@ SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_unity_widget: e509f3109933aa0c63b1bc149ca3d5b90fb68543
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  google_sign_in: f669f45933dad48cd218dc3e189726bced3d19f4
+  google_sign_in_ios: ed71c0dbddfba8b1ea9aa210dbda695f46bf51bd
   GoogleAppMeasurement: 71156240babd3cc6ced03e0d54816f01a880c730
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
@@ -266,8 +266,8 @@ SPEC CHECKSUMS:
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
-  webview_flutter_wkwebview: 005fbd90c888a42c5690919a1527ecc6649e1162
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: 7b6c86a4feac6af01002d793ff1457bd6b163945
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

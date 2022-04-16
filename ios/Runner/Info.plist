@@ -5,7 +5,12 @@
 	<key>AdaptyPublicSdkKey</key>
 	<string>$(ADAPTY_PUBLIC_SDK_KEY)</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>ja</string>
+	<key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>ja</string>
+    </array>
 	<key>CFBundleDisplayName</key>
 	<string>N-Sneaker$(APP_ID_SUFFIX)</string>
 	<key>CFBundleExecutable</key>
@@ -45,13 +50,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app use camera for AR</string>
+	<string>このアプリはARでカメラを使用します。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Take screenshots and save it to the PhotoLibrary.</string>
+	<string>このアプリはARの画像をライブラリに保存します。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Take screenshots and save it to the PhotoLibrary.</string>
+	<string>このアプリはARの画像をライブラリに保存します。</string>
 	<key>Privacy - Camera Usage Description</key>
-	<string>$(PRODUCT_NAME) uses Cameras</string>
+	<string>このアプリはARでカメラを使用します。</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
