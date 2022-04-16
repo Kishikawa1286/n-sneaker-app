@@ -25,6 +25,7 @@ class MarketDetailPage extends HookConsumerWidget {
     final viewModel = ref.watch(marketDetailPageViewModelProvider(productId));
     return Scaffold(
       key: viewModel.scaffoldKey,
+      endDrawerEnableOpenDragGesture: false,
       endDrawer: viewModel.purchased ?? true
           ? null
           : Drawer(
