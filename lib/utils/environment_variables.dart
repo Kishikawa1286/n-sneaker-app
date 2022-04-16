@@ -67,7 +67,7 @@ const termsOfServiceUrl =
 const contactUrl = 'https://notionforms.io/forms/n-sneaker';
 
 /// アカウント削除
-const accountDeletionRequestUrl = 'https://notionforms.io/forms/n-sneaker-1 ';
+const accountDeletionRequestUrl = 'https://notionforms.io/forms/n-sneaker-1';
 
 /// App Store
 const appStoreUrl = '';
