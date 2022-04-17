@@ -218,6 +218,8 @@ public class FileLoadModel : MonoBehaviour
         options.AlphaMaterialMode = AlphaMaterialMode.CutoutAndTransparent;
         // options.LoadTexturesAsSRGB = false;
         options.TextureCompressionQuality = TextureCompressionQuality.Best;
+        options.Enforce16BitsTextures = true;
+        options.UseUnityNativeTextureLoader = true;
         AssetLoader.LoadModelFromFile(
             _filePath(fileName),
             _onLocalFileLoad,

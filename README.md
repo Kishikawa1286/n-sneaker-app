@@ -63,7 +63,7 @@ android/local.properties の `ndk.dir` を Unity で使用している NDK の�
 
 実機を接続し、 Flutter で実行する。
 ```
-fvm flutter run --dart-define=temp
+fvm flutter run --dart-define=FLAVOR=dev
 ```
 
 - 動かないときの確認事項
@@ -71,6 +71,9 @@ fvm flutter run --dart-define=temp
     - local.properties の `ndk.dir` が設定されているか？
         - local.properties のパスの指定でバックスラッシュが2個になっているか？（Windows ではパスを貼り付けたあとに編集が必要）  
         例: `C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.29f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK`
+
+- `flutter run` が `Installing build\app\outputs\flutter-apk\app.apk...` で止まるとき
+    - 一度タスクキルをして再び `flutter run`
 
 ### iOS
 
@@ -90,7 +93,6 @@ fvm flutter build ios --dart-define=FLAVOR=prod --release
 XCode で unity-Framework の Build Setting の Skip Install を YES にする。
 
 XCode で Build Number とバージョンを更新する。
-
 
 通常のプロジェクトと同様に Archive し、 Organizer から App Store にアップロードする。
 

@@ -7,15 +7,14 @@ dependencies {
     implementation(name: 'unity-classes', ext:'jar')
     implementation(name: 'arcore_client', ext:'aar')
     implementation(name: 'ARPresto', ext:'aar')
+    implementation(name: 'core-1.0.0-rc02', ext:'aar')
     implementation(name: 'NatShare', ext:'aar')
     implementation(name: 'unityandroidpermissions', ext:'aar')
     implementation(name: 'UnityARCore', ext:'aar')
-    implementation(name: 'libarpresto_api', ext:'so')
-    implementation(name: 'libUnityARCore', ext:'so')
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
     buildToolsVersion '32.0.0'
 
     compileOptions {
@@ -25,7 +24,7 @@ android {
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 32
         ndk {
             abiFilters 'arm64-v8a'
         }

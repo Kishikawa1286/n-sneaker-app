@@ -50,7 +50,7 @@ class ArPage extends HookConsumerWidget {
                   key: viewModel.unityWidgetKey,
                   onUnityCreated: viewModel.onUnityCreated,
                   onUnityMessage: viewModel.onUnityMessage,
-                  useAndroidViewSurface: true,
+                  useAndroidViewSurface: false,
                 )
               : const SizedBox(),
         ),
