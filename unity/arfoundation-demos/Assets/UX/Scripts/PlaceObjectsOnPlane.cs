@@ -11,7 +11,6 @@ public class PlaceObjectsOnPlane : MonoBehaviour
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject m_PlacedPrefab;
 
-    [SerializeField]
     UnityMessageManager m_UnityMessageManager;
 
     private DataManager _dataManager;

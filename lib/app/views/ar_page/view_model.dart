@@ -116,13 +116,18 @@ class ArPageViewModel extends ViewModelChangeNotifier {
     notifyListeners();
   }
 
-  void onUnityCreated(UnityWidgetController controller) {
+  Future<void> onUnityCreated(UnityWidgetController controller) async {
     _unityWidgetController = controller;
+    await _enableCamera();
   }
 
   void onUnityMessage(dynamic message) {
     if (message == '[[OBJECT_PLACED]]') {
       _loadObject();
+      return;
+    }
+    if (message == '[[RELOADED]]') {
+      _enableCamera();
       return;
     }
     if (message.toString().contains('[[DOWNLOAD_ASSET_ERROR]]')) {
@@ -145,5 +150,21 @@ class ArPageViewModel extends ViewModelChangeNotifier {
 
   void _reloadScene() {
     _unityWidgetController.postMessage('SceneReloadModel', 'SceneReload', '');
+  }
+
+  Future<void> _enableCamera() async {
+    await _unityWidgetController.postMessage(
+      'TrackingTogglerModel',
+      'EnableCamera',
+      '',
+    );
+  }
+
+  Future<void> disableCamera() async {
+    await _unityWidgetController.postMessage(
+      'TrackingTogglerModel',
+      'DisableCamera',
+      '',
+    );
   }
 }

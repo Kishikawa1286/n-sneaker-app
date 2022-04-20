@@ -15,6 +15,29 @@ class ArPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(arPageViewModelProvider);
+    return _ArPage(viewModel: viewModel);
+  }
+}
+
+class _ArPage extends StatefulWidget {
+  const _ArPage({required this.viewModel});
+
+  final ArPageViewModel viewModel;
+
+  @override
+  State<_ArPage> createState() => _ArPageState();
+}
+
+class _ArPageState extends State<_ArPage> {
+  @override
+  void dispose() {
+    widget.viewModel.disableCamera();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = widget.viewModel;
     final productGlbFile = viewModel.productGlbFile;
 
     if (viewModel.noCollectionProductExists) {
