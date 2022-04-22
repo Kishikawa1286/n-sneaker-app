@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UniRx;
+using UnityEngine.XR.ARFoundation;
 
 class JsonData
 {
@@ -18,6 +19,8 @@ class JsonData
 // LoadをFlutterから呼び出すのでComponentにUnityMessageManager
 public class FileLoadModel : MonoBehaviour
 {
+    [SerializeField] private ARSession _ARSession;
+
     private String _GlbFileName = "";
 
     void Awake()
@@ -120,6 +123,7 @@ public class FileLoadModel : MonoBehaviour
     // ローカルファイルのロード開始
     private void _onStartLocalFileLoading()
     {
+        _ARSession.enabled = false;
         _localFileLoading.Value = true;
         _loaded.Value = false;
         _localFileLoadingProgress.Value = 0f;
@@ -128,6 +132,7 @@ public class FileLoadModel : MonoBehaviour
     // ローカルファイルのロード完了
     private void _onFinishLocalFileLoading()
     {
+        _ARSession.enabled = true;
         _localFileLoading.Value = false;
         _loaded.Value = true;
         _localFileLoadingProgress.Value = 1f;
@@ -136,6 +141,7 @@ public class FileLoadModel : MonoBehaviour
     // ローカルファイルのロード失敗
     private void _onErrorLocalFileLoading()
     {
+        _ARSession.enabled = true;
         _localFileLoading.Value = false;
         _loaded.Value = false;
         _localFileLoadingProgress.Value = 0f;

@@ -105,6 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8658607402519927358}
+  - component: {fileID: 5515757282654074555}
   m_Layer: 0
   m_Name: ShadowObject
   m_TagString: Untagged
@@ -128,6 +129,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5515757282654074555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679285653639408882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7cb164f04371456aa93df61df50045b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8730750512195193427
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +150,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3779508572022423583}
-  - component: {fileID: 6750081014758195703}
   m_Layer: 0
   m_Name: Sneaker
   m_TagString: Untagged
@@ -159,15 +171,3 @@ Transform:
   m_Father: {fileID: 8658607402519927358}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6750081014758195703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8730750512195193427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7cb164f04371456aa93df61df50045b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
