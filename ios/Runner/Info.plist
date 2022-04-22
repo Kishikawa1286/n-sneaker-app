@@ -50,13 +50,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>このアプリはARでカメラを使用します。</string>
+	<string>このアプリは拡張現実機能のためにカメラを使用します。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>このアプリはARの画像をライブラリに保存します。</string>
+	<string>このアプリは拡張現実機能を使って撮影した画像をライブラリに保存します。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>このアプリはARの画像をライブラリに保存します。</string>
+	<string>このアプリは拡張現実機能を使って撮影した画像をライブラリに保存します。</string>
 	<key>Privacy - Camera Usage Description</key>
-	<string>このアプリはARでカメラを使用します。</string>
+	<string>このアプリは拡張現実機能のためにカメラを使用します。</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
