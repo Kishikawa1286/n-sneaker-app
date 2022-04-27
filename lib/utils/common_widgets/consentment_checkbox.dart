@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ConsentmentCheckbox extends StatelessWidget {
   const ConsentmentCheckbox({
@@ -36,8 +36,8 @@ class ConsentmentCheckbox extends StatelessWidget {
                   onChanged(false);
                   return;
                 }
-                if (await canLaunch(url!)) {
-                  await launch(url!);
+                if (await canLaunchUrlString(url!)) {
+                  await launchUrlString(url!);
                 }
               },
               child: Padding(

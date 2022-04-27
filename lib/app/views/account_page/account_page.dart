@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../utils/common_style.dart';
 import '../../../utils/environment_variables.dart';
@@ -106,8 +106,8 @@ class AccountPage extends HookConsumerWidget {
                     title: '利用規約',
                     isLauncher: true,
                     onTap: () async {
-                      if (await canLaunch(termsOfServiceUrl)) {
-                        await launch(termsOfServiceUrl);
+                      if (await canLaunchUrlString(termsOfServiceUrl)) {
+                        await launchUrlString(termsOfServiceUrl);
                       }
                     },
                   ),
@@ -116,8 +116,8 @@ class AccountPage extends HookConsumerWidget {
                     title: 'プライバシーポリシー',
                     isLauncher: true,
                     onTap: () async {
-                      if (await canLaunch(privacyPolicyUrl)) {
-                        await launch(privacyPolicyUrl);
+                      if (await canLaunchUrlString(privacyPolicyUrl)) {
+                        await launchUrlString(privacyPolicyUrl);
                       }
                     },
                   ),
@@ -126,10 +126,10 @@ class AccountPage extends HookConsumerWidget {
                     title: '特定商取引法に基づく表記',
                     isLauncher: true,
                     onTap: () async {
-                      if (await canLaunch(
+                      if (await canLaunchUrlString(
                         notionBasedOnSpecifiedCommercialTransactionsActUrl,
                       )) {
-                        await launch(
+                        await launchUrlString(
                           notionBasedOnSpecifiedCommercialTransactionsActUrl,
                         );
                       }
@@ -147,8 +147,8 @@ class AccountPage extends HookConsumerWidget {
                     title: 'ヘルプ・問い合わせ',
                     isLauncher: true,
                     onTap: () async {
-                      if (await canLaunch(contactUrl)) {
-                        await launch(contactUrl);
+                      if (await canLaunchUrlString(contactUrl)) {
+                        await launchUrlString(contactUrl);
                       }
                     },
                   ),
@@ -157,8 +157,8 @@ class AccountPage extends HookConsumerWidget {
                     title: 'アカウント削除申請',
                     isLauncher: true,
                     onTap: () async {
-                      if (await canLaunch(accountDeletionRequestUrl)) {
-                        await launch(accountDeletionRequestUrl);
+                      if (await canLaunchUrlString(accountDeletionRequestUrl)) {
+                        await launchUrlString(accountDeletionRequestUrl);
                       }
                     },
                   ),
