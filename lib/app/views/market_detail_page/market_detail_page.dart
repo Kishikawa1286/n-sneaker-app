@@ -1,10 +1,10 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/common_style.dart';
 import '../../../utils/common_widgets/floating_back_button.dart';
 import '../../../utils/common_widgets/overlay_loading.dart';
+import '../../../utils/show_flushbar.dart';
 import 'components/carousel_indicator.dart';
 import 'components/carousel_slider.dart';
 import 'components/description.dart';
@@ -36,10 +36,10 @@ class MarketDetailPage extends HookConsumerWidget {
                     onTap: () async {
                       final message = await viewModel.restore();
                       if (message.isNotEmpty) {
-                        await Flushbar<void>(
+                        await showFlushbar(
+                          context,
                           message: message,
-                          duration: const Duration(seconds: 3),
-                        ).show(context);
+                        );
                       }
                     },
                     leading: const Icon(Icons.replay),

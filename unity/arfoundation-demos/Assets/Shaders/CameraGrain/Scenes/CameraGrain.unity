@@ -894,8 +894,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HumanSegmentationStencilMode: 3
   m_HumanSegmentationDepthMode: 2
-  m_EnvironmentDepthMode: 3
-  m_OcclusionPreferenceMode: 1
+  m_EnvironmentDepthMode: 2
+  m_OcclusionPreferenceMode: 0
 --- !u!1 &308813318
 GameObject:
   m_ObjectHideFlags: 0

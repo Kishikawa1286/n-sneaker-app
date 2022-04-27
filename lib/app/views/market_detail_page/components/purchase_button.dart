@@ -1,9 +1,9 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../utils/common_style.dart';
+import '../../../../utils/show_flushbar.dart';
 import '../../../repositories/product/product_model.dart';
 import '../view_model.dart';
 
@@ -52,10 +52,10 @@ class MarketDetailPagePurchaseButton extends HookConsumerWidget {
         () async {
           final message = await viewModel.purchase();
           if (message.isNotEmpty) {
-            await Flushbar<void>(
+            await showFlushbar(
+              context,
               message: message,
-              duration: const Duration(seconds: 3),
-            ).show(context);
+            );
           }
         },
       ),

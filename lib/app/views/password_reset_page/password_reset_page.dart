@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -7,6 +6,7 @@ import '../../../utils/common_style.dart';
 import '../../../utils/common_widgets/common_text_form_field.dart';
 import '../../../utils/common_widgets/floating_back_button.dart';
 import '../../../utils/common_widgets/overlay_loading.dart';
+import '../../../utils/show_flushbar.dart';
 import 'view_model.dart';
 
 void pushPasswordResetPage(BuildContext context) =>
@@ -109,10 +109,10 @@ class PasswordResetPage extends HookConsumerWidget {
                                   final message =
                                       await viewModel.sendPasswordResetEmail();
                                   if (message.isNotEmpty) {
-                                    await Flushbar<void>(
+                                    await showFlushbar(
+                                      context,
                                       message: message,
-                                      duration: const Duration(seconds: 3),
-                                    ).show(context);
+                                    );
                                   }
                                 },
                                 text: 'パスワードリセットのメールを送信',

@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -8,6 +7,7 @@ import '../../../utils/common_widgets/common_text_form_field.dart';
 import '../../../utils/common_widgets/floating_back_button.dart';
 import '../../../utils/common_widgets/link_text_span.dart';
 import '../../../utils/common_widgets/overlay_loading.dart';
+import '../../../utils/show_flushbar.dart';
 import '../password_reset_page/password_reset_page.dart';
 import 'view_model.dart';
 
@@ -96,10 +96,10 @@ class SignInPage extends HookConsumerWidget {
                               final message =
                                   await viewModel.signInWithGoogle();
                               if (message.isNotEmpty) {
-                                await Flushbar<void>(
+                                await showFlushbar(
+                                  context,
                                   message: message,
-                                  duration: const Duration(seconds: 3),
-                                ).show(context);
+                                );
                               } else {
                                 Navigator.of(context).pop();
                               }
@@ -120,10 +120,10 @@ class SignInPage extends HookConsumerWidget {
                                     final message =
                                         await viewModel.signInWithApple();
                                     if (message.isNotEmpty) {
-                                      await Flushbar<void>(
+                                      await showFlushbar(
+                                        context,
                                         message: message,
-                                        duration: const Duration(seconds: 3),
-                                      ).show(context);
+                                      );
                                     } else {
                                       Navigator.of(context).pop();
                                     }
@@ -176,10 +176,10 @@ class SignInPage extends HookConsumerWidget {
                                   final message = await viewModel
                                       .signInWithEmailAndPassword();
                                   if (message.isNotEmpty) {
-                                    await Flushbar<void>(
+                                    await showFlushbar(
+                                      context,
                                       message: message,
-                                      duration: const Duration(seconds: 3),
-                                    ).show(context);
+                                    );
                                   } else {
                                     Navigator.of(context).pop();
                                   }

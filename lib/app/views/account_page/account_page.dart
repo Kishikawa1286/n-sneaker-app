@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../utils/common_style.dart';
 import '../../../utils/environment_variables.dart';
+import '../../../utils/show_flushbar.dart';
 import 'components/expansion_tile.dart';
 import 'components/list_tile.dart';
 import 'view_model.dart';
@@ -75,10 +75,10 @@ class AccountPage extends HookConsumerWidget {
                         GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
-                            Flushbar<void>(
+                            showFlushbar(
+                              context,
                               message: 'アカウントIDをコピーしました',
-                              duration: const Duration(seconds: 1),
-                            ).show(context);
+                            );
                             Clipboard.setData(
                               ClipboardData(text: viewModel.accountId),
                             );

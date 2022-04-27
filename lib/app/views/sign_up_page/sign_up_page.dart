@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -9,6 +8,7 @@ import '../../../utils/common_widgets/consentment_checkbox.dart';
 import '../../../utils/common_widgets/link_text_span.dart';
 import '../../../utils/common_widgets/overlay_loading.dart';
 import '../../../utils/environment_variables.dart';
+import '../../../utils/show_flushbar.dart';
 import '../sign_in_page/sign_in_page.dart';
 import 'view_model.dart';
 
@@ -112,10 +112,10 @@ class SignUpPage extends HookConsumerWidget {
                         onPressed: () async {
                           final message = await viewModel.signInWithGoogle();
                           if (message.isNotEmpty) {
-                            await Flushbar<void>(
+                            await showFlushbar(
+                              context,
                               message: message,
-                              duration: const Duration(seconds: 3),
-                            ).show(context);
+                            );
                           }
                         },
                         text: 'Googleでサインイン',
@@ -134,10 +134,10 @@ class SignUpPage extends HookConsumerWidget {
                                 final message =
                                     await viewModel.signInWithApple();
                                 if (message.isNotEmpty) {
-                                  await Flushbar<void>(
+                                  await showFlushbar(
+                                    context,
                                     message: message,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
+                                  );
                                 }
                               },
                               text: 'Appleでサインイン',
@@ -188,10 +188,10 @@ class SignUpPage extends HookConsumerWidget {
                               final message =
                                   await viewModel.signInWithEmailAndPassword();
                               if (message.isNotEmpty) {
-                                await Flushbar<void>(
+                                await showFlushbar(
+                                  context,
                                   message: message,
-                                  duration: const Duration(seconds: 3),
-                                ).show(context);
+                                );
                               }
                             },
                             text: 'Eメールでサインイン',
