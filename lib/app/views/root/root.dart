@@ -16,7 +16,6 @@ import '../onboarding_page/onboarding_page.dart';
 import '../sign_up_page/sign_up_page.dart';
 import 'invalid_build_number_page.dart';
 import 'maintainance_page.dart';
-import 'show_sign_up_reward_dialog.dart';
 import 'view_model.dart';
 
 class Root extends HookConsumerWidget {
@@ -94,16 +93,6 @@ class Root extends HookConsumerWidget {
                     if (authState == AuthState.signInWithNewAccount) {
                       // wait MarketPage built
                       Timer(const Duration(milliseconds: 500), () {
-                        if (!viewModel.modalShowed) {
-                          showSignUpRewardDialog(
-                            context: context,
-                            onTapButton: () {
-                              viewModel.setIndex(1);
-                              Navigator.of(context).pop();
-                            },
-                          );
-                          viewModel.onModalShowed();
-                        }
                         if (!onboardingDone && !viewModel.onboardingPushed) {
                           pushOnboardingPage(context);
                           viewModel.onOnboardingPushed();
