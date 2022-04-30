@@ -3,6 +3,7 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/view_model_change_notifier.dart';
+import '../../repositories/collection_product/collection_product_model.dart';
 import '../../repositories/collection_product/collection_product_repository.dart';
 import '../../repositories/product_glb_file/product_glb_file.dart';
 import '../../repositories/product_glb_file/product_glb_file_repository.dart';
@@ -105,15 +106,24 @@ class ArPageViewModel extends ViewModelChangeNotifier {
     );
   }
 
-  Future<void> selectGlbFile(ProductGlbFileModel selected) async {
-    await _setGlbFile(selected);
-    notifyListeners();
-    await _productGlbFileRepository.setLastUsedGlbFileId(
-      productId: selected.productId,
-      productGlbFileId: selected.id,
-    );
-    _reloadScene();
-    notifyListeners();
+  Future<void> selectCollectionProduct(
+    CollectionProductModel collectionProduct,
+  ) async {
+    try {
+      final fetched = await _productGlbFileRepository
+          .fetchProductsGlbFilesForAr(collectionProduct.productId);
+      if (fetched.isEmpty) {
+        return;
+      }
+      await _setGlbFile(fetched.first);
+      await _productGlbFileRepository.setLastUsedGlbFileId(
+        productId: fetched.first.productId,
+        productGlbFileId: fetched.first.id,
+      );
+      notifyListeners();
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
   Future<void> onUnityCreated(UnityWidgetController controller) async {
@@ -146,10 +156,6 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       'Load',
       '{"fileName": "${f.productId}_${f.id}.glb", "url": "$_url"}',
     );
-  }
-
-  void _reloadScene() {
-    _unityWidgetController.postMessage('SceneReloadModel', 'SceneReload', '');
   }
 
   Future<void> _enableCamera() async {

@@ -5,7 +5,6 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/common_style.dart';
-import '../ar_glb_file_selector_modal_bottom_sheet/viewer_glb_file_selector_modal_bottom_sheet.dart';
 import '../collection_product_selector_modal_bottom_sheet/collection_product_selector_modal_bottom_sheet.dart';
 import 'view_model.dart';
 
@@ -126,18 +125,14 @@ class _ArPageState extends State<_ArPage> {
                         onTap: () {
                           showCollectionProductSelectorModalBottomSheet(
                             context,
-                            onTapTile: (collectionProduct) =>
-                                showArGlbFileSelectorModalBottomSheet(
-                              context,
-                              productId: collectionProduct.productId,
-                              onTapTile: (selected) {
-                                viewModel.selectGlbFile(selected);
-                                Navigator.popUntil(
-                                  context,
-                                  (route) => route.isFirst,
-                                );
-                              },
-                            ),
+                            onTapTile: (collectionProduct) async {
+                              await viewModel
+                                  .selectCollectionProduct(collectionProduct);
+                              Navigator.popUntil(
+                                context,
+                                (route) => route.isFirst,
+                              );
+                            },
                           );
                         },
                       ),
