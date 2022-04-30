@@ -26,7 +26,7 @@ class MarketDetailPageCarouselSlider extends HookConsumerWidget {
     return CarouselSlider(
       carouselController: viewModel.carouselController,
       options: CarouselOptions(
-        height: width,
+        height: width * 4 / 3,
         viewportFraction: 1,
         onPageChanged: (index, reason) {
           viewModel.setCarouselIndex(index);

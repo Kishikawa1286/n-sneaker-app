@@ -64,7 +64,7 @@ class CollectionPage extends HookConsumerWidget {
                         ? BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(backgroundImagePath),
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                               repeat: ImageRepeat.repeatY,
                             ),
                           )
@@ -77,9 +77,10 @@ class CollectionPage extends HookConsumerWidget {
                       pagingController: viewModel.pagingController,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.66,
                         crossAxisCount: 3,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 2,
+                        mainAxisSpacing: 2,
                       ),
                       builderDelegate:
                           PagedChildBuilderDelegate<CollectionProductModel>(

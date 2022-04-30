@@ -43,11 +43,11 @@ class CollectionPageProductGridTile extends HookConsumerWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                width: 100,
+                width: 70,
                 height: 20,
                 decoration: const BoxDecoration(
                   color: CommonStyle.transparentBlack,
-                  borderRadius: BorderRadius.all(Radius.elliptical(50, 10)),
+                  borderRadius: BorderRadius.all(Radius.elliptical(35, 10)),
                 ),
               ),
             ),

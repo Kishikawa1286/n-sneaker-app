@@ -15,6 +15,7 @@ const List<String> collectionPageBackgroundImagePaths = [
   '$_collectionPageBackgroundImageDirectory/bg7.jpg',
   '$_collectionPageBackgroundImageDirectory/bg8.jpg',
   '$_collectionPageBackgroundImageDirectory/bg9.jpg',
+  '$_collectionPageBackgroundImageDirectory/bg10.jpg',
 ];
 
 /* Firestore */
