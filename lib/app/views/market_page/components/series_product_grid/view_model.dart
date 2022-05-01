@@ -42,7 +42,7 @@ class MarketPageSeriesProductGridViewModel extends ViewModelChangeNotifier {
     try {
       final startAfter = pagingController.itemList?.last;
       final fetchedProducts = await _productRepository
-          .fetchProductsBySeries(_series, startAfter: startAfter);
+          .fetchProductsBySeriesJp(_series, startAfter: startAfter);
       // _pagingControllerのdispose後に操作をするのを回避
       if (disposed) {
         return;

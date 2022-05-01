@@ -69,8 +69,8 @@ class ProductRepository {
     return _convertDocumentSnapshotListToProductModelList(snapshot.docs);
   }
 
-  Future<List<ProductModel>> fetchProductsBySeries(
-    String series, {
+  Future<List<ProductModel>> fetchProductsBySeriesJp(
+    String seriesJp, {
     int limit = 16,
     ProductModel? startAfter,
   }) async {
@@ -81,7 +81,7 @@ class ProductRepository {
         collectionPath: productsCollectionPath,
         queryBuilder: (query) => query
             .where('vivsible_in_market', isEqualTo: true)
-            .where('series', isEqualTo: series)
+            .where('series_jp', isEqualTo: seriesJp)
             .orderBy('created_at', descending: true)
             .limit(limit),
       );
@@ -96,7 +96,7 @@ class ProductRepository {
       collectionPath: productsCollectionPath,
       queryBuilder: (query) => query
           .where('vivsible_in_market', isEqualTo: true)
-          .where('series', isEqualTo: series)
+          .where('series_jp', isEqualTo: seriesJp)
           .orderBy('created_at', descending: true)
           .limit(limit)
           .startAfterDocument(startAfterDocumentSnapshot),
