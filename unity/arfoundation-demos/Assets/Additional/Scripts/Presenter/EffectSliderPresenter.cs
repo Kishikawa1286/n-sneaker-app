@@ -18,5 +18,5 @@ public class EffectSliderPresenter : MonoBehaviour
         _BlightnessSlider.OnValueChangedAsObservable().Subscribe(value => _DirectionalLightModel.SetIntensity(value));
         _ObjectPhiAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _DirectionalLightModel.SetPhi(value));
         _ObjectThetaAngleControllSlider.OnValueChangedAsObservable().Subscribe(value =>  _DirectionalLightModel.SetTheta(value));
-  }
+    }
 }

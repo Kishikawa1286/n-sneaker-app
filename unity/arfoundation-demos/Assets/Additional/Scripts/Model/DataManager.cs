@@ -12,4 +12,7 @@ public class DataManager: ScriptableObject
   // Light / Placement / Screenshot
   //  UIの状態を動的に生成されるgameObjectに伝えるための変数
   public string UiMode = "Placement";
+
+  // オブジェクトが設置されているかどうか
+  public bool Placed = false;
 }

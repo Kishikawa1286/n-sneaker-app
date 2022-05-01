@@ -21,10 +21,15 @@ public class FileLoadModel : MonoBehaviour
 {
     [SerializeField] private ARSession _ARSession;
 
+    private DataManager _dataManager;
+
     private String _GlbFileName = "";
 
     void Awake()
     {
+        _dataManager = Resources.Load<DataManager>("datamanager");
+        _dataManager.Placed = false; // Placed のフラグを初期値に
+
         // see: https://kazupon.org/unity-ios-setnonackup-flag/
         // see: https://qiita.com/Ubermensch/items/75072ef89249cb3b30e7#2applicationplatform%E3%82%92%E4%BD%BF%E3%81%86
         // iCloudに保存しない
@@ -36,6 +41,8 @@ public class FileLoadModel : MonoBehaviour
     // called by Flutter
     public void Load(String json)
     {
+        _dataManager.Placed = true;
+
         JsonData jsonData = _parseJson(json);
         // 値が現在のものから変わっている場合には状態変数を初期化
         if (jsonData.fileName != _GlbFileName) {
