@@ -121,6 +121,7 @@ class ArPageViewModel extends ViewModelChangeNotifier {
         productGlbFileId: fetched.first.id,
       );
       notifyListeners();
+      await _reload();
     } on Exception catch (e) {
       print(e);
     }
@@ -144,6 +145,14 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       print(message);
       return;
     }
+  }
+
+  Future<void> _reload() async {
+    await _unityWidgetController.postMessage(
+      'SceneReloadModel',
+      'SceneReload',
+      '',
+    );
   }
 
   void _loadObject() {
