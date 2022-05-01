@@ -15,4 +15,6 @@ public class DataManager: ScriptableObject
 
   // オブジェクトが設置されているかどうか
   public bool Placed = false;
+
+  public Quaternion Rotation = Quaternion.Euler(0f, 0f, 0f);
 }

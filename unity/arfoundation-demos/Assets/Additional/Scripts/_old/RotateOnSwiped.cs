@@ -11,6 +11,10 @@ public class RotateOnSwiped : MonoBehaviour
     private float minRate = 0.2f;
     private float maxRate = 3f;
 
+    // see: https://teratail.com/questions/190510
+    private float longTapTime = 0.25f;
+    private float nowTapTime = 0f;
+
     void Awake()
     {
         _dataManager = Resources.Load<DataManager>("datamanager");
@@ -25,17 +29,29 @@ public class RotateOnSwiped : MonoBehaviour
 
         if (Input.touchCount <= 0)
         {
+            nowTapTime = 0f;
             return;
         }
 
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
+
+            // ただの設置とみなす
+            if (nowTapTime < longTapTime)
+            {
+                nowTapTime += Time.deltaTime;
+                transform.rotation = _dataManager.Rotation;
+                return;
+            }
+
             if (touch.phase == TouchPhase.Moved)
             {
                 Quaternion rotationY = Quaternion.Euler(0f, -touch.deltaPosition.x * speedModifier, 0f);
                 transform.rotation = rotationY * transform.rotation;
+                _dataManager.Rotation = transform.rotation;
             }
+
             return;
         }
 
