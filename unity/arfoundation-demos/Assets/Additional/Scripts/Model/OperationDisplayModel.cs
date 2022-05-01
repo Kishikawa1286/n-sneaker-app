@@ -16,7 +16,7 @@ class OperationDisplayModel: MonoBehaviour
     public IReadOnlyReactiveProperty<bool> IsVisibleTapToPlace => _isVisibleTapToPlace;
 
     // 秒で指定
-    private float visibleMoveToDetectPlanesShowedDuration = 3f;
+    private float visibleMoveToDetectPlanesShowedDuration = 5f;
 
     private float timeSinceStart = 0f;
 
@@ -27,9 +27,12 @@ class OperationDisplayModel: MonoBehaviour
 
     private void Update()
     {
-        timeSinceStart += Time.unscaledDeltaTime;
+        if (!_isVisibleMoveToDetectPlanes.Value && !_isVisibleTapToPlace.Value)
+        {
+            return;
+        }
 
-        if (!_dataManager.Placed && timeSinceStart > visibleMoveToDetectPlanesShowedDuration)
+        if (timeSinceStart > visibleMoveToDetectPlanesShowedDuration)
         {
             _isVisibleMoveToDetectPlanes.Value = false;
             _isVisibleTapToPlace.Value = true;
@@ -40,5 +43,7 @@ class OperationDisplayModel: MonoBehaviour
             _isVisibleMoveToDetectPlanes.Value = false;
             _isVisibleTapToPlace.Value = false;
         }
+
+        timeSinceStart += Time.deltaTime;
     }
 }

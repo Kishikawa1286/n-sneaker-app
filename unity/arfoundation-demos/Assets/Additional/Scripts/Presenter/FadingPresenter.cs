@@ -12,7 +12,7 @@ class FadingPresenter: MonoBehaviour
     [SerializeField] private OperationDisplayModel _OperationDisplayModel;
 
     private void Start() {
-        _OperationDisplayModel.IsVisibleMoveToDetectPlanes.Subscribe((value) => _MoveToDetectPlanesCanvasFaderView.Play(value));
-        _OperationDisplayModel.IsVisibleTapToPlace.Subscribe((value) => _TapToPlaceCanvasFaderView.Play(value));
+        _OperationDisplayModel.IsVisibleMoveToDetectPlanes.Subscribe((value) => _MoveToDetectPlanesCanvasFaderView.Play(!value));
+        _OperationDisplayModel.IsVisibleTapToPlace.Subscribe((value) => _TapToPlaceCanvasFaderView.Play(!value));
     }
 }
