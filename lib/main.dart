@@ -27,7 +27,7 @@ Future<void> main() async {
       runApp(
         ProviderScope(
           child: MaterialApp(
-            title: 'n-sneaker',
+            title: 'nevermind',
             onGenerateRoute: onGenerateRoute,
             initialRoute: 'root',
             theme: ThemeData(

@@ -67,7 +67,7 @@ android {
             applicationIdSuffix ".${dartEnvironmentVariables.FLAVOR}"
         }
         // ref: https://zenn.dev/riscait/articles/separating-environments-in-flutter
-        resValue "string", "app_name", "N-Sneaker" + 
+        resValue "string", "app_name", "Nevermind" + 
             (dartEnvironmentVariables.FLAVOR == 'prod' ? '' : ".${dartEnvironmentVariables.FLAVOR}")
         resValue "string", "adapty_public_sdk_key", (dartEnvironmentVariables.FLAVOR == 'prod' ? 'public_live_96qQsRVA.r8MpDD0AiDF0JylUfUAc' : "public_live_NxLytlOA.MHMxqQXIQSAuISm7dgxf")
     }

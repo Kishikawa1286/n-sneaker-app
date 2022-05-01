@@ -54,7 +54,7 @@ class SignInPage extends HookConsumerWidget {
                             const Padding(
                               padding: EdgeInsets.only(left: 15),
                               child: Text(
-                                'N-Sneaker',
+                                'Nevermind',
                                 style: TextStyle(fontSize: 30),
                               ),
                             ),

@@ -49,7 +49,7 @@ class SignUpPage extends HookConsumerWidget {
                         const Padding(
                           padding: EdgeInsets.only(left: 15),
                           child: Text(
-                            'N-Sneaker',
+                            'Nevermind',
                             style: TextStyle(fontSize: 30),
                           ),
                         ),
@@ -59,7 +59,7 @@ class SignUpPage extends HookConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                     child: Text(
-                      '無料で登録して\nスニーカーを遊び尽くそう。',
+                      '無料で登録して\nデジタルフィギュアの世界へ。',
                       style: Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.center,
                     ),
