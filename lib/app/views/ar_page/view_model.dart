@@ -130,6 +130,7 @@ class ArPageViewModel extends ViewModelChangeNotifier {
   Future<void> onUnityCreated(UnityWidgetController controller) async {
     _unityWidgetController = controller;
     await _enableCamera();
+    await _initializeOperationDisplay();
   }
 
   void onUnityMessage(dynamic message) {
@@ -164,6 +165,14 @@ class ArPageViewModel extends ViewModelChangeNotifier {
       'FileLoadModel',
       'Load',
       '{"fileName": "${f.productId}_${f.id}.glb", "url": "$_url"}',
+    );
+  }
+
+  Future<void> _initializeOperationDisplay() async {
+    await _unityWidgetController.postMessage(
+      'OperationDisplayModel',
+      'Initialize',
+      '',
     );
   }
 

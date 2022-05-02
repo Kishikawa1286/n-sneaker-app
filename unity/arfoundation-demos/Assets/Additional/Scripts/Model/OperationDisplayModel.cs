@@ -46,4 +46,12 @@ class OperationDisplayModel: MonoBehaviour
 
         timeSinceStart += Time.deltaTime;
     }
+
+    // called from flutter
+    private void Initialize()
+    {
+        timeSinceStart = 0f;
+        _isVisibleMoveToDetectPlanes.Value = true;
+        _isVisibleTapToPlace.Value = false;
+    }
 }
