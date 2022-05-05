@@ -90,6 +90,24 @@ class Root extends HookConsumerWidget {
               builder: (context) {
                 switch (viewModel.currentIndex) {
                   case 0:
+                    // login modal related
+                    /*
+                    if (authState == AuthState.signInAndGetPoint) {
+                      // wait MarketPage built
+                      Timer(const Duration(milliseconds: 500), () {
+                        if (!viewModel.pointModalPushed) {
+                          showPointModal(
+                            context,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              viewModel.setIndex(3);
+                            },
+                          );
+                          viewModel.onPointModalPushed();
+                        }
+                      });
+                    }
+                    */
                     if (authState == AuthState.signInWithNewAccount) {
                       // wait MarketPage built
                       Timer(const Duration(milliseconds: 500), () {

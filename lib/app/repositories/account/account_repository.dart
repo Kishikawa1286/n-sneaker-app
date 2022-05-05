@@ -71,6 +71,8 @@ class AccountRepository {
       numberOfCollectionProducts: 1,
       createdAt: Timestamp.now(),
       lastEditedAt: Timestamp.now(),
+      point: 0,
+      lastSignedInAt: Timestamp.now(),
     );
   }
 
@@ -103,6 +105,9 @@ class AccountRepository {
     return null; // 未登録
   }
 
+  // 最終ログイン時間の更新など
+  Future<void> updateData() => _cloudFunctionsInterface.onSignedIn();
+
   Future<AccountModel> createNewWithUid(String uid) async {
     final dynamic result = await _cloudFunctionsInterface.createAccount();
     print('createAccount result: $result');
@@ -111,6 +116,8 @@ class AccountRepository {
       numberOfCollectionProducts: 1,
       createdAt: Timestamp.now(),
       lastEditedAt: Timestamp.now(),
+      point: 0,
+      lastSignedInAt: Timestamp.now(),
     );
   }
 

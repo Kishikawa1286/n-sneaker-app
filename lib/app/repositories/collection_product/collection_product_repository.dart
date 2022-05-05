@@ -112,6 +112,9 @@ class CollectionProductRepository {
     }
   }
 
+  Future<void> addCollectionProductOnSignInReward() =>
+      _cloudFunctionsInterface.addCollectionProductOnSignInReward();
+
   Future<List<CollectionProductModel>> fetchCollectionProductsFromFirestore(
     String accountId, {
     int limit = 16,

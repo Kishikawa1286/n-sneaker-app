@@ -26,6 +26,8 @@ class CloudFunctionsInterface {
 
   Future<dynamic> createAccount() => _call(CloudFunctionsNames.createAccount);
 
+  Future<dynamic> onSignedIn() => _call(CloudFunctionsNames.onSignedIn);
+
   Future<HttpsCallableResult<dynamic>> addCollectionProductOnMakingPurchase(
     AddCollectionProductOnMakingPurchaseParameters params,
   ) =>
@@ -41,6 +43,9 @@ class CloudFunctionsInterface {
         CloudFunctionsNames.addCollectionProductOnRestoringPurchase,
         parameters: params.toMap(),
       ) as Future<HttpsCallableResult<dynamic>>;
+
+  Future<dynamic> addCollectionProductOnSignInReward() =>
+      _call(CloudFunctionsNames.addCollectionProductOnSignInReward);
 
   Future<HttpsCallableResult<dynamic>> generateGlbFileDownloadUrl(
     GenerateGlbFileDownloadUrlParameters params,
