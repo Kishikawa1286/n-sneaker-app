@@ -1,23 +1,9 @@
 import '../../../../utils/environment_variables.dart';
 
-const String _accountsCollectionVersion = firestoreAccountsCollectionVersion;
-
-const String _productsCollectionVersion = firestoreProductsCollectionVersion;
-
-const String _productGlbFilesCollectionVersion =
-    firestoreProductGlbFilesVersion;
-
-const String _collectionProductsCollectionVersion =
-    firestoreCollectionProductsVersion;
-
-const String _marketPageTabsCollectionVersion = firestoreMarketPageTabsVersion;
-
-const String _launchConfigsCollectionVersion = firestoreLaunchConfigsVersion;
-
 const String _accountDomain = 'accounts';
 
 const String _accountsCollectionPath =
-    '${_accountDomain}_$_accountsCollectionVersion';
+    '${_accountDomain}_$firestoreAccountsCollectionVersion';
 
 String accountDocumentPath(String accountId) =>
     '$_accountsCollectionPath/$accountId/';
@@ -26,7 +12,7 @@ String accountDocumentPath(String accountId) =>
 const String _productDomain = 'products';
 
 const String productsCollectionPath =
-    '${_productDomain}_$_productsCollectionVersion';
+    '${_productDomain}_$firestoreProductsCollectionVersion';
 
 String productDocumentPath(String productId) =>
     '$productsCollectionPath/$productId';
@@ -34,7 +20,7 @@ String productDocumentPath(String productId) =>
 const String _productGlbFileDomain = 'product_glb_files';
 
 String productGlbFilesCollectionPath(String productId) =>
-    '${productDocumentPath(productId)}/${_productGlbFileDomain}_$_productGlbFilesCollectionVersion';
+    '${productDocumentPath(productId)}/${_productGlbFileDomain}_$firestoreProductGlbFilesVersion';
 
 String productGlbFileDocumentPath(String productId, String glbFileId) =>
     '${productGlbFilesCollectionPath(productId)}/$glbFileId';
@@ -42,7 +28,7 @@ String productGlbFileDocumentPath(String productId, String glbFileId) =>
 const String _collectionProductDomain = 'collection_products';
 
 String collectionProductsCollectionPath =
-    '${_collectionProductDomain}_$_collectionProductsCollectionVersion';
+    '${_collectionProductDomain}_$firestoreCollectionProductsVersion';
 
 String collectionProductDocumentPath(String productCollectionId) =>
     '$collectionProductsCollectionPath/$productCollectionId';
@@ -50,9 +36,14 @@ String collectionProductDocumentPath(String productCollectionId) =>
 const String _marketPageTabsDomain = 'market_page_tabs';
 
 const String marketPageTabsCollectionPath =
-    '${_marketPageTabsDomain}_$_marketPageTabsCollectionVersion';
+    '${_marketPageTabsDomain}_$firestoreMarketPageTabsVersion';
 
 const String _launchConfigsDomain = 'launch_configs';
 
 const String launchConfigsCollection =
-    '${_launchConfigsDomain}_$_launchConfigsCollectionVersion';
+    '${_launchConfigsDomain}_$firestoreLaunchConfigsVersion';
+
+const String _signInRewardDomain = 'sign_in_rewards';
+
+const String signInRewardCollection =
+    '${_signInRewardDomain}_$firestoreSignInRewardVersion';

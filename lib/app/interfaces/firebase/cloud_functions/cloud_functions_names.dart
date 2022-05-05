@@ -9,6 +9,11 @@ abstract class CloudFunctionsNames {
   static const addCollectionProductOnRestoringPurchase =
       'firestore-collectionProductV1-addOnRestoringPurchase-default';
 
+  static const addCollectionProductOnSignInReward =
+      'firestore-collectionProductV1-addOnSignInReward-default';
+
   static const gemerateGlbFileDownloadUrl =
       'cloudStorage-generateGlbFileDownloadUrl-default';
+
+  static const onSignedIn = 'firestore-accountV1-onSignedIn-default';
 }

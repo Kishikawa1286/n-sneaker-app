@@ -38,6 +38,9 @@ const String firestoreMarketPageTabsVersion = 'v1';
 /// Firestoreの'launch_configs'コレクションのバージョン
 const String firestoreLaunchConfigsVersion = 'v1';
 
+/// Firestoreの'launch_configs'コレクションのバージョン
+const String firestoreSignInRewardVersion = 'v1';
+
 /* Algolia */
 
 /// AlgoliaのApplication ID

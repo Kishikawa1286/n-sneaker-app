@@ -1,38 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AccountModel {
-  const AccountModel({
+import '../product/product_model.dart';
+
+class SignInRewardModel {
+  SignInRewardModel({
     required this.id,
-    required this.numberOfCollectionProducts,
+    required this.productId,
+    required this.consumedPoint,
     required this.createdAt,
     required this.lastEditedAt,
-    required this.point,
-    required this.lastSignedInAt,
+    required this.product,
   });
 
-  factory AccountModel.fromDocumentSnapshot({
+  factory SignInRewardModel.fromDocumentSnapshot({
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
+    required ProductModel product,
   }) {
     final data = snapshot.data();
     if (data == null) {
       throw Exception('DocumentSnapshot has no data.');
     }
-    return AccountModel(
+    return SignInRewardModel(
       id: data['id'] as String,
-      numberOfCollectionProducts:
-          int.tryParse(data['number_of_collection_products'].toString()) ?? 0,
+      productId: data['product_id'] as String,
+      consumedPoint: data['consumed_point'] as int,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
-      point: (data['point'] as int?) ?? 0,
-      lastSignedInAt:
-          (data['last_signed_in_at'] as Timestamp?) ?? Timestamp.now(),
+      product: product,
     );
   }
 
   final String id;
-  final int numberOfCollectionProducts;
+  final String productId;
+  final int consumedPoint;
   final Timestamp createdAt;
   final Timestamp lastEditedAt;
-  final int point;
-  final Timestamp lastSignedInAt;
+
+  final ProductModel product;
 }

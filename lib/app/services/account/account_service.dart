@@ -53,15 +53,65 @@ class AccountService {
     if (_account != null) {
       return;
     }
-    final ac = await _accountRepository.fetch(uid);
-    if (ac == null) {
+    try {
+      final ac = await _accountRepository.fetch(uid);
+      if (ac == null) {
+        _authStateController.add(AuthState.signOut);
+        return;
+      }
+      _account = ac;
+
+      await _adaptyRepository.identify(uid);
+      await _accountRepository.updateData();
+
+      // ログボ関連処理
+      /*
+      if (_canGetPoint(ac.lastSignedInAt.toDate())) {
+        _account = AccountModel(
+          id: ac.id,
+          numberOfCollectionProducts: ac.numberOfCollectionProducts,
+          createdAt: ac.createdAt,
+          lastEditedAt: Timestamp.now(),
+          point: ac.point + 1,
+          lastSignedInAt: Timestamp.now(),
+        );
+        _authStateController.add(AuthState.signInAndGetPoint);
+        return;
+      }
+      */
+
+      _authStateController.add(AuthState.signIn);
+    } on Exception catch (e) {
+      print(e);
+      // 削除されたアカウントの認証情報がローカルにある場合
+      if (e.toString().contains('PERMISSION_DENIED')) {
+        await signOut();
+      }
       _authStateController.add(AuthState.signOut);
-      return;
     }
-    _account = ac;
-    await _adaptyRepository.identify(uid);
-    _authStateController.add(AuthState.signIn);
   }
+
+  /*
+  bool _canGetPoint(DateTime lastSignedInAt) {
+    final now = Timestamp.now().toDate();
+    if (lastSignedInAt.year > now.year) {
+      return false;
+    }
+    if (lastSignedInAt.year < now.year) {
+      return true;
+    }
+    if (lastSignedInAt.month > now.month) {
+      return false;
+    }
+    if (lastSignedInAt.month < now.month) {
+      return true;
+    }
+    if (lastSignedInAt.day < now.day) {
+      return true;
+    }
+    return false;
+  }
+  */
 
   Future<void> createNewWithEmailAndPassword({
     required String email,
@@ -90,11 +140,18 @@ class AccountService {
     required String email,
     required String password,
   }) async {
+    // ローカルのデータをリセット
     try {
-      // 一度クリアする
       _account = null;
       await _adaptyRepository.logout();
       await _productGlbFileRepository.removeLastUsedGlbFileId();
+    } on Exception catch (e) {
+      print(e);
+      _authStateController.add(AuthState.signOut);
+      return;
+    }
+    // ログイン試行
+    try {
       final uid = await _accountRepository.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -117,26 +174,41 @@ class AccountService {
   Future<void> _signInWithUidGetter(
     Future<String> Function() signInToFirebaseAuth,
   ) async {
+    // ローカルのデータをリセット
     try {
-      // 一度クリアする
       _account = null;
       await _adaptyRepository.logout();
       await _productGlbFileRepository.removeLastUsedGlbFileId();
+    } on Exception catch (e) {
+      print(e);
+      _authStateController.add(AuthState.signOut);
+      return;
+    }
+    // ログイン試行
+    try {
       final uid = await signInToFirebaseAuth();
       final ac = await _accountRepository.fetch(uid);
       if (ac == null) {
+        _authStateController.add(AuthState.signOut);
+        return;
+      }
+      // 既存アカウント
+      _account = ac;
+      await _adaptyRepository.identify(uid);
+      _authStateController.add(AuthState.signIn);
+      return;
+    } on Exception catch (e) {
+      print(e);
+      try {
         // 新規登録
+        final uid = await signInToFirebaseAuth();
         _account = await _accountRepository.createNewWithUid(uid);
         await _adaptyRepository.identify(uid);
         _authStateController.add(AuthState.signInWithNewAccount);
-      } else {
-        // 既存アカウント
-        _account = ac;
-        await _adaptyRepository.identify(uid);
-        _authStateController.add(AuthState.signIn);
+        return;
+      } on Exception catch (e) {
+        print(e);
       }
-    } on Exception catch (e) {
-      print(e);
       _authStateController.add(AuthState.signOut);
     }
   }
