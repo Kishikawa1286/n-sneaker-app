@@ -116,10 +116,12 @@ class ArPageViewModel extends ViewModelChangeNotifier {
         return;
       }
       await _setGlbFile(fetched.first);
-      await _productGlbFileRepository.setLastUsedGlbFileId(
-        productId: fetched.first.productId,
-        productGlbFileId: fetched.first.id,
-      );
+      if (!collectionProduct.isTrial) {
+        await _productGlbFileRepository.setLastUsedGlbFileId(
+          productId: fetched.first.productId,
+          productGlbFileId: fetched.first.id,
+        );
+      }
       notifyListeners();
       await _reload();
     } on Exception catch (e) {

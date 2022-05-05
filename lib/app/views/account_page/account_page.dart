@@ -12,7 +12,9 @@ import 'components/list_tile.dart';
 import 'view_model.dart';
 
 class AccountPage extends HookConsumerWidget {
-  const AccountPage();
+  const AccountPage({required this.goToArPage});
+
+  final void Function() goToArPage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +27,7 @@ class AccountPage extends HookConsumerWidget {
             Container(
               width: 80,
               height: 80,
-              margin: const EdgeInsets.only(top: 50, bottom: 30),
+              margin: const EdgeInsets.only(top: 50),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: const Image(
@@ -35,12 +37,69 @@ class AccountPage extends HookConsumerWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20, top: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  viewModel.isTrialActive
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 5, bottom: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'トライアル期間中',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 25),
+                                    child: Text(
+                                      '${viewModel.trialExpiresAt.month}月${viewModel.trialExpiresAt.day}日まで',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: ElevatedButton(
+                                  onPressed: goToArPage,
+                                  style: ElevatedButton.styleFrom(
+                                    minimumSize: Size(
+                                      MediaQuery.of(context).size.width * 0.5,
+                                      30,
+                                    ),
+                                    elevation: 5,
+                                    primary: CommonStyle.black,
+                                    onPrimary: CommonStyle.black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    '試してみる',
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal,
+                                      color: CommonStyle.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox(),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, bottom: 2),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Text(
                       'バージョン',
                       style: Theme.of(context).textTheme.titleSmall,
@@ -48,7 +107,7 @@ class AccountPage extends HookConsumerWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 2, bottom: 10),
+                    padding: const EdgeInsets.only(top: 2),
                     child: Text(
                       '${viewModel.version} (${viewModel.buildNumber})',
                       style: Theme.of(context).textTheme.bodyMedium,
@@ -56,7 +115,7 @@ class AccountPage extends HookConsumerWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Text(
                       'アカウントID',
                       style: Theme.of(context).textTheme.titleSmall,
@@ -64,7 +123,7 @@ class AccountPage extends HookConsumerWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
+                    padding: const EdgeInsets.only(top: 2),
                     child: Row(
                       children: [
                         SelectableText(

@@ -103,4 +103,18 @@ class ProductRepository {
     );
     return _convertDocumentSnapshotListToProductModelList(snapshot.docs);
   }
+
+  Future<List<ProductModel>> fetchProductsAvailableInTrial({
+    int limit = 16,
+  }) async {
+    final snapshot =
+        await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
+      collectionPath: productsCollectionPath,
+      queryBuilder: (query) => query
+          .where('available_in_trial', isEqualTo: true)
+          .orderBy('created_at', descending: true)
+          .limit(limit),
+    );
+    return _convertDocumentSnapshotListToProductModelList(snapshot.docs);
+  }
 }

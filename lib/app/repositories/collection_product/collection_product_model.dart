@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../product/product_model.dart';
+
 class CollectionProductModel {
   const CollectionProductModel({
     required this.id,
@@ -7,6 +9,7 @@ class CollectionProductModel {
     required this.paymentMethod,
     required this.vendorProductId,
     required this.purchasedAtAsIso8601,
+    required this.isTrial,
     required this.createdAt,
     required this.lastEditedAt,
     required this.productId,
@@ -45,6 +48,7 @@ class CollectionProductModel {
       paymentMethod: data['payment_method'] as String,
       vendorProductId: data['vendor_product_id'] as String,
       purchasedAtAsIso8601: data['purchased_at'] as String,
+      isTrial: false,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       productId: data['product_id'] as String,
@@ -76,12 +80,42 @@ class CollectionProductModel {
     );
   }
 
+  factory CollectionProductModel.fromProduct(ProductModel product) =>
+      CollectionProductModel(
+        id: '',
+        accountId: '',
+        paymentMethod: '',
+        vendorProductId: '',
+        purchasedAtAsIso8601: '',
+        isTrial: true,
+        createdAt: Timestamp.now(),
+        lastEditedAt: Timestamp.now(),
+        productId: product.id,
+        title: product.title,
+        vendor: product.vendor,
+        series: product.series,
+        tags: product.tags,
+        titleJp: product.titleJp,
+        vendorJp: product.vendorJp,
+        seriesJp: product.seriesJp,
+        tagsJp: product.tagsJp,
+        descriptionJp: product.descriptionJp,
+        collectionProductStatementJp: product.collectionProductStatementJp,
+        arStatementJp: product.arStatementJp,
+        otherStatementJp: product.otherStatementJp,
+        imageUrls: product.imageUrls,
+        tileImageUrls: product.tileImageUrls,
+        transparentBackgroundImageUrls: product.transparentBackgroundImageUrls,
+      );
+
   final String id;
 
   final String accountId;
   final String paymentMethod;
   final String vendorProductId;
   final String purchasedAtAsIso8601;
+
+  final bool isTrial;
 
   final Timestamp createdAt;
   final Timestamp lastEditedAt;

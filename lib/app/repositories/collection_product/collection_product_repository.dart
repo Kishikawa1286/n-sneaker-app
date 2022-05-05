@@ -152,4 +152,9 @@ class CollectionProductRepository {
       snapshot.docs,
     );
   }
+
+  List<CollectionProductModel> convertProductsToCollectionProducts(
+    List<ProductModel> products,
+  ) =>
+      products.map(CollectionProductModel.fromProduct).toList();
 }

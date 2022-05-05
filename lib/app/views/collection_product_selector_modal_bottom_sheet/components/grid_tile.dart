@@ -83,6 +83,30 @@ class CollectionProductSelectorModalBottomSheetGridTile
                   ),
                 ],
               ),
+              collectionProduct.isTrial
+                  ? Positioned(
+                      height: 27,
+                      top: 5,
+                      right: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: CommonStyle.themeColor,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 2),
+                        child: const Center(
+                          child: Text(
+                            'トライアル',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: CommonStyle.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),

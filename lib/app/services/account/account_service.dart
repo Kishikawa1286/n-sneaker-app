@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -229,6 +230,20 @@ class AccountService {
     } on Exception catch (e) {
       print(e);
     }
+  }
+
+  bool isTrialActive() {
+    final accountCreatedAt = _account?.createdAt.toDate();
+    if (accountCreatedAt == null) {
+      return false;
+    }
+    if (accountCreatedAt
+            .add(const Duration(days: 7))
+            .compareTo(Timestamp.now().toDate()) >
+        0) {
+      return true;
+    }
+    return false;
   }
 }
 

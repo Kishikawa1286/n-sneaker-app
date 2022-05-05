@@ -126,7 +126,7 @@ class Root extends HookConsumerWidget {
                     return const ArPage();
 
                   case 3:
-                    return const AccountPage();
+                    return AccountPage(goToArPage: () => viewModel.setIndex(2));
 
                   default:
                     return const LoadingPage();

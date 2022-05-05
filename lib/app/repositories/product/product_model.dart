@@ -23,6 +23,7 @@ class ProductModel {
     required this.numberOfFavorite,
     required this.numberOfHolders,
     required this.numberOfGlbFiles,
+    required this.availableInTrial,
     required this.createdAt,
     required this.lastEditedAt,
     this.description,
@@ -70,6 +71,7 @@ class ProductModel {
       numberOfFavorite: data['number_of_favorite'] as int,
       numberOfHolders: data['number_of_holders'] as int,
       numberOfGlbFiles: data['number_of_glb_files'] as int,
+      availableInTrial: (data['available_in_trial'] as bool?) ?? false,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       documentSnapshot: snapshot,
@@ -106,6 +108,8 @@ class ProductModel {
   final int numberOfFavorite;
   final int numberOfHolders;
   final int numberOfGlbFiles;
+
+  final bool availableInTrial;
 
   final Timestamp createdAt;
   final Timestamp lastEditedAt;

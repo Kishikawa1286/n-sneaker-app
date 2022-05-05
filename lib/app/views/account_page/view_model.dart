@@ -25,6 +25,12 @@ class AccountPageViewModel extends ViewModelChangeNotifier {
 
   String get accountId => _accountService.account?.id ?? '';
   int get point => _accountService.account?.point ?? 0;
+  bool get isTrialActive => _accountService.isTrialActive();
+  DateTime get trialExpiresAt =>
+      _accountService.account?.createdAt
+          .toDate()
+          .add(const Duration(days: 7)) ??
+      DateTime.now();
 
   String _version = '';
   String _buildNumber = '';
