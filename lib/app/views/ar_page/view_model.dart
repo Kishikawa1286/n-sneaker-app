@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,6 +11,7 @@ import '../../repositories/collection_product/collection_product_repository.dart
 import '../../repositories/product_glb_file/product_glb_file.dart';
 import '../../repositories/product_glb_file/product_glb_file_repository.dart';
 import '../../services/account/account_service.dart';
+import '../../services/unity_screenshot/unity_screenshot_service.dart';
 import '../../services/unity_widget_key/unity_widget_key_service.dart';
 
 final arPageViewModelProvider = AutoDisposeChangeNotifierProvider(
@@ -16,6 +20,7 @@ final arPageViewModelProvider = AutoDisposeChangeNotifierProvider(
     ref.read(productGlbFileRepositoryProvider),
     ref.read(collectionProductRepositoryProvider),
     ref.watch(unityWidgetKeyServiceProvider),
+    ref.watch(unityScreenshotServiceProvider),
   ),
 );
 
@@ -25,6 +30,7 @@ class ArPageViewModel extends ViewModelChangeNotifier {
     this._productGlbFileRepository,
     this._collectionProductRepository,
     this._unityWidgetKeyService,
+    this._unityScreenshotService,
   ) {
     _init();
   }
@@ -33,6 +39,7 @@ class ArPageViewModel extends ViewModelChangeNotifier {
   final ProductGlbFileRepository _productGlbFileRepository;
   final CollectionProductRepository _collectionProductRepository;
   final UnityWidgetKeyService _unityWidgetKeyService;
+  final UnityScreenshotService _unityScreenshotService;
 
   GlobalKey get unityWidgetKey => _unityWidgetKeyService.key;
 
@@ -135,19 +142,35 @@ class ArPageViewModel extends ViewModelChangeNotifier {
     await _initializeOperationDisplay();
   }
 
-  void onUnityMessage(dynamic message) {
+  Future<void> onUnityMessage({
+    required dynamic message,
+    required void Function() showUnityScreenshotModal,
+  }) async {
     if (message == '[[OBJECT_PLACED]]') {
-      _loadObject();
+      await _loadObject();
       return;
     }
     if (message == '[[RELOADED]]') {
-      _enableCamera();
+      await _enableCamera();
       return;
     }
     if (message.toString().contains('[[DOWNLOAD_ASSET_ERROR]]')) {
       print(message);
       return;
     }
+    // スクリーンショットのパスがメッセージとして飛んできた場合
+    if (message.toString().contains('/ar_screenshots/')) {
+      EasyDebounce.debounce(
+        'show_unity_screenshot_modal',
+        const Duration(milliseconds: 500),
+        () {
+          _unityScreenshotService.setScreenshotPath(message.toString());
+          showUnityScreenshotModal();
+        },
+      );
+      return;
+    }
+    print(message);
   }
 
   Future<void> _reload() async {
@@ -158,12 +181,12 @@ class ArPageViewModel extends ViewModelChangeNotifier {
     );
   }
 
-  void _loadObject() {
+  Future<void> _loadObject() async {
     final f = _productGlbFile;
     if (f == null) {
       return;
     }
-    _unityWidgetController.postMessage(
+    await _unityWidgetController.postMessage(
       'FileLoadModel',
       'Load',
       '{"fileName": "${f.productId}_${f.id}.glb", "url": "$_url"}',

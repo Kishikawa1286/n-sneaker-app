@@ -12,7 +12,7 @@ public class RotateOnSwiped : MonoBehaviour
     private float maxRate = 3f;
 
     // see: https://teratail.com/questions/190510
-    private float longTapTime = 0.25f;
+    private float longTapTime = 0.05f;
     private float nowTapTime = 0f;
 
     void Awake()

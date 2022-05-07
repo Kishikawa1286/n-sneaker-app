@@ -15,6 +15,7 @@ dependencies:
   cloud_firestore: ^3.1.9
   cloud_functions: ^3.2.9
   crypto: ^3.0.1
+  easy_debounce: ^2.0.2+1
   firebase_analytics: ^9.1.2
   firebase_auth: ^3.3.9
   firebase_core: ^1.13.0
@@ -25,6 +26,7 @@ dependencies:
   google_sign_in: ^5.2.4
   hooks_riverpod: ^1.0.3
   http: ^0.13.4
+  image_gallery_saver: ^1.7.1
   infinite_scroll_pagination: ^3.1.0
   introduction_screen: ^3.0.2
   model_viewer_plus: ^1.1.2

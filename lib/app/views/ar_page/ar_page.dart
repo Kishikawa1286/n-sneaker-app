@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/common_style.dart';
 import '../collection_product_selector_modal_bottom_sheet/collection_product_selector_modal_bottom_sheet.dart';
+import '../unity_screenshot_modal/unity_screenshot_modal.dart';
 import 'view_model.dart';
 
 class ArPage extends HookConsumerWidget {
@@ -71,7 +72,13 @@ class _ArPageState extends State<_ArPage> {
               ? UnityWidget(
                   key: viewModel.unityWidgetKey,
                   onUnityCreated: viewModel.onUnityCreated,
-                  onUnityMessage: viewModel.onUnityMessage,
+                  onUnityMessage: (dynamic message) {
+                    viewModel.onUnityMessage(
+                      message: message,
+                      showUnityScreenshotModal: () =>
+                          showUnityScreenshotModal(context),
+                    );
+                  },
                   useAndroidViewSurface: false,
                 )
               : const SizedBox(),

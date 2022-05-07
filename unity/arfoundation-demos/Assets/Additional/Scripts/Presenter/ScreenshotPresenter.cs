@@ -13,6 +13,6 @@ public class ScreenshotPresenter: MonoBehaviour
 
     void Start()
     {
-        _ScreenshotButtonView.OnClickAsObservable().Subscribe(_ => _ScreenshotModel.ShareScreenshot());
+        _ScreenshotButtonView.OnClickAsObservable().Subscribe(_ => _ScreenshotModel.SaveScreenshot());
     }
 }
