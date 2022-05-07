@@ -28,7 +28,7 @@ class MarketDetailPageDescription extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '${product.vendorJp}  ${product.seriesJp}',
+            product.seriesJp,
             maxLines: 2,
             style: const TextStyle(
               fontSize: 21,

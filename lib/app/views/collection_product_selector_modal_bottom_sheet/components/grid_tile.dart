@@ -69,7 +69,7 @@ class CollectionProductSelectorModalBottomSheetGridTile
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${collectionProduct.vendorJp}  ${collectionProduct.seriesJp}',
+                          collectionProduct.seriesJp,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.caption,
                         ),

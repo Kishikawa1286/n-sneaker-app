@@ -60,7 +60,7 @@ class MarketPageProductGridTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${product.vendorJp}  ${product.seriesJp}',
+                      product.seriesJp,
                       maxLines: 1,
                       style: const TextStyle(
                         fontSize: 11,
