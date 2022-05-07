@@ -32,7 +32,7 @@ class CollectionProductSelectorModalBottomSheet extends HookConsumerWidget {
         ref.watch(collectionProductSelectorModalBottomSheetViewModelProvider);
     return Column(
       children: [
-        const PageHeader(title: 'スニーカーを選択', height: 35),
+        const PageHeader(title: 'フィギュアを選択', height: 35),
         Flexible(
           child: PagedGridView<int, CollectionProductModel>(
             padding: const EdgeInsets.symmetric(
