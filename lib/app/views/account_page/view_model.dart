@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/view_model_change_notifier.dart';
+import '../../repositories/gallery_post/gallery_post_repository.dart';
 import '../../repositories/package_info/package_info_repository.dart';
 import '../../services/account/account_service.dart';
 
@@ -9,6 +10,7 @@ final accountPageViewModelProvider =
   (ref) => AccountPageViewModel(
     ref.watch(accountServiceProvider),
     ref.read(packageInfoRepositoryProvider),
+    ref.read(galleryPostRepositoryProvider),
   ),
 );
 
@@ -16,12 +18,14 @@ class AccountPageViewModel extends ViewModelChangeNotifier {
   AccountPageViewModel(
     this._accountService,
     this._packageInfoRepository,
+    this._galleryPostRepository,
   ) {
     _init();
   }
 
   final AccountService _accountService;
   final PackageInfoRepository _packageInfoRepository;
+  final GalleryPostRepository _galleryPostRepository;
 
   String get accountId => _accountService.account?.id ?? '';
   int get point => _accountService.account?.point ?? 0;
@@ -34,9 +38,11 @@ class AccountPageViewModel extends ViewModelChangeNotifier {
 
   String _version = '';
   String _buildNumber = '';
+  bool _loading = false;
 
   String get version => _version;
   String get buildNumber => _buildNumber;
+  bool get loading => _loading;
 
   /*
   SignInRewardModel? _signInReward;
@@ -78,6 +84,25 @@ class AccountPageViewModel extends ViewModelChangeNotifier {
       await _accountService.signOut();
     } on Exception catch (e) {
       print(e);
+    }
+  }
+
+  Future<String> clearBlockedAccountIds() async {
+    if (_loading) {
+      return '';
+    }
+    try {
+      _loading = true;
+      notifyListeners();
+
+      await _galleryPostRepository.clearBlockedAccountIds();
+
+      _loading = false;
+      notifyListeners();
+      return 'ブロックしたアカウントの一覧をクリアしました';
+    } on Exception catch (e) {
+      print(e);
+      return 'ブロックしたアカウントの一覧のクリアに失敗しました';
     }
   }
 

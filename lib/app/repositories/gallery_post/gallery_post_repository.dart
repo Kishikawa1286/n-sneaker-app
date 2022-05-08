@@ -9,12 +9,15 @@ import '../../interfaces/firebase/cloud_firestore/cloud_firestore_paths.dart';
 import '../../interfaces/firebase/firebase_storage/content_type.dart';
 import '../../interfaces/firebase/firebase_storage/firebase_storage_interface.dart';
 import '../../interfaces/firebase/firebase_storage/firebase_storage_paths.dart';
+import '../../interfaces/shared_preferences/shared_preferences_interface.dart';
+import '../../interfaces/shared_preferences/shared_preferences_key.dart';
 import 'gallery_post_model.dart';
 
 final galleryPostRepositoryProvider = Provider<GalleryPostRepository>(
   (ref) => GalleryPostRepository(
     ref.read(cloudFirestoreInterfaceProvider),
     ref.read(firebaseStorageInterface),
+    ref.read(sharedPreferencesInterfaceProvider),
   ),
 );
 
@@ -22,10 +25,12 @@ class GalleryPostRepository {
   const GalleryPostRepository(
     this._cloudFirestoreInterface,
     this._firebaseStorageInterface,
+    this._sharedPreferencesInterface,
   );
 
   final CloudFirestoreInterface _cloudFirestoreInterface;
   final FirebaseStorageInterface _firebaseStorageInterface;
+  final SharedPreferencesInterface _sharedPreferencesInterface;
 
   Future<GalleryPostModel> fetchById(String id) async {
     final snapshot = await _cloudFirestoreInterface.fetchDocumentSnapshot(
@@ -71,13 +76,19 @@ class GalleryPostRepository {
     int limit = 16,
     GalleryPostModel? startAfter,
   }) async {
+    // where-inに入れられない空配列を回避
+    final blockedAccountIds = [...await _getBlockedAccountIds(), ''];
     if (startAfter == null) {
       // startAfterを指定しない
       final snapshot =
           await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
         collectionPath: galleryPostsCollectionPath,
-        queryBuilder: (query) =>
-            query.orderBy('created_at', descending: true).limit(limit),
+        // see: https://stackoverflow.com/questions/66829643/cloud-firestore-inequality-operator-exception-flutter
+        queryBuilder: (query) => query
+            .where('account_id', whereNotIn: blockedAccountIds)
+            .orderBy('account_id')
+            .orderBy('created_at', descending: true)
+            .limit(limit),
       );
       return _convertDocumentSnapshotListToGalleryPostModelList(snapshot.docs);
     }
@@ -89,6 +100,8 @@ class GalleryPostRepository {
         await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
       collectionPath: galleryPostsCollectionPath,
       queryBuilder: (query) => query
+          .where('account_id', whereNotIn: blockedAccountIds)
+          .orderBy('account_id')
           .orderBy('created_at', descending: true)
           .limit(limit)
           .startAfterDocument(startAfterDocumentSnapshot),
@@ -163,4 +176,20 @@ class GalleryPostRepository {
       ),
     );
   }
+
+  Future<List<String>> _getBlockedAccountIds() async =>
+      await _sharedPreferencesInterface
+          .getStringList(SharedPreferencesKey.blockedAccountIds) ??
+      [];
+
+  Future<void> addBlockedAccountId(String accountId) async {
+    const key = SharedPreferencesKey.blockedAccountIds;
+    await _sharedPreferencesInterface.setStringList(
+      key: key,
+      value: [...await _getBlockedAccountIds(), accountId],
+    );
+  }
+
+  Future<void> clearBlockedAccountIds() => _sharedPreferencesInterface
+      .remove(SharedPreferencesKey.blockedAccountIds);
 }

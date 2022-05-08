@@ -224,12 +224,29 @@ class AccountPage extends HookConsumerWidget {
                 ],
               ),
             ),
-            AccountPageListTile(
-              iconData: Icons.account_circle,
-              title: 'ログアウト',
-              onTap: () async {
-                await viewModel.signOut();
-              },
+            AccountPageExpansionTile(
+              title: 'アプリ設定',
+              child: Column(
+                children: [
+                  AccountPageListTile(
+                    iconData: Icons.clear_all,
+                    title: 'アカウントブロックを初期化',
+                    onTap: () async {
+                      final message = await viewModel.clearBlockedAccountIds();
+                      if (message.isNotEmpty) {
+                        await showFlushbar(context, message: message);
+                      }
+                    },
+                  ),
+                  AccountPageListTile(
+                    iconData: Icons.account_circle,
+                    title: 'ログアウト',
+                    onTap: () async {
+                      await viewModel.signOut();
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

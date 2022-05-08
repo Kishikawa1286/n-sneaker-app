@@ -83,7 +83,7 @@ const contactUrl = 'https://notionforms.io/forms/n-sneaker';
 const accountDeletionRequestUrl = 'https://notionforms.io/forms/n-sneaker-1';
 
 /// ギャラリー報告
-const galleryPostReportUrl = '';
+const galleryPostReportUrl = 'https://notionforms.io/forms/nevermind';
 
 /// App Store
 const appStoreUrl = '';

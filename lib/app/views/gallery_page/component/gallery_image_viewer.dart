@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,19 +9,30 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../utils/common_style.dart';
+import '../../../../utils/common_widgets/overlay_loading.dart';
 import '../../../../utils/environment_variables.dart';
 import '../../../../utils/show_flushbar.dart';
-import '../../../repositories/gallery_post/gallery_post_model.dart';
 import '../view_model.dart';
 
 class GalleryImageViewer extends HookConsumerWidget {
-  const GalleryImageViewer({required this.galleryPost});
+  const GalleryImageViewer({required this.index});
 
-  final GalleryPostModel galleryPost;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(galleryPageViewModelProvider);
+    final galleryPost = viewModel.pagingController.itemList?[index];
+
+    if (galleryPost == null) {
+      return const Scaffold(
+        body: OverlayLoading(
+          visible: true,
+          child: SizedBox(),
+        ),
+      );
+    }
+
     return Scaffold(
       key: viewModel.scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
@@ -33,9 +46,7 @@ class GalleryImageViewer extends HookConsumerWidget {
                   context,
                   message: '投稿のIDをコピーしました',
                 );
-                Clipboard.setData(
-                  ClipboardData(text: galleryPost.id),
-                );
+                Clipboard.setData(ClipboardData(text: galleryPost.id));
               },
               leading: const Icon(Icons.copy),
               title: const Text('投稿のIDをコピー'),
@@ -50,7 +61,17 @@ class GalleryImageViewer extends HookConsumerWidget {
               title: const Text('悪質な投稿を報告'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () async {
+                Navigator.popUntil(
+                  context,
+                  (route) => route.isFirst,
+                );
+                // popの完了を待つ
+                Timer(
+                  const Duration(milliseconds: 500),
+                  () => viewModel.addBlockedAccountId(index),
+                );
+              },
               leading: const Icon(Icons.disabled_visible),
               title: const Text('同じユーザーの投稿を非表示'),
             ),

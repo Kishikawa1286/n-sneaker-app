@@ -23,6 +23,19 @@ class SharedPreferencesInterface {
     return sharedPreferences.getString(enumToString(key));
   }
 
+  Future<void> setStringList({
+    required SharedPreferencesKey key,
+    required List<String> value,
+  }) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setStringList(enumToString(key), value);
+  }
+
+  Future<List<String>?> getStringList(SharedPreferencesKey key) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getStringList(enumToString(key));
+  }
+
   Future<void> remove(SharedPreferencesKey key) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.remove(enumToString(key));
