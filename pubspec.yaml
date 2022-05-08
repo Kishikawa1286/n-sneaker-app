@@ -15,6 +15,7 @@ dependencies:
   cloud_firestore: ^3.1.9
   cloud_functions: ^3.2.9
   crypto: ^3.0.1
+  dismissible_page: ^0.7.2
   easy_debounce: ^2.0.2+1
   firebase_analytics: ^9.1.2
   firebase_auth: ^3.3.9

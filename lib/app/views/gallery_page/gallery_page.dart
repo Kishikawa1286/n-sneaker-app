@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -6,6 +7,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../../utils/common_style.dart';
 import '../../../utils/common_widgets/page_header.dart';
 import '../../repositories/gallery_post/gallery_post_model.dart';
+import 'component/gallery_image_viewer.dart';
 import 'view_model.dart';
 
 class GalleryPage extends HookConsumerWidget {
@@ -18,7 +20,7 @@ class GalleryPage extends HookConsumerWidget {
       child: Column(
         children: [
           const PageHeader(
-            title: 'コレクション',
+            title: 'ギャラリー',
             color: CommonStyle.scaffoldBackgroundColor,
           ),
           Flexible(
@@ -34,20 +36,24 @@ class GalleryPage extends HookConsumerWidget {
                 mainAxisSpacing: 1,
               ),
               builderDelegate: PagedChildBuilderDelegate<GalleryPostModel>(
-                itemBuilder: (context, galleryPost, index) =>
-                    CachedNetworkImage(
-                  imageUrl: galleryPost.compressedImageUrls.first,
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: imageProvider,
+                itemBuilder: (context, galleryPost, index) => GestureDetector(
+                  onTap: () => context.pushTransparentRoute(
+                    GalleryImageViewer(galleryPost: galleryPost),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: galleryPost.compressedImageUrls.first,
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: imageProvider,
+                        ),
                       ),
                     ),
-                  ),
-                  placeholder: (_, __) => Container(
-                    decoration: const BoxDecoration(
-                      color: CommonStyle.transparentBlack,
+                    placeholder: (_, __) => Container(
+                      decoration: const BoxDecoration(
+                        color: CommonStyle.transparentBlack,
+                      ),
                     ),
                   ),
                 ),

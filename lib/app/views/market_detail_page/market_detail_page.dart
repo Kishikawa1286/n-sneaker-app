@@ -109,11 +109,6 @@ class MarketDetailPage extends HookConsumerWidget {
                         color: CommonStyle.white,
                       ),
                     ),
-                    // child: IconButton(
-                    //   onPressed:
-                    //       viewModel.scaffoldKey.currentState?.openEndDrawer,
-                    //   icon: const Icon(Icons.menu, size: 30),
-                    // ),
                   ),
           ],
         ),

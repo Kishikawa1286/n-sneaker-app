@@ -82,6 +82,9 @@ const contactUrl = 'https://notionforms.io/forms/n-sneaker';
 /// アカウント削除
 const accountDeletionRequestUrl = 'https://notionforms.io/forms/n-sneaker-1';
 
+/// ギャラリー報告
+const galleryPostReportUrl = '';
+
 /// App Store
 const appStoreUrl = '';
 

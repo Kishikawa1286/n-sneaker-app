@@ -31,7 +31,17 @@ class GalleryPostModel {
     );
     if (imageUrls.length != imageStoragePaths.length) {
       throw Exception(
-        'imageUrls does not have same length with imageStoragePaths.',
+        'imageUrls.length != imageStoragePaths.length',
+      );
+    }
+    if (imageUrls.length != compressedImageUrls.length) {
+      throw Exception(
+        'imageUrls.length != compressedImageUrls.length',
+      );
+    }
+    if (imageUrls.length != compressedImageStoragePaths.length) {
+      throw Exception(
+        'imageUrls.length != compressedImageStoragePaths.length',
       );
     }
     return GalleryPostModel(
