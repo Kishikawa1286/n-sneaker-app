@@ -6,10 +6,16 @@ final unityScreenshotServiceProvider = Provider<UnityScreenshotService>(
 
 class UnityScreenshotService {
   String _screenshotPath = '';
+  String _productId = '';
 
   String get screenshotPath => _screenshotPath;
+  String get productId => _productId;
 
-  void setScreenshotPath(String path) {
+  void setStates({
+    required String path,
+    required String id,
+  }) {
     _screenshotPath = path;
+    _productId = id;
   }
 }

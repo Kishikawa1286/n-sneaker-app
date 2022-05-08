@@ -40,10 +40,18 @@ const String marketPageTabsCollectionPath =
 
 const String _launchConfigsDomain = 'launch_configs';
 
-const String launchConfigsCollection =
+const String launchConfigsCollectionPath =
     '${_launchConfigsDomain}_$firestoreLaunchConfigsVersion';
 
-const String _signInRewardDomain = 'sign_in_rewards';
+const String _signInRewardsDomain = 'sign_in_rewards';
 
-const String signInRewardCollection =
-    '${_signInRewardDomain}_$firestoreSignInRewardVersion';
+const String signInRewardsCollectionPath =
+    '${_signInRewardsDomain}_$firestoreSignInRewardsVersion';
+
+const String _galleryPostsDomain = 'gallery_posts';
+
+const String galleryPostsCollectionPath =
+    '${_galleryPostsDomain}_$firestoreGalleryPostsVersion';
+
+String galleryPostDocumentPath(String galleryPostId) =>
+    '$galleryPostsCollectionPath/$galleryPostId';

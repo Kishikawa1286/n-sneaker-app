@@ -164,7 +164,10 @@ class ArPageViewModel extends ViewModelChangeNotifier {
         'show_unity_screenshot_modal',
         const Duration(milliseconds: 500),
         () {
-          _unityScreenshotService.setScreenshotPath(message.toString());
+          _unityScreenshotService.setStates(
+            path: message.toString(),
+            id: _productGlbFile?.productId ?? '',
+          );
           showUnityScreenshotModal();
         },
       );

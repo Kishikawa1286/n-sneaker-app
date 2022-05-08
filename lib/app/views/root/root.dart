@@ -11,6 +11,7 @@ import '../../services/account/account_service.dart';
 import '../account_page/account_page.dart';
 import '../ar_page/ar_page.dart';
 import '../collection_page/collection_page.dart';
+import '../gallery_page/gallery_page.dart';
 import '../market_page/market_page.dart';
 import '../onboarding_page/onboarding_page.dart';
 import '../sign_up_page/sign_up_page.dart';
@@ -72,12 +73,16 @@ class Root extends HookConsumerWidget {
                   label: 'マーケット',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.grid_view_rounded),
-                  label: 'コレクション',
-                ),
-                BottomNavigationBarItem(
                   icon: Icon(Icons.center_focus_strong),
                   label: 'AR',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.photo),
+                  label: 'ギャラリー',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.grid_view_rounded),
+                  label: 'コレクション',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person),
@@ -120,13 +125,16 @@ class Root extends HookConsumerWidget {
                     return const MarketPage();
 
                   case 1:
-                    return const CollectionPage();
-
-                  case 2:
                     return const ArPage();
 
+                  case 2:
+                    return const GalleryPage();
+
                   case 3:
-                    return AccountPage(goToArPage: () => viewModel.setIndex(2));
+                    return const CollectionPage();
+
+                  case 4:
+                    return AccountPage(goToArPage: () => viewModel.setIndex(1));
 
                   default:
                     return const LoadingPage();

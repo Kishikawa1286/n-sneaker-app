@@ -18,7 +18,7 @@ class SignInRewardRepository {
     try {
       final signInRewardsSnapshot =
           await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
-        collectionPath: signInRewardCollection,
+        collectionPath: signInRewardsCollectionPath,
       );
       final signInRewardDocuments = signInRewardsSnapshot.docs;
       if (signInRewardDocuments.isEmpty) {

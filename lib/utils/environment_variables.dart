@@ -39,7 +39,10 @@ const String firestoreMarketPageTabsVersion = 'v1';
 const String firestoreLaunchConfigsVersion = 'v1';
 
 /// Firestoreの'launch_configs'コレクションのバージョン
-const String firestoreSignInRewardVersion = 'v1';
+const String firestoreSignInRewardsVersion = 'v1';
+
+/// Firestoreの'launch_configs'コレクションのバージョン
+const String firestoreGalleryPostsVersion = 'v1';
 
 /* Algolia */
 

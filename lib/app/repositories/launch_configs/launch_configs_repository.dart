@@ -16,7 +16,7 @@ class LaunchConfigsRepository {
   Future<LaunchConfigsModel> fetch() async {
     final snapshot =
         await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
-      collectionPath: launchConfigsCollection,
+      collectionPath: launchConfigsCollectionPath,
       queryBuilder: (query) => query.limit(16),
     );
     final docs = snapshot.docs;
