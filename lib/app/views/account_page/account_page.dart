@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../../utils/common_style.dart';
 import '../../../utils/environment_variables.dart';
 import '../../../utils/show_flushbar.dart';
+import '../account_gallery_posts_page/account_gallery_posts_page.dart';
 import 'components/expansion_tile.dart';
 import 'components/list_tile.dart';
 import 'view_model.dart';
@@ -247,6 +248,11 @@ class AccountPage extends HookConsumerWidget {
                   ),
                 ],
               ),
+            ),
+            AccountPageListTile(
+              iconData: Icons.image,
+              title: '自分の投稿一覧',
+              onTap: () => pushAccountGalleryPostsPage(context),
             ),
           ],
         ),

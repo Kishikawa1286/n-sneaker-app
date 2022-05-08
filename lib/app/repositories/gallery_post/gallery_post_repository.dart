@@ -150,20 +150,21 @@ class GalleryPostRepository {
       bytes: compressedBytes,
       contentType: ContentType.png,
     );
-    await _cloudFirestoreInterface.addData(
+    final collectionReference = _cloudFirestoreInterface.collectionReference(
       collectionPath: galleryPostsCollectionPath,
-      data: <String, dynamic>{
-        'id': id,
-        'product_id': productId,
-        'account_id': accountId,
-        'image_urls': [imageUrl],
-        'image_storage_paths': [imageStoragePath],
-        'compressed_image_urls': [compressedImageUrl],
-        'compressed_image_storage_paths': [compressedImageStoragePath],
-        'created_at': Timestamp.now(),
-        'last_edited_at': Timestamp.now(),
-      },
     );
+    final documentReference = collectionReference.doc(id);
+    await documentReference.set(<String, dynamic>{
+      'id': id,
+      'product_id': productId,
+      'account_id': accountId,
+      'image_urls': [imageUrl],
+      'image_storage_paths': [imageStoragePath],
+      'compressed_image_urls': [compressedImageUrl],
+      'compressed_image_storage_paths': [compressedImageStoragePath],
+      'created_at': Timestamp.now(),
+      'last_edited_at': Timestamp.now(),
+    });
   }
 
   Future<void> deleteGalleryPost(GalleryPostModel galleryPost) async {
@@ -172,7 +173,7 @@ class GalleryPostRepository {
     );
     await Future.wait(
       galleryPost.imageStoragePaths.map(
-        (path) => _firebaseStorageInterface.deleteDirectory(path: path),
+        (path) => _firebaseStorageInterface.deleteFile(path: path),
       ),
     );
   }

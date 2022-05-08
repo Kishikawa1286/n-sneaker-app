@@ -7,6 +7,9 @@ final Provider<CloudFirestoreInterface> cloudFirestoreInterfaceProvider =
 class CloudFirestoreInterface {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  CollectionReference collectionReference({required String collectionPath}) =>
+      _firestore.collection(collectionPath);
+
   Future<void> setData({
     required String documentPath,
     required Map<String, dynamic> data,

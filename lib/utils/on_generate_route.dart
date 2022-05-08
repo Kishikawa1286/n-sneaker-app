@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app/views/account_gallery_posts_page/account_gallery_posts_page.dart';
 import '../app/views/glb_file_viewer_page/glb_file_viewer_page.dart';
 import '../app/views/market_detail_page/market_detail_page.dart';
 import '../app/views/onboarding_page/onboarding_page.dart';
@@ -26,6 +27,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) =>
 
         if (name == 'password_reset') {
           return const PasswordResetPage();
+        }
+
+        if (name == 'account_gallery_posts') {
+          return const AccountGalleryPostsPage();
         }
 
         if (name.startsWith('product_detail')) {
