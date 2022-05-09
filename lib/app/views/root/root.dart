@@ -17,6 +17,7 @@ import '../onboarding_page/onboarding_page.dart';
 import '../sign_up_page/sign_up_page.dart';
 import 'invalid_build_number_page.dart';
 import 'maintainance_page.dart';
+import 'sign_up_reward_modal.dart';
 import 'view_model.dart';
 
 class Root extends HookConsumerWidget {
@@ -114,7 +115,14 @@ class Root extends HookConsumerWidget {
                     }
                     */
                     if (authState == AuthState.signInWithNewAccount) {
-                      // wait MarketPage built
+                      // ページのビルドを待つ
+                      // 特典→オンボーディングの順にpush
+                      Timer(const Duration(milliseconds: 480), () {
+                        if (!viewModel.signUpRewardModalPushed) {
+                          showSignUpRewardModal(context);
+                          viewModel.onSignUpRewardModalPushed();
+                        }
+                      });
                       Timer(const Duration(milliseconds: 500), () {
                         if (!onboardingDone && !viewModel.onboardingPushed) {
                           pushOnboardingPage(context);
