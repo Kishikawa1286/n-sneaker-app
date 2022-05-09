@@ -71,8 +71,8 @@ class UnityScreenshotModalViewModel extends ViewModelChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> saveImage() async {
-    if (_loading) {
+  Future<bool> saveImage({bool skipCheckingLoadingState = false}) async {
+    if (_loading && !skipCheckingLoadingState) {
       return false;
     }
     final im = _image;
@@ -114,7 +114,7 @@ class UnityScreenshotModalViewModel extends ViewModelChangeNotifier {
       _loading = true;
       notifyListeners();
 
-      await saveImage();
+      await saveImage(skipCheckingLoadingState: true);
       await _galleryPostRepository.addGalleryPost(
         accountId: account.id,
         productId: productId,
