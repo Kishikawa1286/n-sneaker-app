@@ -20,6 +20,40 @@ class AccountGalleryPostsPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(accountGalleryPostsPageViewModelProvider);
+    final itemList = viewModel.pagingController.itemList;
+
+    if (itemList == null) {
+      return Scaffold(
+        body: Column(
+          children: [
+            const PageHeader(
+              title: '自分の投稿',
+              color: CommonStyle.scaffoldBackgroundColor,
+              showBackButton: true,
+            ),
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    '📸',
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      'まだ投稿がありません',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: Column(
         children: [
