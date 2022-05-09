@@ -94,38 +94,45 @@ class OnboardingPage extends HookConsumerWidget {
       pages: [
         _page(
           context,
-          title: 'N-Sneaker',
-          body: 'N-Sneakerはデジタルスニーカーを\n「買って、集めて、遊べる」\n総合プラットフォームです',
+          title: 'Nevermind',
+          body: 'Nevermindは\n「毎日に小さなオシャレをプラスする」\nファッションフィギュアのアプリです',
           assetImagePath: 'assets/onboarding_images/onboarding1.jpg',
           backgroundImagePath: 'assets/onboarding_images/Blob1.png',
         ),
         _page(
           context,
           title: 'マーケット',
-          body: '気にいったスニーカーを選んで購入',
+          body: '気にいったフィギュアを選んで購入',
           assetImagePath: 'assets/onboarding_images/onboarding2.jpg',
           backgroundImagePath: 'assets/onboarding_images/Blob2.png',
         ),
         _page(
           context,
-          title: 'コレクション',
-          body: '買ったスニーカーはコレクションして\n手のひらの中で好きなだけ\n転がすことができます',
+          title: 'AR',
+          body: 'お気に入りのフィギュアを\nARで私たちの日常に持ってこよう',
           assetImagePath: 'assets/onboarding_images/onboarding3.jpg',
           backgroundImagePath: 'assets/onboarding_images/Blob3.png',
         ),
         _page(
           context,
-          title: 'AR',
-          body: 'お気に入りのスニーカーを\nARで私たちの日常に持ってこよう',
+          title: 'ギャラリー',
+          body: '上手く撮れたフィギュアの写真は\nギャラリーでみんなとシェアしよう',
           assetImagePath: 'assets/onboarding_images/onboarding4.jpg',
           backgroundImagePath: 'assets/onboarding_images/Blob4.png',
         ),
         _page(
           context,
-          title: '',
-          body: 'さあ、新しいファッションライフを\n始めましょう！',
+          title: 'コレクション',
+          body: '買ったフィギュアはコレクションして\n手のひらの中で好きなだけ\n転がすことができます',
           assetImagePath: 'assets/onboarding_images/onboarding5.jpg',
           backgroundImagePath: 'assets/onboarding_images/Blob5.png',
+        ),
+        _page(
+          context,
+          title: '',
+          body: 'さあ、Nevermindと一緒に\n新しい日常を始めましょう！',
+          assetImagePath: 'assets/onboarding_images/onboarding6.jpg',
+          backgroundImagePath: 'assets/onboarding_images/Blob1.png',
         ),
       ],
       next: const Icon(Icons.arrow_forward_ios, color: CommonStyle.black),
@@ -152,12 +159,12 @@ class OnboardingPage extends HookConsumerWidget {
         Navigator.of(context).pop();
       },
       curve: Curves.fastLinearToSlowEaseIn,
-      controlsMargin: const EdgeInsets.all(16),
-      controlsPadding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+      controlsMargin: const EdgeInsets.all(4),
+      controlsPadding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
       dotsDecorator: const DotsDecorator(
         size: Size(10, 10),
         color: CommonStyle.grey,
-        activeSize: Size(22, 10),
+        activeSize: Size(16, 10),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25)),
         ),
@@ -168,6 +175,7 @@ class OnboardingPage extends HookConsumerWidget {
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
+      dotsFlex: 0,
     );
   }
 }
