@@ -80,11 +80,15 @@ class UnityScreenshotModalViewModel extends ViewModelChangeNotifier {
       return false;
     }
     try {
-      _loading = true;
-      notifyListeners();
+      if (!skipCheckingLoadingState) {
+        _loading = true;
+        notifyListeners();
+      }
       await _unityScreenshotRepository.saveUnityScreenshot(im);
-      _loading = false;
-      notifyListeners();
+      if (!skipCheckingLoadingState) {
+        _loading = false;
+        notifyListeners();
+      }
       return true;
     } on Exception catch (e) {
       print(e);
