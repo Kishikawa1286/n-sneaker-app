@@ -12,6 +12,7 @@ import '../../interfaces/firebase/firebase_storage/firebase_storage_paths.dart';
 import '../../interfaces/shared_preferences/shared_preferences_interface.dart';
 import '../../interfaces/shared_preferences/shared_preferences_key.dart';
 import 'gallery_post_model.dart';
+import 'gallery_posts_fech_result.dart';
 
 final galleryPostRepositoryProvider = Provider<GalleryPostRepository>(
   (ref) => GalleryPostRepository(
@@ -39,7 +40,7 @@ class GalleryPostRepository {
     return GalleryPostModel.fromDocumentSnapshot(snapshot);
   }
 
-  Future<List<GalleryPostModel>> fetchByAccountId(
+  Future<GalleryPostsFetchResult> fetchByAccountId(
     String accountId, {
     int limit = 16,
     GalleryPostModel? startAfter,
@@ -54,11 +55,11 @@ class GalleryPostRepository {
             .orderBy('created_at', descending: true)
             .limit(limit),
       );
-      return _convertDocumentSnapshotListToGalleryPostModelList(snapshot.docs);
+      return _processDocumentSnapshotList(snapshot.docs);
     }
     final startAfterDocumentSnapshot = startAfter.documentSnapshot;
     if (startAfterDocumentSnapshot == null) {
-      return [];
+      throw Exception('startAfter.documentSnapshot is null.');
     }
     final snapshot =
         await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
@@ -69,61 +70,78 @@ class GalleryPostRepository {
           .limit(limit)
           .startAfterDocument(startAfterDocumentSnapshot),
     );
-    return _convertDocumentSnapshotListToGalleryPostModelList(snapshot.docs);
+    return _processDocumentSnapshotList(snapshot.docs);
   }
 
-  Future<List<GalleryPostModel>> fetchNew({
+  Future<GalleryPostsFetchResult> fetchNew({
     int limit = 16,
     GalleryPostModel? startAfter,
   }) async {
     // where-inに入れられない空配列を回避
-    final blockedAccountIds = [...await _getBlockedAccountIds(), ''];
+    final blockedAccountIds = await _getBlockedAccountIds();
     if (startAfter == null) {
       // startAfterを指定しない
       final snapshot =
           await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
         collectionPath: galleryPostsCollectionPath,
-        // see: https://stackoverflow.com/questions/66829643/cloud-firestore-inequality-operator-exception-flutter
-        queryBuilder: (query) => query
-            .where('account_id', whereNotIn: blockedAccountIds)
-            .orderBy('account_id')
-            .orderBy('created_at', descending: true)
-            .limit(limit),
+        queryBuilder: (query) =>
+            query.orderBy('created_at', descending: true).limit(limit),
       );
-      return _convertDocumentSnapshotListToGalleryPostModelList(snapshot.docs);
+      return _processDocumentSnapshotList(
+        snapshot.docs,
+        blockedAccountIds: blockedAccountIds,
+      );
     }
     final startAfterDocumentSnapshot = startAfter.documentSnapshot;
     if (startAfterDocumentSnapshot == null) {
-      return [];
+      throw Exception('startAfter.documentSnapshot is null.');
     }
     final snapshot =
         await _cloudFirestoreInterface.collectionFuture<Map<String, dynamic>>(
       collectionPath: galleryPostsCollectionPath,
       queryBuilder: (query) => query
-          .where('account_id', whereNotIn: blockedAccountIds)
-          .orderBy('account_id')
           .orderBy('created_at', descending: true)
           .limit(limit)
           .startAfterDocument(startAfterDocumentSnapshot),
     );
-    return _convertDocumentSnapshotListToGalleryPostModelList(snapshot.docs);
+    return _processDocumentSnapshotList(
+      snapshot.docs,
+      blockedAccountIds: blockedAccountIds,
+    );
   }
 
-  List<GalleryPostModel> _convertDocumentSnapshotListToGalleryPostModelList(
-    List<DocumentSnapshot<Map<String, dynamic>>> docs,
-  ) =>
-      docs
-          .map((documentSnapshot) {
-            try {
-              return GalleryPostModel.fromDocumentSnapshot(documentSnapshot);
-            } on Exception catch (e) {
-              print(e);
-              return null;
-            }
-          })
-          .toList()
-          .whereType<GalleryPostModel>()
-          .toList();
+  GalleryPostsFetchResult _processDocumentSnapshotList(
+    List<DocumentSnapshot<Map<String, dynamic>>> docs, {
+    List<String> blockedAccountIds = const <String>[],
+  }) {
+    final numberOfFetched = docs.length;
+    final rawGalleryPosts = docs
+        .map((doc) {
+          try {
+            return GalleryPostModel.fromDocumentSnapshot(doc);
+          } on Exception catch (e) {
+            print(e);
+            return null;
+          }
+        })
+        .toList()
+        .whereType<GalleryPostModel>()
+        .toList();
+    final numberOfInvalid = numberOfFetched - rawGalleryPosts.length;
+    final galleryPosts = rawGalleryPosts
+        .where(
+          (galleryPost) => !blockedAccountIds.contains(galleryPost.accountId),
+        )
+        .toList();
+    final numberOfBlocked =
+        numberOfFetched - numberOfInvalid - galleryPosts.length;
+    return GalleryPostsFetchResult(
+      numberOfFetched: numberOfFetched,
+      numberOfInvalid: numberOfInvalid,
+      numberOfBlocked: numberOfBlocked,
+      galleryPosts: galleryPosts,
+    );
+  }
 
   Future<void> addGalleryPost({
     required String accountId,

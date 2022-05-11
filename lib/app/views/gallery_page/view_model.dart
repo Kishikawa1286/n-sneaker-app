@@ -41,7 +41,7 @@ class GalleryPageViewModel extends ViewModelChangeNotifier {
   Future<void> _fetch(int pageKey) async {
     try {
       final startAfter = pagingController.itemList?.last;
-      final fetched = await _galleryPostRepository.fetchNew(
+      final fetchResult = await _galleryPostRepository.fetchNew(
         limit: _limit,
         startAfter: startAfter,
       );
@@ -49,10 +49,13 @@ class GalleryPageViewModel extends ViewModelChangeNotifier {
       if (disposed) {
         return;
       }
-      if (fetched.length != _limit) {
-        _pagingController.appendLastPage(fetched);
+      if (fetchResult.numberOfFetched != _limit) {
+        _pagingController.appendLastPage(fetchResult.galleryPosts);
       } else {
-        _pagingController.appendPage(fetched, pageKey + _limit);
+        _pagingController.appendPage(
+          fetchResult.galleryPosts,
+          pageKey + fetchResult.galleryPosts.length,
+        );
       }
       notifyListeners();
     } on Exception catch (e) {

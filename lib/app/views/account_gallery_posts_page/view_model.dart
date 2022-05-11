@@ -50,7 +50,7 @@ class AccountGalleryPostsPageViewModel extends ViewModelChangeNotifier {
     }
     try {
       final startAfter = pagingController.itemList?.last;
-      final fetched = await _galleryPostRepository.fetchByAccountId(
+      final fetchResult = await _galleryPostRepository.fetchByAccountId(
         accountId,
         limit: _limit,
         startAfter: startAfter,
@@ -59,10 +59,13 @@ class AccountGalleryPostsPageViewModel extends ViewModelChangeNotifier {
       if (disposed) {
         return;
       }
-      if (fetched.length != _limit) {
-        _pagingController.appendLastPage(fetched);
+      if (fetchResult.numberOfFetched != _limit) {
+        _pagingController.appendLastPage(fetchResult.galleryPosts);
       } else {
-        _pagingController.appendPage(fetched, pageKey + _limit);
+        _pagingController.appendPage(
+          fetchResult.galleryPosts,
+          pageKey + fetchResult.galleryPosts.length,
+        );
       }
       notifyListeners();
     } on Exception catch (e) {
