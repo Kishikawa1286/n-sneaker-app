@@ -59,7 +59,6 @@ class GlbFileViewerPage extends HookConsumerWidget {
                       src: 'file://${viewModel.glbFileModel.filePath}',
                       alt: 'Model Viewer',
                       ar: false,
-                      cameraControls: true,
                     ),
                   ),
                 )
