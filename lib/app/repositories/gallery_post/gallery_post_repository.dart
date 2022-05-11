@@ -194,6 +194,11 @@ class GalleryPostRepository {
         (path) => _firebaseStorageInterface.deleteFile(path: path),
       ),
     );
+    await Future.wait(
+      galleryPost.compressedImageStoragePaths.map(
+        (path) => _firebaseStorageInterface.deleteFile(path: path),
+      ),
+    );
   }
 
   Future<List<String>> _getBlockedAccountIds() async =>
