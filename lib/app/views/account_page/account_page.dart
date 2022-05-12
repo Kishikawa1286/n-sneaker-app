@@ -38,13 +38,13 @@ class AccountPage extends HookConsumerWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 30),
+              padding: const EdgeInsets.only(left: 20, top: 30, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   viewModel.isTrialActive
                       ? Padding(
-                          padding: const EdgeInsets.only(top: 5, bottom: 5),
+                          padding: const EdgeInsets.only(top: 5, bottom: 15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -93,6 +93,13 @@ class AccountPage extends HookConsumerWidget {
                                       color: CommonStyle.white,
                                     ),
                                   ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: Text(
+                                  '※ トライアルで入手したフィギュアはコレクションには表示されず、30日後にARでも使用できなくなります。\nトライアル期間後も使うためにはフィギュアの購入が必要です。',
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ),
                             ],
