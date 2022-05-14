@@ -85,13 +85,13 @@ class CollectionProductRepository {
     // ns.purchasedAt == nullは既に弾いている
     // // 時系列順にソートされる（最新のものが最後）
     nonSubscriptions.sort((a, b) => a.purchasedAt!.compareTo(b.purchasedAt!));
-    final purchaseId = nonSubscriptions.last.purchaseId;
-    if (purchaseId == null) {
+    final vendorTransactionId = nonSubscriptions.last.vendorTransactionId;
+    if (vendorTransactionId == null) {
       throw Exception('purchaseId is null');
     }
     final params = AddCollectionProductOnMakingPurchaseParameters(
       productId: product.id,
-      purchaseId: purchaseId,
+      vendorTransactionId: vendorTransactionId,
     );
     final result = await _cloudFunctionsInterface
         .addCollectionProductOnMakingPurchase(params);
