@@ -12,7 +12,9 @@ import '../../../../utils/common_style.dart';
 import '../../../../utils/common_widgets/overlay_loading.dart';
 import '../../../../utils/environment_variables.dart';
 import '../../../../utils/show_flushbar.dart';
+import '../../market_detail_page/market_detail_page.dart';
 import '../view_model.dart';
+import 'view_model.dart';
 
 class GalleryImageViewer extends HookConsumerWidget {
   const GalleryImageViewer({required this.index});
@@ -21,8 +23,8 @@ class GalleryImageViewer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(galleryPageViewModelProvider);
-    final galleryPost = viewModel.pagingController.itemList?[index];
+    final galleryPageViewModel = ref.watch(galleryPageViewModelProvider);
+    final galleryPost = galleryPageViewModel.pagingController.itemList?[index];
 
     if (galleryPost == null) {
       return const Scaffold(
@@ -33,8 +35,21 @@ class GalleryImageViewer extends HookConsumerWidget {
       );
     }
 
+    final galleryImageViewerViewModel =
+        ref.watch(galleryImageViewerViewModelProvider(galleryPost.productId));
+    final product = galleryImageViewerViewModel.product;
+
+    if (product == null) {
+      return const Scaffold(
+        body: OverlayLoading(
+          visible: true,
+          child: SizedBox(),
+        ),
+      );
+    }
+
     return Scaffold(
-      key: viewModel.scaffoldKey,
+      key: galleryImageViewerViewModel.scaffoldKey,
       endDrawerEnableOpenDragGesture: false,
       endDrawer: Drawer(
         child: ListView(
@@ -69,7 +84,7 @@ class GalleryImageViewer extends HookConsumerWidget {
                 // popの完了を待つ
                 Timer(
                   const Duration(milliseconds: 500),
-                  () => viewModel.addBlockedAccountId(index),
+                  () => galleryPageViewModel.addBlockedAccountId(index),
                 );
               },
               leading: const Icon(Icons.disabled_visible),
@@ -93,29 +108,17 @@ class GalleryImageViewer extends HookConsumerWidget {
               behavior: HitTestBehavior.opaque,
               child: Center(
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.65,
                   child: CachedNetworkImage(
                     imageUrl: galleryPost.imageUrls.first,
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(7),
-                        ),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: imageProvider,
-                        ),
+                    imageBuilder: (context, imageProvider) => Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image(image: imageProvider),
                       ),
                     ),
-                    placeholder: (_, __) => Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(7),
-                        ),
-                        color: CommonStyle.grey,
-                      ),
-                    ),
+                    placeholder: (_, __) => const SizedBox(),
                   ),
                 ),
               ),
@@ -127,7 +130,8 @@ class GalleryImageViewer extends HookConsumerWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                viewModel.scaffoldKey.currentState?.openEndDrawer();
+                galleryImageViewerViewModel.scaffoldKey.currentState
+                    ?.openEndDrawer();
               },
               child: Container(
                 color: CommonStyle.transparent,
@@ -136,6 +140,55 @@ class GalleryImageViewer extends HookConsumerWidget {
                   Icons.menu,
                   size: 32,
                   color: CommonStyle.white,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Card(
+              elevation: 5,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(7)),
+              ),
+              margin: const EdgeInsets.only(bottom: 40),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 50,
+                child: ListTile(
+                  tileColor: CommonStyle.transparent,
+                  leading: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CachedNetworkImage(
+                      imageUrl: product.tileImageUrls.first,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: imageProvider,
+                          ),
+                        ),
+                      ),
+                      placeholder: (_, __) => Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(7)),
+                          color: CommonStyle.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                  title: Text(
+                    product.titleJp,
+                    maxLines: 1,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  onTap: product.visibleInMarket
+                      ? () =>
+                          pushMarketDetailPage(context, productId: product.id)
+                      : null,
                 ),
               ),
             ),

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -25,11 +24,9 @@ class GalleryPageViewModel extends ViewModelChangeNotifier {
 
   final PagingController<int, GalleryPostModel> _pagingController =
       PagingController<int, GalleryPostModel>(firstPageKey: 0);
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   PagingController<int, GalleryPostModel> get pagingController =>
       _pagingController;
-  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
   bool _loading = false;
 
   @override

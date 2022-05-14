@@ -43,10 +43,7 @@ class MarketDetailPageCarouselSlider extends HookConsumerWidget {
                   child: Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        url,
-                        fit: BoxFit.contain,
-                      ),
+                      child: Image(image: imageProvider),
                     ),
                   ),
                 ),
@@ -57,7 +54,7 @@ class MarketDetailPageCarouselSlider extends HookConsumerWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Container(
-                      color: CommonStyle.grey,
+                      color: CommonStyle.transparent,
                     ),
                   ),
                 ),

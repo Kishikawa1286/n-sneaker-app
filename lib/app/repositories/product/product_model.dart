@@ -16,6 +16,10 @@ class ProductModel {
     required this.collectionProductStatementJp,
     required this.arStatementJp,
     required this.otherStatementJp,
+    required this.description,
+    required this.collectionProductStatement,
+    required this.arStatement,
+    required this.otherStatement,
     required this.imageUrls,
     required this.tileImageUrls,
     required this.transparentBackgroundImageUrls,
@@ -26,10 +30,7 @@ class ProductModel {
     required this.availableInTrial,
     required this.createdAt,
     required this.lastEditedAt,
-    this.description,
-    this.collectionProductStatement,
-    this.arStatement,
-    this.otherStatement,
+    required this.visibleInMarket,
     this.documentSnapshot,
   });
 
@@ -72,6 +73,7 @@ class ProductModel {
       numberOfHolders: data['number_of_holders'] as int,
       numberOfGlbFiles: data['number_of_glb_files'] as int,
       availableInTrial: (data['available_in_trial'] as bool?) ?? false,
+      visibleInMarket: (data['vivsible_in_market'] as bool?) ?? false,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       documentSnapshot: snapshot,
@@ -110,6 +112,7 @@ class ProductModel {
   final int numberOfGlbFiles;
 
   final bool availableInTrial;
+  final bool visibleInMarket;
 
   final Timestamp createdAt;
   final Timestamp lastEditedAt;
