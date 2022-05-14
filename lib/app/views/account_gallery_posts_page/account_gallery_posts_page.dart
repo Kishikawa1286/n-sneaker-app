@@ -32,6 +32,20 @@ class AccountGalleryPostsPage extends HookConsumerWidget {
               showBackButton: true,
             ),
             Flexible(
+              child: PagedGridView<int, GalleryPostModel>(
+                pagingController: viewModel.pagingController,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 1,
+                  mainAxisSpacing: 1,
+                ),
+                builderDelegate: PagedChildBuilderDelegate<GalleryPostModel>(
+                  itemBuilder: (context, galleryPost, index) =>
+                      const SizedBox(),
+                ),
+              ),
+            ),
+            Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
