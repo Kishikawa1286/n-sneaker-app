@@ -8,6 +8,7 @@ import '../../../utils/common_style.dart';
 import '../../../utils/common_widgets/page_header.dart';
 import '../../repositories/gallery_post/gallery_post_model.dart';
 import 'component/image_viewer.dart';
+import 'component/placeholder.dart';
 import 'view_model.dart';
 
 void pushAccountGalleryPostsPage(BuildContext context) {
@@ -23,49 +24,10 @@ class AccountGalleryPostsPage extends HookConsumerWidget {
     final itemList = viewModel.pagingController.itemList;
 
     if (itemList == null) {
-      return Scaffold(
-        body: Column(
-          children: [
-            const PageHeader(
-              title: '自分の投稿',
-              color: CommonStyle.scaffoldBackgroundColor,
-              showBackButton: true,
-            ),
-            Flexible(
-              child: PagedGridView<int, GalleryPostModel>(
-                pagingController: viewModel.pagingController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 1,
-                  mainAxisSpacing: 1,
-                ),
-                builderDelegate: PagedChildBuilderDelegate<GalleryPostModel>(
-                  itemBuilder: (context, galleryPost, index) =>
-                      const SizedBox(),
-                ),
-              ),
-            ),
-            Flexible(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    '📸',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Text(
-                      'まだ投稿がありません',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+      return const AccountGalleryPostsPagePlaceholder();
+    }
+    if (itemList.isEmpty) {
+      return const AccountGalleryPostsPagePlaceholder();
     }
 
     return Scaffold(
