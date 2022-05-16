@@ -16,7 +16,12 @@ class RevenuecatRepository {
   Future<LogInResult> signIn({required String accountId}) =>
       _revenuecatInterface.signIn(accountId: accountId);
 
-  Future<PurchaserInfo> signOut() => _revenuecatInterface.signOut();
+  Future<PurchaserInfo?> signOut() async {
+    if (await _revenuecatInterface.isAnonymous) {
+      return null;
+    }
+    return _revenuecatInterface.signOut();
+  }
 
   Future<PurchaserInfo> fetchPurchaserInfo() =>
       _revenuecatInterface.fetchPurchaserInfo();

@@ -12,6 +12,8 @@ class RevenuecatInterface {
 
   Future<PurchaserInfo> signOut() => Purchases.logOut();
 
+  Future<bool> get isAnonymous => Purchases.isAnonymous;
+
   Future<PurchaserInfo> fetchPurchaserInfo() => Purchases.getPurchaserInfo();
 
   Future<Offerings> fetchOfferings() => Purchases.getOfferings();
