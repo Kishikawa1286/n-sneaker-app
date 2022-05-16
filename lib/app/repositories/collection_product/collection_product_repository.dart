@@ -1,8 +1,8 @@
-import 'package:adapty_flutter/results/make_purchase_result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:purchases_flutter/models/transaction.dart'
+    as revenuecat_transaction;
 
-import '../../../utils/convert_paywall_id_to_vendor_product_id.dart';
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_interface.dart';
 import '../../interfaces/firebase/cloud_firestore/cloud_firestore_paths.dart';
 import '../../interfaces/firebase/cloud_functions/add_collection_product_on_making_purchase_parameters.dart';
@@ -68,30 +68,11 @@ class CollectionProductRepository {
 
   Future<void> addCollectionProductOnMakingPurchase({
     required ProductModel product,
-    required MakePurchaseResult makePurchaseResult,
+    required revenuecat_transaction.Transaction transaction,
   }) async {
-    final paywallId = product.adaptyPaywallId;
-    final vendorProductId = convertPaywallIdToVendorProductId(paywallId);
-    if (vendorProductId.isEmpty) {
-      throw Exception('generating vendor product id failed.');
-    }
-    final nonSubscriptions = makePurchaseResult
-        .purchaserInfo?.nonSubscriptions[vendorProductId]
-        ?.where((ns) => ns.purchasedAt != null)
-        .toList();
-    if (nonSubscriptions == null) {
-      throw Exception('no nonSubscription for id $vendorProductId exists.');
-    }
-    // ns.purchasedAt == nullは既に弾いている
-    // // 時系列順にソートされる（最新のものが最後）
-    nonSubscriptions.sort((a, b) => a.purchasedAt!.compareTo(b.purchasedAt!));
-    final vendorTransactionId = nonSubscriptions.last.vendorTransactionId;
-    if (vendorTransactionId == null) {
-      throw Exception('purchaseId is null');
-    }
     final params = AddCollectionProductOnMakingPurchaseParameters(
       productId: product.id,
-      vendorTransactionId: vendorTransactionId,
+      revenuecatTransactionId: transaction.revenueCatId,
     );
     final result = await _cloudFunctionsInterface
         .addCollectionProductOnMakingPurchase(params);
@@ -100,9 +81,7 @@ class CollectionProductRepository {
     }
   }
 
-  Future<void> addCollectionProductOnRestoringPurchase(
-    String productId,
-  ) async {
+  Future<void> addCollectionProductOnRestoringPurchase(String productId) async {
     final params =
         AddCollectionProductOnRestoringPurchaseParameters(productId: productId);
     final result = await _cloudFunctionsInterface

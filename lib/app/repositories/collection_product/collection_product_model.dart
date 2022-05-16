@@ -6,9 +6,6 @@ class CollectionProductModel {
   const CollectionProductModel({
     required this.id,
     required this.accountId,
-    required this.paymentMethod,
-    required this.vendorProductId,
-    required this.purchasedAtAsIso8601,
     required this.isTrial,
     required this.createdAt,
     required this.lastEditedAt,
@@ -45,9 +42,6 @@ class CollectionProductModel {
     return CollectionProductModel(
       id: data['id'] as String,
       accountId: data['account_id'] as String,
-      paymentMethod: data['payment_method'] as String,
-      vendorProductId: data['vendor_product_id'] as String,
-      purchasedAtAsIso8601: data['purchased_at'] as String,
       isTrial: false,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
@@ -84,9 +78,6 @@ class CollectionProductModel {
       CollectionProductModel(
         id: '',
         accountId: '',
-        paymentMethod: '',
-        vendorProductId: '',
-        purchasedAtAsIso8601: '',
         isTrial: true,
         createdAt: Timestamp.now(),
         lastEditedAt: Timestamp.now(),
@@ -111,9 +102,6 @@ class CollectionProductModel {
   final String id;
 
   final String accountId;
-  final String paymentMethod;
-  final String vendorProductId;
-  final String purchasedAtAsIso8601;
 
   final bool isTrial;
 

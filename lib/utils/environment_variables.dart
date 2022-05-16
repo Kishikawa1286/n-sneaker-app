@@ -2,6 +2,8 @@
 
 /* アプリ内 */
 
+import 'dart:io';
+
 /// コレクションページの背景画像パス
 const String _collectionPageBackgroundImageDirectory =
     'assets/collection_background';
@@ -43,6 +45,40 @@ const String firestoreSignInRewardsVersion = 'v1';
 
 /// Firestoreの'launch_configs'コレクションのバージョン
 const String firestoreGalleryPostsVersion = 'v1';
+
+/* RevenueCat */
+
+const String revenuecatProductionAppStoreKey =
+    'appl_qZfWEZGCvCmdHtfviFTXtazzWfo';
+
+const String revenuecatProductionPlayStoreKey =
+    'goog_dWEiYMsLkIGlRhRCOVTHbMMscPJ';
+
+const String revenuecatDevelopmentAppStoreKey =
+    'appl_WZMJEQHVisvCMQYxLoXolVXSbkG';
+
+const String revenuecatDevelopmentPlayStoreKey =
+    'goog_mLVyZCfZKreGDugDYrZFVZbDjuw';
+
+String revenuecatKey() {
+  if (flavor == 'prod') {
+    if (Platform.isIOS) {
+      return revenuecatProductionAppStoreKey;
+    }
+    if (Platform.isAndroid) {
+      return revenuecatProductionPlayStoreKey;
+    }
+  }
+
+  if (Platform.isIOS) {
+    return revenuecatDevelopmentAppStoreKey;
+  }
+  if (Platform.isAndroid) {
+    return revenuecatDevelopmentPlayStoreKey;
+  }
+
+  return '';
+}
 
 /* Algolia */
 

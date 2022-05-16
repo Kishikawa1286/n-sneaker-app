@@ -1,14 +1,14 @@
-import 'package:adapty_flutter/models/adapty_error.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:purchases_flutter/object_wrappers.dart';
 
 import '../../../utils/view_model_change_notifier.dart';
 import '../../repositories/collection_product/collection_product_repository.dart';
 import '../../repositories/product/product_model.dart';
 import '../../repositories/product/product_repository.dart';
+import '../../repositories/revenuecat/revenuecat_repository.dart';
 import '../../services/account/account_service.dart';
-import '../../services/adapty/adapty_service.dart';
 
 final marketDetailPageViewModelProvider =
     AutoDisposeChangeNotifierProviderFamily<MarketDetailPageViewModel, String>(
@@ -17,7 +17,7 @@ final marketDetailPageViewModelProvider =
     ref.watch(accountServiceProvider),
     ref.read(productRepositoryProvider),
     ref.read(collectionProductRepositoryProvider),
-    ref.read(adaptyServiceProvider),
+    ref.read(revenuecatRepositoryProvider),
   ),
 );
 
@@ -27,7 +27,7 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     this._accountService,
     this._productRepository,
     this._collectionProductRepository,
-    this._adaptyService,
+    this._revenuecatRepository,
   ) {
     _fetchProduct();
   }
@@ -36,7 +36,7 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
   final AccountService _accountService;
   final ProductRepository _productRepository;
   final CollectionProductRepository _collectionProductRepository;
-  final AdaptyService _adaptyService;
+  final RevenuecatRepository _revenuecatRepository;
 
   final CarouselController _carouselController = CarouselController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -88,14 +88,13 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
     _purchaseInProgress = true;
     notifyListeners();
     try {
-      final result = await _adaptyService.makePurchase(adaptyPaywallId);
-      if (result == null) {
-        throw Exception('purchase failed.');
-      }
+      final result = await _revenuecatRepository.purchase(
+        revenuecatPackageId: adaptyPaywallId,
+      );
       try {
         await _collectionProductRepository.addCollectionProductOnMakingPurchase(
           product: p,
-          makePurchaseResult: result,
+          transaction: result.nonSubscriptionTransactions.last,
         );
         _purchased = true;
       } on Exception catch (e) {
@@ -104,7 +103,7 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
         notifyListeners();
         return '決済を完了しましたが、エラーが発生しました。購入の復元を行ってください。';
       }
-    } on AdaptyError catch (e) {
+    } on PurchasesErrorCode catch (e) {
       print(e);
       _purchaseInProgress = false;
       notifyListeners();

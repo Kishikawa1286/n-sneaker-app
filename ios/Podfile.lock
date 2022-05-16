@@ -1,8 +1,4 @@
 PODS:
-  - Adapty (1.16.10)
-  - adapty_flutter (1.0.0):
-    - Adapty (= 1.16.10)
-    - Flutter
   - AppAuth (1.5.0):
     - AppAuth/Core (= 1.5.0)
     - AppAuth/ExternalUserAgent (= 1.5.0)
@@ -166,6 +162,14 @@ PODS:
   - path_provider_ios (0.0.1):
     - Flutter
   - PromisesObjC (2.1.0)
+  - Purchases (3.13.2):
+    - PurchasesCoreSwift (= 3.13.2)
+  - purchases_flutter (3.10.0):
+    - Flutter
+    - PurchasesHybridCommon (= 1.11.2)
+  - PurchasesCoreSwift (3.13.2)
+  - PurchasesHybridCommon (1.11.2):
+    - Purchases (= 3.13.2)
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
@@ -185,7 +189,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - adapty_flutter (from `.symlinks/plugins/adapty_flutter/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -200,6 +203,7 @@ DEPENDENCIES:
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -208,7 +212,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Adapty
     - AppAuth
     - Firebase
     - FirebaseAnalytics
@@ -229,12 +232,13 @@ SPEC REPOS:
     - Mantle
     - nanopb
     - PromisesObjC
+    - Purchases
+    - PurchasesCoreSwift
+    - PurchasesHybridCommon
     - SDWebImage
     - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
-  adapty_flutter:
-    :path: ".symlinks/plugins/adapty_flutter/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   cloud_functions:
@@ -264,6 +268,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  purchases_flutter:
+    :path: ".symlinks/plugins/purchases_flutter/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
   sign_in_with_apple:
@@ -281,8 +287,6 @@ CHECKOUT OPTIONS:
     :tag: 8.15.0
 
 SPEC CHECKSUMS:
-  Adapty: 76319ab7bde8708c722702fff371ef15c84ec55e
-  adapty_flutter: 4857d8c3310aa2b062342e56db889e8cbc94783c
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   cloud_firestore: d6f0fcf4be1240c9e01207b4dfba93ebe96d044b
   cloud_functions: 560a5d866c4540f87e9f8de6a9ebd63d70040d1c
@@ -317,6 +321,10 @@ SPEC CHECKSUMS:
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
+  Purchases: 03200de9288724e77de435000d1828601e6b8e00
+  purchases_flutter: bcc0010ed14e80a46cc9050bd1afbfb9c48eee17
+  PurchasesCoreSwift: 2ea4b33e5cece5c8a0751594ef7c6cbfcbd747a9
+  PurchasesHybridCommon: 56ef42d85c3e930d49aff4ac5fa027373d2e1bb8
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad

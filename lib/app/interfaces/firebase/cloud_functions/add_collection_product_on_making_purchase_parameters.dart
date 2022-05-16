@@ -1,14 +1,14 @@
 class AddCollectionProductOnMakingPurchaseParameters {
   const AddCollectionProductOnMakingPurchaseParameters({
     required this.productId,
-    required this.vendorTransactionId,
+    required this.revenuecatTransactionId,
   });
 
   final String productId;
-  final String vendorTransactionId;
+  final String revenuecatTransactionId;
 
   Map<String, String> toMap() => {
         'product_id': productId,
-        'vendor_transaction_id': vendorTransactionId,
+        'revenuecat_transaction_id': revenuecatTransactionId,
       };
 }

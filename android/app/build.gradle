@@ -69,7 +69,6 @@ android {
         // ref: https://zenn.dev/riscait/articles/separating-environments-in-flutter
         resValue "string", "app_name", "Nevermind" + 
             (dartEnvironmentVariables.FLAVOR == 'prod' ? '' : ".${dartEnvironmentVariables.FLAVOR}")
-        resValue "string", "adapty_public_sdk_key", (dartEnvironmentVariables.FLAVOR == 'prod' ? 'public_live_g6X8RjFr.nMpNQSmCLA5pZl8ofMQO' : "public_live_NxLytlOA.MHMxqQXIQSAuISm7dgxf")
     }
 
     apply from: './signingConfigs.gradle', to: android

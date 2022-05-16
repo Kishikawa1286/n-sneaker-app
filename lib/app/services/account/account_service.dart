@@ -6,13 +6,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../repositories/account/account_model.dart';
 import '../../repositories/account/account_repository.dart';
-import '../../repositories/adapty/adapty_repository.dart';
 import '../../repositories/product_glb_file/product_glb_file_repository.dart';
+import '../../repositories/revenuecat/revenuecat_repository.dart';
 
 final accountServiceProvider = Provider<AccountService>(
   (ref) => AccountService(
     ref.read(accountRepositoryProvider),
-    ref.read(adaptyRepositoryProvider),
+    ref.read(revenuecatRepositoryProvider),
     ref.read(productGlbFileRepositoryProvider),
   ),
 );
@@ -20,7 +20,7 @@ final accountServiceProvider = Provider<AccountService>(
 class AccountService {
   AccountService(
     this._accountRepository,
-    this._adaptyRepository,
+    this._revenuecatRepository,
     this._productGlbFileRepository,
   ) {
     _authStateController.add(AuthState.notChecked);
@@ -34,7 +34,7 @@ class AccountService {
   }
 
   final AccountRepository _accountRepository;
-  final AdaptyRepository _adaptyRepository;
+  final RevenuecatRepository _revenuecatRepository;
   final ProductGlbFileRepository _productGlbFileRepository;
 
   final StreamController<AuthState?> _authStateController =
@@ -62,7 +62,7 @@ class AccountService {
       }
       _account = ac;
 
-      await _adaptyRepository.identify(uid);
+      await _revenuecatRepository.signIn(accountId: uid);
       await _accountRepository.updateData();
 
       // ログボ関連処理
@@ -121,7 +121,7 @@ class AccountService {
     try {
       // 一度クリアする
       _account = null;
-      await _adaptyRepository.logout();
+      await _revenuecatRepository.signOut();
       await _productGlbFileRepository.removeLastUsedGlbFileId();
       final ac = await _accountRepository.createNewWithEmailAndPassword(
         email: email,
@@ -129,7 +129,7 @@ class AccountService {
       );
       _account = ac;
       _authStateController.add(AuthState.signInWithNewAccount);
-      await _adaptyRepository.identify(ac.id);
+      await _revenuecatRepository.signIn(accountId: ac.id);
     } on Exception catch (e) {
       print(e);
       _authStateController.add(AuthState.signOut);
@@ -144,7 +144,7 @@ class AccountService {
     // ローカルのデータをリセット
     try {
       _account = null;
-      await _adaptyRepository.logout();
+      await _revenuecatRepository.signOut();
       await _productGlbFileRepository.removeLastUsedGlbFileId();
     } on Exception catch (e) {
       print(e);
@@ -163,7 +163,7 @@ class AccountService {
         return;
       }
       _account = ac;
-      await _adaptyRepository.identify(uid);
+      await _revenuecatRepository.signIn(accountId: ac.id);
       _authStateController.add(AuthState.signIn);
     } on Exception catch (e) {
       print(e);
@@ -178,7 +178,7 @@ class AccountService {
     // ローカルのデータをリセット
     try {
       _account = null;
-      await _adaptyRepository.logout();
+      await _revenuecatRepository.signOut();
       await _productGlbFileRepository.removeLastUsedGlbFileId();
     } on Exception catch (e) {
       print(e);
@@ -195,7 +195,7 @@ class AccountService {
       }
       // 既存アカウント
       _account = ac;
-      await _adaptyRepository.identify(uid);
+      await _revenuecatRepository.signIn(accountId: uid);
       _authStateController.add(AuthState.signIn);
       return;
     } on Exception catch (e) {
@@ -204,7 +204,7 @@ class AccountService {
         // 新規登録
         final uid = await signInToFirebaseAuth();
         _account = await _accountRepository.createNewWithUid(uid);
-        await _adaptyRepository.identify(uid);
+        await _revenuecatRepository.signIn(accountId: uid);
         _authStateController.add(AuthState.signInWithNewAccount);
         return;
       } on Exception catch (e) {
@@ -226,7 +226,7 @@ class AccountService {
       _account = null;
       _authStateController.add(AuthState.signOut);
       await _productGlbFileRepository.removeLastUsedGlbFileId();
-      await _adaptyRepository.logout();
+      await _revenuecatRepository.signOut();
     } on Exception catch (e) {
       print(e);
     }
