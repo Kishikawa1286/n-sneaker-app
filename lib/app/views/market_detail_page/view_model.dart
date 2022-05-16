@@ -77,19 +77,19 @@ class MarketDetailPageViewModel extends ViewModelChangeNotifier {
 
   Future<String> purchase() async {
     final p = _product;
-    final adaptyPaywallId = _product?.adaptyPaywallId;
     // Lintの警告回避のためにadaptyPaywallIdもnullチェック
-    if ((_purchased ?? true) ||
-        _purchaseInProgress ||
-        p == null ||
-        adaptyPaywallId == null) {
+    if ((_purchased ?? true) || _purchaseInProgress || p == null) {
       return '';
+    }
+    final revenuecatPackageId = p.revenuecatPackageId;
+    if (revenuecatPackageId.isEmpty) {
+      return 'この商品は現在購入できません。';
     }
     _purchaseInProgress = true;
     notifyListeners();
     try {
       final result = await _revenuecatRepository.purchase(
-        revenuecatPackageId: adaptyPaywallId,
+        revenuecatPackageId: revenuecatPackageId,
       );
       try {
         await _collectionProductRepository.addCollectionProductOnMakingPurchase(
