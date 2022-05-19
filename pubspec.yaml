@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   algolia: ^1.0.4
-  another_flushbar: ^1.10.28
+  another_flushbar: 1.10.28 # 1.10.29はFlutter3.0.0でエラー
   cached_network_image: ^3.2.0
   carousel_slider: ^4.0.0
   cloud_firestore: ^3.1.9
@@ -23,11 +23,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_image_compress: ^1.1.0
-  flutter_svg: ^1.0.3
   flutter_unity_widget: 2020.3.25
   google_sign_in: ^5.2.4
   hooks_riverpod: ^1.0.3
-  http: ^0.13.4
   image_gallery_saver: ^1.7.1
   infinite_scroll_pagination: ^3.1.0
   introduction_screen: ^3.0.2
@@ -36,7 +34,7 @@ dependencies:
   path_provider: ^2.0.9
   purchases_flutter: ^3.10.0
   shared_preferences: ^2.0.9
-  sign_in_with_apple: ^3.3.0
+  sign_in_with_apple: ^4.0.0
   social_login_buttons: ^1.0.6+2
   url_launcher: ^6.0.20
 
