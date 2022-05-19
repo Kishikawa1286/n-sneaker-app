@@ -224,10 +224,7 @@ public class FileLoadModel : MonoBehaviour
         _onStartLocalFileLoading();
         var options = AssetLoader.CreateDefaultLoaderOptions();
         options.AlphaMaterialMode = AlphaMaterialMode.CutoutAndTransparent;
-        // options.LoadTexturesAsSRGB = false;
         options.TextureCompressionQuality = TextureCompressionQuality.Best;
-        options.Enforce16BitsTextures = true;
-        options.UseUnityNativeTextureLoader = true;
         AssetLoader.LoadModelFromFile(
             _filePath(fileName),
             _onLocalFileLoad,
@@ -262,7 +259,6 @@ public class FileLoadModel : MonoBehaviour
         var myLoadedGameObject = assetLoaderContext.RootGameObject;
         myLoadedGameObject.SetActive(true);
 
-        //ここで，オブジェクトをマネージャーに飛ばす．
         _onFinishLocalFileLoading();
     }
 
