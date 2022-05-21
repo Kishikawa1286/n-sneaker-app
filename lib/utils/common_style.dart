@@ -16,5 +16,7 @@ abstract class CommonStyle {
   static const enabledColor = themeColor;
   static const disabledColor = Color.fromARGB(255, 155, 155, 155);
 
+  static const favoriteIconColor = Color.fromARGB(255, 255, 92, 203);
+
   static const scaffoldBackgroundColor = white;
 }

@@ -37,8 +37,9 @@ class GalleryPage extends HookConsumerWidget {
               ),
               builderDelegate: PagedChildBuilderDelegate<GalleryPostModel>(
                 itemBuilder: (context, galleryPost, index) => GestureDetector(
-                  onTap: () => context
-                      .pushTransparentRoute(GalleryImageViewer(index: index)),
+                  onTap: () => context.pushTransparentRoute(
+                    GalleryImageViewer(galleryPostId: galleryPost.id),
+                  ),
                   child: CachedNetworkImage(
                     imageUrl: galleryPost.compressedImageUrls.first,
                     imageBuilder: (context, imageProvider) => Container(

@@ -55,3 +55,14 @@ const String galleryPostsCollectionPath =
 
 String galleryPostDocumentPath(String galleryPostId) =>
     '$galleryPostsCollectionPath/$galleryPostId';
+
+const String _favoriteGalleryPostsDomain = 'favorite_gallery_posts';
+
+String favoriteGalleryPostsCollectionPath(String galleryPostId) =>
+    '${galleryPostDocumentPath(galleryPostId)}/${_favoriteGalleryPostsDomain}_$firestoreFavoriteGalleryPostsVersion';
+
+String favoriteGalleryPostsDocumentPath(
+  String galleryPostId,
+  String favoriteFalleryPostId,
+) =>
+    '${favoriteGalleryPostsCollectionPath(galleryPostId)}/$favoriteFalleryPostId';

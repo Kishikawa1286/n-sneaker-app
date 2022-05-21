@@ -27,7 +27,6 @@ class GalleryPageViewModel extends ViewModelChangeNotifier {
 
   PagingController<int, GalleryPostModel> get pagingController =>
       _pagingController;
-  bool _loading = false;
 
   @override
   void dispose() {
@@ -61,30 +60,5 @@ class GalleryPageViewModel extends ViewModelChangeNotifier {
     }
   }
 
-  Future<bool> addBlockedAccountId(int index) async {
-    if (_loading) {
-      return false;
-    }
-    final galleryPosts = _pagingController.itemList;
-    if (galleryPosts == null) {
-      return false;
-    }
-    if (galleryPosts.isEmpty) {
-      return false;
-    }
-    try {
-      _loading = true;
-      notifyListeners();
-      await _galleryPostRepository
-          .addBlockedAccountId(galleryPosts[index].accountId);
-      _pagingController.refresh();
-      _loading = false;
-      notifyListeners();
-      return true;
-    } on Exception catch (e) {
-      print(e);
-      _loading = false;
-      return false;
-    }
-  }
+  void refresh() => _pagingController.refresh();
 }

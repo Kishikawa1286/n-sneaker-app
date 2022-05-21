@@ -9,6 +9,7 @@ class GalleryPostModel {
     required this.imageStoragePaths,
     required this.compressedImageUrls,
     required this.compressedImageStoragePaths,
+    required this.numberOfFavorites,
     required this.createdAt,
     required this.lastEditedAt,
     this.documentSnapshot,
@@ -52,6 +53,7 @@ class GalleryPostModel {
       imageStoragePaths: imageStoragePaths,
       compressedImageUrls: compressedImageUrls,
       compressedImageStoragePaths: compressedImageStoragePaths,
+      numberOfFavorites: data['number_of_favorites'] as int,
       createdAt: data['created_at'] as Timestamp,
       lastEditedAt: data['last_edited_at'] as Timestamp,
       documentSnapshot: snapshot,
@@ -65,6 +67,7 @@ class GalleryPostModel {
   final List<String> imageStoragePaths;
   final List<String> compressedImageUrls;
   final List<String> compressedImageStoragePaths;
+  final int numberOfFavorites;
   final Timestamp createdAt;
   final Timestamp lastEditedAt;
   final DocumentSnapshot? documentSnapshot;

@@ -40,11 +40,14 @@ const String firestoreMarketPageTabsVersion = 'v1';
 /// Firestoreの'launch_configs'コレクションのバージョン
 const String firestoreLaunchConfigsVersion = 'v1';
 
-/// Firestoreの'launch_configs'コレクションのバージョン
+/// Firestoreの'sign_in_rewards'コレクションのバージョン
 const String firestoreSignInRewardsVersion = 'v1';
 
-/// Firestoreの'launch_configs'コレクションのバージョン
+/// Firestoreの'gallery_posts'コレクションのバージョン
 const String firestoreGalleryPostsVersion = 'v1';
+
+/// Firestoreの'favorite_gallery_posts'コレクションのバージョン
+const String firestoreFavoriteGalleryPostsVersion = 'v1';
 
 /* RevenueCat */
 
