@@ -139,23 +139,26 @@ class AccountPage extends HookConsumerWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                           textAlign: TextAlign.left,
                         ),
-                        GestureDetector(
-                          behavior: HitTestBehavior.opaque,
-                          onTap: () {
-                            showFlushbar(
-                              context,
-                              message: 'アカウントIDをコピーしました',
-                            );
-                            Clipboard.setData(
-                              ClipboardData(text: viewModel.accountId),
-                            );
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 5,
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              showFlushbar(
+                                context,
+                                message: 'アカウントIDをコピーしました',
+                              );
+                              Clipboard.setData(
+                                ClipboardData(text: viewModel.accountId),
+                              );
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Icon(Icons.copy, size: 16),
                             ),
-                            child: Icon(Icons.copy, size: 16),
                           ),
                         ),
                       ],
