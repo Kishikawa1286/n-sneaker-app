@@ -180,6 +180,7 @@ class GalleryPostRepository {
       'image_storage_paths': [imageStoragePath],
       'compressed_image_urls': [compressedImageUrl],
       'compressed_image_storage_paths': [compressedImageStoragePath],
+      'number_of_favorites': 0,
       'created_at': Timestamp.now(),
       'last_edited_at': Timestamp.now(),
     });
