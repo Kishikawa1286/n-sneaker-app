@@ -238,7 +238,7 @@ class AccountService {
       return false;
     }
     if (accountCreatedAt
-            .add(const Duration(days: 7))
+            .add(const Duration(days: 30))
             .compareTo(Timestamp.now().toDate()) >
         0) {
       return true;
