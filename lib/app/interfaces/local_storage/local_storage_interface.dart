@@ -15,12 +15,15 @@ class LocalStorageInterface {
   Future<Directory> getLibraryDirectory() =>
       path_provider.getLibraryDirectory();
 
-  Future<void> writeBytes({
+  Future<Directory> getTemporaryDirectory() =>
+      path_provider.getTemporaryDirectory();
+
+  Future<File> writeBytes({
     required String path,
     required List<int> bytes,
   }) async {
     final file = File(path);
-    await file.writeAsBytes(bytes);
+    return file.writeAsBytes(bytes);
   }
 
   bool fileExists(String path) {

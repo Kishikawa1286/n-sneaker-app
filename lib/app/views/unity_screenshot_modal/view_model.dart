@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../utils/view_model_change_notifier.dart';
 import '../../repositories/gallery_post/gallery_post_repository.dart';
@@ -84,7 +87,16 @@ class UnityScreenshotModalViewModel extends ViewModelChangeNotifier {
         _loading = true;
         notifyListeners();
       }
-      await _unityScreenshotRepository.saveUnityScreenshot(im);
+
+      if (Platform.isAndroid) {
+        final file = await _unityScreenshotRepository
+            .saveUnityScreenshotToTemporaryDirectory(im);
+        await Share.shareFiles([file.path]);
+      }
+      if (Platform.isIOS) {
+        await _unityScreenshotRepository.saveUnityScreenshotToGallery(im);
+      }
+
       if (!skipCheckingLoadingState) {
         _loading = false;
         notifyListeners();
@@ -118,12 +130,12 @@ class UnityScreenshotModalViewModel extends ViewModelChangeNotifier {
       _loading = true;
       notifyListeners();
 
-      await saveImage(skipCheckingLoadingState: true);
       await _galleryPostRepository.addGalleryPost(
         accountId: account.id,
         productId: productId,
         image: im,
       );
+      await saveImage(skipCheckingLoadingState: true);
 
       _loading = false;
       notifyListeners();
