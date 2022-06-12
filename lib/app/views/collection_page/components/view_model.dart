@@ -4,7 +4,7 @@ import '../../../../utils/view_model_change_notifier.dart';
 import '../../../repositories/product_glb_file/product_glb_file.dart';
 import '../../../repositories/product_glb_file/product_glb_file_repository.dart';
 
-final collectionPageProductGridTileViewModelProvider =
+final collectionPageGridTileViewModelProvider =
     AutoDisposeChangeNotifierProviderFamily<
         CollectionPageProductGridTileViewModel, String>(
   (ref, productId) => CollectionPageProductGridTileViewModel(
@@ -32,7 +32,7 @@ class CollectionPageProductGridTileViewModel extends ViewModelChangeNotifier {
   Future<void> _init() async {
     try {
       final fetched = await _productGlbFileRepository
-          .fetchProductsGlbFilesForAr(_productId);
+          .fetchProductsGlbFilesForViewer(_productId);
       if (fetched.isEmpty) {
         return;
       }

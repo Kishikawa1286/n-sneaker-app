@@ -85,7 +85,7 @@ class CollectionPage extends HookConsumerWidget {
                       builderDelegate:
                           PagedChildBuilderDelegate<CollectionProductModel>(
                         itemBuilder: (context, collectionProduct, index) =>
-                            CollectionPageProductGridTile(
+                            CollectionPageGridTile(
                           collectionProduct: collectionProduct,
                         ),
                       ),

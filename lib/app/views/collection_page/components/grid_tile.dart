@@ -7,15 +7,15 @@ import '../../../repositories/collection_product/collection_product_model.dart';
 import '../../glb_file_viewer_page/glb_file_viewer_page.dart';
 import 'view_model.dart';
 
-class CollectionPageProductGridTile extends HookConsumerWidget {
-  const CollectionPageProductGridTile({required this.collectionProduct});
+class CollectionPageGridTile extends HookConsumerWidget {
+  const CollectionPageGridTile({required this.collectionProduct});
 
   final CollectionProductModel collectionProduct;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(
-      collectionPageProductGridTileViewModelProvider(
+      collectionPageGridTileViewModelProvider(
         collectionProduct.productId,
       ),
     );
