@@ -98,4 +98,8 @@ XCode で Build Number とバージョンを更新する。
 
 ## Play Store
 
-coming soon...
+Flutter で `FLAVOR=prod` を指定して App Bundle をビルド。
+```
+fvm flutter build appbundle --dart-define=FLAVOR=prod --release
+```
+Play Storeからアップロードする。

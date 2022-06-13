@@ -5,18 +5,18 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation(name: 'unity-classes', ext:'jar')
-    implementation(name: 'arcore_client', ext:'aar')
     implementation(name: 'ARPresto', ext:'aar')
     implementation(name: 'NatShare', ext:'aar')
-    implementation(name: 'unityandroidpermissions', ext:'aar')
     implementation(name: 'UnityARCore', ext:'aar')
+    implementation(name: 'arcore_client', ext:'aar')
+    implementation(name: 'unityandroidpermissions', ext:'aar')
     implementation(name: 'libarpresto_api', ext:'so')
     implementation(name: 'libUnityARCore', ext:'so')
 }
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion '32.0.0'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -25,12 +25,12 @@ android {
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 32
+        targetSdkVersion 30
         ndk {
-            abiFilters 'arm64-v8a'
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
         versionCode 1
-        versionName '0.1'
+        versionName '1.0'
         consumerProguardFiles 'proguard-unity.txt'
     }
 
@@ -44,6 +44,7 @@ android {
     }
 
     packagingOptions {
+        doNotStrip '*/armeabi-v7a/*.so'
         doNotStrip '*/arm64-v8a/*.so'
     }
 }
@@ -56,7 +57,7 @@ def getSdkDir() {
 
 def BuildIl2Cpp(String workingDir, String targetDirectory, String architecture, String abi, String configuration) {
     exec {
-        commandLine(workingDir + "/src/main/Il2CppOutputProject/IL2CPP/build/deploy/netcoreapp3.1/il2cpp.exe",
+        commandLine(workingDir + "/src/main/Il2CppOutputProject/IL2CPP/build/deploy/netcoreapp3.1/il2cpp",
             "--compile-cpp",
             "--libil2cpp-static",
             "--platform=Android",
@@ -80,6 +81,7 @@ def BuildIl2Cpp(String workingDir, String targetDirectory, String architecture, 
 android {
     task BuildIl2CppTask {
         doLast {
+              BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), '/src/main/jniLibs/', 'ARMv7', 'armeabi-v7a', 'Release');
               BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), '/src/main/jniLibs/', 'ARM64', 'arm64-v8a', 'Release');
         }
     }
