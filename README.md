@@ -29,7 +29,7 @@ Android, iOS の Build Support を導入する。 Android SDK, NDK, JDK など�
 
 クローンして fvm で Flutter をインストールする。
 
-```
+```raw
 git clone https://github.com/Kishikawa1286/n-sneaker-app.git
 cd n-sneaker-app
 fvm install
@@ -45,7 +45,8 @@ fvm install
 
 一度 Flutter で Android アプリのビルドを実行すると `android/local.properties` が生成される。  
 ここに `ndk.dir` を設定する。
-```
+
+```raw
 sdk.dir=・・・
 flutter.sdk=・・・
 flutter.buildMode=・・・
@@ -62,18 +63,19 @@ android/unityLibrary 下でバージョン管理されているファイルが�
 android/local.properties の `ndk.dir` を Unity で使用している NDK のパスに設定する。 Unity で Preferences > External Tools > Android にパスが書いてある。
 
 実機を接続し、 Flutter で実行する。
-```
+
+```raw
 fvm flutter run --dart-define=FLAVOR=dev
 ```
 
 - 動かないときの確認事項
-    - Android 端末の USB デバッグが有効になっているか？
-    - local.properties の `ndk.dir` が設定されているか？
-        - local.properties のパスの指定でバックスラッシュが2個になっているか？（Windows ではパスを貼り付けたあとに編集が必要）  
+  - Android 端末の USB デバッグが有効になっているか？
+  - local.properties の `ndk.dir` が設定されているか？
+    - local.properties のパスの指定でバックスラッシュが2個になっているか？（Windows ではパスを貼り付けたあとに編集が必要）  
         例: `C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.29f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK`
 
 - `flutter run` が `Installing build\app\outputs\flutter-apk\app.apk...` で止まるとき
-    - 一度タスクキルをして再び `flutter run`
+  - 一度タスクキルをして再び `flutter run`
 
 ### iOS
 
@@ -86,7 +88,8 @@ coming soon...
 ## App Store
 
 Flutter で `FLAVOR=prod` を指定してビルド。
-```
+
+```raw
 fvm flutter build ios --dart-define=FLAVOR=prod --release
 ```
 
@@ -99,7 +102,9 @@ XCode で Build Number とバージョンを更新する。
 ## Play Store
 
 Flutter で `FLAVOR=prod` を指定して App Bundle をビルド。
-```
+
+```raw
 fvm flutter build appbundle --dart-define=FLAVOR=prod --release
 ```
+
 Play Storeからアップロードする。
