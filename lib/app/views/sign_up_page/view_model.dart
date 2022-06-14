@@ -32,7 +32,7 @@ class SignUpPageViewModel extends ViewModelChangeNotifier {
   bool get consentToPrivacyPolicy => _consentToPrivacyPolicy;
   bool get consentToAllTerms =>
       _consentToTermOfService && _consentToPrivacyPolicy;
-  bool get showSignInWithAppleButton => Platform.isIOS;
+  bool get showSocialLoginButtons => Platform.isIOS;
   bool get processing => _processing;
 
   void toggleAll() {

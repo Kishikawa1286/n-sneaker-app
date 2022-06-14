@@ -85,30 +85,32 @@ class SignInPage extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Material(
-                          elevation: 5,
-                          child: SocialLoginButton(
-                            buttonType: SocialLoginButtonType.google,
-                            onPressed: () async {
-                              final message =
-                                  await viewModel.signInWithGoogle();
-                              if (message.isNotEmpty) {
-                                await showFlushbar(
-                                  context,
-                                  message: message,
-                                );
-                              } else {
-                                Navigator.of(context).pop();
-                              }
-                            },
-                            text: 'Googleでサインイン',
-                          ),
-                        ),
-                      ),
-                      viewModel.showSignInWithAppleButton
+                      viewModel.showSocialLoginButtons
+                          ? Container(
+                              margin: const EdgeInsets.only(top: 30),
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: Material(
+                                elevation: 5,
+                                child: SocialLoginButton(
+                                  buttonType: SocialLoginButtonType.google,
+                                  onPressed: () async {
+                                    final message =
+                                        await viewModel.signInWithGoogle();
+                                    if (message.isNotEmpty) {
+                                      await showFlushbar(
+                                        context,
+                                        message: message,
+                                      );
+                                    } else {
+                                      Navigator.of(context).pop();
+                                    }
+                                  },
+                                  text: 'Googleでサインイン',
+                                ),
+                              ),
+                            )
+                          : const SizedBox(),
+                      viewModel.showSocialLoginButtons
                           ? Container(
                               margin: const EdgeInsets.only(top: 10),
                               width: MediaQuery.of(context).size.width * 0.8,

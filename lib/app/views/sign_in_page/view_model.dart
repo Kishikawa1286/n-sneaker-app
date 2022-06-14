@@ -26,7 +26,7 @@ class SignInPageViewModel extends ViewModelChangeNotifier {
 
   bool _processing = false;
 
-  bool get showSignInWithAppleButton => Platform.isIOS;
+  bool get showSocialLoginButtons => Platform.isIOS;
   bool get processing => _processing;
 
   Future<String> signInWithEmailAndPassword() async {
