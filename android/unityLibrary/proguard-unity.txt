@@ -7,3 +7,4 @@
 -ignorewarnings
 -keep class com.xraph.plugin.** {*;}
 -keep class api.natsuite.** { *; }
+-keep class com.unity3d.plugin.* { *; } -keep class com.xraph.plugin.flutter_unity_widget.UnityPlayerUtils { *; }
